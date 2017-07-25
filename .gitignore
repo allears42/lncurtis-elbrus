@@ -1,0 +1,9 @@
+.nsdeploy
+payload.json
+DeployDistribution/
+LocalDistribution/
+node_modules/
+.idea/
+scratchpad/
+npm-debug.log
+Modules/lncurtis/Backup/error.txt
