@@ -110,6 +110,16 @@
   }
 }
 
+.tab-action-more {
+  margin-top: $sc-base-margin * 2;
+  display: block;
+}
+
+.tab-action-less {
+  display: none;
+  margin-top: $sc-base-margin * 2;
+}
+
 .tabpanel-tab {
   background-color: $sc-color-theme-background-light;
   padding: $sc-base-padding * 5;
