@@ -1,0 +1,46 @@
+.customer-service-thanks-container {
+  display : none;
+}
+.customer-service-form-container {
+  .customer-service-form {
+    max-width : 400px;
+    width     : 100%;
+  }
+  .std-alert-placeholder { }
+  .std-required {
+    display    : block;
+    margin-top : $sc-medium-margin;
+  }
+  .std-form-required {
+    @extend .input-required;
+  }
+  .std-form { }
+  .std-form-controls-group {
+    @extend .control-group;
+    margin-top : $sc-base-margin*2;
+  }
+  .std-form-label {
+    @extend .input-label;
+    margin-top : $sc-base-margin * 2;
+  }
+  .std-form-controls {
+    input, textarea, select {
+      width     : 100%;
+      min-width : 100%;
+    }
+  }
+  .std-form-input {
+    @extend .input-large;
+  }
+  .std-form-select { }
+  .std-form-textarea { }
+  .std-button-submit {
+    @extend .button-medium;
+    @extend .button-primary;
+  }
+  .std-success {
+    display : none;
+  }
+}
+
+

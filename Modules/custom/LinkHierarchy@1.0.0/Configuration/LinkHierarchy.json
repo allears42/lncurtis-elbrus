@@ -1,0 +1,101 @@
+{
+    "type": "object",
+
+    "subtab": {
+        "id": "linkHierarchy",
+        "title": "Static Page Side Menus",
+        "description": "Configure Side Menus for SMT Pages",
+        "group": "integrations"
+    },
+
+    "properties": {
+        "linkHierarchy.excludeModules": {
+            "group": "layout",
+            "subtab": "linkHierarchy",
+            "type": "string",
+            "title": "Excluded URLS",
+            "description": "Paths to ignore in router",
+            "default": "contact-us-customer-service"
+        },
+        "linkHierarchy.links": {
+            "group": "layout",
+            "subtab": "linkHierarchy",
+            "type": "array",
+            "title": "Side Menu Links",
+            "description": "Links that will show in the side menus",
+
+            "items": {
+                "type": "object",
+                "properties": {
+                    "text": {
+                        "type": "string",
+                        "title": "Text",
+                        "translate": true,
+                        "description": "Link's text shown in the UI",
+                        "mandatory": true
+                    },
+                    "href": {
+                        "type": "string",
+                        "title": "href",
+                        "description": "The href of the link. Used to load the menu on the page so an exact match is required"
+                    },
+                    "menuOnPage": {
+                        "type": "string",
+                        "title": "Menu on Page",
+                        "description": "The id of the menu you want to show on the page. To add more options, contact developer.",
+                        "enum":["customer-service", "help-center", "government", "curtis-care"]
+                    },
+                    "menuOwner": {
+                        "type": "string",
+                        "title": "Menus Link Shows In",
+                        "description": "Menus Link will load in. Should be a comma separated string. Options are \"customer-service\", \"help-center\", \"government\""
+                    },
+                    "level": {
+                        "type": "string",
+                        "title": "level",
+                        "description": "Hierarchy level of this navigation entry",
+                        "enum":["1", "2", "3"],
+                        "mandatory": true
+                    },
+                    "dataTouchpoint": {
+                        "type": "string",
+                        "title": "data-touchpoint",
+                        "description": "data-touchpoint value for the link if any",
+                        "enum": ["home", "login", "register", "logout", "customercenter", "viewcart", "checkout"]
+                    },
+                    "dataHashtag": {
+                        "type": "string",
+                        "title": "data-hashtag",
+                        "description": "data-hashtag value for the link if any"
+                    },
+                    "classnames": {
+                        "type": "string",
+                        "title": "class names",
+                        "description": "extra HTML class names to add to this entry"
+                    },
+                    "target": {
+                        "type": "string",
+                        "title": "Target",
+                        "description": "link target",
+                        "enum":[ "_self", "_blank", "_parent", "_top"]
+                    },
+                    "sortOrder": {
+                        "type": "string",
+                        "title": "Sort Order",
+                        "description": "Sort order for links"
+                    },
+                    "id": {
+                        "type": "string",
+                        "title": "Id",
+                        "description": "Parent entries must have an id so children entries can reference it"
+                    },
+                    "parentId": {
+                        "type": "string",
+                        "title": "Parent Id",
+                        "description": "If this is a child entry then this must be the id of the parent entry."
+                    }
+                }
+            }
+        }
+    }
+}

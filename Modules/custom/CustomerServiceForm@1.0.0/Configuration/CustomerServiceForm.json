@@ -1,0 +1,13 @@
+{
+    "type": "object",
+    "properties": {
+        "customerServiceForm.confirmation": {
+            "group": "layout",
+            "type": "string",
+            "nsType": "textarea",
+            "title": "Confirmation Text",
+            "description": "Text shown after Customer Service form is submitted",
+            "default": "Thank you for submitting your message. Our customer service team will respond within 24 hours during a normal work week, but feel free to contact us at 877.488.0469 for immediate assistance Monday thru Friday from 8 a.m. to 5 p.m. Pacific Time (PT)."
+        }
+    }
+}

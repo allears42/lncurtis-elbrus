@@ -11,9 +11,11 @@
         "deploy": "DeployDistribution"
     },
     "modules": {
-        "extensions/MyExampleCartExtension1": "1.0.0",
-        "extensions/MyExamplePDPExtension1": "1.0.0",
-        "extensions/MyExamplePDPExtension2": "1.0.0",
+        "extensions/Backbone.FormView.Extension": "1.2.0",
+        "extensions/ProductList.Extension": "2.3.0",
+        "extensions/Wizard.Extension": "2.2.0",
+        "extensions/Session.Extension": "2.2.1",
+
         "suitecommerce/Account": "2.3.0",
         "suitecommerce/Address": "2.4.0",
         "suitecommerce/AjaxRequestsKiller": "2.0.2",
@@ -169,7 +171,13 @@
         "third_parties/respond": "1.4.2-custom",
         "third_parties/twitter-bootstrap-sass": "3.3.1",
         "third_parties/twitter-typeahead": "0.10.5",
-        "third_parties/underscore.js": "1.7.0"
+        "third_parties/underscore.js": "1.7.0",
+
+        "custom/CustomerServiceForm": "1.0.0",
+        "custom/FacetContent": "1.0.0",
+        "custom/LinkHierarchy": "1.0.0",
+        "custom/Pacejet": "1.0.0",
+        "themes/Firefighter": "1.0.0"
     },
     "tasksConfig": {
         "local": {
@@ -225,6 +233,7 @@
                     "Merchandising",
                     "Merchandising.Context.DefaultHandlers",
                     "ProductList",
+                    "ProductList.Extension",
                     "UrlHelper",
                     "CMSadapter",
                     "RequestQuoteAccessPoints",
@@ -236,7 +245,12 @@
                     "StoreLocatorAccessPoints",
                     "Newsletter",
                     "ProductDetailToQuote",
-                    "StoreLocator"
+                    "StoreLocator",
+                    "Backbone.FormView.Extension",
+                    "Session.Extension",
+                    "CustomerServiceForm",
+                    "FacetContent",
+                    "LinkHierarchy"
                 ],
                 "amdclean": true,
                 "amdConfig": {
@@ -335,6 +349,7 @@
                     "PaymentWizard",
                     "TransactionHistory",
                     "ProductList",
+                    "ProductList.Extension",
                     "PrintStatement",
                     "Quote",
                     "QuoteToSalesOrderWizard",
@@ -349,7 +364,10 @@
                     "QuickOrder",
                     "GoogleMap",
                     "GoogleMap.Configuration",
-                    "StoreLocatorAccessPoints"
+                    "StoreLocatorAccessPoints",
+                    "Backbone.FormView.Extension",
+                    "Session.Extension",
+                    "LinkHierarchy"
                 ],
                 "amdclean": true,
                 "amdConfig": {
@@ -427,6 +445,7 @@
                     "Content",
                     "Address",
                     "CustomFields",
+                    "Wizard.Extension",
                     "OrderWizard",
                     "Categories",
                     "ExternalPayment",
@@ -459,7 +478,9 @@
                     "GoogleMap",
                     "GoogleMap.Configuration",
                     "StoreLocatorAccessPoints",
-                    "StoreLocator"
+                    "StoreLocator",
+                    "Backbone.FormView.Extension",
+                    "Session.Extension"
                 ],
                 "amdclean": true,
                 "amdConfig": {
@@ -566,7 +587,8 @@
                 "Location.ServiceController",
                 "ExternalPayment.Model",
                 "SC.BaseComponent",
-                "Cart.Component"
+                "Cart.Component",
+                "CustomerServiceForm.ServiceController"
             ],
             "exportFile": "ssp_libraries.js",
             "amdConfig": {
@@ -774,7 +796,10 @@
                         "Newsletter",
                         "ProductDetailToQuote",
                         "PickupInStore",
-                        "Location.SCA"
+                        "Location.SCA",
+                        "CustomerServiceForm",
+                        "FacetContent",
+                        "LinkHierarchy"
                     ]
                 },
                 {
@@ -928,7 +953,8 @@
                                 "product-list-edit-item"
                             ]
                         },
-                        "Location.SCA"
+                        "Location.SCA",
+                        "LinkHierarchy"
                     ]
                 },
                 {

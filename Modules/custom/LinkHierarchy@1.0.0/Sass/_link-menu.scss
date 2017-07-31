@@ -1,0 +1,172 @@
+/*
+	© 2016 NetSuite Inc.
+	User may not copy, modify, distribute, or re-bundle or otherwise make available this code;
+	provided, however, if you are an authorized user with a NetSuite account or log-in, you
+	may use this code subject to the terms that govern your access and use.
+*/
+
+.menu-level1 {
+
+}
+.menu-level1 > li {
+  display:list-item;
+  float : none;
+}
+.menu-level1-anchor {
+	display: block;
+	position: relative;
+	height: $sc-secondary-menu-height;
+	line-height: $sc-secondary-menu-height;
+	padding: 0 $sc-base-padding*2;
+	margin-right: $sc-base-margin;
+	color:$sc-color-secondary;
+    font-weight:$sc-font-weight-semibold;
+    text-transform: capitalize;
+}
+.menu-level1-anchor:hover{
+	color: $sc-color-link-hover;
+}
+.open .menu-level1-anchor{
+	color: $sc-color-dark-copy;
+}
+
+.menu-home-anchor,
+.menu-shop-anchor{
+	@extend .menu-level1-anchor;
+	color:$sc-color-secondary;
+}
+
+//maxi menu level 2
+.menu-back {
+	display: none;
+}
+
+.menu-level2 > li {
+	float: left;
+	width: 20%;
+	padding-right: $sc-base-padding * 6;
+}
+
+.menu-level2-anchor {
+	text-transform: uppercase;
+	font-weight: $sc-font-weight-semibold;
+	color: $sc-color-copy;
+	padding-bottom: $sc-base-padding;
+	margin-bottom: $sc-base-margin * 2;
+	border-bottom: 1px solid $sc-color-theme-border;
+	display: block;
+
+	//@media (min-width: $screen-md-min) {
+	//	pointer-events: none;
+	//}
+}
+.menu-level2-anchor:hover {
+	color: $sc-color-copy;
+}
+
+//maxi menu level 3
+.menu-level3-anchor {
+	display: block;
+	padding: $sc-base-padding 0;
+	color:$sc-color-secondary;
+}
+
+.menu-myaccount-anchor-level3.active {
+	color: $sc-color-copy;
+}
+
+//container fix for maxi menu on desktop
+.menu-push-icon, .menu-pop-icon {
+	display: none;
+}
+
+.menu-level-container {
+	background-color: $sc-color-tertiary;
+	display: none;
+	position: absolute;
+	top: 100%;
+	left: 0;
+	width: 100%;
+	min-height: 150px;
+	z-index: 1003;
+	padding: $sc-base-padding * 5 0;
+	border-bottom: 1px solid $sc-color-theme-border;
+	border-top: 1px solid $sc-color-theme-border;
+	@include box-shadow(0 6px 12px transparentize($sc-color-overlay, 1-0.175));
+
+	> li {
+		@extend .container;
+	}
+}
+
+//maxi menu opened
+.open .menu-level-container {
+	display: block;
+}
+.open .menu-level1-anchor:before{
+	position: absolute;
+	top: 47px;
+	left: 50%;
+	margin-left: -7.5px;
+	display: inline-block;
+	border-right: 7px solid transparent;
+	border-bottom: 7px solid $sc-color-tertiary;
+	border-left: 7px solid transparent;
+	border-bottom-color: transparentize($sc-color-overlay, 1-0.2);
+	content: '';
+}
+.open .menu-level1-anchor:after{
+	position: absolute;
+	top: 48px;
+	left: 50%;
+	margin-left: -6.5px;
+	display: inline-block;
+	border-right: 6px solid transparent;
+	border-bottom: 6px solid $sc-color-tertiary;
+	border-left: 6px solid transparent;
+	content: '';
+	z-index: 9999;
+}
+
+.menu-level1-no-fly {
+  > li {
+    > p {
+      font-weight: $sc-font-weight-bold;
+      color: $sc-color-dark-copy;
+      margin-top: $sc-base-margin*4
+    }
+
+    &:first-of-type {
+      margin-top: 0;
+    }
+  }
+}
+footer {
+
+  .menu-level1-no-fly {
+    > li {
+      > p {
+        color: white;
+        font-weight :normal;
+      }
+    }
+  }
+}
+.cms-page-divider {
+  display: none;
+  @media (max-width: $screen-xs-max) {
+    display : block;
+    border-bottom: 1px solid $sc-color-theme-border;
+    padding: $sc-base-padding*2 0;
+    margin: $sc-base-margin*2 0;
+
+    clear: both;
+  }
+}
+
+footer {
+  a.header-sidebar-menu-back {
+    display: none;
+  }
+
+}

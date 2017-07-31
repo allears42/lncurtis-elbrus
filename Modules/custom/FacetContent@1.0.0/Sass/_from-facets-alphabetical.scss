@@ -1,0 +1,44 @@
+.brands-list-container {
+  @extend .container;
+}
+
+.brands-list-letter {
+  @extend .row;
+
+  p {
+    padding: $sc-base-padding *3;
+    background: $sc-color-theme-background;
+    margin-bottom :$sc-base-margin;
+    font-size: $sc-h4-font-size;
+  }
+}
+
+.brands-sub-list {
+  @extend .row;
+  margin: $sc-base-margin*4 0;
+  font-size: $sc-h5-font-size;
+  li {
+    @extend .col-sm-3;
+
+  }
+}
+
+.featured-brands-container {
+  margin-bottom: $sc-base-margin*3;
+  h3 {
+    color: $sc-color-primary;
+    margin-bottom: $sc-base-margin*2;
+  }
+
+  > div {
+    padding: $sc-base-padding *2;
+    display:inline-block;
+    vertical-align: middle;
+    float:none;
+    width: 16.4%;
+  }
+
+  a {
+    display: block; text-align:center;
+  }
+}
