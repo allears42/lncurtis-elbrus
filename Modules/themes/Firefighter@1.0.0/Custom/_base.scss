@@ -1,0 +1,33 @@
+.list{
+  list-style: initial;
+  margin: 0 0 0 $sc-base-margin*3;
+  li {
+    list-style: initial;
+    padding: 0 $sc-base-padding;
+  }
+}
+
+
+.background-black-transparent {
+  background: rgba(0,0,0,.7);
+  color:white;
+}
+.color-orange {
+  color: #FFA400;
+}
+
+.global-loading-indicator {
+  position: fixed ;
+  top: 50% ;
+  left: 50% ;
+  margin-left: -8px ;
+  margin-top: -8px ;
+
+  @media screen and (max-width: $screen-sm) {
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    margin-left: -8px !important;
+    margin-top: -8px !important;
+  }
+}

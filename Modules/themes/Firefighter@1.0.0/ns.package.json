@@ -1,0 +1,40 @@
+{
+    "gulp": {
+        "sass": [
+            "Sass/**/*.scss"
+        ]
+    },
+    "overrides": {
+        "suitecommerce/BaseSassStyles@2.0.0/Sass/_base.scss": "BaseSassStyles.Firefighter@2.0.0/Sass/_base.scss",
+        "suitecommerce/BaseSassStyles@2.0.0/Sass/_reset.scss": "BaseSassStyles.Firefighter@2.0.0/Sass/_reset.scss",
+
+        "suitecommerce/BaseSassStyles@2.0.0/Sass/atoms/_buttons.scss": "BaseSassStyles.Firefighter@2.0.0/Sass/atoms/_buttons.scss",
+        "suitecommerce/BaseSassStyles@2.0.0/Sass/atoms/_forms.scss": "BaseSassStyles.Firefighter@2.0.0/Sass/atoms/_forms.scss",
+        "suitecommerce/BaseSassStyles@2.0.0/Sass/atoms/_icons.scss": "BaseSassStyles.Firefighter@2.0.0/Sass/atoms/_icons.scss",
+        "suitecommerce/BaseSassStyles@2.0.0/Sass/atoms/_messages.scss": "BaseSassStyles.Firefighter@2.0.0/Sass/atoms/_messages.scss",
+        "suitecommerce/BaseSassStyles@2.0.0/Sass/atoms/_purchase-controls.scss": "BaseSassStyles.Firefighter@2.0.0/Sass/atoms/_purchase-controls.scss",
+        "suitecommerce/BaseSassStyles@2.0.0/Sass/atoms/_spacing.scss": "BaseSassStyles.Firefighter@2.0.0/Sass/atoms/_spacing.scss",
+        "suitecommerce/BaseSassStyles@2.0.0/Sass/atoms/_sticky-button.scss": "BaseSassStyles.Firefighter@2.0.0/Sass/atoms/_sticky-button.scss",
+        "suitecommerce/BaseSassStyles@2.0.0/Sass/atoms/_typography.scss": "BaseSassStyles.Firefighter@2.0.0/Sass/atoms/_typography.scss",
+
+        "suitecommerce/BaseSassStyles@2.0.0/Sass/molecules/_breadcrumb.scss": "BaseSassStyles.Firefighter@2.0.0/Sass/molecules/_breadcrumb.scss",
+        "suitecommerce/BaseSassStyles@2.0.0/Sass/molecules/_columns.scss": "BaseSassStyles.Firefighter@2.0.0/Sass/molecules/_columns.scss",
+        "suitecommerce/BaseSassStyles@2.0.0/Sass/molecules/_image-gallery.scss": "BaseSassStyles.Firefighter@2.0.0/Sass/molecules/_image-gallery.scss",
+        "suitecommerce/BaseSassStyles@2.0.0/Sass/molecules/_information_cards.scss": "BaseSassStyles.Firefighter@2.0.0/Sass/molecules/_information_cards.scss",
+        "suitecommerce/BaseSassStyles@2.0.0/Sass/molecules/_item-cells.scss": "BaseSassStyles.Firefighter@2.0.0/Sass/molecules/_item-cells.scss",
+        "suitecommerce/BaseSassStyles@2.0.0/Sass/molecules/_list-header.scss": "BaseSassStyles.Firefighter@2.0.0/Sass/molecules/_list-header.scss",
+        "suitecommerce/BaseSassStyles@2.0.0/Sass/molecules/_lists.scss": "BaseSassStyles.Firefighter@2.0.0/Sass/molecules/_lists.scss",
+        "suitecommerce/BaseSassStyles@2.0.0/Sass/molecules/_search.scss": "BaseSassStyles.Firefighter@2.0.0/Sass/molecules/_search.scss",
+        "suitecommerce/BaseSassStyles@2.0.0/Sass/molecules/_summary_box.scss": "BaseSassStyles.Firefighter@2.0.0/Sass/molecules/_summary_box.scss",
+        "suitecommerce/BaseSassStyles@2.0.0/Sass/molecules/_tabs.scss": "BaseSassStyles.Firefighter@2.0.0/Sass/molecules/_tabs.scss",
+
+        "suitecommerce/BaseSassStyles@2.0.0/Sass/variables/_colors.scss": "BaseSassStyles.Firefighter@2.0.0/Sass/variables/_colors.scss",
+        "suitecommerce/BaseSassStyles@2.0.0/Sass/variables/_sizing.scss": "BaseSassStyles.Firefighter@2.0.0/Sass/variables/_sizing.scss",
+        "suitecommerce/BaseSassStyles@2.0.0/Sass/variables/_spacing.scss": "BaseSassStyles.Firefighter@2.0.0/Sass/variables/_spacing.scss",
+        "suitecommerce/BaseSassStyles@2.0.0/Sass/variables/_typography.scss": "BaseSassStyles.Firefighter@2.0.0/Sass/variables/_typography.scss",
+        "suitecommerce/BaseSassStyles@2.0.0/Sass/variables/_variables.scss": "BaseSassStyles.Firefighter@2.0.0/Sass/variables/_variables.scss",
+
+        "suitecommerce/Footer@1.2.1/Sass/_footer.scss": "Sass/Footer/_footer.scss",
+        "suitecommerce/Footer@1.2.1/Sass/_footer-simplified.scss": "Sass/Footer/_footer-simplified.scss"
+    }
+}

@@ -1,0 +1,106 @@
+footer {
+  .newsletter-suscription-form {
+    @extend .container-fluid;
+  }
+
+  h3 {
+    margin: $sc-base-margin*4 0 $sc-base-margin*2;
+    color: white;
+    font-size: $sc-h4-font-size-mobile;
+    font-family: $header-copy;
+    font-weight :normal;
+  }
+
+  a.cust-menu-level1-anchor, p.cust-menu-level1-anchor, .footer-social h3 {
+    font-family :$header-copy;
+    color: white;
+    font-size: $sc-h4-font-size-mobile;
+    font-weight : 500;
+    margin: $sc-base-margin*4 0  $sc-base-margin*2;
+    display: block;
+
+  }
+
+  a.header-sidebar-menu-back {
+    display: none;
+  }
+  // hack to get icons imported
+  .fa-facebook-square {
+    @extend %fa-facebook-square;
+  }
+  .fa-twitter-square {
+    @extend %fa-twitter-square;
+  }
+  .fa-linkedin-square {
+    @extend %fa-linkedin-square;
+  }
+  .fa-googleplus-square {
+    @extend %fa-google-plus-square;
+  }
+}
+
+.footer-navigation-links {
+
+  .menu-level1-no-fly > li {
+    @extend .col-xs-6;
+    @media (max-width: 300px) {
+      width: 100%;
+    }
+    @media (min-width: $screen-md-min) {
+      padding-left: $sc-base-padding*8;
+    }
+    padding-bottom: $sc-base-padding * 4;
+
+    &:nth-child(3) {
+      clear:left;
+    }
+  }
+}
+.footer-other-locations {
+  margin: $sc-base-margin*4  0 $sc-base-margin*2
+}
+
+.footer-content {
+  .newsletter-modal-trigger {
+    margin: $sc-base-padding*2 0;
+    display: block;
+    color: $footer-color;
+    font-weight : 500;
+
+    i {
+      font-size: 22px;
+      display : inline-block;
+      vertical-align : middle;
+      margin-right: $sc-base-margin;
+    }
+  }
+}
+
+.footer-content-left {
+  @extend .col-md-3;
+  @extend .col-xs-12;
+  color: $footer-color;
+}
+
+.footer-content-right {
+
+  [data-view="Footer.Seals"] {
+    @extend .col-md-12;
+    @extend .col-sm-6;
+    @extend .col-xs-12;
+
+    a {
+      display: block;
+      margin: $sc-base-margin*2 0;
+    }
+  }
+}
+
+.footer-social {
+  @extend .col-md-12;
+  @extend .col-sm-6;
+  @extend .col-xs-12;
+  .menu-level1 {
+    > li { float : left; font-size : 30px; margin-right : $sc-base-margin; }
+  }
+}
