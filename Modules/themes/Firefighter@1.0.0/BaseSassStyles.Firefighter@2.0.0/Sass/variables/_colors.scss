@@ -1,0 +1,107 @@
+/*
+	© 2016 NetSuite Inc.
+	User may not copy, modify, distribute, or re-bundle or otherwise make available this code;
+	provided, however, if you are an authorized user with a NetSuite account or log-in, you
+	may use this code subject to the terms that govern your access and use.
+*/
+
+$sc-color-theme:#0059b2;
+$sc-color-theme-light:#D8D8D8;
+$sc-color-theme-background:#EBEBEB;
+$sc-color-theme-background-light: #F7F7F7;
+$sc-color-theme-background-lightest:#F7F7F7;
+$sc-color-theme-border: #D8D8D8;
+$sc-color-theme-border-light: #E0E0E0;
+$sc-color-theme-border-dark: #333333;
+$sc-color-background-list:#F7F7F7;
+
+$dark-background: #2F2F2F;
+$footer-background: #333333;
+$footer-color: #B0B0B0;
+
+$sc-color-primary: #CA0E19;
+$sc-color-secondary: #0059b2;
+$sc-color-tertiary: #ffffff;
+
+
+$sc-color-success: #4a7f35;
+$sc-color-success-background: #fff;
+$sc-color-warning: #8e7728;
+$sc-color-warning-background: #fff;
+
+$sc-color-error: #C33C48;
+$sc-color-error-background: #fff;
+
+//$sc-color-error: #C33C48;
+//$sc-color-error-background: #FFE9F1;
+$sc-color-info: $footer-color;
+$sc-color-info-background: $sc-color-theme-light;
+
+$sc-color-primary-hover: saturate(lighten($sc-color-primary, 4), 10);
+$sc-color-primary-active: desaturate(darken($sc-color-primary, 5), 10);
+$sc-color-primary-disable: lighten($sc-color-primary, 18);
+
+$sc-color-secondary-hover: saturate(lighten($sc-color-secondary, 4), 4);
+$sc-color-secondary-active: darken($sc-color-secondary, 6);
+
+$sc-color-tertiary-hover: $sc-color-secondary;
+$sc-color-tertiary-active: darken($sc-color-secondary, 6);
+
+$sc-color-link: #0059b2;
+$sc-color-link-hover: lighten($sc-color-link, 10);
+
+$sc-color-extra-dark-copy : #212121;
+$sc-color-dark-copy: #454545;
+$sc-color-copy: #7C7C7C;
+$sc-color-light-copy: lighten($sc-color-copy, 22);
+
+//TODO: FIND OUT
+$sc-color-range-off:#dcdcdc;
+$sc-color-range-on: $sc-color-primary;
+
+//Stars
+$sc-color-star-filled: $sc-color-secondary;
+$sc-color-star-empty: $footer-color;
+$sc-color-star-error: $sc-color-primary;
+$sc-color-star-empty-disable: $sc-color-copy;
+$sc-color-input-state-error-shadow:lighten($sc-color-primary, 18);;
+
+// icons
+$sc-color-icon: #ffffff;
+
+//Status
+$sc-color-status: $sc-color-primary;
+
+$sc-pusher-bg: #ffffff;
+
+//Datepicker
+$sc-days-disabled: $sc-color-copy;
+
+//Color picker
+$sc-picker-white-border: $sc-color-copy;
+
+//Home Slide Theme
+$sc-color-slide-background:#FFF;
+
+//Bx Slider Colors
+$sc-color-bx-pager-background: $footer-color;
+
+//Placeholder Colors
+$sc-color-placeholder: $footer-color;
+//Quantity value
+$sc-color-quantity-value:$footer-color;
+
+//Miscellaneous varibles
+$sc-color-overlay:#000;
+$sc-color-gallery-icon-control: $dark-background;
+$sc-color-span-spinner-add-or-sub: #9db4c0;
+$sc-color-list-header-view-accordion-body-header: #f1f7fa;
+$sc-color-wizard-confirmation-module: #eef7e4;
+$sc-color-social-sharing-flyout-content-social-facebook-icon: #3b5998;
+$sc-color-social-sharing-flyout-content-social-twitter-icon: #00b6f1;
+$sc-color-social-sharing-flyout-content-social-google-icon: #dd4b38;
+$sc-color-social-sharing-flyout-content-social-pinterest-icon: #bd071d;
+$sc-color-push-button-secondary-p: #404040;
+$sc-color-typeahead-plugin-dropdown-menu: #5b7f8c;
+$sc-color-focus: #66afe9;
+$sc-color-scroolbar: #323232;

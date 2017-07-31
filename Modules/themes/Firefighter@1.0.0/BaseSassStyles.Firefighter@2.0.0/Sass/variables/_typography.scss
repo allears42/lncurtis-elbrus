@@ -1,0 +1,84 @@
+/*
+	© 2017 NetSuite Inc.
+	User may not copy, modify, distribute, or re-bundle or otherwise make available this code;
+	provided, however, if you are an authorized user with a NetSuite account or log-in, you
+	may use this code subject to the terms that govern your access and use.
+*/
+
+//sizing
+$sc-base-font-size: 13px;
+$sc-smallest-font-size: 10px;
+$sc-small-font-size: 12px;
+$sc-small-font-size-mobile: 15px;
+$sc-h1-font-size: 26px;
+$sc-h1-font-size-mobile: 22px;
+$sc-h2-font-size: 24px;
+$sc-h2-font-size-mobile: 18px;
+$sc-h3-font-size: 22px;
+$sc-h3-font-size-mobile: 18px;
+$sc-h4-font-size: 18px;
+$sc-h4-font-size-mobile: 16px;
+$sc-h5-font-size: 16px;
+$sc-h5-font-size-mobile: $sc-base-font-size;
+$sc-button-xlarge-font-size: 19px;
+$sc-button-large-font-size: 17px;
+$sc-button-medium-font-size: 15px;
+$sc-button-small-font-size: $sc-base-font-size;
+
+
+$header-top-bar-link-color: #696969;
+
+$sc-navigation-icon-size: 20px;
+
+$sc-image-large-size:150px;
+$sc-image-medium-size:100px;
+$sc-image-small-size:60px;
+
+//weight
+$sc-font-weight-light:300;
+$sc-font-weight-normal:400;
+$sc-font-weight-semibold:700;
+$sc-font-weight-bold:700;
+
+
+$body-copy: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+$header-copy: "Bitter", "Times New Roman", Times, serif;
+
+
+$sc-homepage-h1-size: 35px;
+.large {
+  font-size: 1.5em
+}
+.x-large {
+  font-size: 2em;
+}
+
+@media (max-width: $screen-sm-max) {
+  .large {
+    font-size: 1.2em
+  }
+  .x-large {
+    font-size: 1.6em;
+  }
+}
+
+@media (max-width: $screen-xs-max) {
+  .large {
+    font-size: 1em
+  }
+  .x-large {
+    font-size: 1.2em;
+  }
+}
+
+// Alignment
+.text-left           { text-align: left; }
+.text-right          { text-align: right; }
+.text-center         { text-align: center; }
+.text-justify        { text-align: justify; }
+.text-nowrap         { white-space: nowrap; }
+
+// Transformation
+.text-lowercase      { text-transform: lowercase; }
+.text-uppercase      { text-transform: uppercase; }
+.text-capitalize     { text-transform: capitalize; }

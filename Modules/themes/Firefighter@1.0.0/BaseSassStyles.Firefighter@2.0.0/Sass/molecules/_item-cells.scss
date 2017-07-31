@@ -1,0 +1,108 @@
+/*
+	© 2017 NetSuite Inc.
+	User may not copy, modify, distribute, or re-bundle or otherwise make available this code;
+	provided, however, if you are an authorized user with a NetSuite account or log-in, you
+	may use this code subject to the terms that govern your access and use.
+*/
+
+.item-cell {
+	margin-bottom: $sc-base-margin * 3;
+    border: 1px solid $sc-color-theme-border;
+
+}
+
+.item-cell-link-image{
+	height:250px;
+	line-height:250px;
+}
+
+.item-cell-image{
+	vertical-align:middle;
+  pointer-events: none;
+}
+
+.item-cell-title {
+	@extend .medium-title-navigable;
+  font-size: 14px;
+	padding:$sc-base-padding * 2 0 $sc-base-padding * 2 0;
+	display: block;
+	text-align: center;
+    color: $sc-color-copy;
+    font-family: $body-copy;
+    font-weight :normal;
+}
+
+.item-cell-price {
+	@extend .small-price;
+	text-align: center;
+}
+
+.item-cell-rate {
+	text-align: center;
+}
+
+.item-cell-rate-filled {
+	@extend .icon-star-filled;
+}
+
+.item-cell-rate-empty {
+	@extend .icon-star;
+}
+
+///////////////////////////////////////////////////////////////
+//Quick view
+
+.item-cell-image-wrapper {
+	position: relative;
+}
+
+.item-cell-quick-view-wrapper {
+	display: none;
+	position: absolute;
+	left: 50%;
+    margin-left: -55px;
+	right: auto;
+	text-align: center;
+	top: 50%;
+    margin-top: -55px;
+    padding: 33px $sc-base-padding * 4;
+    background: white;
+    border: 6px solid $sc-color-dark-copy;
+    height: 110px; width: 110px;
+    -webkit-border-radius :50%; -moz-border-radius :50%; border-radius :50%;
+  opacity :0;
+}
+
+.item-cell:hover .item-cell-quick-view-wrapper {
+  border-color: $sc-color-primary;
+	@media (min-width: $screen-md-min){
+		display: block;
+      opacity :1;
+	}
+}
+
+.item-cell-quick-view-link {
+  color: $sc-color-copy;
+  text-transform: uppercase;
+  font-size: $sc-h3-font-size-mobile;
+  line-height :$sc-h3-font-size-mobile;
+  span {
+    display: block;
+    color: $sc-color-primary;
+    font-weight: bold;
+    line-height :$sc-h3-font-size-mobile;
+  }
+
+  &:hover {
+    color: $sc-color-copy;
+  }
+}
+
+.icon-cell-quick-view-icon {
+	@extend .fa;
+	@extend %fa-search;
+}
+
+.item-cell-sku {
+  margin: $sc-base-margin*2 0;
+}
