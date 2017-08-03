@@ -1,0 +1,21 @@
+{
+    "gulp": {
+        "javascript": [
+            "JavaScript/*"
+        ],
+        "templates": [
+            "Templates/*"
+        ],
+        "sass": [
+            "Sass/**/*.scss"
+        ],
+        "configuration": [
+            "Configuration/*.json"
+        ]
+    },
+    "overrides": {
+        "suitecommerce/Footer@1.2.1/Configuration/Footer.json": "Configuration/Footer.json",
+        "suitecommerce/Footer@1.2.1/Templates/footer.tpl": "Templates/footer.tpl",
+        "suitecommerce/Footer@1.2.1/Templates/footer_simplified.tpl": "Templates/footer_simplified.tpl"
+    }
+}

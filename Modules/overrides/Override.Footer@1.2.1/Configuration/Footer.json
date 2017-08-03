@@ -1,0 +1,369 @@
+{
+	"type": "object",
+    "subtab": {
+        "id": "footer",
+        "title": "Footer",
+        "description": "Footer settings",
+        "docRef": "bridgehead_4393101142",
+        "group": "layout"
+    }
+,	"properties": {
+        "footer.logo": {
+            "group": "layout",
+            "subtab": "footer",
+            "type": "string",
+            "title": "Footer Logo",
+            "description": "Logo in footer.",
+            "default": "img/logo_grey.png"
+        },
+        "footer.companyAddress": {
+            "group": "layout",
+            "subtab": "footer",
+            "type": "string",
+            "title": "Footer company address",
+            "description": "Footer company address",
+            "nsType": "textarea",
+            "default": "<span itemprop='streetAddress'>1800 Peralta Street</span><br><span itemprop='addressLocality'>Oakland</span><span itemprop='addressRegion'>CA</span><span itemprop='postalCode'>94607</span>"
+        },
+        "footer.phoneTollFree": {
+            "group": "layout",
+            "subtab": "footer",
+            "type": "string",
+            "title": "Footer tollfree phone",
+            "description": "Footer tollfree phone",
+            "default": "877-488-0469"
+        },
+        "footer.copyrightText": {
+            "group": "layout",
+            "subtab": "footer",
+            "type": "string",
+            "title": "Copyright Text",
+            "description": "Copyright Text",
+            "nsType": "textarea",
+            "default": "L.N. Curtis & sons, Inc. L.N. Curtis & sons and Tools for Heroes are trademarks of L.N. Curtis & sons, Inc. All rights reserved."
+        },
+        "footer.viewOtherLocationsText": {
+            "group": "layout",
+            "subtab": "footer",
+            "type": "string",
+            "title": "View Other Locations Text",
+            "description": "View Other Locations Text",
+            "default": "View our other locations"
+        },
+        "footer.viewOtherLocationsLink": {
+            "group": "layout",
+            "subtab": "footer",
+            "type": "string",
+            "title": "View Other Locations Link",
+            "description": "View Other Locations Link",
+            "default": "/contact-us"
+        },
+        "footer.familyOfBrandsHeader": {
+            "group": "layout",
+            "subtab": "footer",
+            "type": "string",
+            "title": "Family Of Brands Header",
+            "description": "Family Of Brands Header",
+            "default": "Curtis Family of Brands"
+        },
+        "footer.familyOfBrands": {
+            "group": "layout",
+            "subtab": "footer",
+            "type": "array",
+            "title": "Family of Brands navigation",
+            "description": "Family of Brands navigation links that goes in the footer",
+
+            "items": {
+                "type": "object",
+                "properties": {
+                    "text": {
+                        "type": "string",
+                        "title": "Text",
+                        "translate": true,
+                        "description": "Link's text shown in the UI",
+                        "mandatory": true
+                    },
+                    "href": {
+                        "type": "string",
+                        "title": "href",
+                        "description": "The href of the link - for example '/search' will go to the search results page. It's ignored for parent entries.  Also it could be an absolute URL like https://google.com but in that case, make sure you really need to break the single page application. "
+                    },
+                    "level": {
+                        "type": "string",
+                        "title": "level",
+                        "description": "Hierarchy level of this navigation entry",
+                        "enum":["1", "2", "3"],
+                        "mandatory": true
+                    },
+                    "dataTouchpoint": {
+                        "type": "string",
+                        "title": "data-touchpoint",
+                        "description": "data-touchpoint value for the link if any",
+                        "enum": ["home", "login", "register", "logout", "customercenter", "viewcart", "checkout"]
+                    },
+                    "dataHashtag": {
+                        "type": "string",
+                        "title": "data-hashtag",
+                        "description": "data-hashtag value for the link if any"
+                    },
+                    "classnames": {
+                        "type": "string",
+                        "title": "class names",
+                        "description": "extra HTML class names to add to this entry"
+                    },
+                    "target": {
+                        "type": "string",
+                        "title": "Target",
+                        "description": "link target",
+                        "enum":["_blank", "_self", "_parent", "_top"]
+                    }
+                }
+            },
+            "default":[
+                {
+                    "text": "Firefighters Bookstore",
+                    "href": "http://www.firebooks.com/",
+                    "target": "_blank"
+                },
+                {
+                    "text": "ECMS",
+                    "href": "http://www.ecmsinc.biz/",
+                    "target": "_blank"
+                },
+                {
+                    "text": "Curtis Blue Line",
+                    "href": "http://www.curtisblueline.com/",
+                    "target": "_blank"
+                }
+            ]
+        },
+        "footer.navigationLinks": {
+            "group": "layout",
+            "subtab": "footer",
+            "type": "array",
+            "title": "Footer Navigation",
+            "description": "Navigation links that goes in the footer",
+
+            "items": {
+                "type": "object",
+                "properties": {
+                    "text": {
+                        "type": "string",
+                        "title": "Text",
+                        "translate": true,
+                        "description": "Link's text shown in the UI",
+                        "mandatory": true
+                    },
+                    "href": {
+                        "type": "string",
+                        "title": "href",
+                        "description": "The href of the link - for example '/search' will go to the search results page. It's ignored for parent entries.  Also it could be an absolute URL like https://google.com but in that case, make sure you really need to break the single page application. "
+                    },
+                    "level": {
+                        "type": "string",
+                        "title": "level",
+                        "description": "Hierarchy level of this navigation entry",
+                        "enum":["1", "2", "3"],
+                        "mandatory": true
+                    },
+                    "dataTouchpoint": {
+                        "type": "string",
+                        "title": "data-touchpoint",
+                        "description": "data-touchpoint value for the link if any",
+                        "enum": ["home", "login", "register", "logout", "customercenter", "viewcart", "checkout"]
+                    },
+                    "dataHashtag": {
+                        "type": "string",
+                        "title": "data-hashtag",
+                        "description": "data-hashtag value for the link if any"
+                    },
+                    "classnames": {
+                        "type": "string",
+                        "title": "class names",
+                        "description": "extra HTML class names to add to this entry"
+                    },
+                    "target": {
+                        "type": "string",
+                        "title": "Target",
+                        "description": "link target",
+                        "enum":["_blank", "_self", "_parent", "_top"]
+                    },
+                    "sortOrder": {
+                        "type": "string",
+                        "title": "Sort Order",
+                        "description": "Sort order for links"
+                    },
+                    "id": {
+                        "type": "string",
+                        "title": "Id",
+                        "description": "Parent entries must have an id so children entries can reference it"
+                    },
+                    "parentId": {
+                        "type": "string",
+                        "title": "Parent Id",
+                        "description": "If this is a child entry then this must be the id of the parent entry."
+                    }
+                }
+            },
+            "default":[
+                {
+                    "text": "Fire Fighter Supply Store",
+                    "href": "/search",
+                    "dataTouchpoint": "home",
+                    "dataHashtag": "#/search"
+                },
+                {
+                    "text": "About Us",
+                    "href": "/about-us",
+                    "dataTouchpoint": "home",
+                    "dataHashtag": "#/about-us"
+                },
+                {
+                    "text": "Help",
+                    "href": "/help-center",
+                    "dataTouchpoint": "home",
+                    "dataHashtag": "#/help-center"
+                },
+                {
+                    "text": "Curtis Care",
+                    "href": "/curtis-care",
+                    "dataTouchpoint": "home",
+                    "dataHashtag": "#/curtis-care"
+                }
+            ]
+        },
+        "footer.seals": {
+            "group": "layout",
+            "subtab": "footer",
+            "type": "array",
+            "title": "Footer Seals",
+            "description": "Images for seals and certifications in the footer",
+
+            "items": {
+                "type": "object",
+                "properties": {
+                    "imageURL": {
+                        "type": "string",
+                        "title": "Image URL",
+                        "description": "URL of image"
+                    },
+                    "altText": {
+                        "type": "string",
+                        "title": "Alt Text",
+                        "translate": true,
+                        "description": "Alt text for the image",
+                        "mandatory": true
+                    },
+                    "href": {
+                        "type": "string",
+                        "title": "href",
+                        "description": "The href of the link - for example '/search' will go to the search results page. It's ignored for parent entries.  Also it could be an absolute URL like https://google.com but in that case, make sure you really need to break the single page application. "
+                    },
+                    "dataTouchpoint": {
+                        "type": "string",
+                        "title": "data-touchpoint",
+                        "description": "data-touchpoint value for the link if any",
+                        "enum": ["home", "login", "register", "logout", "customercenter", "viewcart", "checkout"]
+                    },
+                    "dataHashtag": {
+                        "type": "string",
+                        "title": "data-hashtag",
+                        "description": "data-hashtag value for the link if any"
+                    },
+                    "classnames": {
+                        "type": "string",
+                        "title": "class names",
+                        "description": "extra HTML class names to add to this entry"
+                    },
+                    "target": {
+                        "type": "string",
+                        "title": "Target",
+                        "description": "link target",
+                        "enum":["_blank", "_self", "_parent", "_top"]
+                    },
+                    "sortOrder": {
+                        "type": "string",
+                        "title": "Sort Order",
+                        "description": "Sort order for links"
+                    }
+                }
+            },
+            "default":[
+                {
+                    "imageURL": "img/gsa-logo.png",
+                    "altText": "GSA Contract Holder",
+                    "href": "https://www.gsaadvantage.gov/advantage/contractor/contractor_detail.do?mapName=/s/search/&cat=ADV&contractNumber=GS-07F-0043L",
+                    "target": "_blank"
+                },
+                {
+                    "imageURL": "img/hgac-logo.png",
+                    "altText": "HGAC Buy Logo",
+                    "href": "https://www.hgacbuy.org/program/contracts/emergency/emergency-preparedness-ep11-14.aspx",
+                    "target": "_blank"
+                },
+                {
+                    "imageURL": "img/firerescue-logo.png",
+                    "altText": "Fire Rescue Logo",
+                    "href": "https://www.nppgov.com/vendors/ln-curtis-and-sons/",
+                    "target": "_blank"
+                }
+            ]
+        },
+        "footer.social": {
+            "group": "layout",
+            "subtab": "footer",
+            "type": "array",
+            "title": "Social",
+            "description": "Social Links",
+
+            "items": {
+                "type": "object",
+                "properties": {
+                    "href": {
+                        "type": "string",
+                        "title": "href",
+                        "description": "The href of the link - for example '/search' will go to the search results page. It's ignored for parent entries.  Also it could be an absolute URL like https://google.com but in that case, make sure you really need to break the single page application. "
+                    },
+                    "classnames": {
+                        "type": "string",
+                        "title": "class names",
+                        "description": "extra HTML class names to add to this entry"
+                    },
+                    "target": {
+                        "type": "string",
+                        "title": "Target",
+                        "description": "link target",
+                        "enum":["_blank", "_self", "_parent", "_top"]
+                    },
+                    "sortOrder": {
+                        "type": "string",
+                        "title": "Sort Order",
+                        "description": "Sort order for links"
+                    }
+                }
+            },
+            "default":[
+                {
+                    "href": "https://www.facebook.com/toolsforheroes",
+                    "classnames": "fa fa-facebook-square",
+                    "target": "_blank"
+                },
+                {
+                    "href": "https://twitter.com/toolsforheroes",
+                    "classnames": "fa fa-twitter-square",
+                    "target": "_blank"
+                },
+                {
+                    "href": "https://www.linkedin.com/company/l.n.-curtis-&-sons",
+                    "classnames": "fa fa-linkedin-square",
+                    "target": "_blank"
+                },
+                {
+                    "href": "https://plus.google.com/+lncurtis",
+                    "classnames": "fa fa-googleplus-square",
+                    "target": "_blank"
+                }
+            ]
+        }
+    }
+}
