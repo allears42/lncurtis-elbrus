@@ -177,7 +177,10 @@
         "custom/FacetContent": "1.0.0",
         "custom/LinkHierarchy": "1.0.0",
         "custom/Pacejet": "1.0.0",
-        "themes/Firefighter": "1.0.0"
+        "themes/Firefighter": "1.0.0",
+
+
+        "overrides/Override.Footer": "1.2.1"
     },
     "tasksConfig": {
         "local": {
@@ -799,7 +802,13 @@
                         "Location.SCA",
                         "CustomerServiceForm",
                         "FacetContent",
-                        "LinkHierarchy"
+                        "LinkHierarchy",
+                        {
+                            "module": "Firefighter",
+                            "include": [
+                                "custom"
+                            ]
+                        }
                     ]
                 },
                 {
