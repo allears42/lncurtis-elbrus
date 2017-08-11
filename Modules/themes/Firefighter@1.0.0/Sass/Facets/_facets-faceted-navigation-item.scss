@@ -1,0 +1,103 @@
+/*
+	© 2016 NetSuite Inc.
+	User may not copy, modify, distribute, or re-bundle or otherwise make available this code;
+	provided, however, if you are an authorized user with a NetSuite account or log-in, you
+	may use this code subject to the terms that govern your access and use.
+*/
+
+.facets-faceted-navigation-item-icon-ok {
+	@extend .fa;
+	@extend .fa-plus;
+}
+
+.facets-faceted-navigation-item-icon-plus {
+	@extend .fa;
+	@extend .fa-plus;
+}
+
+.facets-faceted-navigation-item-optionlist-extra-button {
+  @extend .button-small;
+  @extend .button-tertiary;
+  @media (min-width : $screen-md-min) {
+
+    border:none;
+    background: transparent;
+    padding :0;
+    display: block;
+    color: $sc-color-link;
+    text-decoration: underline;
+    &:hover, &:focus, &:active, &:hover:focus {
+      background:transparent;
+      color: $sc-color-link;
+    }
+  }
+}
+
+.facets-faceted-navigation-item-optionlist-extra-wrapper {
+  margin-top: $sc-base-margin*2;
+  margin-left: $sc-base-margin*3;
+  @media (min-width : $screen-md-min) {
+    margin-left: 0
+  }
+}
+
+.facets-faceted-navigation-item-facet-group {
+	@extend .facets-faceted-navigation-facet-group;
+
+}
+
+.facets-faceted-navigation-item-facet-group-expander {
+	@extend .facets-faceted-navigation-facet-group-expander;
+}
+
+.facets-faceted-navigation-item-facet-group-expander-icon {
+	@extend .facets-faceted-navigation-facet-group-expander-icon;
+}
+
+.facets-faceted-navigation-item-facet-group-wrapper {
+  @media (max-width: $screen-sm-max) {
+    padding: 0 $sc-base-padding*2;
+  }
+}
+
+.facets-faceted-navigation-item-facet-group-content {}
+
+.facets-faceted-navigation-item-facet-optionlist {
+  li {
+    @media (min-width: $screen-md-min) {
+      margin: 0  $sc-base-margin * -1;
+    }
+  }
+}
+
+.facets-faceted-navigation-item-facet-optionlist-extra {
+  li {
+    @media (min-width: $screen-md-min) {
+      margin: 0  $sc-base-margin * -1;
+    }
+  }
+}
+
+.facets-faceted-navigation-item-facet-group-title {
+	@extend .facets-faceted-navigation-facet-group-title;
+}
+
+.facets-faceted-navigation-item-facet-option {
+	@extend .facets-faceted-navigation-facet-option;
+}
+
+.facets-faceted-navigation-item-facet-option-circle {
+	@extend .facets-faceted-navigation-facet-option-circle;
+}
+
+.facets-faceted-navigation-item-filter-delete {}
+
+.facets-faceted-navigation-item-filter-delete-icon {}
+
+.facets-faceted-navigation-item-alt-caption {
+	display:none;
+}
+
+.facets-faceted-navigation-item-facet-multi {
+	@extend .input-checkbox;
+}

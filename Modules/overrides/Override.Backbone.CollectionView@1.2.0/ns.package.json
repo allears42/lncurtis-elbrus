@@ -1,0 +1,22 @@
+{
+    "gulp": {
+        "javascript": [
+            "JavaScript/*.js"
+        ],
+        "templates": [
+            "Templates/*"
+        ],
+        "sass": [
+            "Sass/*.scss"
+        ],
+        "unit-test-files": [
+            "Tests/*.js"
+        ],
+        "unit-test-entry-point": [
+            "Tests/UnitTest.Backbone.CollectionView.js"
+        ]
+    }
+    , "overrides": {
+        "suitecommerce/Backbone.CollectionView@1.2.0/JavaScript/Backbone.CollectionView.js": "JavaScript/Backbone.CollectionView.js"
+    }
+}

@@ -1,0 +1,39 @@
+/*
+	© 2016 NetSuite Inc.
+	User may not copy, modify, distribute, or re-bundle or otherwise make available this code;
+	provided, however, if you are an authorized user with a NetSuite account or log-in, you
+	may use this code subject to the terms that govern your access and use.
+*/
+
+.recently-viewed-items {
+
+  margin-top: $sc-medium-margin + 5;
+  padding-top:$sc-base-padding * 4;
+  border-top:2px solid $dark-background;
+	position:relative;
+	h3{
+		margin-bottom:$sc-large-margin;
+      @extend h1;
+	}
+	.bx-controls-direction{
+		text-align:right;
+		margin-bottom:$sc-large-margin;
+	}
+
+  .bx-wrapper {
+    margin: 0 !important;
+    .bx-viewport {
+      @media screen and (min-width: $screen-md-min) {
+
+        height: auto !important;
+      }
+    }
+  }
+}
+.recently-viewed-row-cell {
+  display: block;
+  width: 100%;
+}
+ul.recently-viewed-row-cell li{
+	display:inline-block;
+}

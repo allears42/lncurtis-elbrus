@@ -1,0 +1,8 @@
+- Sandbox elbrus url: http://sandbox-ln-elbrus.jhmservices.net/
+
+- Local dev elbrus: http://sandbox-ln-elbrus.jhmservices.net/c.3880230/lncurtis/shopping-local.ssp
+
+
+- Sandbox vinson url: http://sandbox-ln-vinson.jhmservices.net/
+
+- Local dev vinson:  http://sandbox-ln-vinson.jhmservices.net/c.3880230/lncurtis/shopping-local.ssp

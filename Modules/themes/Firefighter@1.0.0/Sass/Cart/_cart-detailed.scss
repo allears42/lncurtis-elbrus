@@ -1,0 +1,285 @@
+/*
+	© 2016 NetSuite Inc.
+	User may not copy, modify, distribute, or re-bundle or otherwise make available this code;
+	provided, however, if you are an authorized user with a NetSuite account or log-in, you
+	may use this code subject to the terms that govern your access and use.
+*/
+
+.cart-detailed{
+	@extend .cart;
+
+	.item-views-selected-option-color-label-text, .cart-item-summary-item-list-actionable-amount-label,
+	.cart-item-summary-item-list-actionable-label-qty{
+		color: $sc-color-dark-copy;
+		font-weight: 600;
+	}
+
+	.item-views-selected-option {
+		.item-views-selected-option-label{
+			color: $sc-color-dark-copy;
+			font-weight: 600;
+		}
+	}
+}
+
+.cart-detailed-view-header{
+	@extend .view-header;
+    @extend .cart-title;
+    @extend .container-fluid;
+
+}
+.cart-detailed-print-page {
+  @extend .item-details-print-page;
+}
+
+div.cart-detailed-print-page {
+  margin-top: 0;
+  vertical-align : top;
+
+}
+
+.cart-detailed-title{
+    float: left;
+  margin-top: $sc-base-margin*2;
+}
+
+.cart-detailed-title-details-count{
+	@extend .cart-title-details-count;
+	@extend .middle-price;
+}
+
+.cart-detailed-confirm-message{
+	@extend .confirm-message;
+}
+
+.cart-detailed-right{
+	@extend .cart-right;
+	margin-top: $sc-base-margin * 4;
+	@media (min-width: $screen-md-min) {
+		margin-top: 0;
+	}
+}
+
+.cart-detailed-body{
+	@extend .cart-body;
+}
+
+.cart-detailed-left{
+	@extend .cart-left;
+}
+
+.cart-detailed-footer{
+	@extend .cart-footer;
+    @extend .row;
+    > div {
+      @extend .col-xs-12;
+    }
+}
+
+.cart-detailed-header{
+	@extend .cart-header;
+  @extend .row;
+}
+
+.cart-detailed-savedforlater{
+	@extend .cart-savedforlater;
+}
+
+.cart-detailed-proceed-to-checkout-container{
+	@extend .cart-proceed-to-checkout-container;
+}
+
+.cart-detailed-proceed-to-checkout{
+	@extend .cart-proceed-to-checkout;
+  max-width: 100%;
+}
+
+.cart-detailed-body-empty{
+	@extend .cart-body-empty;
+}
+
+.cart-detailed-body-empty-title{
+	@extend .cart-body-empty-title;
+}
+
+.cart-detailed-body-empty-info{
+	@extend .cart-body-empty-info;
+}
+
+.cart-detailed-row-fluid{
+	@extend .row-fluid;
+}
+
+.cart-detailed-recently-viewed{
+	@extend .cart-recently-viewed;
+}
+
+.cart-detailed-related{
+	@extend .cart-related;
+}
+
+.cart-detailed-correlated{
+	@extend .cart-correlated;
+}
+
+.cart-detailed-item-view-cell-actionable-table{
+	@extend .item-views-cell-actionable-table;
+  	border-collapse: collapse;
+    border-bottom: 2px solid $sc-color-theme-border;
+
+  margin-top: $sc-base-margin ;
+
+  .item-views-stock-msg-out-text {
+    font-size: $sc-base-font-size;
+  }
+}
+
+.cart-detailed-table-row-with-border{
+}
+.item-views-cell-actionable-table-last {
+  @media (min-width: $screen-sm-min) {
+
+    text-align:right;
+  }
+}
+
+.cart-detailed-item-view-cell-actionable-td-outer {
+  padding: 0;
+}
+
+.item-views-cell-actionable-table-header-first {
+  width: 45%;
+}
+@media screen and (min-width: $screen-sm-min) {
+
+  .item-views-cell-actionable-table-product-image {
+    width : 20%;
+  }
+  .item-views-cell-actionable-table-product-title {
+    width : 30%;
+  }
+  .item-views-cell-actionable-table-header-last,
+  .item-views-cell-actionable-table-header-last {
+    width : 15%;
+    text-align : right;
+  }
+
+  .item-views-cell-actionable-table-middle.item-views-cell-actionable-table-product-amount,
+  .item-views-cell-actionable-table-header-amount {
+    width : 15%;
+
+  }
+
+  .item-views-cell-actionable-table-middle.item-views-cell-actionable-table-product-quantity,
+  .item-views-cell-actionable-table-header-quantity {
+    width : 20%;
+    padding-left: 0; padding-right: 0;
+
+  }
+}
+
+.item-views-cell-actionable-table-header-middle {
+  span {
+    display : inline-block;
+    text-align: center;
+  }
+}
+.item-views-cell-actionable-table-header-amount, .item-views-cell-actionable-table-header-quantity {
+  text-align: center;
+}
+
+.cart-detailed-item-view-cell-actionable-table-outer {
+  th {
+    padding-bottom: $sc-base-padding*2;
+  }
+  thead {
+    tr {
+      border-bottom: 1px solid $sc-color-theme-border-dark;
+    }
+  }
+  @media screen and (max-width: $screen-sm){
+    thead {
+      display:none;
+
+    }
+  }
+
+  .item-views-stock-msg-out {
+    padding-left: 0;
+    .item-views-stock-icon-out {
+      display:none;
+    }
+  }
+}
+
+.item-views-cell-actionable-table-middle.item-views-cell-actionable-table-product-amount
+{
+  @media (max-width : $screen-xs-max) {
+    border-top    : 1px solid $sc-color-theme-background;
+    border-bottom : 1px solid $sc-color-theme-background;
+  }
+}
+
+.item-views-cell-actionable-table-product-image {
+
+  @media (max-width : $screen-xs-max) {
+    padding-top: $sc-base-padding*3;
+  }
+}
+
+@media screen and (min-width : $screen-sm-min) and (max-width: $screen-xs) {
+
+  .cart-item-summary-item-list-actionable-amount-label {
+    display:block;
+    margin: $sc-base-margin 0 $sc-base-margin*2;
+  }
+}
+
+@media screen and (max-width : $screen-xs-max) and (min-width: 400px) {
+  .item-views-cell-actionable-table-product-image {
+    width : 30%;
+    float : left;
+    min-height: 145px;
+  }
+  .item-views-cell-actionable-table-product-title, .item-views-cell-actionable-table-options {
+    width : 70%;
+    float : left;
+    padding-bottom: 0 !important;
+  }
+  td.item-views-cell-actionable-table-options {
+    padding-top: 0 !important;
+  }
+  .item-views-cell-actionable-table-product-quantity,
+  .item-views-cell-actionable-table-product-amount {
+    width : 30%;
+    float : left;
+    @media screen and (min-width: $screen-md-min) {
+      padding: $sc-base-padding*3;
+    }
+
+  }
+
+  .item-views-cell-actionable-table-product-amount {
+
+    text-align: right;
+  }
+
+  .item-views-cell-actionable-table-product-quantity{
+
+    width : 70%; text-align: right;
+  }
+}
+@media screen and (max-width: 399px) {
+  .cart-detailed-item-view-cell-actionable-table {
+    .item-views-cell-actionable-table-product-image {
+      padding-bottom: $sc-base-padding*3;
+    }
+    .item-views-cell-actionable-table-middle {
+      padding-top : 0;
+      padding-bottom : 0;
+    }
+    .item-views-cell-actionable-table-product-quantity {
+      text-align : left;
+    }
+  }
+}

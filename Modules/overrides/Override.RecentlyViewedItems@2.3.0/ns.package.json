@@ -1,0 +1,26 @@
+{
+    "gulp": {
+        "javascript": [
+            "JavaScript/*"
+        ],
+        "templates": [
+            "Templates/*.tpl"
+        ],
+        "sass": [
+            "Sass/*.scss"
+        ],
+        "configuration": [
+            "Configuration/*.json"
+        ]
+    }
+
+    , "overrides": {
+        "suitecommerce/ProductDetails@1.0.0/Configuration/ProductDetails.Information.json" : "Configuration/ProductDetails.Information.json",
+
+        "suitecommerce/RecentlyViewedItems@2.3.0/JavaScript/RecentlyViewedItems.Collection.js" : "JavaScript/RecentlyViewedItems.Collection.js",
+        "suitecommerce/RecentlyViewedItems@2.3.0/JavaScript/RecentlyViewedItems.View.js" : "JavaScript/RecentlyViewedItems.View.js",
+
+        "suitecommerce/RecentlyViewedItems@2.3.0/Templates/recently_viewed_items.tpl" : "Templates/recently_viewed_items.tpl"
+    }
+
+}

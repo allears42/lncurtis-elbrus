@@ -1,0 +1,14 @@
+{
+	"gulp": {
+		"javascript": [
+			"jquery.bxslider.custom.js"
+		]
+	,	"images": [
+			"Images/*"
+		]
+	},
+    "overrides": {
+        "third_parties/jQuery-bxslider@4.1.2-custom/jquery.bxslider.custom.js": "jquery.bxslider.custom.js"
+    }
+,	"jshint": "false"
+}

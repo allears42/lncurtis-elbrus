@@ -1,0 +1,37 @@
+{
+    "gulp": {
+        "javascript": [
+            "JavaScript/*.js"
+        ],
+        "templates": [
+            "Templates/*"
+        ],
+        "ssp-files": {
+            "SuiteScript/checkout.ssp": "checkout.ssp",
+            "SuiteScript/cart.ssp": "cart.ssp",
+            "SuiteScript/checkout.environment.ssp": "checkout.environment.ssp",
+            "Internal/index-local.ssp": "checkout-local.ssp",
+            "Internal/cart-local.ssp": "cart-local.ssp"
+        },
+        "sass": [
+            "Sass/**/*.scss"
+        ],
+        "languages": [
+            "Languages/*.js"
+        ],
+        "images": [
+            "Images/*"
+        ],
+        "configuration": [
+            "Configuration/*.json"
+        ]
+    }
+, "overrides": {
+    "suitecommerce/CheckoutApplication@2.3.0/JavaScript/SC.Checkout.Starter.js" : "JavaScript/SC.Checkout.Starter.js",
+
+    "suitecommerce/CheckoutApplication@2.3.0/Internal/cart-local.ssp" : "Internal/cart-local.ssp",
+    "suitecommerce/CheckoutApplication@2.3.0/Internal/index-local.ssp" : "Internal/index-local.ssp",
+    "suitecommerce/CheckoutApplication@2.3.0/SuiteScript/cart.ssp" : "SuiteScript/cart.ssp",
+    "suitecommerce/CheckoutApplication@2.3.0/SuiteScript/checkout.ssp" : "SuiteScript/checkout.ssp"
+}
+}

@@ -11,10 +11,6 @@
         "deploy": "DeployDistribution"
     },
     "modules": {
-        "extensions/Backbone.FormView.Extension": "1.2.0",
-        "extensions/ProductList.Extension": "2.3.0",
-        "extensions/Wizard.Extension": "2.2.0",
-        "extensions/Session.Extension": "2.2.1",
 
         "suitecommerce/Account": "2.3.0",
         "suitecommerce/Address": "2.4.0",
@@ -148,7 +144,7 @@
         "suitecommerce/UrlHelper": "2.1.1",
         "suitecommerce/Utilities": "2.2.1",
         "suitecommerce/Wizard": "2.3.0",
-        "themes/NightSkin": "1.0.0",
+
         "third_parties/almond": "0.3.0",
         "third_parties/backbone.js": "1.1.2-custom",
         "third_parties/backbone.stickit": "0.8.0",
@@ -173,14 +169,62 @@
         "third_parties/twitter-typeahead": "0.10.5",
         "third_parties/underscore.js": "1.7.0",
 
+        "overrides/Override.Account": "2.3.0",
+        "overrides/Override.Address": "2.4.0",
+        "overrides/Override.ApplicationSkeleton": "2.4.0",
+        "overrides/Override.Backbone.CollectionView": "1.2.0",
+        "overrides/Override.BackboneExtras": "2.4.0",
+        "overrides/Override.Balance": "2.1.2",
+        "overrides/Override.Cart": "4.0.0",
+        "overrides/Override.Case": "2.3.0",
+        "overrides/Override.Categories": "3.0.1",
+        "overrides/Override.CheckoutApplication": "2.3.0",
+        "overrides/Override.CreditCard": "2.4.0",
+        "overrides/Override.ErrorManagement": "2.4.0",
+        "overrides/Override.Facets": "2.4.0",
+        "overrides/Override.Footer": "1.2.1",
+        "overrides/Override.GlobalImages": "1.0.2",
+        "overrides/Override.GlobalViews": "1.4.0",
+        "overrides/Override.Header": "1.3.0",
+        "overrides/Override.Home": "2.2.0",
+        "overrides/Override.ItemRelations": "3.0.0",
+        "overrides/Override.ItemsSearcher": "2.0.0",
+        "overrides/Override.jQuery-bxslider": "4.1.2-custom",
+        "overrides/Override.jQueryExtras": "2.3.0",
+        "overrides/Override.ListHeader": "2.3.0",
+        "overrides/Override.LiveOrder": "4.0.0",
+        "overrides/Override.LoginRegister": "2.3.0",
+        "overrides/Override.MyAccountApplication": "3.1.0",
+        "overrides/Override.NavigationHelper": "2.1.0",
+        "overrides/Override.OrderHistory": "5.0.0",
+        "overrides/Override.OrderWizard.Module.Address": "2.2.1",
+        "overrides/Override.OrderWizard.Module.PaymentMethod": "4.0.0",
+        "overrides/Override.OrderWizard.Module.SubmitButton": "1.1.1",
+        "overrides/Override.OrderWizard": "3.0.0",
+        "overrides/Override.Overview": "1.1.2",
+        "overrides/Override.ProductList": "3.0.0",
+        "overrides/Override.Profile": "3.0.0",
+        "overrides/Override.RecentlyViewedItems": "2.3.0",
+        "overrides/Override.RecordViews": "2.0.0",
+        "overrides/Override.ReorderItems": "3.0.0",
+        "overrides/Override.SCA": "4.0.0",
+        "overrides/Override.ShoppingApplication": "4.0.0",
+        "overrides/Override.SiteSearch": "2.1.2",
+        "overrides/Override.twitter-bootstrap-sass": "3.3.1",
+        "overrides/Override.Utilities": "2.2.1",
+
+        "extensions/Backbone.FormView.Extension": "1.2.0",
+        "extensions/ProductList.Extension": "2.3.0",
+        "extensions/Wizard.Extension": "2.2.0",
+        "extensions/Session.Extension": "2.2.1",
+
         "custom/CustomerServiceForm": "1.0.0",
         "custom/FacetContent": "1.0.0",
         "custom/LinkHierarchy": "1.0.0",
         "custom/Pacejet": "1.0.0",
-        "themes/Firefighter": "1.0.0",
 
+        "themes/Firefighter": "1.0.0"
 
-        "overrides/Override.Footer": "1.2.1"
     },
     "tasksConfig": {
         "local": {
@@ -254,6 +298,7 @@
                     "CustomerServiceForm",
                     "FacetContent",
                     "LinkHierarchy"
+
                 ],
                 "amdclean": true,
                 "amdConfig": {
@@ -371,6 +416,7 @@
                     "Backbone.FormView.Extension",
                     "Session.Extension",
                     "LinkHierarchy"
+
                 ],
                 "amdclean": true,
                 "amdConfig": {
@@ -484,6 +530,7 @@
                     "StoreLocator",
                     "Backbone.FormView.Extension",
                     "Session.Extension"
+
                 ],
                 "amdclean": true,
                 "amdConfig": {
