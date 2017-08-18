@@ -64,11 +64,11 @@
 }
 
 .overview-home-content-table-header-row-title {
-	@extend .recordviews-header;
+	@extend .recordviews-header !optional;
 	width: 20%;
 }
 .overview-home-content-table-header-row-date {
-	@extend .recordviews-date-header;
+	@extend .recordviews-date-header !optional;
 	width: 15%;
 }
 .overview-home-content-table-header-row-currency {
@@ -84,7 +84,7 @@
 	width: 25%;
 }
 .overview-home-content-table-header-row-track {
-	@extend .recordviews-header;
+	@extend .recordviews-header !optional;
 	width: 20%;
 
 	@media (min-width: $screen-sm-min) {

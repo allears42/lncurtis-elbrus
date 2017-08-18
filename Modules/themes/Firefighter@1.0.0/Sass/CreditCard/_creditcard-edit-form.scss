@@ -1,5 +1,5 @@
 /*
-	© 2016 NetSuite Inc.
+	© 2017 NetSuite Inc.
 	User may not copy, modify, distribute, or re-bundle or otherwise make available this code;
 	provided, however, if you are an authorized user with a NetSuite account or log-in, you
 	may use this code subject to the terms that govern your access and use.
@@ -65,13 +65,12 @@
 }
 
 .creditcard-edit-form-checkbox {
-    @extend .checkbox;
     margin-bottom: $sc-base-margin * 3;
     display: inline-block;
 }
 
 .creditcard-edit-form-controls-cc-select-container {
-
+    /*display:none;*/
 }
 
 .creditcard-edit-form-controls-cc-select-label {

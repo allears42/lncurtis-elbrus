@@ -1,5 +1,5 @@
 /*
-	© 2016 NetSuite Inc.
+	© 2017 NetSuite Inc.
 	User may not copy, modify, distribute, or re-bundle or otherwise make available this code;
 	provided, however, if you are an authorized user with a NetSuite account or log-in, you
 	may use this code subject to the terms that govern your access and use.
@@ -35,7 +35,7 @@
 
 .order-history-details-accordion-container{
 	@extend .accordion-container;
-	.item-views-cell-actionable-table-first {
+	.transaction-line-views-cell-actionable-table-first {
 	  padding-left: 0;
 	  padding-right: 0;
 	}
@@ -122,11 +122,9 @@
 }
 
 .order-history-details-summary-grid-left{
-	@extend .shopping-cart-summary-grid-left;
 }
 
 .order-history-details-summary-grid-right{
-	@extend .shopping-cart-summary-grid-right;
 }
 
 .order-history-details-summary-col{
@@ -139,7 +137,6 @@
 }
 
 .order-history-details-row-fluid{
-	@extend .row-fluid;
 }
 
 .order-history-details-order-title{
@@ -166,11 +163,6 @@
 	margin-bottom:$sc-base-margin * 3;
 }
 
-.order-history-details-shipping-accordion-divider{
-	@extend .order-history-details-accordion-divider;
-	margin: $sc-base-margin *4 0 $sc-base-margin *4 0;
-
-}
 .order-history-details-header-row{
 	@extend .row;
 	margin-bottom:$sc-small-margin;
@@ -352,16 +344,15 @@
 }
 
 .order-history-details-accordion-container{
-	@extend .order-history-details;
 	overflow:hidden;
 }
 
 .order-history-details-unfulfilled-items-table{
-	@extend .item-views-cell-actionable-table;
+	@extend .transaction-line-views-cell-actionable-table;
 }
 
 .order-history-details-non-shippable-table{
-	@extend .item-views-cell-actionable-table;
+	@extend .transaction-line-views-cell-actionable-table;
 	@extend .table-row-with-border;
 }
 
@@ -392,19 +383,17 @@
 }
 
 .order-history-details-payment-table-header {
-	@extend .order-history-details-payment-transactions-table-header;
 }
 
 .order-history-details-payment-table-header-payment-transaction {
-	@extend .order-history-details-payment-transactions-table-header-payment-transaction;
+	@extend .order-history-details-payment-transactions-table-header-payment-transaction !optional;
 }
 
 .order-history-details-payment-table-header-date {
-	@extend .order-history-details-payment-transactions-table-header-date;
+	@extend .order-history-details-payment-transactions-table-header-date !optional;
 }
 
 .order-history-details-payment-table-header-amount{
-	@extend .order-history-details-payment-table-header-amount;
 }
 
 .order-history-details-payment-table-body-payment-transaction {
@@ -413,10 +402,6 @@
 
 .order-history-details-payment-table-body-payment-transaction{
 	@extend .order-history-details-payment-transactions-table-body-payment-transaction;
-}
-
-.order-history-details-accordion-body-no-header {
-	@extend .order-history-shipping-group-accordion-body-no-header;
 }
 
 .order-history-details-payment-method-title {
@@ -445,3 +430,4 @@
 .order-history-details-header-quote-info-quote-label {
 	@extend .sc-label;
 }
+.order-history-details-instore-groups{}

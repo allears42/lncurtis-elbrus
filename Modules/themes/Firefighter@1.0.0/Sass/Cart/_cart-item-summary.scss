@@ -1,12 +1,12 @@
 /*
-	© 2016 NetSuite Inc.
+	© 2017 NetSuite Inc.
 	User may not copy, modify, distribute, or re-bundle or otherwise make available this code;
 	provided, however, if you are an authorized user with a NetSuite account or log-in, you
 	may use this code subject to the terms that govern your access and use.
 */
 
 .cart-item-summary-item-list-actionable-qty{
-	@extend .item-views-cell-actionable-qty;
+	@extend .transaction-line-views-cell-actionable-qty;
   text-align: left;
     @media (min-width: $screen-sm-min) {
       text-align : center;
@@ -14,15 +14,13 @@
 }
 
 .cart-item-summary-item-list-actionable-qty-form{
-	@extend .item-views-cell-actionable-qty-form;
-
-
 }
 
 .cart-item-summary-item-list-actionable-container-qty {
 	margin-bottom: 10px;
+
 	.cart-item-summary-item-list-actionable-label-qty {
-		
+
 		display: block;
 		vertical-align: middle;
 		color: $sc-color-dark-copy;
@@ -46,15 +44,16 @@
 }
 
 .cart-item-summary-item-list-actionable-label-qty{
-	@extend .item-views-cell-actionable-label-qty;
+	@extend .transaction-line-views-cell-actionable-label-qty;
 }
 
 .cart-item-summary-item-list-actionable-input-qty{
-	@extend .item-views-cell-actionable-input-qty;
+	@extend .transaction-line-views-cell-actionable-input-qty;
 }
 
 .cart-item-summary-item-list-actionable-amount{
-	@extend .item-views-cell-actionable-amount;
+	@extend .transaction-line-views-cell-actionable-amount;
+
     padding :0;
     text-align:right;
 
@@ -66,19 +65,18 @@
 }
 
 .cart-item-summary-item-list-actionable-amount-label{
-	@extend .item-views-cell-actionable-amount-label;
+	@extend .transaction-line-views-cell-actionable-amount-label;
     @media (min-width: $screen-sm-min) {
       display : none;
     }
 }
 
 .cart-item-summary-item-view-old-price{
-	@extend .item-views-price-old;
+	@extend .transaction-line-views-price-old;
 }
 
 .cart-item-summary-amount-value{
-	@extend .amount-value;
-  line-height: $sc-target-size;
+	line-height: $sc-target-size;
 }
 
 .cart-item-summary-quantity-title-help{
@@ -108,4 +106,13 @@
 	border: 0;
 	-webkit-border-radius: 0 0 0 0;
 	border-radius: 0 0 0 0;
+}
+
+.cart-item-summary-promocodes .cart-promocode-list-item-container{
+	@extend .transaction-line-views-cell-actionable-amount-label;
+	padding-left: 0;
+}
+
+.cart-item-summary-promocodes .cart-promocode-list-item-code-value {
+	@extend .sc-value;
 }

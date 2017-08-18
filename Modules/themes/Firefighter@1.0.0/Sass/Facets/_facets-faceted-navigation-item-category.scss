@@ -8,12 +8,12 @@
 
 .facets-faceted-navigation-item-category-icon-ok {
 	@extend .fa;
-	@extend .fa-plus;
+	@extend .fa-plus !optional;
 }
 
 .facets-faceted-navigation-item-category-icon-plus {
 	@extend .fa;
-	@extend .fa-plus;
+	@extend .fa-plus !optional;
 }
 
 .facets-faceted-navigation-item-category-optionlist-extra-button {

@@ -1,5 +1,5 @@
 /*
-	© 2016 NetSuite Inc.
+	© 2017 NetSuite Inc.
 	User may not copy, modify, distribute, or re-bundle or otherwise make available this code;
 	provided, however, if you are an authorized user with a NetSuite account or log-in, you
 	may use this code subject to the terms that govern your access and use.
@@ -15,7 +15,6 @@
 }
 
 .login-register-register-form-controls{
-	@extend .register-form-controls;
 }
 
 .login-register-register-form-label{
@@ -40,17 +39,13 @@
 }
 
 .login-register-register-form-optional{
-	@extend .register-form-optional;
 }
 
 .login-register-register-form-help-block{
-	@extend .register-form-help-block;
 }
 
 .login-register-register-form{
-	@extend .register-form;
 }
 
 .login-register-register-required{
-	@extend .register-required;
 }

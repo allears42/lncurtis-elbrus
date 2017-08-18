@@ -1,0 +1,180 @@
+/*
+	© 2016 NetSuite Inc.
+	User may not copy, modify, distribute, or re-bundle or otherwise make available this code;
+	provided, however, if you are an authorized user with a NetSuite account or log-in, you
+	may use this code subject to the terms that govern your access and use.
+*/
+
+.quick-view-confirmation-modal {
+	@extend .row;
+
+  [data-type="alert-placeholder-quantity"] {
+    span {
+      font-size: $sc-small-font-size;
+    }
+    div {
+      padding-right: 0;
+    }
+
+    .global-views-message {
+      padding: 0;
+      margin-bottom: 0;
+    }
+  }
+}
+.quick-view-confirmation-modal-img {
+	@extend .col-sm-5;
+	margin-bottom: $sc-base-margin * 3;
+
+	@media (min-width: $screen-sm-min) {
+		margin-bottom: 0;
+	}
+}
+.quick-view-confirmation-modal-details {
+	@extend .col-sm-7;
+	.item-view-stock-msg {
+		display: table;
+	}
+}
+.quick-view-confirmation-modal-full-details {
+	margin: $sc-base-margin 0 $sc-base-margin * 3;
+	display: block;
+}
+.quick-view-confirmation-modal-price {
+	@extend .cart-confirmation-modal-price;
+
+  .item-views-price {
+    text-align: left;
+    border:none;
+  }
+  .item-views-price-lead, .item-views-price-call-for-pricing .item-views-price-message a {
+      @extend .large-price;
+      font-family: $body-copy;
+      font-weight: normal;
+
+  }
+}
+.quick-view-confirmation-modal-sku{
+	@extend .cart-confirmation-modal-sku;
+    margin-top: $sc-base-margin*2;
+}
+.quick-view-confirmation-modal-quantity {
+	.item-details-options-quantity {
+		margin-top: $sc-base-margin*2;
+	}
+}
+
+.quick-view-confirmation-modal-actions {
+	@extend .row;
+
+}
+
+.quick-view-confirmation-modal-actions-add {
+
+  margin: 0;
+}
+
+.quick-view-add-to-cart-help{
+	@extend .message-info;
+	margin: $sc-base-margin * 2 0;
+    padding: $sc-base-padding;
+}
+
+.quick-view-quantity-help {
+	clear: both;
+	display: block;
+	font-weight:$sc-font-weight-light;
+	margin: $sc-base-margin * 2 0;
+}
+
+.quick-view-add-to-cart-help-icon{
+	@extend .fa;
+	@extend %fa-info-circle;
+	margin-right: $sc-base-margin;
+}
+
+.quick-view-confirmation-modal-add-to-cart{
+
+}
+
+.quick-view-confirmation-modal-add-to-product-list {
+	margin-top: $sc-base-margin * 2;
+	padding-left: 0;
+	.product-list-control-button-wishlist {
+		margin-top: 0;
+	}
+}
+.quick-view-confirmation-modal-add-to-product-list .add-to-product-list-button {
+	@extend .add-to-product-list-button;
+	@extend .button-medium;
+}
+.quick-view-confirmation-modal-view-cart-button {
+	@extend .button-large;
+	@extend .button-primary;
+	width: 100%;
+  font-size: 1.2em;
+}
+
+.quick-view-message-warning{
+	@extend .global-views-message;
+	@extend .global-views-message-warning;
+}
+
+.quick-view-button-quantity-remove{
+	@extend .item-details-quantity-remove;
+}
+
+.quick-view-options-quantity{
+	@extend .item-details-options-quantity;
+}
+
+.quick-view-options-quantity-title{
+	@extend .item-details-options-quantity-title;
+}
+
+.quick-view-quantity-value{
+	@extend .item-details-quantity-value;
+}
+
+.quick-view-options-container{
+	@extend .options-container;
+}
+
+.quick-view-button-quantity-add{
+	@extend .item-details-quantity-add;
+}
+
+.quick-view-confirmation-modal-sku-label{
+	@extend .sc-label-sku;
+
+  font-size: 1.2em;
+}
+.quick-view-confirmation-modal-sku-value{
+	@extend .sc-value-sku;
+
+  font-size: 1.2em;
+}
+.quick-view-add-to-cart-form{
+	margin-bottom:$sc-small-margin;
+}
+.quick-view-confirmation-modal-item-name { }
+.modal-product-detail {
+  .global-views-modal-content-header {
+    padding-bottom: $sc-base-padding*2;
+    border-bottom: 1px solid $sc-color-theme-border;
+  }
+  .global-views-modal-content-header-title {
+
+    @extend h1;
+    color: $sc-color-primary;
+  }
+}
+.quick-view-confirmation-modal-options{}
+.quick-view-add-to-cart-help-text{}
+.quick-view-add-to-cart-help-outer {
+  padding-left: 0;
+}
+
+.quick-view-confirmation-modal-description {
+  margin-top: $sc-base-margin*2;
+}

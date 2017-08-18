@@ -1,12 +1,11 @@
 /*
-	© 2016 NetSuite Inc.
+	© 2017 NetSuite Inc.
 	User may not copy, modify, distribute, or re-bundle or otherwise make available this code;
 	provided, however, if you are an authorized user with a NetSuite account or log-in, you
 	may use this code subject to the terms that govern your access and use.
 */
 
 .product-list-details-later-macro-selectable-actionable {
-	@extend .item-views-cell-selectable-actionable;
     border: 1px solid white;
     overflow: hidden;
     padding: $sc-base-padding*3;
@@ -30,11 +29,11 @@
 }
 
 .product-list-details-later-macro-name-link{
-	@extend .item-views-cell-actionable-name-link;
+	@extend .transaction-line-views-cell-actionable-name-link;
 }
 
 .product-list-details-later-macro-price {
-	@extend .item-views-cell-actionable-price;
+	@extend .transaction-line-views-cell-actionable-price;
     .item-views-price-lead {
       color: $sc-color-dark-copy;
       line-height :$sc-target-size;
@@ -42,15 +41,14 @@
 }
 
 .product-list-details-later-macro-qty {
-	@extend .item-views-cell-actionable-qty;
+	@extend .transaction-line-views-cell-actionable-qty;
 }
 
 .product-list-details-later-macro-qty-form {
-	@extend .item-views-cell-actionable-qty-form;
 }
 
 .product-list-details-later-macro-input-qty {
-	@extend .item-views-cell-actionable-input-qty;
+	@extend .transaction-line-views-cell-actionable-input-qty;
 }
 
 .product-list-details-later-macro-button-quantity-add {
@@ -63,7 +61,7 @@
 }
 
 .product-list-details-later-macro-item-stock {
-	@extend .item-details-stock;
+	/*@extend .item-details-stock;*/
   text-align: center;
 }
 
@@ -81,17 +79,14 @@
 }
 
 .product-list-details-later-macro-label-qty{
-	@extend .item-views-cell-actionable-label-qty;
+	@extend .transaction-line-views-cell-actionable-label-qty;
 }
 
 .product-list-details-later-macro-qty-input{
-	@extend .input-mini;
 }
 
 .product-list-details-later-macro-qty input[type=number]{
 	width:60px;
-
-
 	@media (min-width: $screen-xs-min){
 		width:45px;
 	}

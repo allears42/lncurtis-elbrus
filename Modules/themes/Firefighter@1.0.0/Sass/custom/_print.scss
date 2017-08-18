@@ -1,3 +1,20 @@
+.item-details-print-page,
+.item-details-email-page {
+  display: inline-block;
+  vertical-align : bottom;
+  margin-top: $sc-base-margin*4;
+  float:right;
+
+  a {
+    font-size: $sc-h2-font-size;
+    padding: $sc-base-padding*2 $sc-base-padding*3;
+    display: inline-block;
+    background: $sc-color-copy;
+    color: $sc-color-tertiary;
+    margin-right: $sc-base-margin;
+  }
+}
+
 .print-only {
   display:none;
   visibility : hidden;

@@ -66,7 +66,7 @@
 }
 
 .product-list-edit-item-input-quantity {
-	@extend .item-details-quantity-value;
+	@extend .product-details-quantity-value;
 	display: block;
 	float:left;
 }

@@ -1,5 +1,5 @@
 /*
-	© 2016 NetSuite Inc.
+	© 2017 NetSuite Inc.
 	User may not copy, modify, distribute, or re-bundle or otherwise make available this code;
 	provided, however, if you are an authorized user with a NetSuite account or log-in, you
 	may use this code subject to the terms that govern your access and use.
@@ -62,11 +62,11 @@
 }
 
 .order-history-summary-summary-grid-left{
-	@extend .shopping-cart-summary-grid-left;
+
 }
 
 .order-history-summary-summary-grid-right{
-	@extend .shopping-cart-summary-grid-right;
+
 }
 
 .order-history-summary-summary-col{
@@ -123,7 +123,7 @@
 }
 
 .order-history-summary-row-fluid{
-	@extend .row-fluid;
+	/*@extend .row-fluid;*/
 }
 
 .order-history-summary-button-cancel-order{
@@ -137,4 +137,9 @@
     @media (min-width :$screen-md) {
       display:block;
     }
+}
+
+.order-history-summary-pickup-label-free {
+	@extend .summary-grid-right;
+	color: $sc-color-success;
 }

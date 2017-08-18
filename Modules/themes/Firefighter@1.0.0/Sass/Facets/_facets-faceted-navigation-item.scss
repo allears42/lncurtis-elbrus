@@ -7,12 +7,12 @@
 
 .facets-faceted-navigation-item-icon-ok {
 	@extend .fa;
-	@extend .fa-plus;
+	@extend .fa-plus !optional;
 }
 
 .facets-faceted-navigation-item-icon-plus {
 	@extend .fa;
-	@extend .fa-plus;
+	@extend .fa-plus !optional;
 }
 
 .facets-faceted-navigation-item-optionlist-extra-button {

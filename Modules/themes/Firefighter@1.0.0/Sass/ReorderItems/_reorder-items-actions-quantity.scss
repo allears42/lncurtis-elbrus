@@ -48,7 +48,7 @@
 
 .reorder-items-actions-quantity-input{
 	input{
-		@extend .item-details-quantity-value;
+		@extend .product-details-quantity-value;
 		float: left;
 		width:60px;
 		padding:0px;

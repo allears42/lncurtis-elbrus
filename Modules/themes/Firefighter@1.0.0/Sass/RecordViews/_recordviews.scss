@@ -61,7 +61,7 @@
 .recordviews-status-header,
 .recordviews-currency-header
 {
-	@extend .recordviews-header;
+	@extend .recordviews-header !optional;
 }
 
 //----------------------

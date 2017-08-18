@@ -1,5 +1,5 @@
 /*
-	© 2016 NetSuite Inc.
+	© 2017 NetSuite Inc.
 	User may not copy, modify, distribute, or re-bundle or otherwise make available this code;
 	provided, however, if you are an authorized user with a NetSuite account or log-in, you
 	may use this code subject to the terms that govern your access and use.
@@ -59,8 +59,9 @@
 }
 
 .cart-summary-button-container {
+  @extend .col-xs-12;
 	@media (min-width: $screen-sm-min), (orientation: landscape) {
-		@extend .col-xs-12;
+
 		background:$sc-color-theme-background;
 		padding:0;
 		margin-bottom:$sc-small-margin * 2;
@@ -146,7 +147,6 @@
 }
 
 .cart-summary-label-shipto-success {
-	@extend .text-success;
 }
 
 .cart-summary-label-shipping{
@@ -219,11 +219,15 @@
 	overflow:hidden;
 }
 
+.cart-summary-promocode-container {
+	margin-top: $sc-base-margin * 3;
+}
+
 .cart-summary-discount-applied{}
 
 .cart-summary-expander-tooltip{
 	@extend .sc-tooltip;
-	@extend .icon-question-sign;
+	/*@extend .icon-question-sign;*/
 }
 
 /* FIX (rename/move)*/
@@ -233,7 +237,6 @@
 
 .cart-summary-zip-code{
 	@extend .input-small;
-	@extend .zip;
 }
 
 .cart-summary-button-proceed-checkout{
@@ -259,6 +262,14 @@
 	}
 }
 
+.cart-summary-btn-paypal-express-image {
+	width: 100%;
+
+	@media (max-width: $screen-xs-max) {
+		width: auto;
+	}
+}
+
 .cart-summary-continue-shopping {
 	@extend .small-title-navigable;
 	display: inline-block;
@@ -275,9 +286,19 @@
 
 .cart-summary-msg-description {
 	@extend .message-info;
-	@extend .item-views-stock-msg;
+	@extend .item-view-stock-msg;
 	display: block;
     text-align: left;
     margin-left: $sc-base-margin * 2;
 	margin-right: $sc-base-margin * 2;
+}
+
+.cart-summary-pickup-container {
+	margin-bottom:$sc-medium-margin;
+	font-size:$sc-base-font-size;
+}
+
+.cart-summary-pickup-label-free {
+	@extend .cart-summary-grid-right;
+	color: $sc-color-success;
 }

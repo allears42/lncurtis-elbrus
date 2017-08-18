@@ -50,7 +50,7 @@
 }
 
 .reorder-items-list-paginator{
-	@extend .case-list-paginator;
+	@extend .case-list-paginator !optional;
 }
 
 .reorder-items-list-empty-button{}

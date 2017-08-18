@@ -180,9 +180,10 @@
   right: 0;
   cursor: pointer;
 
+  @extend .fa;
+  @extend %fa-calendar;
+
   @media (min-width: $screen-md-min) {
-    @extend .fa;
-    @extend %fa-calendar;
 
     right: 0;
     top: 0;
