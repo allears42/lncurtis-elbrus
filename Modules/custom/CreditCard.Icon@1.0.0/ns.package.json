@@ -7,10 +7,7 @@
             "Templates/*"
         ],
         "sass": [
-            "Sass/*.scss"
-        ],
-        "ssp-libraries": [
-            "SuiteScript/*.js"
+            "Sass/**/*.scss"
         ],
         "configuration": [
             "Configuration/*.json"

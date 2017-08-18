@@ -1,28 +1,34 @@
 /*
-	© 2017 LN Curtis
-	Custom extension logic for CreditCard.Edit.Form.View.Extension
-*/
+ © 2017 Satellite Commerce
+ Adds icons in place of images in credit card modules
+ */
 
-define(
-	'CreditCard.View.Extension'
+// @module CreditCard
+define('CreditCard.Icon.View'
 ,	[
-		'CreditCard.View'
+		'SC.Configuration'
+	,	'CreditCard.View'
+	,	'creditcard_icon.tpl'
 
 	,	'underscore'
-
+	,	'Utils'
 	]
-,	function(
-        CreditCardView
-
-	, 	_
-
+,	function (
+		Configuration
+	,	CreditCardView
+	,	creditcard_tpl
+	,	_
 	)
 {
 	'use strict';
-	
-	_.extend( CreditCardView.prototype, {
 
-        getContext: function ()
+    // @class CreditCard.Icon.View @extends CreditCard.View
+    _.extend(CreditCardView.prototype, {
+
+        template: creditcard_tpl
+        
+        //@method getContext @return CreditCard.View
+        ,	getContext: function ()
         {
             var payment_methods = Configuration.get('siteSettings.paymentmethods')
                 ,	payment_method = this.model.get('paymentmethod').key ? _.findWhere(payment_methods, {key: this.model.get('paymentmethod').key}) : _.findWhere(payment_methods, {internalid: this.model.get('paymentmethod').internalid})
@@ -68,5 +74,5 @@ define(
             };
         }
 
-	});
+    });
 });

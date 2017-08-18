@@ -1,0 +1,51 @@
+/*
+	© 2017 Satellite Commerce
+*/
+
+$icon-font-size: 40px;
+
+.global-views-format-payment-method-header-icon {
+  @extend .creditcard-header-icon;
+  font-size: $icon-font-size;
+}
+
+//Modal CreditCardDetailsView
+.global-views-modal-content .global-views-modal-content-body {
+
+  .creditcard-edit-form-controls-icon-container {
+    margin-top: 0;
+  }
+}
+
+.creditcard-edit-form-controls-icon-container {
+  margin-top: $sc-base-margin * 3;
+  margin-bottom: $sc-base-margin * 2
+}
+
+.creditcard-edit-form-card-icon {
+  border:0 solid $sc-color-theme-border;
+  width:auto;
+  height:$sc-target-size-mobile;
+  font-size: $icon-font-size;
+  margin-right: $sc-base-margin;
+}
+
+.creditcard-header-icon {
+  font-size: $icon-font-size;
+}
+
+
+.fa-cc-amex {
+  @extend %fa-cc-amex;
+}
+
+.fa-cc-visa {
+  @extend %fa-cc-visa;
+}
+.fa-cc-mastercard {
+  @extend %fa-cc-mastercard;
+}
+
+.fa-cc-discover {
+  @extend %fa-cc-discover;
+}
