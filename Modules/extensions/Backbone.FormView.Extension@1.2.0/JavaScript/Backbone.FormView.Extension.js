@@ -1,6 +1,6 @@
 /*
 	© 2017 LN Curtis
-	todo@shelby: this was already here, but I can't find a related version in Vinson
+	Add custom property closeModalOnSuccess that can be uses to not close modal on success
 */
 
 define(
@@ -24,8 +24,7 @@ define(
 	
 	function buttonSubmitDone (savingForm)
 	{
-		savingForm.find('[type="submit"]').each(function()
-		{
+		savingForm.find('[type="submit"]').each(function () {
 			var element = jQuery(this);
 			element.attr('disabled', false);
 			element.text(element.data('default-text'));
@@ -73,6 +72,7 @@ define(
 					{
 						if (self.inModal && self.$containerModal)
 						{
+							// customization to not auto close modal
 							if(self.closeModalOnSuccess) {
 								self.$containerModal.modal('hide');
 							}
