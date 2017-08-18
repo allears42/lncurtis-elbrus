@@ -8,10 +8,12 @@ define(
 ,	[
 		'Cart.Confirmation.View.Extension'
 	,	'Cart.Detailed.View'
+	,	'Cart.Detailed.View.Extension'
 	]
 ,	function(
         CartConfirmationViewExtension
 	,	CartDetailedView
+	,	CartDetailedViewExtension
 	)
 {
 	'use strict';
@@ -19,6 +21,7 @@ define(
 	return {
         CartConfirmationViewExtension: CartConfirmationViewExtension
 	,	CartDetailedView: CartDetailedView
+	,	CartDetailedViewExtension: CartDetailedViewExtension
 	}
 
 });

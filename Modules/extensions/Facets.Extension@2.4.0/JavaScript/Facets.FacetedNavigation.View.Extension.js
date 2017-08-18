@@ -6,12 +6,16 @@ define(
 	'Facets.FacetedNavigation.View.Extension'
 ,	[
 		'Facets.FacetedNavigation.View'
+    ,   'Profile.Model'
+    ,   'Backbone'
     ,   'Backbone.CompositeView'
 
 	,	'underscore'
 	]
 ,	function(
         FacetsFacetedNavigationView
+    ,   ProfileModel
+	,   Backbone
     ,   BackboneCompositeView
 
 	, 	_
@@ -21,7 +25,7 @@ define(
 	
 	_.extend( FacetsFacetedNavigationView.prototype, {
 
-        initialize: _.wrap( FacetsFacetedNavigationView.prototype.initialize, function(fn)
+        initialize: _.wrap(FacetsFacetedNavigationView.prototype.initialize, function(fn)
         {
             fn.apply(this, _.toArray(arguments).slice(1));
 
@@ -33,7 +37,7 @@ define(
             this.allFacets = options.allFacets;
         })
 
-    ,	childViews: _.extend( FacetsFacetedNavigationView.prototype.childView,
+    ,	childViews: _.extend({}, FacetsFacetedNavigationView.prototype.childView,
         {
             'Facets.FacetedNavigationItems': function ()
             {
@@ -43,6 +47,7 @@ define(
                     return (translator.getFacetConfig(a.url || a.id).priority || 0) - (translator.getFacetConfig(b.url || b.id).priority || 0);
                 });
 
+                // remove any facets with only one value
                 ordered_facets = _.filter(ordered_facets, function (facet) {
                     var validURLS = _.filter(facet.values, function (facetValue) {
 
@@ -73,36 +78,37 @@ define(
                 });
             }
 
+            // added so categories will show above facets
         ,   'Facets.CategorySidebar': function ()
             {
-                    var self = this
-                        , category = this.category
-                        , categoryFacets = _.find(self.allFacets, {id: "commercecategoryname"});
-
-                    if (this.category) {
-                        // compare against this.allFacets
-                        var categories = _.filter(this.category.get('categories'), function (cat) {
-                            var inFacets = _.filter(categoryFacets.values, function (facet) {
-
-                                return facet.url === cat.name;
-                            });
-
-                            return cat.displayinsite === true && inFacets.length > 0
-                        });
-
-                        category = new Backbone.Model({
-                            categories: categories
-                            , name: 'All'
-                        });
-
-
-                        return new FacetsFacetedNavigationItemCategoryView({
-                            model: category
-                            , categoryUrl: this.translator.getCategoryUrl()
-                            , translator: this.translator
-                        });
-                    }
-                }
+	            var self = this
+		            , category = this.category
+		            , categoryFacets = _.find(self.allFacets, {id: "commercecategoryname"});
+	
+	            if (this.category) {
+		            // compare against this.allFacets
+		            var categories = _.filter(this.category.get('categories'), function (cat) {
+			            var inFacets = _.filter(categoryFacets.values, function (facet) {
+				
+				            return facet.url === cat.name;
+			            });
+			
+			            return cat.displayinsite === true && inFacets.length > 0
+		            });
+		
+		            category = new Backbone.Model({
+			            categories: categories
+			            , name: 'All'
+		            });
+		
+		
+		            return new FacetsFacetedNavigationItemCategoryView({
+			            model: category
+			            , categoryUrl: this.translator.getCategoryUrl()
+			            , translator: this.translator
+		            });
+	            }
+            }
         })
 
     ,   getContext: _.wrap( FacetsFacetedNavigationView.prototype.getContext, function(fn)
