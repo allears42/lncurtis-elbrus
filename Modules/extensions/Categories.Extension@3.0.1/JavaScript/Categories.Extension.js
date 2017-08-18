@@ -8,10 +8,13 @@ define(
 ,	[
 		'Categories'
 
+	,	'SC.Configuration'
 	,	'underscore'
 	]
 ,	function(
         Categories
+
+	, 	Configuration
 
 	, 	_
     )
