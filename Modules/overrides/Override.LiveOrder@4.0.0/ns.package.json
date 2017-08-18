@@ -13,8 +13,6 @@
         }
     }
     , "overrides": {
-        "suitecommerce/LiveOrder@4.0.0/JavaScript/LiveOrder.Model.js" : "JavaScript/LiveOrder.Model.js",
-        "suitecommerce/LiveOrder@4.0.0/SuiteScript/LiveOrder.Model.js" : "SuiteScript/LiveOrder.Model.js",
-        "suitecommerce/LiveOrder@4.0.0/SuiteScript/LiveOrder.ServiceController.js" : "SuiteScript/LiveOrder.ServiceController.js"
+        "suitecommerce/LiveOrder@4.0.0/SuiteScript/LiveOrder.Model.js" : "SuiteScript/LiveOrder.Model.js"
     }
 }

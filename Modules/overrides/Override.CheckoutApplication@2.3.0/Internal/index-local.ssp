@@ -1,5 +1,5 @@
 <%/*
-	© 2016 NetSuite Inc.
+	© 2017 NetSuite Inc.
 	User may not copy, modify, distribute, or re-bundle or otherwise make available this code;
 	provided, however, if you are an authorized user with a NetSuite account or log-in, you
 	may use this code subject to the terms that govern your access and use.
@@ -17,6 +17,7 @@
 	,	login
 	,	Application
 	,	environmentParameters
+	,	session;
 
 	try
 	{
@@ -25,6 +26,7 @@
 		siteType = SiteSettings.sitetype;
 		parameters = request.getAllParameters();
 		environmentParameters = [];
+		session = require('SC.Models.Init').session;
 
 		Environment = Application.getEnvironment(request);
 		Language = Environment.currentLanguage && Environment.currentLanguage.locale || '';
@@ -43,6 +45,11 @@
 		{
 			parameters.fragment = 'reset-password';
 			login = true;
+		}
+		else if (parameters.is === 'storelocator')
+		{
+			delete parameters.sitepath;
+			parameters.fragment = 'stores';
 		}
 		else if (
 					(SiteSettings.registration.registrationoptional !== 'T' && !session.isLoggedIn2())
@@ -100,14 +107,14 @@
 	<head>
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Bitter:400,700" rel="stylesheet">
 		<!--[if !IE]><!-->
-			<link rel="stylesheet" href="<%= ROOT %>css/checkout.css"></link>
+			<link rel="stylesheet" href="<%= ROOT %>{{#if distro.isSCLite}}tmp/{{/if}}css/checkout.css"></link>
 		<!--<![endif]-->
 
 		<!--[if lte IE 9]>
 		{{#each cssnumbers}}
-			<link rel="stylesheet" href="<%= ROOT %>css_ie/checkout_{{this}}.css?t={{../timestamp}}"></link>
+			<link rel="stylesheet" href="<%= ROOT %>{{#if distro.isSCLite}}tmp/{{/if}}css_ie/checkout_{{this}}.css?t={{../timestamp}}"></link>
 		{{/each}}
-			<link rel="stylesheet" href="<%= ROOT %>css_ie/checkout.css?t={{timestamp}}"></link>
+			<link rel="stylesheet" href="<%= ROOT %>{{#if distro.isSCLite}}tmp/{{/if}}css_ie/checkout.css?t={{timestamp}}"></link>
 		<![endif]-->
 
 		<!--[if lt IE 9]>
@@ -118,7 +125,7 @@
 			<script src="<%= ROOT %>javascript/respond.proxy.js"></script>
 		<![endif]-->
 
-		<link rel="shortcut icon" href="<%= session.getAbsoluteUrl("checkout", "img/ln-favicon.ico") %>" />
+		<link rel="shortcut icon" href="<%= ROOT %>{{#if distro.isSCLite}}tmp/{{/if}}img/ln-favicon.ico" />
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -195,7 +202,10 @@
 
 			<script>
 				loadScript({
-					url: '<%= session.getAbsoluteUrl("checkout", "checkout.environment.ssp?" + environmentParameters.join("&") ) %>&t=' + (new Date().getTime())
+					url: '<%= session.getAbsoluteUrl("checkout.environment.ssp?" + environmentParameters.join("&") ) %>&t=' + (new Date().getTime())
+				});
+				loadScript({
+					url: '<%= session.getAbsoluteUrl("customFieldsMetadata.ssp?")%>t={{timestamp}}'
 				});
 			</script>
 
@@ -211,18 +221,30 @@
 		</script>
 
 		<script>
+			setTimeout(function ()
+			{
 			<% if (login) { %>
 			/* require(['SC.Checkout'], function(Checkout)
 			{
 				Checkout.Configuration.currentTouchpoint = 'login';
 			}); */
 			<% } %>
+            <% if (parameters.is === 'storelocator') { %>
+            require(['SC.Checkout'], function(Checkout)
+            {
+                Checkout.Configuration.currentTouchpoint = 'storelocator';
+            });
+			<% } %>
+			},1000);
 		</script>
 
 		<% if (typeof(release_metadata) != 'undefined') { %>
 		<!-- <%= JSON.stringify(release_metadata) %> -->
 		<% } %>
-
+		{{#if distro.isSCLite}}
+		<script type="text/javascript" src="<%= ROOT %>tmp/checkout-templates.js"></script>
+		<script src="<%= session.getAbsoluteUrl("javascript/checkout.js") %>?t={{timestamp}}"></script>
+		{{else}}
 		<script data-main="<%= ROOT %>javascript/checkout.js" src="<%= ROOT %>javascript/require.js"></script>
 		<script type="text/javascript">
 		if (!window.require)
@@ -232,17 +254,26 @@
 			document.body.appendChild(script);
 		}
 		</script>
+		{{/if}}
 		<% if (SC.Configuration.cms.useCMS) { %>
 			<script>
 				if (SC.ENVIRONMENT.jsEnvironment === 'browser')
 				{
-					setTimeout(function()
+					(function() {
+		    			var nlTimer = setInterval(function()
 					{
+		    				if (window.jQuery)
+							{
+		      					// Load CMS
 						jQuery.getScript('/cms/2/cms.js')
 							.done(function() {
 								CMS.trigger('cms:load');
 							});
-					}, 5000);
+
+		      					clearInterval(nlTimer);
+		    				}
+		  				}, 100);
+					})();
 				}
 			</script>
 		<% } %>

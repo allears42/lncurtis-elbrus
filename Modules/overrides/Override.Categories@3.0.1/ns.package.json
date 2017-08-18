@@ -14,7 +14,8 @@
         ]
     }
     , "overrides": {
-        "suitecommerce/Categories@3.0.1/Configuration/Categories.json" : "Configuration/Categories.json",
-        "suitecommerce/Categories@3.0.1/JavaScript/Categories.js" : "JavaScript/Categories.js"
+
+        "suitecommerce/Categories@3.0.1/Configuration/Categories.json" : "Configuration/Categories.json"
+
     }
 }

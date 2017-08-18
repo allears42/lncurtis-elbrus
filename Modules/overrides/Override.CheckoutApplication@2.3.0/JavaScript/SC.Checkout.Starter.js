@@ -1,5 +1,5 @@
 /*
-	© 2016 NetSuite Inc.
+	© 2017 NetSuite Inc.
 	User may not copy, modify, distribute, or re-bundle or otherwise make available this code;
 	provided, however, if you are an authorized user with a NetSuite account or log-in, you
 	may use this code subject to the terms that govern your access and use.
@@ -12,6 +12,7 @@ define(
 	,	'underscore'
 	,	'jQuery'
 	,	'Backbone'
+	,	'Utils'
 
 	,	'SC.Checkout.Starter.Dependencies' // Auto generated at build time using configuration from distro.json
 
@@ -21,6 +22,7 @@ define(
 	,	_
 	,	jQuery
 	,	Backbone
+	,	Utils
 
 	,	entryPointModules
 	)
@@ -30,8 +32,6 @@ define(
 
 	jQuery(function ()
 	{
-		//var application = SC.Application('Checkout');
-
 		application.getConfig().siteSettings = SC.ENVIRONMENT.siteSettings || {};
 
 		if (SC.ENVIRONMENT.CHECKOUT.skipLogin)
@@ -58,8 +58,8 @@ define(
 			}
 			else
 			{
-				var fragment = _.parseUrlOptions(location.search).fragment
-                ,   parameters = _.parseUrlOptions(location.search);
+				var fragment = Utils.parseUrlOptions(location.search).fragment
+                ,   parameters = Utils.parseUrlOptions(location.search);
 
                 if (parameters.acctredirect) {
                     var touchpoints = SC.getSessionInfo('touchpoints');

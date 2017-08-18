@@ -22,8 +22,11 @@
             "Tests/UnitTest.Address.js"
         ]
     }
+
     , "overrides": {
+
         "suitecommerce/Address@2.4.0/Templates/address_details.tpl" : "Templates/address_details.tpl"
-        , "suitecommerce/Address@2.4.0/Templates/address_edit_fields.tpl" : "Templates/address_edit_fields.tpl"
+    ,   "suitecommerce/Address@2.4.0/Templates/address_edit_fields.tpl" : "Templates/address_edit_fields.tpl"
+
     }
 }

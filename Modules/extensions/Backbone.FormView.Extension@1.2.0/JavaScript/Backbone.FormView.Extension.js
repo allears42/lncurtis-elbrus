@@ -1,6 +1,6 @@
 /*
 	© 2017 LN Curtis
-	Add custom logic for closing modal automatically
+	todo@shelby: this was already here, but I can't find a related version in Vinson
 */
 
 define(
@@ -32,7 +32,8 @@ define(
 		});
 	}
 	
-	_.extend(BackboneFormView.prototype, {
+	_.extend( BackboneFormView.prototype, {
+
 		closeModalOnSuccess: true
 	
 		// @method saveForm will serialize the input of some form and save() the given model using it

@@ -1,5 +1,5 @@
 /*
-	© 2016 NetSuite Inc.
+	© 2017 NetSuite Inc.
 	User may not copy, modify, distribute, or re-bundle or otherwise make available this code;
 	provided, however, if you are an authorized user with a NetSuite account or log-in, you
 	may use this code subject to the terms that govern your access and use.
@@ -47,9 +47,7 @@ define(
 		//@param {String} password
 		//@param {Boolean} redirect
 		//@returns {Account.Model.Attributes} ret touchpoints and user profile data
-    // todo@shelby: this module only has slight changes to login & register. Would it make more sense to just extend it?
-
-    ,	login: function (email, password, redirect)
+	,	login: function (email, password, redirect)
 		{
 
 			ModelsInit.session.login({
@@ -71,7 +69,7 @@ define(
 			{
 				var Environment = Application.getEnvironment(request)
 				,	language = Environment && Environment.currentLanguage || {};
-				language.url = language.locale && ModelsInit.session.getAbsoluteUrl('checkout', '/languages/' + language.locale + '.js') || '';
+				language.url = language.locale && ModelsInit.session.getAbsoluteUrl('/languages/' + language.locale + '.js') || '';
 
 				_.extend(ret, {
 					cart: LiveOrder.get()

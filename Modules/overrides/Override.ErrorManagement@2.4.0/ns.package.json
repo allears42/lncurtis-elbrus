@@ -16,8 +16,7 @@
             "Sass/*.scss"
         ]
     }
-, "overrides": {
-    "suitecommerce/ErrorManagement@2.4.0/JavaScript/ErrorManagement.PageNotFound.View.js" : "JavaScript/ErrorManagement.PageNotFound.View.js",
-    "suitecommerce/ErrorManagement@2.4.0/Templates/error_management_page_not_found.tpl" : "Templates/error_management_page_not_found.tpl"
-}
+    , "overrides": {
+        "suitecommerce/ErrorManagement@2.4.0/Templates/error_management_page_not_found.tpl" : "Templates/error_management_page_not_found.tpl"
+    }
 }

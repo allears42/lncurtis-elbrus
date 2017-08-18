@@ -382,6 +382,7 @@ define('ProductList.Details.View'
 			{
 				self.render();
 				MenuTreeView.getInstance().updateMenuItemsUI();
+
 				self.showConfirmationMessage(_('The selected items were removed from your product list').translate());
 			});
 		}

@@ -32,6 +32,7 @@
     }
 , "overrides": {
     "suitecommerce/MyAccountApplication@3.1.0/Internal/index-local.ssp" : "Internal/index-local.ssp",
+
     "suitecommerce/MyAccountApplication@3.1.0/SuiteScript/my_account.ssp" : "SuiteScript/my_account.ssp",
     "suitecommerce/MyAccountApplication@3.1.0/SuiteScript/myaccount.environment.ssp" : "SuiteScript/myaccount.environment.ssp"
 }

@@ -27,9 +27,6 @@
     }
     , "overrides": {
 
-        "suitecommerce/CreditCard@2.4.0/JavaScript/CreditCard.Edit.Form.View.js" : "JavaScript/CreditCard.Edit.Form.View.js",
-        "suitecommerce/CreditCard@2.4.0/JavaScript/CreditCard.View.js" : "JavaScript/CreditCard.View.js",
-
         "suitecommerce/CreditCard@2.4.0/Templates/creditcard_edit_form.tpl" : "Templates/creditcard_edit_form.tpl",
         "suitecommerce/CreditCard@2.4.0/Templates/creditcard.tpl" : "Templates/creditcard.tpl",
         "suitecommerce/CreditCard@2.4.0/Templates/creditcard_edit_form_securitycode_tooltip.tpl" : "Templates/creditcard_edit_form_securitycode_tooltip.tpl"

@@ -16,12 +16,13 @@ define(
 	,	'Application'
 	,	'Profile.Model'
 	,	'StoreItem.Model'
-	,	'Models.Init'
+	,	'SC.Models.Init'
 	,	'SiteSettings.Model'
 	,	'Utils'
 	,	'ExternalPayment.Model'
 	,	'Pacejet.Model'
 	,	'underscore'
+	,	'CustomFields.Utils'
 	]
 ,	function (
 		SCModel
@@ -34,6 +35,7 @@ define(
 	,	ExternalPayment
 	,	PacejetModel
 	,	_
+	,	CustomFieldsUtils
 	)
 {
 	'use strict';
@@ -45,7 +47,12 @@ define(
 	return SCModel.extend({
 
 		name: 'LiveOrder'
-
+		// @property {Boolean} isSecure
+	,	isSecure: Utils.isCheckoutDomain()
+		// @property {Boolean} isMultiShippingEnabled
+	,	isMultiShippingEnabled: SiteSettings.isMultiShippingRoutesEnabled()
+		// @property {Boolean} isPickupInStoreEnabled
+	,	isPickupInStoreEnabled: SiteSettings.isPickupInStoreEnabled()
 		// @method get
 		// @returns {LiveOrder.Model.Data}
 	,	get: function (data)
@@ -81,6 +88,11 @@ define(
 
 			// @property {Array<LiveOrder.Model.PromoCode>} promocodes
 			result.promocodes = this.getPromoCodes(order_fields);
+
+			if (this.automaticallyRemovedPromocodes)
+			{
+				result.automaticallyremovedpromocodes = this.automaticallyRemovedPromocodes;
+			}
 
 			// @property {Boolean} ismultishipto
 			result.ismultishipto = this.getIsMultiShipTo(order_fields);
@@ -156,62 +168,66 @@ define(
 
 		// @method update will update the commerce order object with given data.
 		// @param {LiveOrder.Model.Data} data
-	,	update: function (data)
+	,	update: function update (data)
 		{
             data.purchasenumber = 'WEB';
 
             // Pacejet rates status is saved in the order, not passed from the site so need to look it up here
             var options = ModelsInit.order.getCustomFieldValues();
-            var status = _.find(options, function (e) { return e.name == 'custbody_pacejet_rates_status'});
+            var status = _.find(options, function (e) {
+                return e.name == 'custbody_pacejet_rates_status'
+            });
             data.options.custbody_pacejet_rates_status = !!status ? status.value : 'F';
 
             var current_order = this.get(data);
 
-			// Only do this if it's capable of shipping multiple items.
-			if (this.isMultiShippingEnabled)
-			{
-				if (this.isSecure && ModelsInit.session.isLoggedIn2())
-				{
-					ModelsInit.order.setEnableItemLineShipping(!!data.ismultishipto);
+            // Only do this if it's capable of shipping multiple items.
+            if (this.isMultiShippingEnabled)
+            {
+                if (this.isSecure && ModelsInit.session.isLoggedIn2())
+                {
+                    ModelsInit.order.setEnableItemLineShipping(!!data.ismultishipto);
+                    if (!current_order.ismultishipto && data.ismultishipto)
+                    {
+                        this.automaticallyRemovedPromocodes = this.getAutomaticallyRemovedPromocodes(current_order);
+                    }
 				}
+                // Do the following only if multishipto is active (if the data received determine that MST is enabled and pass the MST Validation)
+                if (data.ismultishipto) {
+                    ModelsInit.order.removeShippingAddress();
 
-				// Do the following only if multishipto is active (if the data received determine that MST is enabled and pass the MST Validation)
-				if (data.ismultishipto)
-				{
-					ModelsInit.order.removeShippingAddress();
+                    ModelsInit.order.removeShippingMethod();
 
-					ModelsInit.order.removeShippingMethod();
+                    this.removeAllPromocodesForMST(current_order.promocodes);
 
-					this.removeAllPromocodesForMST(current_order.promocodes);
+                    this.splitLines(data, current_order);
 
-					this.splitLines(data, current_order);
+                    this.setShippingAddressAndMethod(data, current_order);
+                }
+            }
 
-					this.setShippingAddressAndMethod(data, current_order);
-				}
-			}
+            if (!this.isMultiShippingEnabled || !data.ismultishipto) {
+                this.setShippingAddress(data, current_order);
 
-			if (!this.isMultiShippingEnabled || !data.ismultishipto)
-			{
-				this.setShippingAddress(data, current_order);
+                this.setShippingMethod(data, current_order);
+            }
 
-				this.setShippingMethod(data, current_order);
+            this.setPromoCodes(data, current_order);
 
-				this.setPromoCodes(data, current_order);
-			}
+            this.setBillingAddress(data, current_order);
 
-			this.setBillingAddress(data, current_order);
+            this.setPaymentMethods(data, current_order);
 
-			this.setPaymentMethods(data, current_order);
+            this.setPurchaseNumber(_.extend(data, {purchasenumber: 'WEB'}), current_order);
 
-			this.setPurchaseNumber(_.extend(data, {purchasenumber: 'WEB'}), current_order);
+            this.setTermsAndConditions(data, current_order);
 
-			this.setTermsAndConditions(data, current_order);
-
-			this.setTransactionBodyField(data, current_order);
+            this.setTransactionBodyField(data, current_order);
         }
 
+
 		// @method submit will call ModelsInit.order.submit() taking in account paypal payment
-	,	submit: function ()
+	,	submit: function submit ()
 		{
 			var	paypal_address = _.find(ModelsInit.customer.getAddressBook(), function (address){ return !address.phone && address.isvalid === 'T'; })
 			,	confirmation = ModelsInit.order.submit();
@@ -240,17 +256,11 @@ define(
 			return confirmation;
 		}
 
-		// @property {Boolean} isSecure
-	,	isSecure: Utils.isCheckoutDomain()
-
-		// @property {Boolean} isMultiShippingEnabled
-	,	isMultiShippingEnabled: ModelsInit.context.getSetting('FEATURE', 'MULTISHIPTO') === 'T' && SC.Configuration.isMultiShippingEnabled
-
 		// @method addAddress
 		// @param {OrderAddress} address
 		// @param {Array<OrderAddress>} addresses
 		// @returns {String} the given address internal id
-	,	addAddress: function (address, addresses)
+	,	addAddress: function addAddress (address, addresses)
 		{
 			if (!address)
 			{
@@ -296,7 +306,7 @@ define(
 
 		// @method hidePaymentPageWhenNoBalance
 		// @param {Array<String>} order_fields
-	,	hidePaymentPageWhenNoBalance: function (order_fields)
+	,	hidePaymentPageWhenNoBalance: function hidePaymentPageWhenNoBalance (order_fields)
 		{
 			if (this.isSecure && ModelsInit.session.isLoggedIn2() && order_fields.payment && ModelsInit.session.getSiteSettings(['checkout']).checkout.hidepaymentpagewhennobalance === 'T' && order_fields.summary.total === 0)
 			{
@@ -307,10 +317,10 @@ define(
 		}
 
 		// @method redirectToPayPal calls ModelsInit.order.proceedToCheckout() method passing information for paypal third party checkout provider
-	,	redirectToPayPal: function ()
+	,	redirectToPayPal: function redirectToPayPal ()
 		{
-			var touchpoints = ModelsInit.session.getSiteSettings( ['touchpoints'] ).touchpoints
-			,	continue_url = 'https://' + request.getHeader('Host') + touchpoints.checkout
+			var touchpoints = SiteSettings.getTouchPoints()
+			,	continue_url = session.getAbsoluteUrl('') + (/\/$/.test(session.getAbsoluteUrl('')) ? touchpoints.checkout.replace('/', '') : touchpoints.checkout )
 			,	joint = ~continue_url.indexOf('?') ? '&' : '?';
 
 			continue_url = continue_url + joint + 'paypal=DONE&fragment=' + request.getParameter('next_step');
@@ -326,10 +336,10 @@ define(
 		}
 
 		// @method redirectToPayPalExpress calls ModelsInit.order.proceedToCheckout() method passing information for paypal-express third party checkout provider
-	,	redirectToPayPalExpress: function ()
+	,	redirectToPayPalExpress: function redirectToPayPalExpress ()
 		{
-			var touchpoints = ModelsInit.session.getSiteSettings( ['touchpoints'] ).touchpoints
-			,	continue_url = 'https://' + request.getHeader('Host') + touchpoints.checkout
+			var touchpoints = SiteSettings.getTouchPoints()
+			,	continue_url = session.getAbsoluteUrl('') + (/\/$/.test(session.getAbsoluteUrl('')) ? touchpoints.checkout.replace('/', '') : touchpoints.checkout )
 			,	joint = ~continue_url.indexOf('?') ? '&' : '?';
 
 			continue_url = continue_url + joint + 'paypal=DONE';
@@ -343,7 +353,7 @@ define(
 		}
 
 		// @method getConfirmation
-	,	getConfirmation: function (internalid)
+	,	getConfirmation: function getConfirmation (internalid)
 		{
 			var confirmation = {internalid: internalid};
 			try
@@ -360,9 +370,10 @@ define(
 		}
 
 		// @method confirmationCreateResult
-	,	confirmationCreateResult: function (placed_order)
+	,	confirmationCreateResult: function confirmationCreateResult (placed_order)
 		{
-			var result = {
+			var self = this
+			,	result = {
 				internalid: placed_order.getId()
 			,	tranid: placed_order.getFieldValue('tranid')
 			,	summary: {
@@ -439,24 +450,47 @@ define(
 			result.lines = [];
 			for (i = 1; i <= placed_order.getLineItemCount('item'); i++)
 			{
-				result.lines.push({
+				var line_item = {
 						item: {
-								internalid: placed_order.getLineItemValue('item', 'item', i)
+                            id: placed_order.getLineItemValue('item', 'item', i)
+                        ,	type: placed_order.getLineItemValue('item', 'itemtype', i)
+                        ,   internalid: placed_order.getLineItemValue('item', 'item', i)
 							// 'item_display' returns the 'sku' or if is a matrix returns 'sku_parent : sku_child'
 							// getLineItemValue of 'item_display' returns the same as getLineItemText of 'item'
-							,	itemDisplay: placed_order.getLineItemValue('item', 'item_display', i)
+                        ,	itemDisplay: placed_order.getLineItemValue('item', 'item_display', i)
 						}
-					,	quantity: parseInt(placed_order.getLineItemValue('item', 'quantity', i), 10)
+					    ,	quantity: parseInt(placed_order.getLineItemValue('item', 'quantity', i), 10)
 						,	rate: parseInt(placed_order.getLineItemValue('item', 'rate', i), 10)
-						,	options: placed_order.getLineItemValue('item', 'options', i)
-				});
+						,	options: self.parseLineOptionsFromSuiteScript(placed_order.getLineItemValue('item', 'options', i))
+				};
+
+				if (self.isPickupInStoreEnabled)
+				{
+					if (placed_order.getLineItemValue('item', 'itemfulfillmentchoice', i) === '1')
+					{
+						line_item.fulfillmentChoice = 'ship';
+					}
+					else if (placed_order.getLineItemValue('item', 'itemfulfillmentchoice', i) === '2')
+					{
+						line_item.fulfillmentChoice = 'pickup';
+					}
+				}
+
+				result.lines.push(line_item);
 			}
+
+			StoreItem.preloadItems(_(result.lines).pluck('item'));
+
+			_.each(result.lines, function (line)
+			{
+				line.item = StoreItem.get(line.item.id, line.item.type);
+				});
 
 			return result;
 		}
 
 		// @method backFromPayPal
-	,	backFromPayPal: function ()
+	,	backFromPayPal: function backFromPayPal ()
 		{
 			var customer_values = Profile.get()
 			,	bill_address = ModelsInit.order.getBillingAddress()
@@ -479,11 +513,11 @@ define(
 		// @method removePaypalAddress remove the shipping address or billing address if phone number is null.
 		// This is because addresses are not valid created by Paypal.
 		// @param {Object} paypal_address
-	,	removePaypalAddress: function (paypal_address)
+	,	removePaypalAddress: function removePaypalAddress (paypal_address)
 		{
 			try
 			{
-				if (paypal_address && paypal_address.internalid)
+				if (SC.Configuration.removePaypalAddress && paypal_address && paypal_address.internalid)
 				{
 					ModelsInit.customer.removeAddress(paypal_address.internalid);
 				}
@@ -499,17 +533,26 @@ define(
 
 		// @method addLine
 		// @param {LiveOrder.Model.Line} line_data
-	,	addLine: function (line_data)
+	,	addLine: function addLine (line_data)
 		{
-			// Adds the line to the order
-			var line_id = ModelsInit.order.addItem({
+			var item = {
 				internalid: line_data.item.internalid.toString()
 			,	quantity: _.isNumber(line_data.quantity) ? parseInt(line_data.quantity, 10) : 1
-			,	options: line_data.options || {}
-			});
+			,	options: this.parseLineOptionsToCommerceAPI(line_data.options)
+			};
 
+			if (this.isPickupInStoreEnabled && line_data.fulfillmentChoice === 'pickup' && line_data.location)
+			{
+				item.fulfillmentPreferences = {
+					fulfillmentChoice: 'pickup'
+				,	pickupLocationId: parseInt(line_data.location, 10)
+				};
+			}
 
-			if (this.isMultiShippingEnabled)
+			// Adds the line to the order
+			var line_id = ModelsInit.order.addItem(item);
+
+			if (this.isMultiShippingEnabled && line_data.fulfillmentChoice !== 'pickup')
 			{
 				// Sets it ship address (if present)
 				line_data.shipaddress && ModelsInit.order.setItemShippingAddress(line_id, line_data.shipaddress);
@@ -531,17 +574,26 @@ define(
 
 		// @method addLines
 		// @param {Array<LiveOrder.Model.Line>} lines_data
-	,	addLines: function (lines_data)
+	,	addLines: function addLines (lines_data)
 		{
-			var items = [];
+			var items = []
+			,	self = this;
 
 			_.each(lines_data, function (line_data)
 			{
 				var item = {
 						internalid: line_data.item.internalid.toString()
 					,	quantity:  _.isNumber(line_data.quantity) ? parseInt(line_data.quantity, 10) : 1
-					,	options: line_data.options || {}
+					,	options: self.parseLineOptionsToCommerceAPI(line_data.options)
 				};
+
+				if (self.isPickupInStoreEnabled && line_data.fulfillmentChoice === 'pickup' && line_data.location)
+				{
+					item.fulfillmentPreferences = {
+						fulfillmentChoice: 'pickup'
+					,	pickupLocationId: parseInt(line_data.location, 10)
+					};
+				}
 
 				items.push(item);
 			});
@@ -561,7 +613,7 @@ define(
 
 		// @method removeLine
 		// @param {String} line_id
-	,	removeLine: function (line_id)
+	,	removeLine: function removeLine (line_id)
 		{
 			// Removes the line
 			ModelsInit.order.removeItem(line_id);
@@ -575,7 +627,7 @@ define(
 		// @method updateLine
 		// @param {String} line_id
 		// @param {LiveOrder.Model.Line} line_data
-	,	updateLine: function (line_id, line_data)
+	,	updateLine: function updateLine (line_id, line_data)
 		{
 			var lines_sort = this.getLinesSort()
 			,	current_position = _.indexOf(lines_sort, line_id)
@@ -583,6 +635,7 @@ define(
 					'quantity'
 				,	'internalid'
 				,	'options'
+				,	'fulfillmentPreferences'
 			]);
 
 			this.removeLine(line_id);
@@ -631,7 +684,7 @@ define(
 		// @method splitLines
 		// @param {LiveOrder.Model.Line} data
 		// @param current_order
-	,	splitLines: function (data, current_order)
+	,	splitLines: function splitLines (data, current_order)
 		{
 			_.each(data.lines, function (line)
 			{
@@ -659,12 +712,21 @@ define(
 		}
 
 		// @method getFieldValues
+		// @param {Array<String>} requested_field_keys To override field_keys got from configuration
 		// @returns {Array<String>}
-	,	getFieldValues: function ()
+	,	getFieldValues: function (requested_field_keys)
 		{
 			var order_field_keys = {}
 			,	isCheckout = Utils.isInCheckout(request) && ModelsInit.session.isLoggedIn2()
 			,	field_keys = isCheckout ? SC.Configuration.orderCheckoutFieldKeys : SC.Configuration.orderShoppingFieldKeys;
+
+			if (requested_field_keys)
+			{
+				field_keys = {
+					keys: requested_field_keys.keys || field_keys.keys
+				,	items: requested_field_keys.items || field_keys.items
+				};
+			}
 
 			order_field_keys.items = field_keys.items;
 			_.each(field_keys.keys, function (key)
@@ -685,6 +747,14 @@ define(
 				order_field_keys.ismultishipto = null;
 			}
 
+			if (this.isPickupInStoreEnabled)
+			{
+				if (!_.contains(order_field_keys.items, 'fulfillmentPreferences'))
+				{
+					order_field_keys.items.push('fulfillmentPreferences');
+				}
+			}
+
 			return ModelsInit.order.getFieldValues(order_field_keys, false);
 		}
 
@@ -692,7 +762,9 @@ define(
 		//not all promocodes are valid and there is not way to determine which promocodes are valid and which arent
 		//TODO This is thanks to the following Platform issue: https://system.netsuite.com/app/crm/support/issuedb/issue.nl?id=46343025&whence=
 		//TODO This method just exists to make it easy to localize where the MST restriction are located
-		//@param {Array<LiveOrder.Model.PromoCode>} promocodes_to_remove List of promocodes that will removed
+
+		//@method removeAllPromocodes Removes all the promocodes or the ones passed by parameter
+        //@param {Array<LiveOrder.Model.PromoCode>} promocodes_to_remove List of promocodes that will removed
 		//@return {Void}
 	,	removeAllPromocodesForMST: function removeAllPromocodesForMST (promocodes_to_remove)
 		{
@@ -701,11 +773,17 @@ define(
 
 	,	removeAllPromocodes: function removeAllPromocodes (promocodes_to_remove)
 		{
-			// ModelsInit.order.removeAllPromotionCodes();
-			_.each(promocodes_to_remove || [], function (promo)
+			if (promocodes_to_remove)
+			{
+				_.each(promocodes_to_remove, function (promo)
 			{
 				ModelsInit.order.removePromotionCode(promo.code);
 			});
+		}
+			else
+			{
+				ModelsInit.order.removeAllPromotionCodes();
+			}
 		}
 
 		// @method getPromoCodes
@@ -730,8 +808,11 @@ define(
 						// @property {String} discountrate_formatted
 						// TODO Populate this line when the issue https://system.netsuite.com/app/crm/support/issuedb/issue.nl?id=46640914&whence=&cmid=1467749011534 is fixed
 					,	discountrate_formatted: ''
+					,	errormsg : promo_code.errormsg
+					,	name: promo_code.discount_name
+					,	rate: promo_code.discount_rate
+					,	type: promo_code.discount_type
 					});
-				//@class LiveOrder.Model
 
 					//TODO Remove this false when this issue https://system.netsuite.com/app/crm/support/issuedb/issue.nl?id=46343025&whence= is finishes
 					if (promo_code.isvalid !== 'T' && false)
@@ -748,18 +829,40 @@ define(
 			return result;
 		}
 
+		// @method getAutomaticallyRemovedPromocodes
+		// @param {Object} order_fields
+		// @return {Array<LiveOrder.Model.PromoCode>}
+	,	getAutomaticallyRemovedPromocodes: function getAutomaticallyRemovedPromocodes(current_order)
+		{
+			var latest_promocodes = _.pluck(_.where(ModelsInit.order.getFieldValues(['promocodes']).promocodes, {isvalid:'T'}) ,'promocode')
+            ,	current_promocodes = _.pluck(_.where(current_order.promocodes,{isvalid:true}), 'code')
+            ,	removed_promocodes = _.difference(current_promocodes, latest_promocodes);
+
+            return _.filter(current_order.promocodes, function (promocode)
+            {
+                return _.indexOf(removed_promocodes, promocode.code) >= 0;
+            });
+		}
+
 		// @method setPromoCodes
 		// @param {LiveOrder.Model.Data} data Received data from the service
 		// @param {LiveOrder.Model.Data} current_order Returned data
 		// @param current_order
 	,	setPromoCodes: function setPromoCodes (data, current_order)
 		{
-			//ModelsInit.order.removeAllPromotionCodes();
-			this.removeAllPromocodes(current_order.promocodes);
+			var self = this
+			,	only_in_current_order = _.filter(current_order.promocodes, function (promocode){
+				return !_.findWhere(data.promocodes, {'code': promocode.code});
+			})
+			,	only_in_data = _.filter(data.promocodes, function (promocode){
+				return !_.findWhere(current_order.promocodes, {'code': promocode.code});
+			});
+
+			this.removeAllPromocodes(only_in_current_order);
 
 			data.promocodes = data.promocodes || [];
 
-			var valid_promocodes = _.filter(data.promocodes, function (promocode)
+			var valid_promocodes = _.filter(only_in_data, function (promocode)
 			{
 					return promocode.isvalid !== false;
 				});
@@ -768,15 +871,37 @@ define(
 			{
 				valid_promocodes = [valid_promocodes[0]];
 			}
+			else
+			{
+				valid_promocodes = only_in_data;
+			}
+
 			_.each(valid_promocodes, function (promo)
 			{
+				try
+				{
 				ModelsInit.order.applyPromotionCode(promo.code);
+				}
+				catch (e)
+				{
+					var order_fields = self.getFieldValues()
+					,	promos = self.getPromoCodes(order_fields)
+					,	is_in_current_order = !!_.find(promos, function (p)
+						{
+							return promo.code === p.code;
+						});
+
+					if (e.code === 'ERR_WS_INVALID_COUPON' && !is_in_current_order)
+					{
+						throw e;
+					}
+				}
 			});
 		}
 
 		// @method getMultiShipMethods
 		// @param {Array<LiveOrder.Model.Line>} lines
-	,	getMultiShipMethods: function (lines)
+	,	getMultiShipMethods: function getMultiShipMethods (lines)
 		{
 			// Get multi ship methods
 			var multishipmethods = {};
@@ -811,7 +936,7 @@ define(
 		// @method getShipMethods
 		// @param {Array<String>} order_fields
 		// @returns {Array<OrderShipMethod>}
-	,	getShipMethods: function (order_fields)
+	,	getShipMethods: function getShipMethods (order_fields)
 		{
 			var shipmethods = _.map(order_fields.shipmethods, function (shipmethod)
 			{
@@ -831,7 +956,7 @@ define(
 
 		// @method getLinesSort
 		// @returns {Array<String>}
-	,	getLinesSort: function ()
+	,	getLinesSort: function getLinesSort ()
 		{
 			return ModelsInit.context.getSessionObject('lines_sort') ? ModelsInit.context.getSessionObject('lines_sort').split(',') : [];
 		}
@@ -839,7 +964,7 @@ define(
 		// @method getPaymentMethods
 		// @param {Array<String>} order_fields
 		// @returns {Array<ShoppingSession.PaymentMethod>}
-	,	getPaymentMethods: function (order_fields)
+	,	getPaymentMethods: function getPaymentMethods (order_fields)
 		{
 			var paymentmethods = []
 			,	giftcertificates = ModelsInit.order.getAppliedGiftCertificates()
@@ -949,15 +1074,20 @@ define(
 
 		// @method getTransactionBodyField
 		// @returns {Object}
-	,	getTransactionBodyField: function ()
+	,	getTransactionBodyField: function getTransactionBodyField ()
 		{
 			var options = {};
 
 			if (this.isSecure)
 			{
+				var fieldsIdToBeExposed = CustomFieldsUtils.getCustomFieldsIdToBeExposed('salesorder');
 				_.each(ModelsInit.order.getCustomFieldValues(), function (option)
 				{
-					options[option.name] = option.value;
+					//expose the custom field value if was configured in the backend configuration
+					if(_.find(fieldsIdToBeExposed, function (fieldIdToBeExposed){ return option.name === fieldIdToBeExposed;}))
+					{
+						options[option.name] = (option.value.indexOf(String.fromCharCode(5)) !== -1) ?  option.value.split(String.fromCharCode(5)) : option.value;
+					}
 				});
 
 			}
@@ -967,7 +1097,7 @@ define(
 		// @method getAddresses
 		// @param {Array<String>} order_fields
 		// @returns {Array<OrderAddress>}
-	,	getAddresses: function (order_fields)
+	,	getAddresses: function getAddresses (order_fields)
 		{
 			var self = this
 			,	addresses = {}
@@ -998,7 +1128,7 @@ define(
 		// @method getLines Set Order Lines into the result. Standardizes the result of the lines
 		// @param {Object} order_fields
 		// @returns {Array<LiveOrder.Model.Line>}
-	,	getLines: function (order_fields)
+	,	getLines: function getLines (order_fields)
 		{
 			var lines = [];
 			if (order_fields.items && order_fields.items.length)
@@ -1029,12 +1159,18 @@ define(
 					,	rate_formatted: original_line.rate_formatted
 						// @property {Number} amount
 					,	amount: Utils.toCurrency(original_line.amount)
-						// @property {Number} tax_amount
-					,	tax_amount: 0
-						// @property {Number} tax_rate
-					,	tax_rate: null
-						// @property {String} tax_rate
-					,	tax_code: null
+						// @property {String} tax_rate1
+					,	tax_rate1: original_line.taxrate1
+						// @property {String} tax_type1
+					,	tax_type1: original_line.taxtype1
+						// @property {String} tax_rate2
+					,	tax_rate2: original_line.taxrate2
+						// @property {String} tax_type2
+					,	tax_type2: original_line.taxtype2
+						// @property {Number} tax1_amount
+					,	tax1_amount: original_line.tax1amt
+						// @property {String} tax1_amount_formatted
+					,	tax1_amount_formatted: Utils.formatCurrency(original_line.tax1amt)
 						// @property {Number} discount
 					,	discount: discount
 						// @property {Number} total
@@ -1043,13 +1179,25 @@ define(
 					,	item: original_line.internalid
 						// @property {String} itemtype
 					,	itemtype: original_line.itemtype
-						// @property {Object} options
-					,	options: original_line.options
+						// @property {Array<LiveOrder.Model.Line.Option>} options
+					,	options: self.parseLineOptionsFromCommerceAPI(original_line.options)
 						// @property {OrderAddress} shipaddress
 					,	shipaddress: original_line.shipaddress
 						// @property {OrderShipMethod} shipmethod
 					,	shipmethod: original_line.shipmethod
+
+						// @property {Array<DiscountsImpact>} discounts_impact
+					,	discounts_impact: original_line.discounts_impact
 					};
+
+					if (self.isPickupInStoreEnabled && original_line.fulfillmentPreferences)
+					{
+						// @property {Number} location
+						line_to_add.location = original_line.fulfillmentPreferences.pickupLocationId;
+						// @property {String} fulfillmentChoice
+						line_to_add.fulfillmentChoice = original_line.fulfillmentPreferences.fulfillmentChoice;
+					}
+
 					// @class LiveOrder.Model
 
 					lines.push(line_to_add);
@@ -1121,11 +1269,122 @@ define(
 
 			return lines;
 		}
+		//@method getLinesOnly returns only the lines of the order without requesting unnecessary data
+		//@return {Array<LiveOrder.Model.Line>}
+	,	getLinesOnly: function getLinesOnly()
+		{
+			var field_values = this.getFieldValues({
+				keys: []
+			,	items: null
+			});
+			return this.getLines(field_values);
+		}
+		//@method getSummary gives the summary of the order requesting only the needed data
+		//@return {Object} An object containing the summary
+	,	getSummary: function getSummary()
+		{
+			var summary = this.getFieldValues({
+				keys: ['summary']
+			,	items: []
+			}).summary;
+			return _.clone(summary);
+		}
+		//@method parseLineOptionsToCommerceAPI Given the list of options from he Front-end it parsed to the particular CommerceAPI format
+		//@param {Array<LiveOrder.Model.Line.Option>} options
+		//@return {Object} An object used as a dictionary where each key is the cart option id and the values are the option's value internalid
+	,	parseLineOptionsToCommerceAPI: function parseLineOptionsToCommerceAPI (options)
+		{
+			var result = {};
+			_.each(options || [], function (option)
+			{
+				if (option && option.value && option.cartOptionId)
+				{
+					result[option.cartOptionId] = option.value.internalid;
+				}
+			});
+			return result;
+		}
+		//@method parseLineOptionsFromCommerceAPI
+		//@param {Array<CommerceAPI.LineOption>} options
+		//@return {Array<LiveOrder.Model.Line.Option>}
+	,	parseLineOptionsFromCommerceAPI: function parseLineOptionsFromCommerceAPI (options)
+		{
+			//@class CommerceAPI.LineOption
+			//@property {String} displayvalue
+			//@property {String} id
+			//@property {String} name
+			//@property {String} value
 
-		// @method getIsMultiShipTo
-		// @param {Array<String>} order_fields
-		// @returns {Boolean}
-	,	getIsMultiShipTo: function (order_fields)
+			return _.map(options, function (option)
+			{
+				var option_label =  Utils.trim(option.name);
+
+				option_label = Utils.stringEndsWith(option_label, ':') ? option_label.substr(0, option_label.length - 1) : option_label;
+
+				//@class LiveOrder.Model.Line.Option
+				return {
+					//@property {LiveOrder.Model.Line.Option.Value} value
+					//@class LiveOrder.Model.Line.Option.Value
+					value:
+					{
+						//@property {String} label Name of the value selected in case of select or the entered string
+						label: option.displayvalue
+						//@property {String} internalid
+					,	internalid: option.value
+					}
+					//@class LiveOrder.Model.Line.Option
+					//@property {String} cartOptionId
+				,	cartOptionId: option.id.toLowerCase()
+					//@property {String} label
+				,	label: option_label
+				};
+			});
+
+			//@class LiveOrder.Model
+		}
+
+		// @method parseLineOptionsFromSuiteScript
+		// @param {String} options
+	,	parseLineOptionsFromSuiteScript: function parseLineOptionsFromSuiteScript (options_string)
+		{
+			var options_object = [];
+
+			if (options_string && options_string !== '- None -')
+			{
+				var split_char_3 = String.fromCharCode(3)
+				,	split_char_4 = String.fromCharCode(4);
+
+				_.each(options_string.split(split_char_4), function (option_line)
+				{
+					option_line = option_line.split(split_char_3);
+
+					//@class Transaction.Model.Get.Line.Option
+					options_object.push({
+						//@property {String} cartOptionId
+						cartOptionId: option_line[0].toLowerCase()
+						//@property {String} label
+					,	label: option_line[2]
+						//@property {Transaction.Model.Get.Line.Option.Value} value
+					,	value: {
+							//@class Transaction.Model.Get.Line.Option.Value
+							//@property {String} label
+							label: option_line[4]
+							//@property {String} internalid
+						,	internalid: option_line[3]
+						}
+						//@class Transaction.Model.Get.Line.Option
+						//@property {Boolean} mandatory
+					,	ismandatory: option_line[1]	=== 'T'
+					});
+				});
+			}
+			//@class LiveOrder.Model
+
+			return options_object;
+		}
+
+		// @method getIsMultiShipTo @param {Array<String>} order_fields @returns {Boolean}
+	,	getIsMultiShipTo: function getIsMultiShipTo (order_fields)
 		{
 			return this.isMultiShippingEnabled && order_fields.ismultishipto === 'T';
 		}
@@ -1133,7 +1392,7 @@ define(
 		// @method setLinesSort
 		// @param {String} lines_sort
 		// @returns {String}
-	,	setLinesSort: function (lines_sort)
+	,	setLinesSort: function setLinesSort (lines_sort)
 		{
 			return ModelsInit.context.setSessionObject('lines_sort', lines_sort || []);
 		}
@@ -1141,7 +1400,7 @@ define(
 		// @method setBillingAddress
 		// @param data
 		// @param {LiveOrder.Model.Data} current_order
-	,	setBillingAddress: function (data, current_order)
+	,	setBillingAddress: function setBillingAddress (data, current_order)
 		{
 			if (data.sameAs)
 			{
@@ -1168,7 +1427,7 @@ define(
 		// @method setShippingAddressAndMethod
 		// @param {LiveOrder.Model.Data} data
 		// @param current_order
-	,	setShippingAddressAndMethod: function (data, current_order)
+	,	setShippingAddressAndMethod: function setShippingAddressAndMethod (data, current_order)
 		{
 			var current_package
 			,	packages = {}
@@ -1227,7 +1486,7 @@ define(
 		// @method setShippingAddress
 		// @param {LiveOrder.Model.Data} data
 		// @param current_order
-	,	setShippingAddress: function (data, current_order)
+	,	setShippingAddress: function setShippingAddress (data, current_order)
 		{
 			if (data.shipaddress !== current_order.shipaddress)
 			{
@@ -1262,8 +1521,9 @@ define(
 				}
 			}
 		}
-		// @method setPurchaseNumber @param {LiveOrder.Model.Data} data
-	,	setPurchaseNumber: function (data)
+		// @method setPurchaseNumber
+		// @param {LiveOrder.Model.Data} data
+	,	setPurchaseNumber: function setPurchaseNumber (data)
 		{
             if (data && data.purchasenumber)
 			{
@@ -1278,7 +1538,7 @@ define(
 
 		// @method setPaymentMethods
 		// @param {LiveOrder.Model.Data} data
-	,	setPaymentMethods: function (data)
+	,	setPaymentMethods: function setPaymentMethods (data)
 		{
 			// Because of an api issue regarding Gift Certificates, we are going to handle them separately
 			var gift_certificate_methods = _.where(data.paymentmethods, {type: 'giftcertificate'})
@@ -1418,7 +1678,7 @@ define(
 
 		// @method setGiftCertificates
 		// @param {Array<Object>} gift_certificates
-	,	setGiftCertificates:  function (gift_certificates)
+	,	setGiftCertificates: function setGiftCertificates (gift_certificates)
 		{
 			// Remove all gift certificates so we can re-enter them in the appropriate order
 			ModelsInit.order.removeAllGiftCertificates();
@@ -1432,7 +1692,7 @@ define(
 		// @method setShippingMethod
 		// @param {LiveOrder.Model.Data} data
 		// @param current_order
-	,	setShippingMethod: function (data, current_order)
+	,	setShippingMethod: function setShippingMethod (data, current_order)
 		{
             if ((!this.isMultiShippingEnabled || !data.ismultishipto) && this.isSecure /* && data.shipmethod !== current_order.shipmethod */)
 			{
@@ -1454,7 +1714,7 @@ define(
 
 		// @method setTermsAndConditions
 		// @param {LiveOrder.Model.Data} data
-	,	setTermsAndConditions: function (data)
+	,	setTermsAndConditions: function setTermsAndConditions (data)
 		{
 			var require_terms_and_conditions = ModelsInit.session.getSiteSettings(['checkout']).checkout.requiretermsandconditions;
 
@@ -1466,13 +1726,24 @@ define(
 
 		// @method setTransactionBodyField
 		// @param {LiveOrder.Model.Data} data
-	,	setTransactionBodyField: function (data)
+	,	setTransactionBodyField: function setTransactionBodyField (data)
 		{
 			// Transaction Body Field
 			if (this.isSecure && !_.isEmpty(data.options))
 			{
+				_.each(data.options, function(value, key)
+				{
+					if (Array.isArray(value))
+					{
+						data.options[key] = value.join(String.fromCharCode(5));
+					}
+				});
 				ModelsInit.order.setCustomFieldValues(data.options);
 			}
+		}
+	,	getOptionByCartOptionId: function getOptionByCartOptionId (options, cart_option_id)
+		{
+			return _.findWhere(options, {cartOptionId: cart_option_id});
 		}
 	});
 });

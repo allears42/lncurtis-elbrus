@@ -14,8 +14,11 @@
 	,	Currency
 	,	Error
 	,	login
+	,	order
+	,	session
 	,	Application
 	,	environmentParameters
+	;
 
 	try
 	{
@@ -24,6 +27,8 @@
 		siteType = SiteSettings.sitetype;
 		parameters = request.getAllParameters();
 		environmentParameters = [];
+		session = require('SC.Models.Init').session;
+		order = session.getOrder();
 
 		Environment = Application.getEnvironment(request);
 		Language = Environment.currentLanguage && Environment.currentLanguage.locale || '';
@@ -103,7 +108,7 @@
 <!DOCTYPE html>
 <html <%= Language ? 'lang="' + Language.replace('_', '-') + '"' : '' %>>
 	<head>
-		<link rel="shortcut icon" href="<%= session.getAbsoluteUrl("checkout", "img/ln-favicon.ico") %>" />
+		<link rel="shortcut icon" href="<%= session.getAbsoluteUrl(Application.getNonManageResourcesPathPrefix() + "img/ln-favicon.ico") %>" />
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -114,19 +119,19 @@
 
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Bitter:400,700" rel="stylesheet">
 		<!--[if !IE]><!-->
-			<link rel="stylesheet" href="<%= session.getAbsoluteUrl('checkout', 'css/checkout.css') %>?t={{timestamp}}">
+			<link rel="stylesheet" href="<%= session.getAbsoluteUrl(Application.getNonManageResourcesPathPrefix() + 'css/checkout.css') %>?t={{timestamp}}">
 		<!--<![endif]-->
 
 		<!--[if lte IE 9]>
 		{{#each cssnumbers}}
-			<link rel="stylesheet" href="<%= session.getAbsoluteUrl('checkout', 'css_ie/checkout_{{this}}.css') %>?t={{../timestamp}}">
+			<link rel="stylesheet" href="<%= session.getAbsoluteUrl(Application.getNonManageResourcesPathPrefix() + 'css_ie/checkout_{{this}}.css') %>?t={{../timestamp}}">
 		{{/each}}
-		  	<link rel="stylesheet" href="<%= session.getAbsoluteUrl('checkout', 'css_ie/checkout.css') %>?t={{timestamp}}">
+		  	<link rel="stylesheet" href="<%= session.getAbsoluteUrl(Application.getNonManageResourcesPathPrefix() + 'css_ie/checkout.css') %>?t={{timestamp}}">
 		<![endif]-->
 
 		<!--[if lt IE 9]>
-			<script src="<%= session.getAbsoluteUrl('checkout', 'javascript/html5shiv.min.js') %>"></script>
-		  	<script src="<%= session.getAbsoluteUrl('checkout', 'javascript/respond.min.js') %>"></script>
+			<script src="<%= session.getAbsoluteUrl('javascript/html5shiv.min.js') %>"></script>
+		  	<script src="<%= session.getAbsoluteUrl('javascript/respond.min.js') %>"></script>
 		<![endif]-->
 
 		<script>
@@ -200,7 +205,10 @@
 
 		<script>
 			loadScript({
-				url: '<%= session.getAbsoluteUrl("checkout", "checkout.environment.ssp?" + environmentParameters.join("&") ) %>&t={{timestamp}}'
+				url: '<%= session.getAbsoluteUrl("checkout.environment.ssp?" + environmentParameters.join("&") ) %>&t={{timestamp}}'
+			});
+			loadScript({
+				url: '<%= session.getAbsoluteUrl("customFieldsMetadata.ssp?")%>t={{timestamp}}'
 			});
 		</script>
 
@@ -214,7 +222,11 @@
 				window.location.hash = '<%= parameters.fragment %>';
 			}
 		</script>
-		<script src="<%= session.getAbsoluteUrl('checkout', 'javascript/checkout.js') %>?t={{timestamp}}"></script>
+
+		{{#if distro.isSCLite}}
+		<script src="<%= session.getAbsoluteUrl(Application.getNonManageResourcesPathPrefix() + "checkout-templates.js") %>?t={{timestamp}}"></script>
+		{{/if}}
+		<script src="<%= session.getAbsoluteUrl('javascript/checkout.js') %>?t={{timestamp}}"></script>
 
 		<% if (SC.Configuration.cms.useCMS) { %>
 			<script src="/cms/2/assets/js/postframe.js"></script>

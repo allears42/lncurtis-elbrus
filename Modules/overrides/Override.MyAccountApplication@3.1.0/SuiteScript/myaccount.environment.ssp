@@ -23,7 +23,9 @@
 	,	Application
 	,	CMS
 	,	ReleaseMetadata
-	,	external_parameters;
+	,	external_parameters
+	,	session
+	;
 
 	try
 	{
@@ -34,13 +36,14 @@
 		Environment = Application.getEnvironment(request);
 		siteId = SiteSettings.siteid;
 		productlist_bundle_present = Utils.recordTypeExists('customrecord_ns_pl_productlist');
+		session = require('SC.Models.Init').session;
 
 		// The use of CDS and CMS are mutually exclusive, if you use CMS you can't use CDS, or if you use CDS you can't use CMS
 		if (SC.Configuration.cms.useCMS)
 		{
 			try
 			{
-				var baseUrl = request.getURL().match(/(^https?:\/\/[^\/]+)/i)[0];
+				var baseUrl = Utils.trim(SC.Configuration.cms.baseUrl || '') || request.getURL().match(/(^https?:\/\/[^\/]+)/i)[0];
 				CMS = require('CMSadapter.Model').getPages(baseUrl);
 			}
 			catch (e)
@@ -105,7 +108,7 @@
 					if (external_parameters.externalPayment === 'DONE')
 					{
 						LivePayment = require('LivePayment.Model').get();
-						LivePayment.confirmation = require('Payment.Model').get(external_parameters.nltranid);
+						LivePayment.confirmation = require('CustomerPayment.Model').get(external_parameters.recordType, external_parameters.nltranid);
 					}
 					else
 					{
@@ -214,6 +217,9 @@ SC.getSessionInfo = function(key)
 	SC.ENVIRONMENT.CASES_CONFIG = <%= JSON.stringify(SC.Configuration.cases) %>;
 <% } %>
 
+//Information generated at compilation time
+SC.ENVIRONMENT.BuildTimeInf = <%= JSON.stringify(BuildTimeInf || {}) %>
+
 // CMS configuration
 <% if (SC.Configuration.cms.useCMS) { %>
 	SC.ENVIRONMENT.CMS = <%= JSON.stringify(CMS || {}) %>;
@@ -246,10 +252,10 @@ SC.ENVIRONMENT.isTouchEnabled = ('ontouchstart' in window) || window.DocumentTou
 document.documentElement.className = (SC.ENVIRONMENT.isTouchEnabled) ? "touch" : "no-touch";
 
 // Include Language Files
-document.write('<script src="<%= session.getAbsoluteUrl('checkout', 'languages/en.js') %>?t={{timestamp}}"><\\/script>');
+document.write('<script src="<%= session.getAbsoluteUrl('languages/en.js') %>?t={{timestamp}}"><\\/script>');
 
 <% if (Environment && Environment.currentLanguage && Environment.currentLanguage.locale && Environment.currentLanguage.locale !== 'en') { %>
-	document.write('<script src="<%= session.getAbsoluteUrl('checkout', 'languages/myaccount_' + Environment.currentLanguage.locale + '.js') %>?t={{timestamp}}"><\\/' + 'script' + '>');
+	document.write('<script src="<%= session.getAbsoluteUrl('languages/myaccount_' + Environment.currentLanguage.locale + '.js') %>?t={{timestamp}}"><\\/' + 'script' + '>');
 <% } %>
 
 <% if (Error) { %>
@@ -258,7 +264,7 @@ document.write('<script src="<%= session.getAbsoluteUrl('checkout', 'languages/e
 
 	if(!SC.ENVIRONMENT.baseUrl)
 	{
-		SC.ENVIRONMENT.baseUrl = '<%=  session.getAbsoluteUrl('checkout', '/{{file}}') %>';
+		SC.ENVIRONMENT.baseUrl = '<%=  session.getAbsoluteUrl('/{{file}}') %>';
 	}
 
 <% } %>

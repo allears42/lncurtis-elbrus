@@ -20,8 +20,6 @@
         ]
     }
     , "overrides": {
-        "suitecommerce/OrderHistory@5.0.0/JavaScript/OrderHistory.List.View.js":"JavaScript/OrderHistory.List.View.js",
-        "suitecommerce/OrderHistory@5.0.0/JavaScript/OrderHistory.Summary.View.js":"JavaScript/OrderHistory.Summary.View.js",
 
         "suitecommerce/OrderHistory@5.0.0/SuiteScript/OrderHistory.Model.js":"SuiteScript/OrderHistory.Model.js"
 

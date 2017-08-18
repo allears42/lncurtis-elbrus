@@ -16,12 +16,14 @@
 	,	Application
 	,	environmentParamaters
 	, 	parameters
+	,	session
 	,	Utils;
 
 	try
 	{
 		SiteSettings = require('SiteSettings.Model').get();
 		parameters = request.getAllParameters();
+		session = require('SC.Models.Init').session;
 
 		// Access control, if you are not loged this will send you to the log in page
 		if (!session.isLoggedIn2() || session.getCustomer().isGuest())
@@ -72,14 +74,14 @@
 
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Bitter:400,700" rel="stylesheet">
 		<!--[if !IE]><!-->
-			<link rel="stylesheet" href="<%= ROOT %>css/myaccount.css"></link>
+			<link rel="stylesheet" href="<%= ROOT %>{{#if distro.isSCLite}}tmp/{{/if}}css/myaccount.css"></link>
 		<!--<![endif]-->
 
 		<!--[if lte IE 9]>
 		{{#each cssnumbers}}
-			<link rel="stylesheet" href="<%= ROOT %>css_ie/myaccount_{{this}}.css?t={{../timestamp}}"></link>
+			<link rel="stylesheet" href="<%= ROOT %>{{#if distro.isSCLite}}tmp/{{/if}}css_ie/myaccount_{{this}}.css?t={{../timestamp}}"></link>
 		{{/each}}
-			<link rel="stylesheet" href="<%= ROOT %>css_ie/myaccount.css?t={{timestamp}}"></link>
+			<link rel="stylesheet" href="<%= ROOT %>{{#if distro.isSCLite}}tmp/{{/if}}css_ie/myaccount.css?t={{timestamp}}"></link>
 		<![endif]-->
 
 		<!--[if lt IE 9]>
@@ -115,8 +117,9 @@
 			<script src="/cms/2/assets/js/postframe.js"></script>
 		<% } %>
 
-		<script src="<%= session.getAbsoluteUrl('checkout', 'myaccount.environment.ssp?' + environmentParameters.join('&')) %>&t={{timestamp}}"></script>
-		<% if (Error) { %>
+		<script src="<%= session.getAbsoluteUrl('myaccount.environment.ssp?' + environmentParameters.join('&')) %>&t={{timestamp}}"></script>
+        <script src="<%= session.getAbsoluteUrl('customFieldsMetadata.ssp?')%>t={{timestamp}}"></script>
+        <% if (Error) { %>
 		<script>SC.ENVIRONMENT.contextError = <%= JSON.stringify(Error) %>;</script>
 		<% } %>
 		<script type="text/javascript" src="/cms/1/cms.js"></script>
@@ -138,6 +141,10 @@
 		</noscript>
 
 		<div id="main" class="main"></div>
+		{{#if distro.isSCLite}}
+		<script type="text/javascript" src="<%= ROOT %>tmp/myaccount-templates.js"></script>
+		<script src="<%= session.getAbsoluteUrl("javascript/myaccount.js") %>?t={{timestamp}}"></script>
+		{{else}}
 		<script data-main="<%= ROOT %>javascript/myaccount.js" src="<%= ROOT %>javascript/require.js"></script>
 		<script type="text/javascript">
 		if (!window.require)
@@ -147,17 +154,26 @@
 			document.body.appendChild(script);
 		}
 		</script>
-
+		{{/if}}
 		<% if (SC.Configuration.cms.useCMS) { %>
 			<script>
 				if (SC.ENVIRONMENT.jsEnvironment === 'browser')
 				{
-					setTimeout(function() {
+					(function() {
+						var nlTimer = setInterval(function()
+						{
+							if (window.jQuery)
+							{
+								// Load CMS
 					jQuery.getScript('/cms/2/cms.js')
 						.done(function() {
 							CMS.trigger('cms:load');
-						})
-					}, 5000);
+									});
+
+								clearInterval(nlTimer);
+							}
+						}, 100);
+					})();
 				}
 			</script>
 		<% } %>

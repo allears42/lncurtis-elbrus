@@ -21,9 +21,6 @@
     },
     "overrides": {
 
-        "suitecommerce/Cart@4.0.0/JavaScript/Cart.Confirmation.View.js": "JavaScript/Cart.Confirmation.View.js",
-        "suitecommerce/Cart@4.0.0/JavaScript/Cart.Detailed.View.js": "JavaScript/Cart.Detailed.View.js",
-
         "suitecommerce/Cart@4.0.0/Templates/cart_confirmation_modal.tpl": "Templates/cart_confirmation_modal.tpl",
         "suitecommerce/Cart@4.0.0/Templates/cart_detailed.tpl": "Templates/cart_detailed.tpl",
         "suitecommerce/Cart@4.0.0/Templates/cart_item_actions.tpl": "Templates/cart_item_actions.tpl",

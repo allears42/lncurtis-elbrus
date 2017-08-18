@@ -1,5 +1,5 @@
 <%/*
-	© 2016 NetSuite Inc.
+	© 2017 NetSuite Inc.
 	User may not copy, modify, distribute, or re-bundle or otherwise make available this code;
 	provided, however, if you are an authorized user with a NetSuite account or log-in, you
 	may use this code subject to the terms that govern your access and use.
@@ -39,7 +39,7 @@
 <!DOCTYPE html>
 <html <%= Language ? 'lang="' + Language.replace('_', '-') + '"' : '' %>>
 	<head>
-		<link rel="shortcut icon" href="<%= session.getAbsoluteUrl("shopping", "img/ln-favicon.ico") %>" />
+		<link rel="shortcut icon" href="<%= session.getAbsoluteUrl("img/ln-favicon.ico") %>" />
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 		<title>Shopping Cart</title>
@@ -92,19 +92,19 @@
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Bitter:400,700" rel="stylesheet">
 
 		<!--[if !IE]><!-->
-			<link rel="stylesheet" href="<%= session.getAbsoluteUrl('shopping', 'css/checkout.css') %>">
+			<link rel="stylesheet" href="<%= session.getAbsoluteUrl('css/checkout.css') %>">
 		<!--<![endif]-->
 
 		<!--[if lte IE 9]>
 		{{#each cssnumbers}}
-			<link rel="stylesheet" href="<%= session.getAbsoluteUrl('shopping', 'css_ie/checkout_{{this}}.css') %>">
+			<link rel="stylesheet" href="<%= session.getAbsoluteUrl('css_ie/checkout_{{this}}.css') %>">
 				{{/each}}
-		  	<link rel="stylesheet" href="<%= session.getAbsoluteUrl('shopping', 'css_ie/checkout.css') %>">
+		  	<link rel="stylesheet" href="<%= session.getAbsoluteUrl('css_ie/checkout.css') %>">
 		<![endif]-->
 
 		<!--[if lt IE 9]>
-			<script src="<%= session.getAbsoluteUrl('shopping', 'javascript/html5shiv.min.js') %>"></script>
-		  	<script src="<%= session.getAbsoluteUrl('shopping', 'javascript/respond.min.js') %>"></script>
+			<script src="<%= session.getAbsoluteUrl('javascript/html5shiv.min.js') %>"></script>
+		  	<script src="<%= session.getAbsoluteUrl('javascript/respond.min.js') %>"></script>
 		<![endif]-->
 	</head>
 	<body>
@@ -129,7 +129,7 @@
 
 		<script>
 			loadScript({
-				url: '<%= session.getAbsoluteUrl("shopping", "checkout.environment.ssp?lang=" + Language + "&cur=" + Currency + "&cart-bootstrap=T") %>&t=' + (new Date().getTime())
+				url: '<%= session.getAbsoluteUrl("checkout.environment.ssp?lang=" + Language + "&cur=" + Currency + "&cart-bootstrap=T" + "&X-SC-Touchpoint=checkout") %>&t=' + (new Date().getTime())
 			});
 		</script>
 
@@ -137,7 +137,7 @@
 			<script>SC.ENVIRONMENT.contextError = <%= JSON.stringify(Error) %>;</script>
 		<% } %>
 
-		<script src="<%= session.getAbsoluteUrl('shopping', 'javascript/checkout.js') %>"></script>
+		<script src="<%= session.getAbsoluteUrl('javascript/checkout.js') %>"></script>
 
 		<script>
 			window.location.hash = 'cart';

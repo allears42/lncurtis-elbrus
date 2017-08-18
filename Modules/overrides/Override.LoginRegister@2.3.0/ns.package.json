@@ -11,12 +11,6 @@
         ]
     },
     "overrides": {
-        "suitecommerce/LoginRegister@2.3.0/JavaScript/LoginRegister.ForgotPassword.View.js" : "JavaScript/LoginRegister.ForgotPassword.View.js",
-        "suitecommerce/LoginRegister@2.3.0/JavaScript/LoginRegister.Login.View.js" : "JavaScript/LoginRegister.Login.View.js",
-        "suitecommerce/LoginRegister@2.3.0/JavaScript/LoginRegister.Register.View.js" : "JavaScript/LoginRegister.Register.View.js",
-        "suitecommerce/LoginRegister@2.3.0/JavaScript/LoginRegister.ResetPassword.View.js" : "JavaScript/LoginRegister.ResetPassword.View.js",
-        "suitecommerce/LoginRegister@2.3.0/JavaScript/LoginRegister.View.js" : "JavaScript/LoginRegister.View.js",
-
         "suitecommerce/LoginRegister@2.3.0/Templates/login_register.tpl" : "Templates/login_register.tpl",
         "suitecommerce/LoginRegister@2.3.0/Templates/login_register_login.tpl" : "Templates/login_register_login.tpl",
         "suitecommerce/LoginRegister@2.3.0/Templates/login_register_register.tpl" : "Templates/login_register_register.tpl",

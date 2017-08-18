@@ -23,15 +23,6 @@
 
     "suitecommerce/Facets@2.4.0/Configuration/Facets.json" : "Configuration/Facets.json",
 
-    "suitecommerce/Facets@2.4.0/JavaScript/Facets.Browse.CategoryHeading.View.js" : "JavaScript/Facets.Browse.CategoryHeading.View.js",
-    "suitecommerce/Facets@2.4.0/JavaScript/Facets.Browse.View.js" : "JavaScript/Facets.Browse.View.js",
-    "suitecommerce/Facets@2.4.0/JavaScript/Facets.FacetedNavigation.View.js" : "JavaScript/Facets.FacetedNavigation.View.js",
-    "suitecommerce/Facets@2.4.0/JavaScript/Facets.FacetedNavigationItem.View.js" : "JavaScript/Facets.FacetedNavigationItem.View.js",
-    "suitecommerce/Facets@2.4.0/JavaScript/Facets.FacetedNavigationItemCategory.View.js" : "JavaScript/Facets.FacetedNavigationItemCategory.View.js",
-    "suitecommerce/Facets@2.4.0/JavaScript/Facets.ItemCell.View.js" : "JavaScript/Facets.ItemCell.View.js",
-    "suitecommerce/Facets@2.4.0/JavaScript/Facets.js" : "JavaScript/Facets.js",
-    "suitecommerce/Facets@2.4.0/JavaScript/Facets.Translator.js" : "JavaScript/Facets.Translator.js",
-
     "suitecommerce/Facets@2.4.0/Templates/facets_browse_category_heading.tpl" : "Templates/facets_browse_category_heading.tpl",
     "suitecommerce/Facets@2.4.0/Templates/facets_empty.tpl" : "Templates/facets_empty.tpl",
     "suitecommerce/Facets@2.4.0/Templates/facets_facet_browse.tpl" : "Templates/facets_facet_browse.tpl",

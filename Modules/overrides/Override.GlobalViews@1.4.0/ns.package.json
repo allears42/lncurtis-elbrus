@@ -11,8 +11,6 @@
         ]
     }
     ,   "overrides": {
-        "suitecommerce/GlobalViews@1.4.0/JavaScript/GlobalViews.Breadcrumb.View.js": "JavaScript/GlobalViews.Breadcrumb.View.js",
-        "suitecommerce/GlobalViews@1.4.0/JavaScript/GlobalViews.FormatPaymentMethod.View.js": "JavaScript/GlobalViews.FormatPaymentMethod.View.js",
 
         "suitecommerce/GlobalViews@1.4.0/Templates/global_views_breadcrumb.tpl": "Templates/global_views_breadcrumb.tpl",
         "suitecommerce/GlobalViews@1.4.0/Templates/global_views_format_payment_method.tpl": "Templates/global_views_format_payment_method.tpl",

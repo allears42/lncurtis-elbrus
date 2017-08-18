@@ -1,5 +1,5 @@
 /*
-	© 2016 NetSuite Inc.
+	© 2017 NetSuite Inc.
 	User may not copy, modify, distribute, or re-bundle or otherwise make available this code;
 	provided, however, if you are an authorized user with a NetSuite account or log-in, you
 	may use this code subject to the terms that govern your access and use.
@@ -15,11 +15,12 @@ define(
 	,	'Utils'
 	,	'StoreItem.Model'
 	,	'Transaction.Model'
+	,	'Transaction.Model.Extensions'
 	,	'SiteSettings.Model'
 	,	'SC.Model'
 	,	'ReturnAuthorization.Model'
 	,	'ExternalPayment.Model'
-
+	,	'Models.Init'
 	,	'underscore'
 	]
 ,	function (
@@ -27,11 +28,12 @@ define(
 	,	Utils
 	,	StoreItem
 	,	Transaction
+	,	TransactionModelExtensions
 	,	SiteSettings
 	,	SCModel
 	,	ReturnAuthorization
 	,	ExternalPayment
-
+	,	ModelsInit
 	,	_
 	)
 {
@@ -40,6 +42,11 @@ define(
 	return Transaction.extend({
 
 		name: 'OrderHistory'
+
+	,	isPickupInStoreEnabled: SiteSettings.isPickupInStoreEnabled()
+
+	,	isSCISIntegrationEnabled: SiteSettings.isSCISIntegrationEnabled()
+
 	,	setExtraListColumns: function ()
 		{
 			this.columns.trackingnumbers = new nlobjSearchColumn('trackingnumbers');
@@ -202,9 +209,10 @@ define(
 
 				if (self.result.recordtype === 'salesorder')
 				{
-					if ((!self.result.ismultishipto && (!line.isfulfillable || !self.result.shipaddress)) || (self.result.ismultishipto && (!line.shipaddress || !line.shipmethod)))
+					if ( (self.isPickupInStoreEnabled && line.fulfillmentChoice === 'pickup') || (!self.result.ismultishipto && (!line.isfulfillable || !self.result.shipaddress)) || (self.result.ismultishipto && (!line.shipaddress || !line.shipmethod)))
 					{
-						if (self.isSCISIntegrationEnabled && self.result.origin === 1)
+
+						if ( (self.isSCISIntegrationEnabled && self.result.origin === 1) || (self.isPickupInStoreEnabled && line.fulfillmentChoice === 'pickup') )
 						{
 							line_group_id = 'instore';
 						}
@@ -229,6 +237,20 @@ define(
 		}
 	,	getFulfillments: function ()
 		{
+			if (this.result.recordtype !== 'salesorder')
+			{
+				var location = this.record.getFieldValue('location');
+
+				_.each(this.result.lines, function (line)
+				{
+					line.quantityfulfilled = line.quantity;
+					line.location = location;
+				});
+
+				return;
+			}
+
+
 			this.result.fulfillments = {};
 
 			var self = this
@@ -267,6 +289,14 @@ define(
 				,	new nlobjSearchColumn('shipstate','fulfillingtransaction')
 				,	new nlobjSearchColumn('shipzip','fulfillingtransaction')
 				];
+
+			var pick_pack_ship_is_enabled = !!Utils.isFeatureEnabled('PICKPACKSHIP');
+
+			if (pick_pack_ship_is_enabled)
+			{
+				columns.push(new nlobjSearchColumn('quantitypicked'));
+				columns.push(new nlobjSearchColumn('quantitypacked'));
+			}
 
 			Application.getAllSearchResults('salesorder', filters, columns).forEach(function (ffline)
 			{
@@ -313,13 +343,21 @@ define(
 
 				if (line)
 				{
+					if (line.fulfillmentChoice && line.fulfillmentChoice === 'pickup')
+					{
 					line.quantityfulfilled = parseInt(ffline.getValue('quantityshiprecv') || 0, 10);
-					line.quantitypacked = parseInt(ffline.getValue('quantitypacked') || 0, 10) - line.quantityfulfilled;
-					line.quantitypicked = parseInt(ffline.getValue('quantitypicked') || 0, 10) - line.quantitypacked - line.quantityfulfilled;
-					line.quantitybackordered = line.quantity - line.quantityfulfilled - line.quantitypacked - line.quantitypicked;
-                    line.custcol_sc_item_image = ffline.getValue('custcol_sc_item_image');
+						line.quantitypicked = pick_pack_ship_is_enabled ? parseInt(ffline.getValue('quantitypicked') || 0, 10) - line.quantityfulfilled : 0;
+						line.quantitybackordered = line.quantity - line.quantityfulfilled - line.quantitypicked;
+					}
+					else
+					{
+						line.quantityfulfilled = parseInt(ffline.getValue('quantityshiprecv') || 0, 10);
+						line.quantitypacked = pick_pack_ship_is_enabled ? parseInt(ffline.getValue('quantitypacked') || 0, 10) - line.quantityfulfilled : 0;
+						line.quantitypicked = pick_pack_ship_is_enabled ? parseInt(ffline.getValue('quantitypicked') || 0, 10) - line.quantitypacked - line.quantityfulfilled : 0;
+					    line.quantitybackordered = line.quantity - line.quantityfulfilled - line.quantitypacked - line.quantitypicked;
+                        line.custcol_sc_item_image = ffline.getValue('custcol_sc_item_image');
+				    }
 				}
-
 			});
 
 			this.result.fulfillments = _.values(this.result.fulfillments);
@@ -471,5 +509,68 @@ define(
 
 		}
 
+	,	getAdjustments: TransactionModelExtensions.getAdjustments
+
+	,	getLines: function ()
+		{
+			Transaction.getLines.apply(this, arguments);
+
+			if (this.isPickupInStoreEnabled)
+			{
+				var self = this;
+
+				_.each(this.result.lines, function (line)
+				{
+					line.location = self.record.getLineItemValue('item', 'location', line.index);
+
+					var item_fulfillment_choice = self.record.getLineItemValue('item', 'itemfulfillmentchoice', line.index);
+
+					if (item_fulfillment_choice === '1')
+					{
+						line.fulfillmentChoice = 'ship';
+					}
+					else if (item_fulfillment_choice === '2')
+					{
+						line.fulfillmentChoice = 'pickup';
+					}
+	});
+			}
+		}
+
+	,	getTransactionRecord: function (record_type, id)
+		{
+			if (this.isPickupInStoreEnabled && record_type === 'salesorder' && SC.Configuration.pickupInStoreSalesOrderCustomFormId)
+			{
+				return nlapiLoadRecord(record_type, id, {customform: SC.Configuration.pickupInStoreSalesOrderCustomFormId});
+			}
+			else
+			{
+				return Transaction.getTransactionRecord.apply(this, arguments);
+			}
+		}
+	,	_addTransactionColumnFieldsToOptions: function (line)
+		{
+			var self = this;
+			var lineFieldsId = self.record.getAllLineItemFields('item');
+			_.each(lineFieldsId, function(field){
+				if(field.indexOf('custcol') === 0)
+				{
+					var lineId = line.index;
+					var fieldValue = self.record.getLineItemValue('item', field, lineId);
+					if(fieldValue !== null)
+					{
+						var fieldInf = self.record.getLineItemField('item', field, lineId);
+						line.options.push(
+							self.transactionModelGetLineOptionBuilder(
+								field
+							,	fieldInf.label
+							,	self.transactionModelGetLineOptionValueBuilder(undefined, fieldValue)
+							,	fieldInf.mandatory
+							)
+						);
+					}
+				}
+});
+		}
 	});
 });

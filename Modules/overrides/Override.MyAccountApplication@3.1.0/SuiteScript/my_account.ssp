@@ -14,6 +14,7 @@
 	,	Error
 	,	Application
 	,	environmentParameters
+	,	session
 	, 	parameters
 	,	external_payment;
 
@@ -21,6 +22,7 @@
 	{
 		SiteSettings = require('SiteSettings.Model').get();
 		parameters = request.getAllParameters();
+		session = require('SC.Models.Init').session;
 
 		// Access control, if you are not loged this will send you to the log in page
 		if (!session.isLoggedIn2() || session.getCustomer().isGuest())
@@ -66,23 +68,23 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 		<title>My Account</title>
-		<link rel="shortcut icon" href="<%= session.getAbsoluteUrl('checkout', 'img/ln-favicon.ico') %>" />
+		<link rel="shortcut icon" href="<%= session.getAbsoluteUrl(Application.getNonManageResourcesPathPrefix() + 'img/ln-favicon.ico') %>" />
 
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Bitter:400,700" rel="stylesheet">
 		<!--[if !IE]><!-->
-			<link rel="stylesheet" href="<%= session.getAbsoluteUrl('checkout', 'css/myaccount.css') %>?t={{timestamp}}">
+			<link rel="stylesheet" href="<%= session.getAbsoluteUrl(Application.getNonManageResourcesPathPrefix() + 'css/myaccount.css') %>?t={{timestamp}}">
 		<!--<![endif]-->
 
 		<!--[if lte IE 9]>
 		{{#each cssnumbers}}
-			<link rel="stylesheet" href="<%= session.getAbsoluteUrl('checkout', 'css_ie/myaccount_{{this}}.css?t={{../timestamp}}') %>">
+			<link rel="stylesheet" href="<%= session.getAbsoluteUrl(Application.getNonManageResourcesPathPrefix() + 'css_ie/myaccount_{{this}}.css?t={{../timestamp}}') %>">
 		{{/each}}
-			<link rel="stylesheet" href="<%= session.getAbsoluteUrl('checkout', 'css_ie/myaccount.css?t={{timestamp}}') %>">
+			<link rel="stylesheet" href="<%= session.getAbsoluteUrl(Application.getNonManageResourcesPathPrefix() + 'css_ie/myaccount.css?t={{timestamp}}') %>">
 		<![endif]-->
 
 		<!--[if lt IE 9]>
-			<script src="<%= session.getAbsoluteUrl('checkout', 'javascript/html5shiv.min.js') %>"></script>
-		  	<script src="<%= session.getAbsoluteUrl('checkout', 'javascript/respond.min.js') %>"></script>
+			<script src="<%= session.getAbsoluteUrl('javascript/html5shiv.min.js') %>"></script>
+		  	<script src="<%= session.getAbsoluteUrl('javascript/respond.min.js') %>"></script>
 		<![endif]-->
 
 		<%= (siteType && siteType === 'STANDARD') ? getPageFullHead() : '' %>
@@ -113,11 +115,15 @@
 			{{/js}}
 		</script>
 
-		<script src="<%= session.getAbsoluteUrl('checkout', 'myaccount.environment.ssp?' + environmentParameters.join('&')) %>&t={{timestamp}}"></script>
+		<script src="<%= session.getAbsoluteUrl('myaccount.environment.ssp?' + environmentParameters.join('&')) %>&t={{timestamp}}"></script>
+		<script src="<%= session.getAbsoluteUrl('customFieldsMetadata.ssp?')%>t={{timestamp}}"></script>
 		<% if (Error) { %>
 		<script>SC.ENVIRONMENT.contextError = <%= JSON.stringify(Error) %>;</script>
 		<% } %>
-		<script src="<%= session.getAbsoluteUrl('checkout', 'javascript/myaccount.js') %>?t={{timestamp}}"></script>
+		{{#if distro.isSCLite}}
+		<script src="<%= session.getAbsoluteUrl(Application.getNonManageResourcesPathPrefix() + "myaccount-templates.js") %>?t={{timestamp}}"></script>
+		{{/if}}
+		<script src="<%= session.getAbsoluteUrl('javascript/myaccount.js') %>?t={{timestamp}}"></script>
 
 		<% if (SC.Configuration.cms.useCMS) { %>
 			<script src="/cms/2/assets/js/postframe.js"></script>
