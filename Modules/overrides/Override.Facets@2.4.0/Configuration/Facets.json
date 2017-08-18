@@ -8,7 +8,7 @@
         "docRef": "bridgehead_4393383668",
         "description": "Facets"
     },
-    
+
     "resource": {
         "template": {
             "facet-navigation-item": [
@@ -39,7 +39,6 @@
             "subtab": "facets",
             "type": "array",
             "title": "Facets",
-            "docRef": "bridgehead_4393383668",
             "description": "Facets editor declarations",
             "items": {
                 "type": "object",
@@ -74,12 +73,6 @@
                         "title": "Behavior",
                         "description": "behavior can be one of 'range', 'multi'. If 'range', a double slider will be showed as the editor. If 'multi', multiple facet value selection will be available",
                         "enum": ["range", "multi", "single"]
-                    },
-                    "max": {
-                        "type": "string",
-                        "title": "Max",
-                        "description": "Max number to show before 'show more' button shows",
-                        "default": "5"
                     },
                     "template": {
                         "type": "string",
@@ -142,7 +135,6 @@
                     }
                 }
             },
-
             "default":[
                 {
                     "id": "pricelevel5",
@@ -157,175 +149,7 @@
                     "isParameter": true,
                     "max": 4
                 }
-
             ]
-        }
-    ,   "facetsColorPalette": {
-            "group": "catalog",
-            "type": "array",
-            "title": "Facets Color Palettes",
-            "docRef": "bridgehead_4667037557",
-            "description": "Color palettes maps a color defined in a netsuite list to a CSS color value. Then, one or more color facets can use a palette to show the values. <br/>Use this table to modify default color palette or create new ones. <br/><b>IMPORTANT: </b>",
-            "items": {
-                "type": "object",
-                "properties": {
-                    "paletteId": {
-                        "type": "string",
-                        "title": "Palette id",
-                        "description": "The palette id for this color",
-                        "mandatory": true
-                    }
-                ,   "colorName": {
-                        "type": "string",
-                        "title": "Color name",
-                        "description": "The color name as it is in the netsuite list used in the facet declaration.",
-                        "mandatory": true
-                    }
-                ,   "colorValue": {
-                        "type": "string",
-                        "title": "Color value",
-                        "description": "The color CSS value - must be a valid CSS color. ",
-                        "mandatory": true
-                    }
-                }
-            },
-
-
-            "default":[
-                {
-                    "paletteId": "default",
-                    "colorName": "black",
-                    "colorValue": "#212121"
-                }
-                ,{
-                    "paletteId": "default",
-                    "colorName": "gray",
-                    "colorValue": "#9c9c9c"
-                }
-                ,{
-                    "paletteId": "default",
-                    "colorName": "grey",
-                    "colorValue": "#9c9c9c"
-                }
-                ,{
-                    "paletteId": "default",
-                    "colorName": "white",
-                    "colorValue": "#fff"
-                }
-                ,{
-                    "paletteId": "default",
-                    "colorName": "brown",
-                    "colorValue": "#804d3b"
-                }
-                ,{
-                    "paletteId": "default",
-                    "colorName": "beige",
-                    "colorValue": "#eedcbe"
-                }
-                ,{
-                    "paletteId": "default",
-                    "colorName": "blue",
-                    "colorValue": "#0f5da3"
-                }
-                ,{
-                    "paletteId": "default",
-                    "colorName": "light-blue",
-                    "colorValue": "#8fdeec"
-                }
-                ,{
-                    "paletteId": "default",
-                    "colorName": "purple",
-                    "colorValue": "#9b4a97"
-                }
-                ,{
-                    "paletteId": "default",
-                    "colorName": "lilac",
-                    "colorValue": "#ceadd0"
-                }
-                ,{
-                    "paletteId": "default",
-                    "colorName": "red",
-                    "colorValue": "#f63440"
-                }
-                ,{
-                    "paletteId": "default",
-                    "colorName": "pink",
-                    "colorValue": "#ffa5c1"
-                }
-                ,{
-                    "paletteId": "default",
-                    "colorName": "orange",
-                    "colorValue": "#ff5200"
-                }
-                ,{
-                    "paletteId": "default",
-                    "colorName": "peach",
-                    "colorValue": "#ffcc8c"
-                }
-                ,{
-                    "paletteId": "default",
-                    "colorName": "yellow",
-                    "colorValue": "#ffde00"
-                }
-                ,{
-                    "paletteId": "default",
-                    "colorName": "light-yellow",
-                    "colorValue": "#ffee7a"
-                }
-                ,{
-                    "paletteId": "default",
-                    "colorName": "green",
-                    "colorValue": "#00af43"
-                }
-                ,{
-                    "paletteId": "default",
-                    "colorName": "lime",
-                    "colorValue": "#c3d600"
-                }
-                ,{
-                    "paletteId": "default",
-                    "colorName": "teal",
-                    "colorValue": "#00ab95"
-                }
-                ,{
-                    "paletteId": "default",
-                    "colorName": "aqua",
-                    "colorValue": "#28e1c5"
-                }
-                ,{
-                    "paletteId": "default",
-                    "colorName": "burgandy",
-                    "colorValue": "#9c0633"
-                }
-                ,{
-                    "paletteId": "default",
-                    "colorName": "navy",
-                    "colorValue": "#002d5d"
-                }
-            ]
-        }
-    ,   "lightColors": {
-            "group": "catalog",
-            "title": "Light colors",
-            "docRef": "section_4701517042",
-            "description": "The light colors in the color palette",
-            "type": "array",
-            "items": {
-                "type": "string",
-                "title": "Color Name"
-            },
-            "default": [
-               "white"
-            ]
-        }
-    ,   "customExclude": {
-            "type": "string",
-            "group": "catalog",
-            "title": "Facets to Exclude",
-            "description": "Enter the field ids of facet fields you don't want to show.",
-            "default": "custitem_feed_featured_product,onspecial"
         }
     }
-
-
 }
