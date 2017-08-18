@@ -18,7 +18,7 @@ define(
 {
 	'use strict';
 	
-	_.extend( Categories.prototype, {
+	_.extend( Categories, {
 
 		moreCategories: []
 
@@ -99,8 +99,6 @@ define(
             });
 
             return result;
-
-
         }
 
 	});
