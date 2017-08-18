@@ -1,21 +1,14 @@
 {
 	"type": "object",
 
-    "group": {
-        "id": "catalog",
-        "title": "Shopping Catalog",
-        "docRef": "bridgehead_4667037093",
-        "description": "Commerce Catalog - search. pdp, facets, etc"
-    },
-
     "subtab": {
-        "id": "facetsSeoLimits",
+        "id": "facets",
         "group": "catalog",
-        "title": "Facets SEO",
-        "docRef": "bridgehead_4667037495",
-        "description": "Facets SEO"
+        "title": "Facets",
+        "docRef": "bridgehead_4393383668",
+        "description": "Facets"
     },
-
+    
     "resource": {
         "template": {
             "facet-navigation-item": [
@@ -32,34 +25,18 @@
     },
 
     "properties": {
-
-        "facetsSeoLimits.numberOfFacetsGroups": {
-            "type": "string",
+        "facetsAsUrlParameters": {
             "group": "catalog",
-            "subtab": "facetsSeoLimits",
-            "title": "Number of Facets groups",
-            "description": "Enter a number to specify how many facet groups are indexed."
-        },
-         "facetsSeoLimits.numberOfFacetsValues": {
-            "type": "string",
-            "group": "catalog",
-            "subtab": "facetsSeoLimits",
-            "title": "Number of Facets Values",
-            "description": "Enter a number to specify how many multi-facet groups are grouped together."
-        },
-        "facetsSeoLimits.options": {
-            "type": "string",
-            "group": "catalog",
-            "subtab": "facetsSeoLimits",
-            "title": "Options",
-            "description": " Which options will be indexed, if you omit one here, and it's present in the url it will not be indexed",
-            "enum": ["order", "page", "show", "display", "keywords"],
-            "default": ["page", "keywords"],
-            "multiselect": true
+            "subtab": "facets",
+            "type": "boolean",
+            "title": "Facets as URL Parameters",
+            "description": "Check this box to treat all facets as URL query string parameters to help optimize searches. Otherwise, all facets will be part of the URL path unless something else is specified in the individual Facet record.",
+            "default": false
         },
 
         "facets": {
             "group": "catalog",
+            "subtab": "facets",
             "type": "array",
             "title": "Facets",
             "docRef": "bridgehead_4393383668",
@@ -150,6 +127,18 @@
                         "description": "The function that shows the value in the UI, use 'default' if not sure. Js Code: Facets.js > facetConfigTranslators",
                         "default": "default",
                         "enum": ["default", "currency", "quantity"]
+                    },
+                    "isParameter": {
+                        "type": "boolean",
+                        "title": "Is URL Parameter?",
+                        "description": "If true, the facet will interpreted as an URL query string parameter. If false, the facet will be part of the URL path. It will take precendence over the Facets as URL Parameters property.",
+                        "default": false
+                    },
+                    "max": {
+                        "type": "number",
+                        "title": "Max",
+                        "description": "For multi select facets, it will limit the number of options and show a \"See more\". Particularly useful for B2B - or facets with lots of options",
+                        "default": 4
                     }
                 }
             },
@@ -164,7 +153,9 @@
                     "uncollapsible": true,
                     "titleToken": "Price $(1) - $(0)",
                     "titleSeparator": ", ",
-                    "parser": "currency"
+                    "parser": "currency",
+                    "isParameter": true,
+                    "max": 4
                 }
 
             ]
