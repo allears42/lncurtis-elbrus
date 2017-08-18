@@ -9,6 +9,7 @@ define(
 	,	'ItemRelations.Correlated.Collection'
 	,	'ItemRelations.RelatedItem.View'
 	,	'Backbone.CollectionView'
+	,	'SC.Configuration'
 
 	,	'item_relations_correlated.tpl'
 	,	'item_relations_row.tpl'
@@ -22,6 +23,7 @@ define(
 	,	ItemRelationsCorrelatedCollection
 	,	ItemRelationsRelatedItemView
 	,	BackboneCollectionView
+	,	Configuration
 
 	,	item_relations_correlated_tpl
 	,	item_relations_row_tpl
