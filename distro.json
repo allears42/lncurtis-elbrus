@@ -193,7 +193,6 @@
         "overrides/Override.OrderHistory": "5.0.0",
         "overrides/Override.OrderWizard.Module.PaymentMethod": "4.0.0",
 
-        "extensions/ApplicationSkeleton.Extension": "2.4.0",
         "extensions/Backbone.CollectionView.Extension": "1.2.0",
         "extensions/Backbone.FormView.Extension": "1.2.0",
         "extensions/Cart.Extension": "4.0.0",
@@ -296,7 +295,6 @@
                     "FacetContent",
                     "LinkHierarchy",
 
-                    "ApplicationSkeleton.Extension",
                     "Backbone.CollectionView.Extension",
                     "Backbone.FormView.Extension",
                     "Cart.Extension",
@@ -433,7 +431,6 @@
                     "Session.Extension",
                     "LinkHierarchy",
 
-                    "ApplicationSkeleton.Extension",
                     "Backbone.CollectionView.Extension",
                     "Backbone.FormView.Extension",
                     "Cart.Extension",
@@ -566,7 +563,6 @@
                     "Backbone.FormView.Extension",
                     "Session.Extension",
 
-                    "ApplicationSkeleton.Extension",
                     "Backbone.CollectionView.Extension",
                     "Backbone.FormView.Extension",
                     "Cart.Extension",

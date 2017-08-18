@@ -15,5 +15,8 @@
         "configuration": [
             "Configuration/*.json"
         ]
+    },
+    "overrides": {
+        "suitecommerce/ApplicationSkeleton@2.4.0/JavaScript/ApplicationSkeleton.Layout.js": "JavaScript/ApplicationSkeleton.Layout.js"
     }
 }
