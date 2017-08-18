@@ -1,8 +1,6 @@
 /*
-	© 2016 NetSuite Inc.
-	User may not copy, modify, distribute, or re-bundle or otherwise make available this code;
-	provided, however, if you are an authorized user with a NetSuite account or log-in, you
-	may use this code subject to the terms that govern your access and use.
+	© 2017 JHM Services
+	Add closeModalOnSuccess property so that modal can be set to not automatically close
 */
 
 /*
@@ -32,8 +30,7 @@ define('Backbone.View.saveForm'
 		// @param {HTMLEvent} e @param {Backbone.Model} model @param {Object} props properties to pass to model.save()
 		// @return {jQuery.Deferred}
 		// @obsolete Please use @?ref Backbone.FormView
-
-		, saveForm: function (e, model, props)
+	,	saveForm: function (e, model, props)
 		{
 			e.preventDefault();
 

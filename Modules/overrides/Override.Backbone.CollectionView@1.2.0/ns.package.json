@@ -15,5 +15,8 @@
         "configuration": [
             "Configuration/*.json"
         ]
+    },
+    "overrides": {
+        "suitecommerce/Backbone.CollectionView@1.2.0/JavaScript/Backbone.CollectionView.js": "JavaScript/Backbone.CollectionView.js"
     }
 }
