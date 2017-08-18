@@ -10,7 +10,8 @@ define(
     ,   'Backbone.CompositeView'
     ,   'Backbone.FormView'
     ,   'Cart.Summary.View'
-
+		
+	,	'GlobalViews.Message.View'
 	,	'underscore'
 	]
 ,	function(
@@ -19,6 +20,7 @@ define(
     ,   BackboneCompositeView
     ,   BackboneFormView
     ,   CartSummaryView
+    ,   GlobalViewsMessageView
 
 	, 	_
 	)

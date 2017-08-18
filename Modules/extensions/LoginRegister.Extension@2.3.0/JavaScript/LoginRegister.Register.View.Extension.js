@@ -80,7 +80,7 @@ define(
                                 ,	type: 'warning'
                                 ,	closable: false
                             })
-                                , el = self.$('.login-register-register-form [data-type="alert-placeholder"]');
+                            ,   el = self.$('.login-register-register-form [data-type="alert-placeholder"]');
 
                             //el.append(global_view_message.render().$el.html());
                             //We've got to disable passwordProtectedSite and loginToSeePrices features if customer registration is disabled.

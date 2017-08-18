@@ -55,7 +55,6 @@ define(
                     seoURL: window.location.protocol + '//' + window.location.hostname + this.model.get('_url')
                 ,	minQuantity: parseInt(this.model.get('_minimumQuantity'), 10)
                 ,	rating: this.model.get('_rating')
-                ,	canAddToCart: Configuration.addToCartFromFacetsView && this.model.isReadyForCart() && this.model.get('_priceCallFor') == false
                 ,	stockInfo: this.model.getStockInfo()
                 ,	sku: this.model.get('_sku')
                 ,	storeDescription: this.model.get('storedescription')

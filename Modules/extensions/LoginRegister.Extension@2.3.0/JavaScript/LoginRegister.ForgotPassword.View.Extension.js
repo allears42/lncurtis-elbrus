@@ -6,13 +6,15 @@ define(
     'LoginRegister.ForgotPassword.View.Extension'
     ,	[
         'LoginRegister.ForgotPassword.View'
-
+		
+		,	'GlobalViews.Message.View'
         ,	'underscore'
 
     ]
     ,	function(
         LoginRegisterForgotPasswordView
 
+        , 	GlobalViewsMessageView
         , 	_
 
     )

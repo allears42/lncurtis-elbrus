@@ -7,12 +7,24 @@ define(
 	'Facets.Browse.View.Extension'
 ,	[
 		'Facets.Browse.View'
-
+		
+	,	'Facets.FacetedNavigation.View'
+	,	'LiveOrder.Model'
+	,	'GlobalViews.Message.View'
+	,	'SC.Configuration'
+	,	'Tracker'
+	,	'jQuery'
 	,	'underscore'
 	]
 ,	function(
 		FacetsBrowseView
 
+	, 	FacetsFacetedNavigationView
+	, 	LiveOrderModel
+	, 	GlobalViewsMessageView
+	, 	Configuration
+	, 	Tracker
+	, 	jQuery
 	, 	_
 	)
 {
@@ -27,17 +39,19 @@ define(
         ,	'click [data-action="toggle-filters"]': 'toggleFilters'
         ,   'contextmenu img': 'preventContextMenu'
     	})
-
+	
+		// custom function to prevent people trying to save images
 	,   preventContextMenu: function (e)
 		{
 			e.preventDefault();
             console.error('You\'re attempting to access an image that is copyrighted by LNCurtis.com');
             return false;
         }
-
+	
+    // fixed for category being relative URL :/
 	,	getPath: function ()
         {
-            // fixed for category being relative URL :/
+            
             var canonical = window.location.protocol + '//' + window.location.hostname;
 
             if (this.model.get('category'))
@@ -52,7 +66,7 @@ define(
                 return !~index_of_query ? canonical : canonical.substring(0, index_of_query);
             }
         }
-
+		// this overrides our settings in configuration so override the function to ignore
 	,	setOptionsTranslator: function (translator)
         {
             /*if (translator.options.display === 'grid' && _.isPhoneDevice())
@@ -60,165 +74,6 @@ define(
                 translator.options.display = 'table';
             }*/
             return translator;
-        }
-
-	,	showContent: function ()
-        {
-            // If its a free text search it will work with the title
-            var self = this
-                ,	keywords = this.translator.getOptionValue('keywords')
-                ,	resultCount = this.model.get('total');
-
-            if (keywords)
-            {
-                keywords = decodeURIComponent(keywords);
-
-                if (resultCount > 0)
-                {
-                    this.subtitle =  resultCount > 1 ? _('Results for "$(0)"').translate(keywords) : _('Result for "$(0)"').translate(keywords);
-                }
-                else
-                {
-                    this.subtitle = _('We couldn\'t find any items that match "$(0)"').translate(keywords);
-                }
-            }
-
-            this.totalPages = Math.ceil(resultCount / this.translator.getOptionValue('show'));
-
-            this.application.getLayout().showContent(this).done(function ()
-            {
-                Tracker.getInstance().trackProductList(self.model.get('items'));
-                self.render();
-
-                if(jQuery.fn.scPush)
-                {
-                    self.$el.find('[data-action="pushable"]').scPush({target: 'tablet'});
-                }
-            });
-        }
-
-	,	changeQ: function(e)
-        {
-            e.preventDefault();
-            var options = jQuery(e.target).closest('form').serializeObject()
-                ,	model = this.model.get('items').get(options.item_id)
-                ,   stock_level = jQuery(e.target).attr("max");
-
-            // custom limit quantity
-            if(typeof stock_level !== 'undefined' && parseInt(stock_level) > 0) {
-
-                if ( parseInt(options.quantity) > parseInt(stock_level)){
-                    options.quantity = stock_level;
-
-                    var global_view_message = new GlobalViewsMessageView({
-                        message: "<span>Limited quantities, only " + stock_level +" available.</span>"
-                        ,	type: 'warning'
-                        ,	closable: false
-                    });
-
-
-                    jQuery(e.target).closest('form').find('[data-type="alert-placeholder-module"]').html(
-                        global_view_message.render().$el.html()
-                    );
-
-                    jQuery(e.target).val(stock_level)
-                }
-            }
-
-
-            // Updates the quantity of the model
-            model.setOption('quantity', options.quantity);
-            jQuery(e.target).closest('.item-cell').find('[itemprop="price"]').html(model.getPrice().price_formatted);
-        }
-
-	,	addToCart: function (e)
-        {
-            e.preventDefault();
-
-            var options = jQuery(e.target).serializeObject()
-                ,	model = this.model.get('items').get(options.item_id);
-
-            // Updates the quantity of the model
-            model.setOption('quantity', options.quantity);
-
-            if (model.isReadyForCart())
-            {
-                var self = this
-				,	cart = this.cart
-				,	layout = this.application.getLayout()
-				,	cart_promise = jQuery.Deferred()
-				,	error_message = _('Sorry, there is a problem with this Item and can not be purchased at this time. Please check back later.').translate()
-
-				,   stock_level = model.get("_stock", true)
-				,   allowBackorders = model.get("_allowBackorders", true);
-
-                // wrap in a load cart promise to make sure we have a live instance of the order to check against inventory
-                LiveOrderModel.loadCart().done(function () {
-                    var cartInstance = LiveOrderModel.getInstance()
-                        , lines = cart.get('lines');
-
-                    var itemCart = SC.Utils.findItemInCart(model, cart) // TODO: resolve error with dependency circular.
-                        ,	total = itemCart && itemCart.get('quantity') || 0;
-
-                    if ((total + options.quantity) > stock_level && !allowBackorders)
-                    {
-                        options.quantity = (stock_level - total > 0) ? stock_level - total : 0;
-                    }
-
-                    // reset quantity after calculations take place
-                    model.setOption('quantity', options.quantity);
-
-                    if(options.quantity === 0) {
-                        // do nothing
-                        var global_view_message = new GlobalViewsMessageView({
-                            message: "<span>Limited quantities, only " + stock_level +" available.</span>"
-                            ,	type: 'warning'
-                            ,	closable: false
-                        });
-
-
-                        jQuery(e.target).closest('form').find('[data-type="alert-placeholder-module"]').html(
-                            global_view_message.render().$el.html()
-                        );
-                    }
-                    else {
-                        if (model.cartItemId) {
-                            cart_promise = cart.updateItem(model.cartItemId, model).done(function () {
-                                if (cart.getLatestAddition()) {
-                                    if (self.$containerModal) {
-                                        self.$containerModal.modal('hide');
-                                    }
-
-                                    if (layout.currentView instanceof require('Cart').Views.Detailed) {
-                                        layout.currentView.showContent();
-                                    }
-                                }
-                                else {
-                                    self.showError(error_message);
-                                }
-                            });
-                        }
-                        else {
-                            cart_promise = cart.addItem(model).done(function () {
-                                if (cart.getLatestAddition()) {
-                                    layout.showCartConfirmation();
-                                }
-                                else {
-                                    self.showError(error_message);
-                                }
-                            });
-                        }
-
-                        // disalbes the btn while it's being saved then enables it back again
-                        if (e && e.currentTarget) {
-                            jQuery('input[type="submit"]', e.currentTarget).attr('disabled', true);
-                            cart_promise.always(function () {
-                                jQuery('input[type="submit"]', e.currentTarget).attr('disabled', false);
-                            });
-                        }
-                    }
-                });
-            }
         }
 
 	,   getOrderedFacets: function (facets_to_show)
@@ -247,7 +102,7 @@ define(
 					, exclude = _.map((options.excludeFacets || '').split(','), function (facet_id_to_exclude) {
 					return jQuery.trim(facet_id_to_exclude);
 				})
-					, customExcludeConfig = Configuration.get('customExclude', '')
+					, customExcludeConfig = Configuration.get('excludedFacets', '')
 					, customExclude = _.map((customExcludeConfig).split(','), function (facet_id_to_exclude) {
 					return jQuery.trim(facet_id_to_exclude);
 				})

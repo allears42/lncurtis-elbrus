@@ -22,7 +22,7 @@
         "suitecommerce/BackboneExtras": "2.4.0",
         "suitecommerce/Balance": "2.1.2",
         "suitecommerce/BaseSassStyleguide": "1.0.2",
-        "themes/Firefighter@1.0.0/BaseSassStyles": "2.0.0",
+        "themes/BaseSassStyles.Firefighter": "2.0.0",
         "suitecommerce/BootstrapExtras": "2.1.0",
         "suitecommerce/BrontoIntegration": "1.1.0",
         "suitecommerce/Cart": "4.0.0",
@@ -820,7 +820,7 @@
                             ]
                         },
                         {
-                            "module": "BaseSassStyles",
+                            "module": "BaseSassStyles.Firefighter",
                             "include": [
                                 "main-variables",
                                 "main-atoms",
@@ -929,7 +929,7 @@
                             ]
                         },
                         {
-                            "module": "BaseSassStyles",
+                            "module": "BaseSassStyles.Firefighter",
                             "include": [
                                 "main-variables"
                             ]
@@ -955,7 +955,7 @@
                             ]
                         },
                         {
-                            "module": "BaseSassStyles",
+                            "module": "BaseSassStyles.Firefighter",
                             "include": [
                                 "main-atoms",
                                 "main-molecules",
@@ -1099,7 +1099,7 @@
                             ]
                         },
                         {
-                            "module": "BaseSassStyles",
+                            "module": "BaseSassStyles.Firefighter",
                             "include": [
                                 "main-variables",
                                 "main-atoms",
