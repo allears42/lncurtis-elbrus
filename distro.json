@@ -193,6 +193,7 @@
         "overrides/Override.MyAccountApplication": "3.1.0",
         "overrides/Override.OrderHistory": "5.0.0",
         "overrides/Override.OrderWizard.Module.PaymentMethod": "4.0.0",
+        "overrides/Override.ShoppingApplication": "4.0.0",
 
         "extensions/Backbone.FormView.Extension": "1.2.0",
         "extensions/Cart.Extension": "4.0.0",
@@ -289,8 +290,6 @@
                     "Newsletter",
                     "ProductDetailToQuote",
                     "StoreLocator",
-                    "Backbone.FormView.Extension",
-                    "Session.Extension",
                     "CustomerServiceForm",
                     "FacetContent",
                     "LinkHierarchy",
@@ -311,7 +310,8 @@
                     "LoginRegister.Extension",
                     "NavigationHelper.Extension",
                     "OrderHistory.Extension",
-                    "Overview.Extension"
+                    "Overview.Extension",
+                    "Session.Extension"
 
                 ],
                 "amdclean": true,

@@ -27,6 +27,8 @@ define(
     {
         'use strict';
         
+        
+        
 	    return {
 		    FacetsBrowseViewExtension: FacetsBrowseViewExtension
 		    ,	FacetsBrowseCategoryHeadingViewExtension: FacetsBrowseCategoryHeadingViewExtension

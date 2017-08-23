@@ -34,7 +34,7 @@ define(
 				, selected_values = this.options.translator.getFacetValue(facet_id) || []
 				, show_remove_link = !!selected_values.length
 				, display_values
-				, extra_values
+				, extra_values = []
 				, max_items;
 			
 			if (facet_config.behavior !== 'range') {

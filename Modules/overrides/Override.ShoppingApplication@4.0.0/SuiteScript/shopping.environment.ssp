@@ -1,5 +1,5 @@
 <%/*
-	© 2016 NetSuite Inc.
+	© 2017 NetSuite Inc.
 	User may not copy, modify, distribute, or re-bundle or otherwise make available this code;
 	provided, however, if you are an authorized user with a NetSuite account or log-in, you
 	may use this code subject to the terms that govern your access and use.
@@ -18,7 +18,8 @@
 	,	Utils
 	,	Application
 	,	CMS
-	,	ReleaseMetadata;
+	,	ReleaseMetadata
+	,	session;
 
 
 	try {
@@ -30,13 +31,14 @@
 		siteId = SiteSettings.siteid;
 		Language = Environment.currentLanguage && Environment.currentLanguage.locale || '';
 		Currency = Environment.currentCurrency && Environment.currentCurrency.code || '';
+		session = require('SC.Models.Init').session;
 
 		// The use of CDS and CMS are mutually exclusive, if you use CMS you can't use CDS, or if you use CDS you can't use CMS
 		if (SC.Configuration.cms.useCMS)
 		{
 			try
 			{
-				var baseUrl = request.getURL().match(/(^https?:\/\/[^\/]+)/i)[0];
+				var baseUrl = Utils.trim(SC.Configuration.cms.baseUrl || '') || request.getURL().match(/(^https?:\/\/[^\/]+)/i)[0];
 				CMS = require('CMSadapter.Model').getPages(baseUrl);
 			}
 			catch(e)
@@ -153,6 +155,8 @@ SC.ENVIRONMENT.REVIEWS_CONFIG = {
 <% if (SC.Configuration.categories) { %>
 	SC.CATEGORIES = <%= JSON.stringify(require('Categories.Model').getCategoryTree(SC.Configuration.categories.menuLevel)) %>;
 <% } %>
+//Information generated at compilation time
+SC.ENVIRONMENT.BuildTimeInf = <%= JSON.stringify(BuildTimeInf || {}) %>
 
 SC.ENVIRONMENT.RELEASE_METADATA = <%= JSON.stringify(ReleaseMetadata || {}) %>;
 
@@ -171,7 +175,7 @@ document.documentElement.className = SC.ENVIRONMENT.isTouchEnabled ? 'touch' : '
 
 	if (!SC.ENVIRONMENT.baseUrl)
 	{
-		SC.ENVIRONMENT.baseUrl = '<%=  session.getAbsoluteUrl('shopping', '/{{file}}') %>';
+		SC.ENVIRONMENT.baseUrl = '<%=  session.getAbsoluteUrl('/{{file}}') %>';
 	}
 <% } %>
 

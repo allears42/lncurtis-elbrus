@@ -21,10 +21,12 @@ define(
 		_.extend(CartConfirmationViewExtension.prototype, {
 			
 			 getContext: _.wrap(CartConfirmationViewExtension.prototype.getContext, function (fn) {
+			 
 				var returnVariable = fn.apply(this, _.toArray(arguments).slice(1))
-				,   itemOptions = this.line.get('options')
+				,   item = this.model.get('item')
+				,   itemOptions = item.get('options')
 				,   customImage = _.first(_.filter(itemOptions, function (option) {
-					return option.id === "CUSTCOL_SC_ITEM_IMAGE"
+					return option && option.id === "CUSTCOL_SC_ITEM_IMAGE"
 				}));
 				
 				// add custom parameters to return variable

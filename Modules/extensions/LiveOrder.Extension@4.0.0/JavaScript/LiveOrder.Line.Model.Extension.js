@@ -21,7 +21,7 @@ define(
 
         _.extend( LiveOrderLineModel.prototype, {
 
-            createFromProduct: function( product )
+            /*createFromProduct: function( product )
             {
                 var line = new LiveOrderLineModel(product.toJSON())
                     ,	item = product.get('item')
@@ -73,7 +73,7 @@ define(
                 }
 
                 return line;
-            }
+            }*/
 
         });
 

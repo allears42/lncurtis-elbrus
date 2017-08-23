@@ -1,12 +1,13 @@
 <%/*
-	© 2016 NetSuite Inc.
+	© 2017 NetSuite Inc.
 	User may not copy, modify, distribute, or re-bundle or otherwise make available this code;
 	provided, however, if you are an authorized user with a NetSuite account or log-in, you
 	may use this code subject to the terms that govern your access and use.
 */%>
 
 <%
-	var password_protected_site = session.getSiteSettings(['siteloginrequired']).siteloginrequired==='T';
+	var session = require('SC.Models.Init').session
+	,	password_protected_site = session.getSiteSettings(['siteloginrequired']).siteloginrequired==='T';
 
 	if (password_protected_site)
 	{
@@ -34,14 +35,14 @@
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Bitter:400,700" rel="stylesheet">
 	<!--[if !IE]><!-->
-		<link rel="stylesheet" href="<%= session.getAbsoluteUrl("css/shopping.css') %>?t={{timestamp}}">
+	<link rel="stylesheet" href="<%= session.getAbsoluteUrl(Application.getNonManageResourcesPathPrefix() + 'css/shopping.css') %>?t={{timestamp}}">
 	<!--<![endif]-->
 
 	<!--[if lte IE 9]>
 	{{#each cssnumbers}}
-		<link rel="stylesheet" href="<%= session.getAbsoluteUrl('css_ie/shopping_{{this}}.css') %>?t={{../timestamp}}">
+		<link rel="stylesheet" href="<%= session.getAbsoluteUrl(Application.getNonManageResourcesPathPrefix() + 'css_ie/shopping_{{this}}.css') %>?t={{../timestamp}}">
 	{{/each}}
-		<link rel="stylesheet" href="<%= session.getAbsoluteUrl('css_ie/shopping.css') %>"?t={{timestamp}}>
+		<link rel="stylesheet" href="<%= session.getAbsoluteUrl(Application.getNonManageResourcesPathPrefix() + 'css_ie/shopping.css') %>?t={{timestamp}}">
 	<![endif]-->
 
 	<!--[if lt IE 9]>
@@ -53,7 +54,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 	<meta name="robots" content="nofollow,noindex">
-	<link rel="shortcut icon" href="<%= session.getAbsoluteUrl("img/ln-favicon.ico") %>" />
+	<link rel="shortcut icon" href="<%= session.getAbsoluteUrl(Application.getNonManageResourcesPathPrefix() + "img/favicon-ln.ico") %>" />
 	<title>Shopping</title>
 
 </head>
@@ -161,12 +162,17 @@
 {{/js}}
 </script>
 
-<script src="<%= session.getAbsoluteUrl( "shopping.environment.ssp?lang=" + Language + "&cur=" + Currency + "&X-SC-Touchpoint=shopping") %>&t={{timestamp}}" ></script>
-<script src="<%= session.getAbsoluteUrl( "languages/shopping_" + Language + ".js") %>?t={{timestamp}}"></script>
-<script src="<%= session.getAbsoluteUrl( "javascript/shopping.js") %>?t={{timestamp}}"></script>
+<script src="<%= session.getAbsoluteUrl("shopping.environment.ssp?lang=" + Language + "&cur=" + Currency + "&X-SC-Touchpoint=shopping") %>&t={{timestamp}}" ></script>
+<script src="<%= session.getAbsoluteUrl("languages/shopping_" + Language + ".js") %>?t={{timestamp}}"></script>
+
+
+{{#if distro.isSCLite}}
+<script src="<%= session.getAbsoluteUrl(Application.getNonManageResourcesPathPrefix() + "shopping-templates.js") %>?t={{timestamp}}"></script>
+{{/if}}
+
+<script src="<%= session.getAbsoluteUrl("javascript/shopping.js") %>?t={{timestamp}}"></script>
 
 <% if (SC.Configuration.cms.useCMS) { %>
-	<script src="/cms/2/assets/js/postframe.js"></script>
 	<script src="/cms/2/cms.js"></script>
 <% } %>
 

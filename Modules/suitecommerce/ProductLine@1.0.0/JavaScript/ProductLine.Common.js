@@ -74,6 +74,7 @@ define(
 		//@return {void}
 	,	extendOptionsFromItem: function extendOptionsFromItem (item, productline)
 		{
+			//todo: why is this failing?
 			// Here we make sure that the options collection of the line always
 			// (event when the line is loaded from an already created transaction via SuiteScript) have all the properties
 			item.get('options').each(function (item_option)
@@ -84,6 +85,7 @@ define(
 				var item_option_cartId = item_option.get('cartOptionId').toLowerCase()
 				,	productline_option = productline.get('options').find(function (product_option)
 					{
+						console.log(product_option, item_option_cartId);
 						return product_option.get('cartOptionId').toLowerCase() === item_option_cartId;
 					});
 

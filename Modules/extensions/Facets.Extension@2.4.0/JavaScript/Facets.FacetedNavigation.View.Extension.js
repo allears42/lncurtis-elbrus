@@ -6,17 +6,24 @@ define(
 	'Facets.FacetedNavigation.View.Extension'
 ,	[
 		'Facets.FacetedNavigation.View'
+    ,   'Facets.FacetedNavigationItem.View'
     ,   'Profile.Model'
     ,   'Backbone'
+    ,   'Backbone.CollectionView'
     ,   'Backbone.CompositeView'
 
+	,	'SC.Configuration'
 	,	'underscore'
 	]
 ,	function(
         FacetsFacetedNavigationView
+    ,   FacetsFacetedNavigationItemView
     ,   ProfileModel
 	,   Backbone
+	,   BackboneCollectionView
     ,   BackboneCompositeView
+
+	, 	Configuration
 
 	, 	_
 	)

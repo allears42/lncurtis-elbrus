@@ -22,7 +22,7 @@ define(
 
        getContext: _.wrap( HeaderMiniCartView.prototype.getContext, function(fn)
         {
-            var returnVariable = fn.apply(self, _.toArray(arguments).slice(1));
+            var returnVariable = fn.apply(this, _.toArray(arguments).slice(1));
 
             _.extend( returnVariable , {
                 showItemCount: this.itemsInCart > 0
