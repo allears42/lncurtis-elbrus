@@ -73,7 +73,7 @@ define(
                 ,   carouselImages: carouselImages
                 });
 
-				debugger;
+				//debugger;
 
 				return returnVariable
 			})

@@ -4,14 +4,19 @@
 */
 
 define(
-    'Categories.Extension'
-    , [
-        'Categories'
-    ,   'underscore'
-    ]
-    , function (
+	'Categories.Extension'
+,	[
+		'Categories'
+
+	,	'SC.Configuration'
+	,	'underscore'
+	]
+,	function(
         Categories
-    ,   _
+
+	, 	Configuration
+
+	, 	_
     )
 
     {

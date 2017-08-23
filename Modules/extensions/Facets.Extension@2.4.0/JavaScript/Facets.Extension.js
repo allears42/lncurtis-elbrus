@@ -12,7 +12,6 @@ define(
 		,	'Facets.FacetedNavigationItem.View.Extension'
 		,	'Facets.FacetedNavigationItemCategory.View.Extension'
 		,	'Facets.ItemCell.View.Extension'
-		,	'Facets.Extension'
 		,	'Facets.Translator.Extension'
     ]
     ,	function(
@@ -23,7 +22,6 @@ define(
 		,	FacetsFacetedNavigationItemViewExtension
 		,	FacetsFacetedNavigationItemCategoryViewExtension
 		,	FacetsItemCellViewExtension
-		,	FacetsExtension
 		,	FacetsTranslatorExtension
     )
     {
@@ -36,7 +34,6 @@ define(
 		    ,	FacetsFacetedNavigationItemViewExtension: FacetsFacetedNavigationItemViewExtension
 		    ,	FacetsFacetedNavigationItemCategoryViewExtension: FacetsFacetedNavigationItemCategoryViewExtension
 		    ,	FacetsItemCellViewExtension: FacetsItemCellViewExtension
-		    ,	FacetsExtension: FacetsExtension
 		    ,	FacetsTranslatorExtension: FacetsTranslatorExtension
 		
 	    }
