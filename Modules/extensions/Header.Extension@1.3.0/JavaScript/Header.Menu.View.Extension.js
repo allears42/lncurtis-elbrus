@@ -26,10 +26,14 @@ define(
 
 	_.extend(HeaderMenuView.prototype, {
 
-		events: {
-			'click [data-toggle="categories-menu"] > a': 'toggleMenu'
-			, 'click .header-menu-close-menu': 'closeMenuClick'
-		}
+        events: {
+            'click [data-toggle="categories-menu"] > a': 'toggleMenu'
+        ,	'click .header-menu-close-menu': 'closeMenuClick'
+        /*
+        ,   'mouseenter [data-toggle="categories-menu"]': 'menuOpen'
+        ,   'mouseleave [data-toggle="categories-menu"]': 'menuClose'
+        */
+        }
 
 	,   closeMenuClick: function (e)
 		{
@@ -58,7 +62,7 @@ define(
 
     ,   childViews: _.extend( HeaderMenuView.prototype.childViews, {
 
-        'HelpLinks': function()
+            'HelpLinks': function()
             {
                 return new LinkHierarchyView({
                     childViewOptions: {
@@ -104,14 +108,14 @@ define(
                 // @property {Array<NavigationData>} navigationItems
                 categories: Configuration.navigationData || []
                 // @property {Boolean} showExtendedMenu
-                ,	showExtendedMenu: !is_loading && is_loged_in
+            ,	showExtendedMenu: !is_loading && is_loged_in
                 // @property {Boolean} showLanguages
-                ,	showLanguages: show_languages
+            ,	showLanguages: show_languages
                 // @property {Boolean} showCurrencies
-                ,	showCurrencies: show_currencies
+            ,	showCurrencies: show_currencies
 
-                ,   catalogsLink : Configuration.get("header.catalogsLink", "#")
-                ,   agenciesLink : Configuration.get("header.agenciesLink", "#")
+            ,   catalogsLink : Configuration.get("header.catalogsLink", "#")
+            ,   agenciesLink : Configuration.get("header.agenciesLink", "#")
 
             };
         }

@@ -40,10 +40,10 @@ define(
 
                 product.get('options').each(function (product_option)
                 {
-                    var line_option = line.get('options').findWhere({cartOptionId: product_option.get('cartOptionId')});
-                    line_option.attributes = _.extend({}, product_option.attributes, line_option.attributes);
 
                     //todo@shelby: is this correct for the migration of: "LiverOrder.Model@3.0.0 from Vinson?
+                    var line_option = line.get('options').findWhere({cartOptionId: product_option.get('cartOptionId')});
+                    line_option.attributes = _.extend({}, product_option.attributes, line_option.attributes);
 
                     var image = _.first(item.get('_images'))
                     ,   imageURL = image.url

@@ -35,16 +35,6 @@ define(
                     showExtendedMenu: !is_loading && is_loged_in
                     // @property {Boolean} showLoginMenu
                     ,	showLoginMenu: !is_loading && !is_loged_in
-                    // @property {Boolean} showLoadingMenu
-                    ,	showLoadingMenu: is_loading
-                    // @property {Boolean} showMyAccountMenu
-                    ,	showMyAccountMenu: !!this.options.showMyAccountMenu
-                    // @property {String} displayName
-                    ,	displayName: profile.get('firstname') || profile.get('companyname')
-                    // @property {Boolean} showLogin
-                    ,	showLogin: Configuration.getRegistrationType() !== 'disabled'
-                    // @property {Boolean} showRegister
-                    ,	showRegister: Configuration.getRegistrationType() === 'optional' || Configuration.getRegistrationType() === 'required'
                 };
             }
 

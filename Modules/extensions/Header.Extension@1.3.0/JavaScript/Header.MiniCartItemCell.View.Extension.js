@@ -29,26 +29,14 @@ define(
 
         _.extend( HeaderMiniCartItemCellView.prototype, {
 
-            events:
-			{
+            events: _.extend( HeaderMiniCartItemCellView.prototype.events,
+            {
                 'contextmenu img': 'preventContextMenu'
-            }
+            })
 
 		,	childViews: _.extend( HeaderMiniCartItemCellView.prototype.childViews,
 			{
-                'Item.SelectedOptions': function ()
-                {
-                    return new BackboneCollectionView({
-                        collection: new Backbone.Collection(this.model.get('item').getPosibleOptions())
-                        ,	childView: TransactionLineViewsOptionsSelectedView
-                        ,	viewsPerRow: 1
-                        ,	childViewOptions: {
-                            cartLine: this.model
-                        }
-                    });
-                }
-
-                , 'Item.Stock': function ()
+                'Item.Stock': function ()
                 {
                     return new ProductLineStockView({
 						model: this.model.get('item'),
@@ -59,18 +47,10 @@ define(
                 }
             })
 
-		,   preventContextMenu: function (e)
-			{
-                e.preventDefault();
-                console.error('You\'re attempting to access an image that is copyrighted by LNCurtis.com');
-                return false;
-            }
-
 		,	getContext: _.wrap( HeaderMiniCartItemCellView.prototype.getConetxt, function(fn)
 			{
 
-                var self = this
-				,   returnVariable = fn.apply(self, _.toArray(arguments).slice(1))
+                var returnVariable = fn.apply(self, _.toArray(arguments).slice(1))
 				,   itemOptions = this.model.get('options')
 				,   customImage = _.first(_.filter(itemOptions, function (option)
 					{
@@ -83,6 +63,13 @@ define(
 
                 return returnVariable
             })
+
+        ,   preventContextMenu: function (e)
+            {
+                e.preventDefault();
+                console.error('You\'re attempting to access an image that is copyrighted by LNCurtis.com');
+                return false;
+            }
 
         });
 

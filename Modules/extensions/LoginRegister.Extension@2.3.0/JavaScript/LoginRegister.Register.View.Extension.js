@@ -79,7 +79,7 @@ define(
                                 message: _.translate('You have already registered with LNCurtis.com. We\'re logging you in.')
                                 ,	type: 'warning'
                                 ,	closable: false
-                            })
+                                })
                             ,   el = self.$('.login-register-register-form [data-type="alert-placeholder"]');
 
                             //el.append(global_view_message.render().$el.html());
@@ -111,17 +111,17 @@ define(
             }
 
 		,	getContext: _.wrap( LoginRegisterRegisterView.prototype.getContext, function(fn)
-                {
-                    var self = this
-                    ,   returnVariable = fn.apply(self, _.toArray(arguments).slice(1))
-					, 	subscribeText = Configuration.get('newsletter.optInText', 'Please sign me up for Curtis offers, promotions and news');
+            {
+                var self = this
+                ,   returnVariable = fn.apply(self, _.toArray(arguments).slice(1))
+                , 	subscribeText = Configuration.get('newsletter.optInText', 'Please sign me up for Curtis offers, promotions and news');
 
-                    _.extend(returnVariable , {
-                        subscribeText: subscribeText
-                    });
+                _.extend(returnVariable , {
+                    subscribeText: subscribeText
+                });
 
-                    return returnVariable
-                })
+                return returnVariable
+            })
 
         });
 

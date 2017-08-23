@@ -25,21 +25,7 @@ define(
 
         _.extend( ProductListControlSingleView.prototype, {
 
-            isReadyForList: ControlView.prototype.isReadyForList
-
-        ,   render: _.wrap( ProductListControlSingleView.prototype.render, function(fn)
-            {
-                var self = this;
-                fn.apply(self, _.toArray(arguments).slice(1));
-
-                if (!self.isReadyForList())
-                {
-                    self.$('[data-action="add-product-to-single-list"]').attr('disabled', 'true');
-                }
-
-            })
-
-        ,	renderAfterAdded: function (self)
+            renderAfterAdded: function (self)
             {
                 if (!this.validateGiftCertificate(self.product))
                 {

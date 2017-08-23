@@ -64,10 +64,7 @@ define(
 
 				var self = this
 				,   returnVariable = fn.apply(self, _.toArray(arguments).slice(1))
-                ,   carouselImages = _.map(SC.CONFIGURATION.get('home.carouselImages', []), function(url)
-                {
-                    return url;
-                });
+                ,   carouselImages = Configuration.get('home.carouselImages', []);
 
 				_.extend(returnVariable , {
                     imageHomeSize: Utils.getViewportWidth() < 480 ? '480' : 'homeslider'

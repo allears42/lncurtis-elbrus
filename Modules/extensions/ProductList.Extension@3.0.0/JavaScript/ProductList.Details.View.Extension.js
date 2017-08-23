@@ -25,6 +25,7 @@ define(
 
         _.extend( ProductListDetailsView.prototype, {
 
+
             addItemToCartHandler : function (e)
             {
                 e.stopPropagation();
@@ -82,15 +83,16 @@ define(
                         items_for_cart.push(item_for_cart);
                         button_selector.push('article[data-item-id="' + item_internal_id + '"] a, article[data-item-id="' + item_internal_id + '"] button');
                     }
+
                 });
 
                 //items: backbone models representing selected items
                 //items_for_cart: selected models ready to be inserted into a cart
                 //button_selector: all the buttons that should be disabled when performing a batch operation
                 return {
-                    items: new ProductListItemCollection(items)
-                ,	items_for_cart: items_for_cart
-                ,	button_selector: button_selector
+                    items: items
+                    ,	items_for_cart: items_for_cart
+                    ,	button_selector: button_selector
                 };
             }
 
@@ -131,7 +133,7 @@ define(
                 });
 
                 //add items to cart
-                var add_to_cart_promise = this.cart.addProducts(selected_models.items.models);
+                var add_to_cart_promise = this.cart.addItems(selected_models.items_for_cart);
 
                 add_to_cart_promise.then(function ()
                 {
@@ -153,41 +155,23 @@ define(
                 }
             }
 
-        ,	showConfirmationHelper: function (selected_item)
+        ,   getBreadcrumbPages: function ()
             {
-                // this.showConfirmationMessage(_('Good! The items were successfully added to your cart. You can continue to <a href="#" data-touchpoint="viewcart">view cart and checkout</a>').translate());
-
-                //selected item may be undefined
-                if (_.isUndefined(selected_item) === true)
+                var breadcrumb = [
+                    {
+                        text: _('Product Lists').translate(),
+                        href: '/productlist'
+                    }
+                    ,	{
+                        text: this.model.get('name'),
+                        href: '/productlist/' + (this.model.get('internalid') ? this.model.get('internalid') : 'tmpl_' + this.model.get('templateid'))
+                    }
+                ];
+                if (this.application.ProductListModule.Utils.isSingleList())
                 {
-                    return;
+                    breadcrumb.splice(0, 1); //remove first
                 }
-
-                this.addedToCartView = new ProductListAddedToCartView({
-                    application: this.application
-                    ,	parentView: this
-                    ,	item: selected_item
-                });
-
-                this.application.getLayout().showInModal(this.addedToCartView);
-            }
-
-        ,	askEditListItem : function (e)
-            {
-                e.stopPropagation();
-
-                var product_list_itemid = this.$(e.target).closest('[data-id]').data('id')
-                    ,	selected_item = this.model.get('items').get(product_list_itemid);
-
-                this.editView = new ProductListItemEditView({
-                    application: this.application
-                ,	parentView: this
-                ,	model: selected_item
-                ,	title: _('Edit Item').translate()
-                ,	confirm_edit_method: 'editListItemHandler'
-                });
-
-                this.application.getLayout().showInModal(this.editView);
+                return breadcrumb;
             }
 
         });

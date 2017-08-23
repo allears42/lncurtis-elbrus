@@ -1,71 +1,36 @@
 /*
-	© 2016 NetSuite Inc.
-	User may not copy, modify, distribute, or re-bundle or otherwise make available this code;
-	provided, however, if you are an authorized user with a NetSuite account or log-in, you
-	may use this code subject to the terms that govern your access and use.
+	© 2017 LN Curtis
 */
 
-// @module Footer
 define(
-	'Footer.Simplified.View'
+	'Footer.Simplified.View.Extension'
 ,	[
-		'SC.Configuration'
-	,	'GlobalViews.BackToTop.View'
+		'Footer.Simplified.View'
+	,	'underscore'
 
-	,	'footer_simplified.tpl'
-
-	,	'Backbone'
-	,	'Backbone.CompositeView'
 	]
 ,	function(
-		Configuration
-	,	GlobalViewsBackToTopView
+		FooterSimplifiedView
+	,	_
 
-	,	footer_simplified_tpl
-
-	,	Backbone
-	,	BackboneCompositeView
 	)
 {
 	'use strict';
 
-	// @class Footer.Simplified.View @extends Backbone.View
-	return Backbone.View.extend({
-		//@property {Function} template
-		template: footer_simplified_tpl
-		//@method initialize
-	,	initialize: function (options)
-		{
-			this.application = options.application;
+    _.extend( FooterSimplifiedView.prototype, {
 
-			BackboneCompositeView.add(this);
-
-			this.application.getLayout().on('afterAppendToDom', function()
-			{
-				// after appended to DOM, we add the footer height as the content bottom padding, so the footer doesn't go on top of the content
-				var footer_height = this.$el.find('#site-footer').height();
-				if (footer_height)
-				{
-					this.$el.find('#content').css('padding-bottom', footer_height);
-				}
-			}); 
-		}
-		//@property {Object} childViews
-	,	childViews: {
-			'Global.BackToTop': function()
-			{
-				return new GlobalViewsBackToTopView();
-			}
-		}
-    ,   getContext: function () {
+		getContext: function() {
             var startDate = 2016
-            , d = new Date()
-            , today = d.getFullYear();
-            
+                , d = new Date()
+                , today = d.getFullYear();
+
             return {
                 copyrightText: Configuration.get("footer.copyrightText", "")
-                ,   date : today > startDate ? startDate.toString()+" - "+today.toString() : startDate.toString()
+			, 	date: today > startDate ? startDate.toString() + " - " + today.toString() : startDate.toString()
+
             }
         }
-	});
+
+    });
+
 });

@@ -21,7 +21,7 @@ define(
 
         getContext: function ()
         {
-            _.each(this.pages, function(page,index)
+            _.each(this.pages, function(page, index)
             {
                 if (page['data-touchpoint'])
                 {

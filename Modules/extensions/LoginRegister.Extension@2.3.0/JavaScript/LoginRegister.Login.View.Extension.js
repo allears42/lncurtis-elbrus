@@ -21,18 +21,7 @@ define(
 
         _.extend( LoginRegisterLoginView.prototype, {
 
-            render: function ()
-            {
-                Backbone.View.prototype.render.apply(this, arguments);
-                if (this.$containerModal && this.application.getConfig('checkoutApp.skipLogin'))
-                {
-                    this.$('[data-type="form-login-action"]').append('<br/><br/><br/><div class="pull-left">'+_('Want to create an Account first?').translate()+
-                        '<a class="login-register-login-register-now" href="register" data-toggle="show-in-modal" data-type="register-now">'+_('Register Now').translate()+'</a></div>');
-                    this.$('[data-action="forgot-password"]').attr('data-toggle', 'show-in-modal');
-                }
-            }
-
-		,	redirect: function (context, response)
+            redirect: function (context, response)
             {
                 var url_options = _.parseUrlOptions(window.location.search)
                     ,	touchpoints = response.touchpoints
@@ -85,19 +74,6 @@ define(
                     }
                 });
             }
-
-		,	getContext: _.wrap( LoginRegisterLoginView.prototype.getContext, function(fn)
-            {
-                var self = this
-				,   returnVariable = fn.apply(self, _.toArray(arguments).slice(1))
-				,	url_options = _.parseUrlOptions(window.location.search);
-
-                _.extend(returnVariable , {
-                    isRedirect: !!(url_options.is !== 'checkout' && url_options.origin !== 'checkout')
-                });
-
-                return returnVariable
-            })
 
         });
 
