@@ -1,0 +1,97 @@
+/*
+	© 2017 NetSuite Inc.
+	User may not copy, modify, distribute, or re-bundle or otherwise make available this code;
+	provided, however, if you are an authorized user with a NetSuite account or log-in, you
+	may use this code subject to the terms that govern your access and use.
+*/
+
+// @module Footer
+define(
+	'Footer.View.Extension'
+,	[
+        'Footer.View'
+    ,   'LinkHierarchy.View'
+    ,   'LinkHierarchy.Image.View'
+    ,   'LinkHierarchy.Social.View'
+
+	,	'link_menu.tpl'
+
+    ,	'underscore'
+	]
+,	function (
+		FooterView
+	,	LinkHierarchyView
+	,	LinkHierarchyImageView
+	,	LinkHierarchySocialView
+
+	,	link_menu_tpl
+
+    ,   _
+	)
+{
+	'use strict';
+
+	// @class Footer.View @extends Backbone.View
+	_.extend( FooterView.prototype, {
+
+		childViews: _.extend( FooterView.prototype.childViews,
+		{
+            'FamilyOfBrands': function()
+            {
+                return new LinkHierarchyView({
+                    childViewOptions: {
+                        configurationObject: "footer.familyOfBrands"
+                        , headerText: Configuration.get("footer.familyOfBrandsHeader", "")
+                    }
+                });
+            }
+		,	'Footer.Navigation': function()
+			{
+				return new LinkHierarchyView({
+					childViewOptions: {
+						configurationObject: "footer.navigationLinks"
+						, custom_template: link_menu_tpl
+					}
+				});
+			}
+		,	'Footer.Seals': function()
+			{
+				return new LinkHierarchyImageView({
+					childViewOptions: {
+						configurationObject: "footer.seals"
+					}
+				});
+			}
+		,	'Footer.Social': function()
+			{
+				return new LinkHierarchySocialView({
+					childViewOptions: {
+						configurationObject: "footer.social"
+					}
+				});
+			}
+		})
+
+	,	getContext: _.wrap( FooterView.prototype.getContext, function(fn)
+		{
+			var returnVariable = fn.apply(self, _.toArray(arguments).slice(1))
+			, 	startDate = 2016
+			, 	d = new Date()
+			, 	today = d.getFullYear();
+
+			_.extend( returnVariable,
+			{
+                footerLogo: _.getAbsoluteUrl(Configuration.get("footer.logo", ""))
+			,   companyAddress: Configuration.get("footer.companyAddress", "")
+			,   phoneTollFree: Configuration.get("footer.phoneTollFree", "")
+			,   viewOtherLocationsText: Configuration.get("footer.viewOtherLocationsText", "")
+			,   viewOtherLocationsLink: Configuration.get("footer.viewOtherLocationsLink", "")
+			,   subscribeButtonText: Configuration.get("newsletter.subscribeButtonText", "")
+			,   copyrightText: Configuration.get("footer.copyrightText", "")
+			,   date : today > startDate ? startDate.toString()+" - "+today.toString() : startDate.toString()
+            })
+
+		})
+
+	});
+});
