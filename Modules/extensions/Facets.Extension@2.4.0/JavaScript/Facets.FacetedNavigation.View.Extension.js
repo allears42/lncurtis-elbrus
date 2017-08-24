@@ -7,6 +7,7 @@ define(
 ,	[
 		'Facets.FacetedNavigation.View'
     ,   'Facets.FacetedNavigationItem.View'
+    ,   'Facets.FacetedNavigationItemCategory.View'
     ,   'Profile.Model'
     ,   'Backbone'
     ,   'Backbone.CollectionView'
@@ -18,6 +19,7 @@ define(
 ,	function(
         FacetsFacetedNavigationView
     ,   FacetsFacetedNavigationItemView
+    ,   FacetsFacetedNavigationItemCategoryView
     ,   ProfileModel
 	,   Backbone
 	,   BackboneCollectionView

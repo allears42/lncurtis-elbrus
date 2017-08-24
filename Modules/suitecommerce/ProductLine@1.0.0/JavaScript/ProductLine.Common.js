@@ -85,8 +85,8 @@ define(
 				var item_option_cartId = item_option.get('cartOptionId').toLowerCase()
 				,	productline_option = productline.get('options').find(function (product_option)
 					{
-						console.log(product_option, item_option_cartId);
-						return product_option.get('cartOptionId').toLowerCase() === item_option_cartId;
+						// temporary fix - only happens on local
+						return product_option.get('cartOptionId') && product_option.get('cartOptionId').toLowerCase() === item_option_cartId;
 					});
 
 				if (productline_option)

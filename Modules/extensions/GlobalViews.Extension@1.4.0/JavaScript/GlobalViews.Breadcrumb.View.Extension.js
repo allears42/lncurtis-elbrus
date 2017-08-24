@@ -33,6 +33,7 @@ define(
                     page.hasDataHashtag = true;
                 }
 
+                // this is used for the schema.org meta data
                 page.position = index+1;
             });
 

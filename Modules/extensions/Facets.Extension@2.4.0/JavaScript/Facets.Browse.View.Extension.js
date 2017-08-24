@@ -15,6 +15,7 @@ define(
 		, 'Tracker'
 		, 'jQuery'
 		, 'underscore'
+		, 'Utils'
 	]
 	, function (FacetsBrowseView
 		, FacetsFacetedNavigationView
@@ -23,7 +24,9 @@ define(
 		, Configuration
 		, Tracker
 		, jQuery
-		, _) {
+		, _
+		, Utils
+	) {
 		'use strict';
 		
 		_.extend(FacetsBrowseView.prototype, {
