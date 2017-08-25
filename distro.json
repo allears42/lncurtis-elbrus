@@ -11,7 +11,6 @@
         "deploy": "DeployDistribution"
     },
     "modules": {
-
         "suitecommerce/Account": "2.3.0",
         "suitecommerce/Address": "2.4.0",
         "suitecommerce/AjaxRequestsKiller": "2.0.2",
@@ -22,9 +21,7 @@
         "suitecommerce/BackboneExtras": "2.4.0",
         "suitecommerce/Balance": "2.1.2",
         "suitecommerce/BaseSassStyleguide": "1.0.2",
-
         "themes/BaseSassStyles.Firefighter": "2.0.0",
-
         "suitecommerce/BootstrapExtras": "2.1.0",
         "suitecommerce/BrontoIntegration": "1.1.0",
         "suitecommerce/Cart": "4.0.0",
@@ -146,7 +143,6 @@
         "suitecommerce/UrlHelper": "2.1.1",
         "suitecommerce/Utilities": "2.2.1",
         "suitecommerce/Wizard": "2.3.0",
-
         "third_parties/almond": "0.3.0",
         "third_parties/backbone.js": "1.1.2-custom",
         "third_parties/backbone.stickit": "0.8.0",
@@ -199,7 +195,6 @@
         "overrides/Override.ProductList": "3.0.0",
         "overrides/Override.Profile": "3.3.0",
         "overrides/Override.RecentlyViewedItems": "2.3.0",
-        "overrides/Override.SCA": "4.0.0",
         "overrides/Override.ShoppingApplication": "4.0.0",
         "overrides/Override.SiteSearch": "2.1.2",
         "overrides/twitter-bootstrap-sass": "3.3.1",
@@ -225,6 +220,7 @@
         "extensions/ProductList.Extension": "3.0.0",
         "extensions/Profile.Extension": "3.0.0",
         "extensions/RecentlyViewedItems.Extension": "2.3.0",
+        "extensions/SC.Configuration.Extension": "4.0.0",
         "extensions/Session.Extension": "2.2.1",
         "extensions/SiteSearch.Extension": "2.1.2",
         "extensions/Wizard.Extension": "2.2.0",
@@ -234,9 +230,7 @@
         "custom/FacetContent": "1.0.0",
         "custom/LinkHierarchy": "1.0.0",
         "custom/Pacejet": "1.0.0",
-
         "themes/Firefighter": "1.0.0"
-
     },
     "tasksConfig": {
         "local": {
@@ -308,7 +302,6 @@
                     "FacetContent",
                     "LinkHierarchy",
                     "CreditCard.Icon",
-
                     "Backbone.FormView.Extension",
                     "Cart.Extension",
                     "Categories.Extension",
@@ -329,8 +322,8 @@
                     "ProductList.Extension",
                     "Profile.Extension",
                     "Session.Extension",
-                    "Wizard.Extension"
-
+                    "Wizard.Extension",
+                    "SC.Configuration.Extension"
                 ],
                 "amdclean": true,
                 "amdConfig": {
@@ -448,7 +441,6 @@
                     "Session.Extension",
                     "LinkHierarchy",
                     "CreditCard.Icon",
-
                     "Backbone.FormView.Extension",
                     "Cart.Extension",
                     "Categories.Extension",
@@ -469,8 +461,8 @@
                     "ProductList.Extension",
                     "Profile.Extension",
                     "Session.Extension",
-                    "Wizard.Extension"
-
+                    "Wizard.Extension",
+                    "SC.Configuration.Extension"
                 ],
                 "amdclean": true,
                 "amdConfig": {
@@ -583,7 +575,6 @@
                     "StoreLocatorAccessPoints",
                     "StoreLocator",
                     "CreditCard.Icon",
-
                     "Backbone.FormView.Extension",
                     "Cart.Extension",
                     "Categories.Extension",
@@ -604,8 +595,8 @@
                     "Profile.Extension",
                     "ProductList.Extension",
                     "Session.Extension",
-                    "Wizard.Extension"
-
+                    "Wizard.Extension",
+                    "SC.Configuration.Extension"
                 ],
                 "amdclean": true,
                 "amdConfig": {
