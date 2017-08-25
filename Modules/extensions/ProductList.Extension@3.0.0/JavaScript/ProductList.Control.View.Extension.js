@@ -93,7 +93,7 @@ define(
 
         ,   getContext: _.wrap( ProductListControlView.prototype.getContext, function(fn)
             {
-                var returnVariable = fn.apply(self, _.toArray(arguments).slice(1));
+                var returnVariable = fn.apply(this, _.toArray(arguments).slice(1));
 
                 _.extend(returnVariable , {
                     isLoggedIn: ProfileModel.getInstance().get('isLoggedIn') === 'T'

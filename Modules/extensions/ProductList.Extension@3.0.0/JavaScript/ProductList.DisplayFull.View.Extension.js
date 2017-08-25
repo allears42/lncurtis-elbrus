@@ -24,7 +24,7 @@ define(
 
         	getContext: _.wrap( ProductListDisplayFullView.prototype.getContext, function(fn)
                 {
-                    var returnVariable = fn.apply(self, _.toArray(arguments).slice(1));
+                    var returnVariable = fn.apply(this, _.toArray(arguments).slice(1));
 
                     _.extend(returnVariable , {
                         showRating : false //!options || !options.hide_rating

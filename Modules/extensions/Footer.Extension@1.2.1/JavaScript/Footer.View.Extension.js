@@ -72,7 +72,7 @@ define(
 
 	,	getContext: _.wrap( FooterView.prototype.getContext, function(fn)
 		{
-			var returnVariable = fn.apply(self, _.toArray(arguments).slice(1))
+			var returnVariable = fn.apply(this, _.toArray(arguments).slice(1))
 			, 	startDate = 2016
 			, 	d = new Date()
 			, 	today = d.getFullYear();
