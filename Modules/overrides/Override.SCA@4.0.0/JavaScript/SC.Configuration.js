@@ -466,13 +466,13 @@ define(
         // navigation hierarchy bindings.
         _.each(baseConfiguration.navigationData, function (entry)
         {
-            if(entry.placeholder && entry.placeholder == "Categories")
+		if (!entry)
             {
                 return;
             }
             else
             {
-                if(entry.placeholder)
+                if(entry.placeholder && entry.placeholder == "Categories")
                 {
                     entry.text = '';
                 }
