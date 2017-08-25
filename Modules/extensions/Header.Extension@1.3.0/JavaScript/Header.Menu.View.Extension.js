@@ -24,7 +24,7 @@ define(
 			
 			events: {
 				'click [data-toggle="categories-menu"] > a': 'toggleMenu'
-				, 'click .header-menu-close-menu': 'closeMenuClick'
+			, 	'click .header-menu-close-menu': 'closeMenuClick'
 				/*
 				,   'mouseenter [data-toggle="categories-menu"]': 'menuOpen'
 				,   'mouseleave [data-toggle="categories-menu"]': 'menuClose'

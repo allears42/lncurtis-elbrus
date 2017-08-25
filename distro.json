@@ -217,6 +217,7 @@
         "extensions/NavigationHelper.Extension": "2.1.0",
         "extensions/OrderHistory.Extension": "5.0.0",
         "extensions/Overview.Extension": "1.1.2",
+        "extensions/ProductDetails.Extension": "1.1.0",
         "extensions/ProductList.Extension": "3.0.0",
         "extensions/Profile.Extension": "3.0.0",
         "extensions/RecentlyViewedItems.Extension": "2.3.0",
@@ -231,6 +232,7 @@
         "custom/LinkHierarchy": "1.0.0",
         "custom/Pacejet": "1.0.0",
         "themes/Firefighter": "1.0.0"
+
     },
     "tasksConfig": {
         "local": {
@@ -324,6 +326,7 @@
                     "Session.Extension",
                     "Wizard.Extension",
                     "SC.Configuration.Extension"
+
                 ],
                 "amdclean": true,
                 "amdConfig": {

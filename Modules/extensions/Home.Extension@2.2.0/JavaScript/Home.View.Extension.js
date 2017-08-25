@@ -73,9 +73,7 @@ define(
                 ,   carouselImages: carouselImages
                 });
 
-				//debugger;
-
-				return returnVariable
+			return returnVariable
 			})
 
         });

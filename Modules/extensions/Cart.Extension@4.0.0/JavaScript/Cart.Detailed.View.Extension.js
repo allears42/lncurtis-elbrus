@@ -7,25 +7,38 @@ define(
 	'Cart.Detailed.View.Extension'
 	, [
 		'Cart.Detailed.View'
-		, 'Backbone.CompositeView'
-		, 'Backbone.FormView'
-		, 'Cart.Summary.View'
-		
-		, 'GlobalViews.Message.View'
-		
-		, 'Backbone'
-		, 'underscore'
+	, 	'Backbone.CompositeView'
+	, 	'Backbone.FormView'
+	,	'Backbone.CollectionView'
+	, 	'Cart.Summary.View'
+	,	'Cart.Lines.View'
+	,	'Cart.Item.Summary.View'
+	, 	'Cart.Item.Actions.View'
+	,	'RecentlyViewedItems.View'
+
+	, 	'GlobalViews.Message.View'
+
+	, 	'Backbone'
+	, 	'underscore'
 	]
-	, function (CartDetailedView
-		, BackboneCompositeView
-		, BackboneFormView
-		, CartSummaryView
-		, GlobalViewsMessageView
-		, Backbone
-		, _) {
+	, function (
+		CartDetailedView
+	, 	BackboneCompositeView
+	, 	BackboneFormView
+	,	BackboneCollectionView
+	, 	CartSummaryView
+	,	CartLinesView
+	,	CartItemSummaryView
+    , 	CartItemActionsView
+	,	RecentlyViewedItemsView
+	, 	GlobalViewsMessageView
+	, 	Backbone
+	, 	_
+	)
+	{
 		'use strict';
 		
-		_.extend(CartDetailedView.prototype, {
+		_.extend( CartDetailedView.prototype, {
 			
 			events: _.extend({}, CartDetailedView.prototype.events, {
 				'click [data-action="print-page"]': 'triggerPrint'

@@ -87,7 +87,9 @@ define(
 			,   subscribeButtonText: Configuration.get("newsletter.subscribeButtonText", "")
 			,   copyrightText: Configuration.get("footer.copyrightText", "")
 			,   date : today > startDate ? startDate.toString()+" - "+today.toString() : startDate.toString()
-            })
+            });
+
+			return returnVariable
 
 		})
 

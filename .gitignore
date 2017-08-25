@@ -8,5 +8,6 @@ scratchpad/
 npm-debug.log
 Modules/extensions/_template/
 Modules/lncurtis/Backup/error.txt
-temp/
 Modules/custom/CodeInspector/
+temp/
+CodeInspectorConfig.js
