@@ -9,6 +9,7 @@ define(
     ,   'LiveOrder.Model'
     ,   'ProductList.AddedToCart.View'
     ,   'ProductList.Model'
+    ,	'SC.Configuration'
     ,	'underscore'
 
     ]
@@ -17,6 +18,7 @@ define(
     ,   LiveOrderModel
     ,   ProductListAddedToCartView
     ,   ProductListModel
+    , 	Configuration
     , 	_
 
     )
@@ -27,6 +29,7 @@ define(
 
             title: _('Product Lists').translate()
 
+	        // filter Call for Pricing items
         ,   addListToCart: function (list)
             {
                 // collect the items data to add to cart
@@ -77,28 +80,20 @@ define(
 
                         // also show a confirmation message
                         var confirmMessage;
-
-                        if (list.get('items').length > 1)
-                        {
-                            confirmMessage =  _(Configuration.get('productList.itemsAddedToCartConfirmationText', '')).translate(lines_to_add.length, list.get('internalid'), list.get('name'));
-                        }
-                        else
-                        {
-                            confirmMessage =  _(Configuration.get('productList.itemAddedToCartConfirmationText', '')).translate(1, list.get('internalid'), list.get('name'));
-                        }
+	
+	                    if (list.get('items').length > 1)
+	                    {
+		                    confirmMessage =  _(Configuration.get('productList.itemsAddedToCartConfirmationText', '')).translate(add_items.length, list.get('internalid'), list.get('name'));
+	                    }
+	                    else
+	                    {
+		                    confirmMessage =  _(Configuration.get('productList.itemAddedToCartConfirmationText', '')).translate(1, list.get('internalid'), list.get('name'));
+	                    }
 
                         self.showConfirmationMessage(confirmMessage);
                         self.application.getLayout().showInModal(self.addedToCartView);
                     });
                 });
-            }
-
-        ,	getBreadcrumbPages: function()
-            {
-                return {
-                    text: _('Product Lists').translate()
-                    ,	href: '/productlist'
-                };
             }
 
         });
