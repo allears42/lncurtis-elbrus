@@ -21,7 +21,7 @@ define(
 
         _.extend( ProductListModel.prototype, {
 
-
+			// filter call for pricing items
             numberItemsAddableToCart: function(only_checked_items)
             {
                 var items = !_.isUndefined(only_checked_items) ? new Backbone.Collection(this.get('items').filter(function (product_list_item) {
