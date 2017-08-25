@@ -1,0 +1,91 @@
+/*
+	© 2017 LN Curtis
+*/
+
+define(
+    'RecentlyViewedItems.View.Extension'
+    ,	[
+        'RecentlyViewedItems.View'
+    ,   'Backbone.CollectionView'
+    ,	'ItemRelations.RelatedItem.View'
+    ,	'RecentlyViewedItems.Collection'
+    ,	'SC.Configuration'
+    ,	'Tracker'
+
+    ,	'recently_viewed_items.tpl'
+    ,	'recently_viewed_row.tpl'
+    ,	'recently_viewed_cell.tpl'
+
+    ,	'jQuery'
+    ,	'Backbone'
+    ,	'underscore'
+    ,	'Utils'
+
+    ]
+    ,	function(
+        RecentlyViewedItemsViewExtension
+    ,   BackboneCollectionView
+    ,	ItemRelationsRelatedItemView
+    ,	RecentlyViewedItemsCollection
+    ,	Configuration
+    ,	Tracker
+
+    ,	recently_viewed_items_tpl
+    ,	recently_viewed_row_tpl
+    ,	recently_viewed_cell_tpl
+
+    ,	jQuery
+    ,	Backbone
+    ,	_
+
+    )
+    {
+        'use strict';
+
+        _.extend( RecentlyViewedItemsViewExtension.prototype, {
+
+            initialize: function ()
+            {
+                var application = this.options.application
+                    ,	collection = application.getConfig('siteSettings.sitetype') === 'ADVANCED' ? RecentlyViewedItemsCollection.getInstance() : new Backbone.Collection()
+                    ,	number_of_items_displayed = application.getConfig('recentlyViewedItems.numberOfItemsDisplayed')
+                    ,	self = this;
+                BackboneCollectionView.prototype.initialize.call( this,
+                {
+                    collection: collection
+                    ,	viewsPerRow: Infinity
+                    ,	cellTemplate: recently_viewed_cell_tpl
+                    ,	rowTemplate: recently_viewed_row_tpl
+                    ,	childView: ItemRelationsRelatedItemView
+                    ,	template: recently_viewed_items_tpl
+                    ,   childViewOptions: {
+                            showAddToCart: true
+                        ,   application: application
+                        }
+                });
+
+                this.options.application.getLayout().once('afterAppendView', function ()
+                {
+                    collection.promise && collection.promise.done(function()
+                    {
+                        Tracker.getInstance().trackProductList(self.collection, 'Recently Viewed Items');
+                        self.collection = collection.first(number_of_items_displayed);
+                        self.render();
+
+                        var carousel = self.$el.find('[data-type="carousel-items"]');
+
+                        if(_.isPhoneDevice() === false && application.getConfig('siteSettings.imagesizes'))
+                        {
+                            var img_min_height = _.where(application.getConfig('siteSettings.imagesizes'), {name: application.getConfig('imageSizeMapping.thumbnail')})[0].maxheight;
+
+                            carousel.find('.item-relations-related-item-thumbnail').css('minHeight', img_min_height);
+                        }
+
+                        _.initBxSlider(carousel, Configuration.bxSliderDefaults);
+                    });
+                });
+
+            }
+
+        });
+    });

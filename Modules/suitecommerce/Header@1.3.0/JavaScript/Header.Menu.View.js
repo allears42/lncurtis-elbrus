@@ -127,6 +127,7 @@ define(
 					entry.data = entry.data || {};
 					entry.data.hashtag = entry.dataHashtag;
 				}
+
 			});
 
 			// @class Header.Sidebar.View.Context

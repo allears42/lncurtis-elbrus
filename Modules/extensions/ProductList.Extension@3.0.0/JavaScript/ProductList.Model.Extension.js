@@ -22,17 +22,34 @@ define(
         _.extend( ProductListModel.prototype, {
 
 
-            /*,	extendedFunction: _.wrap( ModuleUsed.prototype.extendedFunction, function(fn)
-                {
-                    var self = this
-                    ,   returnVariable = fn.apply(self, _.toArray(arguments).slice(1));
+            numberItemsAddableToCart: function(only_checked_items)
+            {
+                var items = !_.isUndefined(only_checked_items) ? new Backbone.Collection(this.get('items').filter(function (product_list_item) {
+                        return product_list_item.get('checked');
+                    }))
+                    : this.get('items');
 
-                    _.extend(returnVariable , {
-                        newKey: 'newValue'
+                if(!!items) {
+                    var addable = _.filter(items.models, function (item) {
+                        return item.get('item').custitem_sc_call_for_pricing === false;
                     });
+                    return addable.length;
+                }
+                return 0;
+            }
 
-                    return returnVariable
-                })*/
+        ,	canBeAddedToCart: function(only_checked_items)
+            {
+                var items = !_.isUndefined(only_checked_items) ?
+                    new Backbone.Collection(this.get('items').filter(function (product_list_item)
+                    {
+                        return product_list_item.get('checked');
+                    })) :
+                    this.get('items');
+
+
+                return items.length && this.getOutOfStockItems(items).length === 0 && this.getNotPurchasableItemsDueToMinimumQuantity(items).length === 0 && this.numberItemsAddableToCart(only_checked_items) > 0;
+            }
 
         });
 

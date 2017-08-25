@@ -8,8 +8,12 @@
         ],
         "sass": [
             "Sass/*.scss"
+        ],
+        "ssp-libraries": [
+            "SuiteScript/*.js"
+        ],
+        "configuration": [
+            "Configuration/*.json"
         ]
-    },
-    "overrides": {
     }
 }

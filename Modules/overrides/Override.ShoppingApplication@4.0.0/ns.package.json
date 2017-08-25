@@ -28,6 +28,7 @@
     }
     , "overrides": {
         "suitecommerce/ShoppingApplication@4.0.0/Internals/index-local.ssp" : "Internals/index-local.ssp",
+
         "suitecommerce/ShoppingApplication@4.0.0/SuiteScript/shopping.environment.ssp" : "SuiteScript/shopping.environment.ssp",
         "suitecommerce/ShoppingApplication@4.0.0/SuiteScript/shopping.ssp" : "SuiteScript/shopping.ssp"
     }

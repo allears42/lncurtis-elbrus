@@ -6,14 +6,18 @@ define(
     'ProductList.Lists.View.Extension'
     ,	[
         'ProductList.Lists.View'
-
-        ,	'underscore'
+    ,   'LiveOrder.Model'
+    ,   'ProductList.AddedToCart.View'
+    ,   'ProductList.Model'
+    ,	'underscore'
 
     ]
     ,	function(
         ProductListListsView
-
-        , 	_
+    ,   LiveOrderModel
+    ,   ProductListAddedToCartView
+    ,   ProductListModel
+    , 	_
 
     )
     {
@@ -21,18 +25,81 @@ define(
 
         _.extend( ProductListListsView.prototype, {
 
+            title: _('Product Lists').translate()
 
-            /*,	extendedFunction: _.wrap( ModuleUsed.prototype.extendedFunction, function(fn)
+        ,   addListToCart: function (list)
+            {
+                // collect the items data to add to cart
+                var lines_to_add = []
+                    ,	self = this
+                    ,	not_purchasable_items_count = 0;
+
+                list.get('items').each(function (pli)
                 {
-                    var self = this
-                    ,   returnVariable = fn.apply(self, _.toArray(arguments).slice(1));
+                    var store_item = pli.get('item')
+                        , matrix_parent = store_item.matrix_parent || store_item
+                        , isCallForPricing = matrix_parent.custitem_sc_call_for_pricing || false;
 
-                    _.extend(returnVariable , {
-                        newKey: 'newValue'
+
+                    if (store_item.ispurchasable && !isCallForPricing)
+                    {
+                        var cart_item_detail = pli.getItemForCart(store_item.internalid, pli.get('quantity'), store_item.itemoptions_detail, pli.getOptionsArray());
+
+                        lines_to_add.push(cart_item_detail);
+                    }
+                    else
+                    {
+                        not_purchasable_items_count ++;
+                    }
+                });
+
+                if (lines_to_add.length === 0)
+                {
+                    var errorMessage = _('All items in the list are not available for purchase.').translate();
+
+                    self.showWarningMessage(errorMessage);
+
+                    return;
+                }
+
+                // add the items to the cart and when its done show the confirmation view
+                LiveOrderModel.getInstance().addProducts(lines_to_add).done(function ()
+                {
+                    // before showing the confirmation view we need to fetch the items of the list with all the data.
+                    self.application.ProductListModule.Utils.getProductList(list.get('internalid')).done(function(model)
+                    {
+                        self.addedToCartView = new ProductListAddedToCartView({
+                            application: self.application
+                            ,	parentView: self
+                            ,	list: new ProductListModel(model) //pass the model with all the data
+                            ,	not_purchasable_items_count: not_purchasable_items_count
+                        });
+
+                        // also show a confirmation message
+                        var confirmMessage;
+
+                        if (list.get('items').length > 1)
+                        {
+                            confirmMessage =  _(Configuration.get('productList.itemsAddedToCartConfirmationText', '')).translate(lines_to_add.length, list.get('internalid'), list.get('name'));
+                        }
+                        else
+                        {
+                            confirmMessage =  _(Configuration.get('productList.itemAddedToCartConfirmationText', '')).translate(1, list.get('internalid'), list.get('name'));
+                        }
+
+                        self.showConfirmationMessage(confirmMessage);
+                        self.application.getLayout().showInModal(self.addedToCartView);
                     });
+                });
+            }
 
-                    return returnVariable
-                })*/
+        ,	getBreadcrumbPages: function()
+            {
+                return {
+                    text: _('Product Lists').translate()
+                    ,	href: '/productlist'
+                };
+            }
 
         });
 

@@ -19,7 +19,7 @@ define(
 		, Configuration
 		, _) {
 		'use strict';
-		
+
 		_.extend(HeaderMenuView.prototype, {
 			
 			events: {
@@ -66,13 +66,14 @@ define(
 			})
 			
 			, getContext: function () {
+
 				var profile = ProfileModel.getInstance()
 					, is_loading = !_.getPathFromObject(Configuration, 'performance.waitForUserProfile', true) && ProfileModel.getPromise().state() !== 'resolved'
 					, is_loged_in = profile.get('isLoggedIn') === 'T' && profile.get('isGuest') === 'F'
 					, environment = SC.ENVIRONMENT
 					, show_languages = environment.availableHosts && environment.availableHosts.length > 1
 					, show_currencies = environment.availableCurrencies && environment.availableCurrencies.length > 1 && !Configuration.get('header.notShowCurrencySelector');
-				
+
 				_.each(Configuration.navigationData, function (entry) {
 					if (entry.dataTouchpoint !== undefined) {
 						entry.data = entry.data || {};

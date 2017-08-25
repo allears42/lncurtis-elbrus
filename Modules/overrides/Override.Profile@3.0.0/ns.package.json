@@ -17,8 +17,6 @@
         ]
     },
     "overrides": {
-        "suitecommerce/Profile@3.0.0/JavaScript/Profile.EmailPreferences.View.js": "JavaScript/Profile.EmailPreferences.View.js",
-        "suitecommerce/Profile@3.0.0/JavaScript/Profile.Information.View.js": "JavaScript/Profile.Information.View.js",
         "suitecommerce/Profile@3.0.0/Templates/profile_emailpreferences.tpl": "Templates/profile_emailpreferences.tpl"
     }
 }

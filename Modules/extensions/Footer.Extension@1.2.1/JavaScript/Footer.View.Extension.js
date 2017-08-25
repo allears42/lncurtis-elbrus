@@ -7,8 +7,9 @@ define(
 ,	[
         'Footer.View'
     ,   'LinkHierarchy.View'
-    ,   'LinkHierarchy.Image.View'
+    ,   'LinkHierarchy.Images.View'
     ,   'LinkHierarchy.Social.View'
+	,	'SC.Configuration'
 
 	,	'link_menu.tpl'
 
@@ -19,6 +20,7 @@ define(
 	,	LinkHierarchyView
 	,	LinkHierarchyImageView
 	,	LinkHierarchySocialView
+	,	Configuration
 
 	,	link_menu_tpl
 

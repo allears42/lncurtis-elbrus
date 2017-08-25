@@ -22,7 +22,9 @@
         "suitecommerce/BackboneExtras": "2.4.0",
         "suitecommerce/Balance": "2.1.2",
         "suitecommerce/BaseSassStyleguide": "1.0.2",
+
         "themes/BaseSassStyles.Firefighter": "2.0.0",
+
         "suitecommerce/BootstrapExtras": "2.1.0",
         "suitecommerce/BrontoIntegration": "1.1.0",
         "suitecommerce/Cart": "4.0.0",
@@ -169,6 +171,7 @@
         "third_parties/twitter-typeahead": "0.10.5",
         "third_parties/underscore.js": "1.7.0",
 
+        "overrides/Override.Account": "2.3.0",
         "overrides/Override.Address": "2.4.0",
         "overrides/Override.BackboneExtras": "2.4.0",
         "overrides/Override.Backbone.CollectionView": "1.2.0",
@@ -193,13 +196,22 @@
         "overrides/Override.MyAccountApplication": "3.1.0",
         "overrides/Override.OrderHistory": "5.0.0",
         "overrides/Override.OrderWizard.Module.PaymentMethod": "4.0.0",
+        "overrides/Override.ProductList": "3.0.0",
+        "overrides/Override.Profile": "3.3.0",
         "overrides/Override.ShoppingApplication": "4.0.0",
+        "overrides/Override.RecentlyViewedItems": "2.3.0",
+        "overrides/Override.SCA": "4.0.0",
+        "overrides/Override.ShoppingApplication": "4.0.0",
+        "overrides/Override.SiteSearch": "2.1.2",
+        "overrides/twitter-bootstrap-sass": "3.3.1",
+        "overrides/Utilities": "2.2.1",
 
         "extensions/Backbone.FormView.Extension": "1.2.0",
         "extensions/Cart.Extension": "4.0.0",
         "extensions/Categories.Extension": "3.0.1",
         "extensions/ErrorManagement.Extension": "2.4.0",
         "extensions/Facets.Extension": "2.4.0",
+        "extensions/Footer.Extension": "1.2.1",
         "extensions/GlobalViews.Extension": "1.4.0",
         "extensions/Header.Extension": "1.3.0",
         "extensions/Home.Extension": "2.2.0",
@@ -211,6 +223,11 @@
         "extensions/NavigationHelper.Extension": "2.1.0",
         "extensions/OrderHistory.Extension": "5.0.0",
         "extensions/Overview.Extension": "1.1.2",
+        "extensions/ProductList.Extension": "3.0.0",
+        "extensions/Profile.Extension": "3.0.0",
+        "extensions/RecentlyViewedItems.Extension": "2.3.0",
+        "extensions/Session.Extension": "2.2.1",
+        "extensions/SiteSearch.Extension": "2.1.2",
         "extensions/Wizard.Extension": "2.2.0",
 
         "custom/CreditCard.Icon": "1.0.0",
@@ -219,9 +236,7 @@
         "custom/LinkHierarchy": "1.0.0",
         "custom/Pacejet": "1.0.0",
 
-        "themes/Firefighter": "1.0.0",
-
-        "extensions/Session.Extension": "2.2.1"
+        "themes/Firefighter": "1.0.0"
 
     },
     "tasksConfig": {
@@ -300,6 +315,7 @@
                     "Categories.Extension",
                     "ErrorManagement.Extension",
                     "Facets.Extension",
+                    "Footer.Extension",
                     "GlobalViews.Extension",
                     "Header.Extension",
                     "Home.Extension",
@@ -311,7 +327,10 @@
                     "NavigationHelper.Extension",
                     "OrderHistory.Extension",
                     "Overview.Extension",
-                    "Session.Extension"
+                    "ProductList.Extension",
+                    "Profile.Extension",
+                    "Session.Extension",
+                    "Wizard.Extension"
 
                 ],
                 "amdclean": true,
@@ -435,16 +454,23 @@
                     "Cart.Extension",
                     "Categories.Extension",
                     "ErrorManagement.Extension",
+                    "Facets.Extension",
+                    "Footer.Extension",
                     "GlobalViews.Extension",
                     "Header.Extension",
                     "Home.Extension",
+                    "ItemRelations.Extension",
                     "ItemsSearcher.Extension",
                     "ListHeader.Extension",
                     "LiveOrder.Extension",
                     "LoginRegister.Extension",
                     "NavigationHelper.Extension",
                     "OrderHistory.Extension",
-                    "Overview.Extension"
+                    "Overview.Extension",
+                    "ProductList.Extension",
+                    "Profile.Extension",
+                    "Session.Extension",
+                    "Wizard.Extension"
 
                 ],
                 "amdclean": true,
@@ -558,22 +584,28 @@
                     "StoreLocatorAccessPoints",
                     "StoreLocator",
                     "CreditCard.Icon",
-                    "Backbone.FormView.Extension",
-                    "Session.Extension",
+
                     "Backbone.FormView.Extension",
                     "Cart.Extension",
                     "Categories.Extension",
                     "ErrorManagement.Extension",
+                    "Facets.Extension",
+                    "Footer.Extension",
                     "GlobalViews.Extension",
                     "Header.Extension",
                     "Home.Extension",
+                    "ItemRelations.Extension",
                     "ItemsSearcher.Extension",
                     "ListHeader.Extension",
                     "LiveOrder.Extension",
                     "LoginRegister.Extension",
                     "NavigationHelper.Extension",
                     "OrderHistory.Extension",
-                    "Overview.Extension"
+                    "Overview.Extension",
+                    "Profile.Extension",
+                    "ProductList.Extension",
+                    "Session.Extension",
+                    "Wizard.Extension"
 
                 ],
                 "amdclean": true,

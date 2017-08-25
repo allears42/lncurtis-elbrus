@@ -21,18 +21,14 @@ define(
 
         _.extend( ProductListRouter.prototype, {
 
-
-            /*,	extendedFunction: _.wrap( ModuleUsed.prototype.extendedFunction, function(fn)
-                {
-                    var self = this
-                    ,   returnVariable = fn.apply(self, _.toArray(arguments).slice(1));
-
-                    _.extend(returnVariable , {
-                        newKey: 'newValue'
-                    });
-
-                    return returnVariable
-                })*/
+            routes: _.extend(ProductListRouter.prototype,
+            {
+                // add url mappings for product list instead of wishlist
+                'productlist': 'showProductListsList'
+            ,	'productlist/?*options': 'showProductListsList'
+            ,	'productlist/:id': 'showProductListDetails'
+            ,	'productlist/:id/?*options': 'showProductListDetails'
+            })
 
         });
 

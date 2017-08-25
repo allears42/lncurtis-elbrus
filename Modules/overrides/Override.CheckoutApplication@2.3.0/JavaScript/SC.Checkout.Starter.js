@@ -6,80 +6,74 @@
 */
 
 define(
-	'SC.Checkout.Starter'
-,	[
-		'SC.Checkout'
-	,	'underscore'
-	,	'jQuery'
-	,	'Backbone'
-	,	'Utils'
+    'SC.Checkout.Starter'
+    ,	[
+        'SC.Checkout'
+        ,	'underscore'
+        ,	'jQuery'
+        ,	'Backbone'
+        ,	'Utils'
 
-	,	'SC.Checkout.Starter.Dependencies' // Auto generated at build time using configuration from distro.json
+        ,	'SC.Checkout.Starter.Dependencies' // Auto generated at build time using configuration from distro.json
+    ]
+    ,	function(
+        application
+        ,	_
+        ,	jQuery
+        ,	Backbone
+        ,	Utils
 
-	]
-,	function(
-		application
-	,	_
-	,	jQuery
-	,	Backbone
-	,	Utils
+        ,	entryPointModules
+    )
+    {
 
-	,	entryPointModules
-	)
-{
+        'use strict';
 
-	'use strict';
+        jQuery(function ()
+        {
+            application.getConfig().siteSettings = SC.ENVIRONMENT.siteSettings || {};
 
-	jQuery(function ()
-	{
-		application.getConfig().siteSettings = SC.ENVIRONMENT.siteSettings || {};
+            if (SC.ENVIRONMENT.CHECKOUT.skipLogin)
+            {
+                application.Configuration.checkout = application.Configuration.checkout || {};
+                application.Configuration.checkout.skipLogin = SC.ENVIRONMENT.CHECKOUT.skipLogin;
+                delete SC.ENVIRONMENT.CHECKOUT.skipLogin;
+            }
 
-		if (SC.ENVIRONMENT.CHECKOUT.skipLogin)
-		{
-			application.Configuration.checkout = application.Configuration.checkout || {};
-			application.Configuration.checkout.skipLogin = SC.ENVIRONMENT.CHECKOUT.skipLogin;
-			delete SC.ENVIRONMENT.CHECKOUT.skipLogin;
-		}
+            application.start(entryPointModules, function ()
+            {
+                // Checks for errors in the context
+                if (SC.ENVIRONMENT.contextError)
+                {
+                    // Shows the error.
+                    if (SC.ENVIRONMENT.contextError.errorCode === 'ERR_WS_EXPIRED_LINK')
+                    {
+                        application.getLayout().expiredLink(SC.ENVIRONMENT.contextError.errorMessage);
+                    }
+                    else
+                    {
+                        application.getLayout().internalError(SC.ENVIRONMENT.contextError.errorMessage, 'Error ' + SC.ENVIRONMENT.contextError.errorStatusCode + ': ' + SC.ENVIRONMENT.contextError.errorCode);
+                    }
+                }
+                else
+                {
+                    var fragment = _.parseUrlOptions(location.search).fragment
+                        ,   parameters = _.parseUrlOptions(location.search);
 
-		application.start(entryPointModules, function ()
-		{
-			// Checks for errors in the context
-			if (SC.ENVIRONMENT.contextError)
-			{
-				// Shows the error.
-				if (SC.ENVIRONMENT.contextError.errorCode === 'ERR_WS_EXPIRED_LINK')
-				{
-					application.getLayout().expiredLink(SC.ENVIRONMENT.contextError.errorMessage);
-				}
-				else
-				{
-					application.getLayout().internalError(SC.ENVIRONMENT.contextError.errorMessage, 'Error ' + SC.ENVIRONMENT.contextError.errorStatusCode + ': ' + SC.ENVIRONMENT.contextError.errorCode);
-				}
-			}
-			else
-			{
-				var fragment = Utils.parseUrlOptions(location.search).fragment
-                ,   parameters = Utils.parseUrlOptions(location.search);
+                    if (parameters.acctredirect) {
+                        var touchpoints = SC.getSessionInfo('touchpoints');
+                        window.location.href = touchpoints.customercenter + (parameters.acctredirect.indexOf('#') !== 0 ? "#" : "") + parameters.acctredirect;
+                    }
 
-                if (parameters.acctredirect) {
-                    var touchpoints = SC.getSessionInfo('touchpoints');
-                    window.location.href = touchpoints.customercenter + (parameters.acctredirect.indexOf('#') !== 0 ? "#" : "") + parameters.acctredirect;
+                    if (fragment && !location.hash)
+                    {
+                        location.hash = decodeURIComponent(fragment);
+                    }
+
+                    Backbone.history.start();
                 }
 
-				if (fragment && !location.hash)
-				{
-					location.hash = decodeURIComponent(fragment);
-				}
-
-				Backbone.history.start();
-			}
-
-			if (SC.ENVIRONMENT.siteSettings.sitetype === 'STANDARD' && SC.ENVIRONMENT.siteSettings.showcookieconsentbanner === 'T')
-			{
-				//if cookie consent banner is going to be displayed, fix the navigation issue
-				_.preventAnchorNavigation('div#cookieconsent a');
-			}
-			application.getLayout().appendToDom();
-		});
-	});
-});
+                application.getLayout().appendToDom();
+            });
+        });
+    });
