@@ -50,7 +50,7 @@ define(
 		,	getContext: _.wrap( HeaderMiniCartItemCellView.prototype.getConetxt, function(fn)
 			{
 
-                var returnVariable = fn.apply(self, _.toArray(arguments).slice(1))
+                var returnVariable = fn.apply(this, _.toArray(arguments).slice(1))
 				,   itemOptions = this.model.get('options')
 				,   customImage = _.first(_.filter(itemOptions, function (option)
 					{
