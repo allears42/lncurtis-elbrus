@@ -67,14 +67,15 @@ define(
                     });
                 }
 
-                ,	'Product.Stock.Info': function ()
-                    {
-                        return new ProductLineStockView({
-                            model: this.model
-                        ,   origin: "PDP_DETAIL"
-                        ,   application: this.application
-                        });
-                    }
+            ,	'Product.Stock.Info': function ()
+                {
+                    return new ProductLineStockView({
+                        model: this.model
+                    ,   origin: "PDP_DETAIL"
+                    ,   application: this.application
+                    });
+                }
+
             })
 
         ,   preventContextMenu: function (e)
@@ -83,6 +84,8 @@ define(
                 console.error('You\'re attempting to access an image that is copyrighted by LNCurtis.com');
                 return false;
             }
+
+
 
         });
     });

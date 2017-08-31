@@ -143,6 +143,7 @@
         "suitecommerce/UrlHelper": "2.1.1",
         "suitecommerce/Utilities": "2.2.1",
         "suitecommerce/Wizard": "2.3.0",
+
         "third_parties/almond": "0.3.0",
         "third_parties/backbone.js": "1.1.2-custom",
         "third_parties/backbone.stickit": "0.8.0",
@@ -232,7 +233,6 @@
         "custom/LinkHierarchy": "1.0.0",
         "custom/Pacejet": "1.0.0",
         "themes/Firefighter": "1.0.0"
-
     },
     "tasksConfig": {
         "local": {
@@ -325,8 +325,8 @@
                     "Profile.Extension",
                     "Session.Extension",
                     "Wizard.Extension",
-                    "SC.Configuration.Extension"
-
+                    "SC.Configuration.Extension",
+                    "ProductDetails.Extension"
                 ],
                 "amdclean": true,
                 "amdConfig": {
@@ -465,7 +465,8 @@
                     "Profile.Extension",
                     "Session.Extension",
                     "Wizard.Extension",
-                    "SC.Configuration.Extension"
+                    "SC.Configuration.Extension",
+                    "ProductDetails.Extension"
                 ],
                 "amdclean": true,
                 "amdConfig": {
@@ -599,7 +600,8 @@
                     "ProductList.Extension",
                     "Session.Extension",
                     "Wizard.Extension",
-                    "SC.Configuration.Extension"
+                    "SC.Configuration.Extension",
+                    "ProductDetails.Extension"
                 ],
                 "amdclean": true,
                 "amdConfig": {

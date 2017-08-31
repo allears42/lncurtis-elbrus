@@ -22,7 +22,7 @@ define(
         _.extend( ProductListUtils.prototype, {
 
             /*
-            todo@shelby:
+            todo@shelby
                 The override from Vinson was identical to the base;
                 however Elbrus base has some differences regarding "Product Lists" & "Translate" is
                 that meaningful?
