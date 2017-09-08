@@ -6,19 +6,23 @@ define(
     'ProductDetails.Base.View.Extension'
     ,	[
         'ProductDetails.Base.View'
+    ,   'ProductDetails.Full.View'
+		
     ,   'LiveOrder.Model'
-    ,   'ProductDetails.Options.Selector.View'
     ,   'ProductDetails.ImageGallery.View'
     ,   'ProductLine.Stock.View'
+    ,   'ProductViews.SizeChart'
 
     ,	'underscore'
     ]
     ,	function(
         ProductDetailsBaseView
+    ,   ProductDetailsFullView
+    
     ,   LiveOrderModel
-    ,   ProductDetailsOptionsSelectorView
     ,   ProductDetailsImageGalleryView
     ,   ProductLineStockView
+    ,   ProductViewsSizeChartView
 
     ,	_
     )
@@ -27,10 +31,7 @@ define(
 
         _.extend( ProductDetailsBaseView.prototype, {
 
-            showModalPageHeader: true
-
-        ,   events: _.extend( ProductDetailsBaseView.prototype.events,
-            {
+            events: _.extend({}, ProductDetailsBaseView.prototype.events, {
                 'click [data-action="print-page"]': 'triggerPrint'
             ,   'click [data-action="show-size-chart"]': 'showSizeChart'
             ,   'contextmenu img': 'preventContextMenu'
@@ -40,7 +41,6 @@ define(
             {
                 fn.apply(this, _.toArray(arguments).slice(1));
                 this.cart = LiveOrderModel.getInstance();
-
             })
 
         ,   childViews: _.extend( ProductDetailsBaseView.prototype.childViews,
@@ -84,8 +84,35 @@ define(
                 console.error('You\'re attempting to access an image that is copyrighted by LNCurtis.com');
                 return false;
             }
-
-
+	
+        ,   triggerPrint: function (e)
+	        {
+		        window.print();
+	        }
+	
+        ,   showSizeChart: function (e)
+	        {
+		
+		        var model = this.model;
+		        this.application.getLayout().showInModal(new ProductViewsSizeChartView({
+			        layout: this
+			        , application: this.application
+			        , model: model
+		        }));
+	        }
+	
+	
+        ,   getContext: _.wrap(ProductDetailsBaseView.prototype.getContext, function (fn) {
+		        var returnVariable = fn.apply(this, _.toArray(arguments).slice(1))
+		        ,   isCallForPricing = this.model.get('item').get('_isCallForPricing');
+		
+		        _.extend(returnVariable, {
+					isCallForPricing: isCallForPricing
+		        });
+		
+		        return returnVariable;
+            })
 
         });
+        
     });

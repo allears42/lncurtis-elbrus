@@ -3,7 +3,7 @@
 */
 
 define(
-    'ProductList.Model.Extension'
+    'ProductList.Model.CallForPricing.Extension'
     ,	[
         'ProductList.Model'
 

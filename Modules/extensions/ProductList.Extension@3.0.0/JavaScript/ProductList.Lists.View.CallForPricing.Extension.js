@@ -3,7 +3,7 @@
 */
 
 define(
-    'ProductList.Lists.View.Extension'
+    'ProductList.Lists.View.CallForPricing.Extension'
     ,	[
         'ProductList.Lists.View'
     ,   'LiveOrder.Model'

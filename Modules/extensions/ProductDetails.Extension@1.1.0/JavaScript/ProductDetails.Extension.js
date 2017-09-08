@@ -6,13 +6,17 @@ define(
     'ProductDetails.Extension'
     ,	[
         'ProductDetails.Base.View.Extension'
-    ,   'ProductDetails.Options.Selector.View.Extension'
+    ,   'ProductDetails.Full.View.Extension'
+    ,   'ProductDetails.Information.View.Extension'
+    ,   'ProductDetails.QuickView.View.Extension'
 
     ,	'underscore'
     ]
     ,	function(
         ProductDetailsBaseViewExtension
-    ,   ProductDetailsOptionsSelectorViewExtension
+    ,   ProductDetailsFullViewExtension
+    ,   ProductDetailsInformationViewExtension
+    ,   ProductDetailsQuickViewViewExtension
     ,	_
     )
     {
@@ -20,6 +24,8 @@ define(
 
         return {
             ProductDetailsBaseViewExtension: ProductDetailsBaseViewExtension
-        ,   ProductDetailsOptionsSelectorViewExtension: ProductDetailsOptionsSelectorViewExtension
+        ,   ProductDetailsFullViewExtension: ProductDetailsFullViewExtension
+        ,   ProductDetailsInformationViewExtension: ProductDetailsInformationViewExtension
+        ,   ProductDetailsQuickViewViewExtension: ProductDetailsQuickViewViewExtension
         }
     });

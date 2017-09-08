@@ -21,6 +21,8 @@
 	font-weight: $sc-font-weight-semibold;
 	width: 100%;
 	text-align:center;
+  padding-left: $sc-base-padding*2;
+  padding-right: $sc-base-padding*2;
 }
 
 .product-list-control-button-wishlist:focus {
