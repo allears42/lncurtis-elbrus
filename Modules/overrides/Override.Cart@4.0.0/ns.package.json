@@ -24,6 +24,9 @@
         "suitecommerce/Cart@4.0.0/Templates/cart_confirmation_modal.tpl": "Templates/cart_confirmation_modal.tpl",
         "suitecommerce/Cart@4.0.0/Templates/cart_detailed.tpl": "Templates/cart_detailed.tpl",
         "suitecommerce/Cart@4.0.0/Templates/cart_item_actions.tpl": "Templates/cart_item_actions.tpl",
+        "suitecommerce/Cart@4.0.0/Templates/cart_item_summary.tpl": "Templates/cart_item_summary.tpl",
+        "suitecommerce/Cart@4.0.0/Templates/cart_lines.tpl": "Templates/cart_lines.tpl",
+        "suitecommerce/Cart@4.0.0/Templates/cart_quickaddtocart.tpl": "Templates/cart_quickaddtocart.tpl",
         "suitecommerce/Cart@4.0.0/Templates/cart_summary.tpl": "Templates/cart_summary.tpl"
 
     }

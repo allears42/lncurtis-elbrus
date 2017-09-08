@@ -64,7 +64,7 @@
 
 		background:$sc-color-theme-background;
 		padding:0;
-		margin-bottom:$sc-small-margin * 2;
+		/*margin-bottom:$sc-small-margin * 2;*/
 		display: block;
 	}
 }
@@ -81,6 +81,11 @@
 	@media (min-width: $screen-sm-min), (orientation: landscape) {
 		@extend .button-proceed-checkout;
 		display: block;
+
+    margin-left: -1px;
+    margin-right: -1px;
+    max-width: none;
+    width: auto;
 	}
 }
 

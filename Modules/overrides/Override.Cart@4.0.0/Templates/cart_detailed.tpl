@@ -1,8 +1,5 @@
 {{!
-	© 2016 NetSuite Inc.
-	User may not copy, modify, distribute, or re-bundle or otherwise make available this code;
-	provided, however, if you are an authorized user with a NetSuite account or log-in, you
-	may use this code subject to the terms that govern your access and use.
+	© 2017 LN Curtis
 }}
 
 <div class="cart-detailed">
@@ -30,30 +27,24 @@
 			</div>
 			<div data-confirm-message class="cart-detailed-confirm-message"></div>
 
-			<table class="cart-detailed-item-view-cell-actionable-table-outer">
+			<table class="cart-detailed-product-view-cell-actionable-table-outer">
 				<thead>
 					<tr>
-						<th class="item-views-cell-actionable-table-header-first">
+						<th class="product-views-cell-actionable-table-header-first">
 							Item
 						</th>
-						<th class="item-views-cell-actionable-table-header-middle item-views-cell-actionable-table-header-amount">
+						<th class="product-views-cell-actionable-table-header-middle product-views-cell-actionable-table-header-amount">
 							<span>Price</span>
 						</th>
-						<th class="item-views-cell-actionable-table-header-middle item-views-cell-actionable-table-header-quantity">
+						<th class="product-views-cell-actionable-table-header-middle product-views-cell-actionable-table-header-quantity">
 							<span>Quantity</span>
 						</th>
-						<th class="item-views-cell-actionable-table-header-last">
+						<th class="product-views-cell-actionable-table-header-last">
 							Total
 						</th>
 					</tr>
 				</thead>
-				<tbody>
-					<tr>
-						<td colspan="4" class="cart-detailed-item-view-cell-actionable-td-outer">
-							<div data-view="Item.ListNavigable"></div>
-						</td>
-					</tr>
-				</tbody>
+				<tbody data-view="Item.ListNavigable"></tbody>
 			</table>
 
 		</section>

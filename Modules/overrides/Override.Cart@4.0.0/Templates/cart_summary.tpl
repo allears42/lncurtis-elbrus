@@ -17,11 +17,11 @@
 					<span class="cart-summary-amount-subtotal">
 						{{ summary.subtotal_formatted }}
 					</span>
-						{{#if isSingleItem}}
-							{{translate 'Subtotal <span class="cart-summary-item-quantity-subtotal">$(0) item</span>'itemCount}}
-						{{else}}
-							{{translate 'Subtotal <span class="cart-summary-item-quantity-subtotal">$(0) items</span>' itemCount}}
-						{{/if}}
+					{{#if isSingleItem}}
+						{{translate 'Subtotal <span class="cart-summary-item-quantity-subtotal">$(0) item</span>'itemCount}}
+					{{else}}
+						{{translate 'Subtotal <span class="cart-summary-item-quantity-subtotal">$(0) items</span>' itemCount}}
+					{{/if}}
 				</p>
 				{{#if showEstimate}}
 					<div class="cart-summary-subtotal-legend">
@@ -52,8 +52,18 @@
 				</div>
 			{{/if}}
 
-			{{#if showEstimate}}
-				<!--<div class="cart-summary-expander-container">
+			{{#if showPickupInStoreLabel}}
+				<div class="cart-summary-pickup-container">
+					<p class="cart-summary-grid-float">
+						{{translate 'Pick Up'}}
+						<span class="cart-summary-pickup-label-free"> {{translate 'FREE'}}</span>
+					</p>
+				</div>
+			{{/if}}
+
+			{{#unless areAllItemsPickupable}}
+				{{#if showEstimate}}
+					<!--<div class="cart-summary-expander-container">
 					<div class="cart-summary-expander-head">
 						<a class="cart-summary-expander-head-toggle collapsed" data-toggle="collapse" data-target="#estimate-shipping-form" aria-expanded="false" aria-controls="estimate-shipping-form">
 							{{translate 'Estimate Tax &amp; Shipping'}} <i data-toggle="tooltip" class="cart-summary-expander-tooltip" title="{{translate '<b>Shipping Estimator</b><br>Shipping fees are based on your shipping location. Please enter your information to view estimated shipping costs.'}}" ></i><i class="cart-summary-expander-toggle-icon"></i>
@@ -75,14 +85,14 @@
 										</select>
 									</div>
 								{{/if}}
-								{{#if isZipCodeRequire}}
+						{{#if isZipCodeRequire}}
 									<div data-validation="control-group">
 										<label for="zip" class="cart-summary-label">
 											{{#if isDefaultCountryUS}}
-												{{translate 'Ship to the following zip code'}}
-											{{else}}
-												{{translate 'Ship to the following postal code'}}
-											{{/if}}
+							{{translate 'Ship to the following zip code'}}
+						{{else}}
+							{{translate 'Ship to the following postal code'}}
+						{{/if}}
 										</label>
 										<div data-validation="control">
 											<input type="text" name="zip" id="zip" class="cart-summary-zip-code" value="{{shippingZipCode}}" />
@@ -94,43 +104,43 @@
 						</div>
 					</div>
 				</div>-->
-			{{else}}
-				<div class="cart-summary-shipping-cost-applied">
-					<div class="cart-summary-grid">
-						<div class="cart-summary-label-shipto">
-							{{translate 'Ship to:'}}
-							<span class="cart-summary-label-shipto-success">{{shipToText}}</span>
-							<a href="#" data-action="remove-shipping-address">
-								<span class="cart-summary-remove-action"><i></i></span>
-							</a>
+				{{else}}
+					<div class="cart-summary-shipping-cost-applied">
+						<div class="cart-summary-grid">
+							<div class="cart-summary-label-shipto">
+								{{translate 'Ship to:'}}
+								<span class="cart-summary-label-shipto-success">{{shipToText}}</span>
+								<a href="#" data-action="remove-shipping-address">
+									<span class="cart-summary-remove-action"><i></i></span>
+								</a>
+							</div>
 						</div>
-					</div>
-					<p class="cart-summary-grid-float">
+						<p class="cart-summary-grid-float">
 						<span class="cart-summary-amount-shipping">
 							{{summary.shippingcost_formatted}}
 						</span>
 							{{translate 'Shipping'}}
-					</p>
+						</p>
 
-					{{#if showHandlingCost}}
-					<p class="cart-summary-grid-float">
+						{{#if showHandlingCost}}
+							<p class="cart-summary-grid-float">
 						<span class="cart-summary-amount-handling">
 							{{summary.handlingcost_formatted}}
 						</span>
-							{{translate 'Handling'}}
-					</p>
-					{{/if}}
+								{{translate 'Handling'}}
+							</p>
+						{{/if}}
 
-					<p class="cart-summary-grid-float">
+						<p class="cart-summary-grid-float">
 						<span class="cart-summary-amount-tax">
 							{{summary.taxtotal_formatted}}
 						</span>
 							{{translate 'Tax'}}
-					</p>
-				</div>
+						</p>
+					</div>
 
-				<div class="cart-summary-total">
-					<p class="cart-summary-grid-float">
+					<div class="cart-summary-total">
+						<p class="cart-summary-grid-float">
 						<span class="cart-summary-amount-total">
 							{{summary.total_formatted}}
 						</span>
@@ -139,9 +149,10 @@
 							{{else}}
 								{{translate 'Total'}}
 							{{/if}}
-					</p>
-				</div>
-			{{/if}}
+						</p>
+					</div>
+				{{/if}}
+			{{/unless}}
 
 			{{#if showActions}}
 				<div class="cart-summary-button-container">
@@ -152,7 +163,7 @@
 					{{#if showPaypalButton}}
 						<div class="cart-summary-btn-paypal-express">
 							<a href="#" data-touchpoint="checkout" data-hashtag="#" data-parameters="paypalexpress=T">
-										<img src="{{paypalButtonImageUrl}}" alt="PayPal Express" />
+								<img src="{{paypalButtonImageUrl}}" alt="PayPal Express"/>
 							</a>
 						</div>
 					{{/if}}
@@ -164,8 +175,9 @@
 					{{/if}}
 				</div>
 			{{/if}}
+
 			{{#if showPromocodeForm}}
-				<div class="cart-summary-grid">
+				<div class="cart-summary-grid cart-summary-promocode-container">
 					<div class="cart-summary-expander-head">
 						<a class="cart-summary-expander-head-toggle collapsed" data-toggle="collapse" data-target="#promo-code-container" aria-expanded="false" aria-controls="promo-code-container">
 							{{translate 'Have a Promo Code?'}}

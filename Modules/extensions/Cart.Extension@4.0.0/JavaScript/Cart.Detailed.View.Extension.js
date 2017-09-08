@@ -7,13 +7,14 @@ define(
 	'Cart.Detailed.View.Extension'
 	, [
 		'Cart.Detailed.View'
-	, 	'Backbone.CompositeView'
-	, 	'Backbone.FormView'
+		
 	,	'Backbone.CollectionView'
 	, 	'Cart.Summary.View'
 	,	'Cart.Lines.View'
 	,	'Cart.Item.Summary.View'
 	, 	'Cart.Item.Actions.View'
+	,	'Cart.Item.Total.View'
+	
 	,	'RecentlyViewedItems.View'
 
 	, 	'GlobalViews.Message.View'
@@ -23,13 +24,14 @@ define(
 	]
 	, function (
 		CartDetailedView
-	, 	BackboneCompositeView
-	, 	BackboneFormView
+		
 	,	BackboneCollectionView
 	, 	CartSummaryView
 	,	CartLinesView
 	,	CartItemSummaryView
     , 	CartItemActionsView
+	,	CartItemTotalView
+	
 	,	RecentlyViewedItemsView
 	, 	GlobalViewsMessageView
 	, 	Backbone
@@ -47,13 +49,14 @@ define(
 			, initialize: _.wrap(CartDetailedView.prototype.initialize, function (fn, options) {
 				fn.apply(this, _.toArray(arguments).slice(1));
 				
+				
 				// custom handling for items added from related
-				// todo: is this event event fired anymore? 'itemAddedFromRelated'
 				var self = this;
 				this.model.on('itemAddedFromRelated', function () {
 					self.showContent();
 					jQuery(document).scrollTop(0);
 				}, this);
+				
 				
 				// custom handling for window resize event
 				this.windowWidth = jQuery(window).width();
@@ -108,6 +111,8 @@ define(
 						});
 					}
 					
+					console.log(line);
+					
 					placeholder = line.find('[data-type="alert-placeholder"]');
 					this.hideError(line);
 				}
@@ -133,7 +138,7 @@ define(
 				placeholder.append(global_view_message.render().$el.html());
 				
 				// custom - scroll to error
-				jQuery(document).scrollTop(placeholder.offset().top - 40);
+				jQuery(document).scrollTop(placeholder.offset().top - 150);
 				
 				// Re Enables all posible disableded buttons of the line or the entire view
 				if (line) {
@@ -144,111 +149,32 @@ define(
 				}
 			}
 			
-			// override for custom handling of back ordeded and OOS items
-			, updateItemQuantity: function (e) {
-				var self = this
-					, $line = null
-					, $form = this.$(e.target).closest('form')
-					, options = $form.serializeObject()
-					, internalid = options.internalid
-					, line = this.model.get('lines').get(internalid)
-					, $input = $form.find('[name="quantity"]')
-					, validInput = this.validInputValue($input[0]);
-				
-				if (!line || this.isRemoving) {
-					return;
-				}
-				
-				if (!validInput || options.quantity) {
-					var new_quantity = parseInt(options.quantity, 10)
-						, item = line.get('item')
-						, min_quantity = item ? item.get('_minimumQuantity', true) : line.get('minimumquantity')
-						, current_quantity = parseInt(line.get('quantity'), 10)
-						// custom - get stock level
-						, stock_level = item.get("_stock", true)
-						, allowBackorders = item.get("_allowBackorders", true);
-					
-					// customize calculations around new quantity
-					new_quantity = (new_quantity >= min_quantity && new_quantity) ? new_quantity : current_quantity;
-					
-					if (new_quantity > stock_level && !allowBackorders) {
-						new_quantity = stock_level;
-						self.showError("<span>Limited quantities, only " + stock_level + " available.</span>", this.$('#' + internalid + ' + .item-summary-line-2'), false);
-					}
-					
-					$input.val(new_quantity);
-					
-					if (new_quantity !== current_quantity) {
-						
-						$line = this.$('#' + internalid);
-						$input.val(new_quantity).prop('disabled', true);
-						line.set('quantity', new_quantity);
-						
-						var invalid = line.validate();
-						
-						if (!invalid) {
-							var update_promise = this.model.updateLine(line);
-							
-							this.disableElementsOnPromise(update_promise, '#' + internalid + ' button');
-							
-							update_promise.fail(function (jqXhr) {
-								jqXhr.preventDefault = true;
-								var result = JSON.parse(jqXhr.responseText);
-								
-								self.showError(result.errorMessage, $line, result.errorDetails);
-								line.set('quantity', current_quantity);
-							}).always(function () {
-								$input.prop('disabled', false);
-							});
-						}
-						else {
-							var placeholder = this.$('#' + internalid + ' [data-type="alert-placeholder"]');
-							placeholder.empty();
-							
-							_.each(invalid, function (value) {
-								var global_view_message = new GlobalViewsMessageView({
-									message: value
-									, type: 'error'
-									, closable: true
-								});
-								
-								placeholder.append(global_view_message.render().$el.html());
-							});
-							
-							$input.prop('disabled', false);
-							line.set('quantity', current_quantity);
-						}
-					}
-				}
-			}
-			
 			, childViews: _.extend({}, CartDetailedView.prototype.childViews, {
-				'Item.ListNavigable': function () {
-					// add useLinePrice variable
+				'RecentlyViewed.Items': function () {
+					// add child view options
+					return new RecentlyViewedItemsView(
+					{
+						application: this.application
+					,   childViewOptions: {
+							showAddToCart: true
+						}
+					});
+				}
+				
+				, 'Item.ListNavigable': function () {
 					return new BackboneCollectionView({
 						collection: this.model.get('lines')
 						, viewsPerRow: 1
 						, childView: CartLinesView
 						, childViewOptions: {
 							navigable: true
-							, useLinePrice: true
 							, application: this.application
 							, SummaryView: CartItemSummaryView
 							, ActionsView: CartItemActionsView
+							, TotalView: CartItemTotalView
 							, showAlert: false
 						}
 					});
-				}
-				
-				, 'RecentlyViewed.Items': function () {
-					// add child view options
-					return new RecentlyViewedItemsView(
-						{
-							application: this.application
-							, childViewOptions: {
-							showAddToCart: true
-						}
-						});
 				}
 			})
 			

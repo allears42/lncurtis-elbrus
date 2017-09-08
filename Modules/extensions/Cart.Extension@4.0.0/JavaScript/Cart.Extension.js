@@ -7,21 +7,21 @@ define(
 	'Cart.Extension'
 ,	[
 		'Cart.Confirmation.View.Extension'
-	,	'Cart.Detailed.View'
 	,	'Cart.Detailed.View.Extension'
+	,	'Cart.Lines.View.Extension'
 	]
 ,	function(
         CartConfirmationViewExtension
-	,	CartDetailedView
 	,	CartDetailedViewExtension
+	,	CartLinesViewExtension
 	)
 {
 	'use strict';
 	
 	return {
         CartConfirmationViewExtension: CartConfirmationViewExtension
-	,	CartDetailedView: CartDetailedView
 	,	CartDetailedViewExtension: CartDetailedViewExtension
+	,	CartLinesViewExtension: CartLinesViewExtension
 	}
 
 });
