@@ -3,7 +3,7 @@
 */
 
 define(
-    'RecentlyViewedItems.Collection.Extension'
+    'RecentlyViewedItems.Collection.Fix'
     ,	[
         'RecentlyViewedItems.Collection'
 
@@ -39,7 +39,9 @@ define(
 
                 // can't be longer than 36
                 items_ids = items_ids.length > 36 ? items_ids.slice(0, 36) : items_ids;
-                //console.log(items_ids);
+	            // can't have a leading comma
+	            if(items_ids.indexOf(",") === 0) items_ids = items_ids.replace(",", "");
+	            //console.log(items_ids);
 
                 if (items_ids)
                 {

@@ -15,8 +15,6 @@
     }
 
     , "overrides": {
-        "suitecommerce/ProductDetails@1.0.0/Configuration/ProductDetails.Information.json" : "Configuration/ProductDetails.Information.json",
-
         "suitecommerce/RecentlyViewedItems@2.3.0/Templates/recently_viewed_items.tpl" : "Templates/recently_viewed_items.tpl"
     }
 
