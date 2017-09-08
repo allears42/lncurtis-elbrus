@@ -30,8 +30,7 @@ define('Cart.Item.Summary.View.BackOrders'
 		   ,    current_quantity = this.model.get('quantity')
 			,   allowBackorders = this.model.get('item').get('_allowBackorders', true);
 			
-		    console.log(stock_level, current_quantity, !this.allowBackorders && current_quantity > stock_level);
-			
+		    //console.log(stock_level, current_quantity, !this.allowBackorders && current_quantity > stock_level);
 			
 			_.extend(returnVariable, {
 				//@property {String} showMawQuantity

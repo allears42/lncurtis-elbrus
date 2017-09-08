@@ -71,7 +71,7 @@
 
 .cart-detailed-header {
   @extend .cart-title !optional;
-  @extend .row;
+  overflow: hidden;
 }
 
 .cart-detailed-savedforlater {

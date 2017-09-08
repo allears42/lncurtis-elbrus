@@ -12,29 +12,15 @@
 	<a {{{itemURL}}} class="item-relations-related-item-title">
 		<span itemprop="name">{{itemName}}</span>
 	</a>
-	<div class="item-relations-related-item-price" data-view="Item.Price">
-	</div>
+	<!--<div class="item-relations-related-item-price" data-view="Item.Price">
+	</div>-->
 
 	{{#if showRating}}
 		<!--<div class="item-relations-related-item-rate" data-view="Global.StarRating">
 		</div>-->
 	{{/if}}
 
-	{{#if canAddToCart}}
-		<form class="facets-item-cell-grid-add-to-cart" data-toggle="add-to-cart">
-			<input class="facets-item-cell-grid-add-to-cart-itemid" type="hidden" value="{{itemId}}" name="item_id"/>
-			<div class="col-xs-4">
-				<input name="quantity" class="facets-item-cell-grid-add-to-cart-quantity" min="1" value="{{minQuantity}}"/>
-			</div>
-			<div class="col-xs-8 facets-item-cell-grid-add-to-cart-button-outer">
-				<input type="submit" class="facets-item-cell-grid-add-to-cart-button" value="{{translate 'Add to Cart'}}"/>
-			</div>
-		</form>
-	{{else}}
-		{{#if showAddToCart}}
-			<a href="{{itemURL}}" class="facets-item-cell-grid-view-details-button">{{translate 'View All Options'}}</a>
-		{{/if}}
-	{{/if}}
+	<div data-view="Cart.QuickAddToCart"></div>
 </div>
 
 

@@ -1,5 +1,7 @@
 
 .cart-lines-row {
+  border-bottom: 1px solid $sc-color-theme-border;
+
   table {
     td {
       @media (min-width: $screen-sm-min) {
@@ -129,4 +131,8 @@ div.cart-detailed-print-page {
       display: none;
     }
   }
+}
+
+.transaction-line-views-options-selected-content {
+  margin-bottom: $sc-base-margin*2;
 }

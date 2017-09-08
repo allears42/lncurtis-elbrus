@@ -346,3 +346,35 @@
     }
   }
 }
+
+
+.item-relations-related-item-title {
+  @extend .small-title-navigable;
+  text-align:center;
+  font-weight:normal;
+  text-transform:capitalize;
+  margin-bottom:$sc-small-margin;
+  display:block;
+  position:relative;
+  min-height :70px;
+  color: $sc-color-copy;
+}
+
+.recently-viewed-cell-item {
+  .product-views-price {
+    @extend .small-price;
+    margin-bottom: $sc-small-margin;
+    position: relative;
+    padding: $sc-base-padding 0;
+    border-top: 1px solid $sc-color-theme-border;
+    border-bottom: 1px solid $sc-color-theme-border;
+  }
+
+  .product-views-price-lead {
+    @extend .middle-price;
+    color: $sc-color-dark-copy;
+    @media (min-width:$screen-md-min) {
+      font-size: $sc-h4-font-size;
+    }
+  }
+}

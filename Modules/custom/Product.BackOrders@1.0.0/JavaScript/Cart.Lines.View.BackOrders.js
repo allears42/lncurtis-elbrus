@@ -23,8 +23,7 @@ define('Cart.Lines.View.BackOrders'
 				,   current_quantity = this.model.get('quantity')
 				,   allowBackorders = this.model.get('item').get('_allowBackorders', true);
 			
-			console.log(stock_level, current_quantity);
-			
+			//console.log(stock_level, current_quantity);
 			
 			_.extend(returnVariable, {
 				//@property {Boolean} showBackorderMessage
