@@ -25,9 +25,7 @@ define(
         'use strict';
 
         _.extend( FacetsItemCellView.prototype, {
-
-
-            childViews: _.extend( FacetsItemCellView.prototype.childViews, {
+			childViews: _.extend({}, FacetsItemCellView.prototype.childViews, {
                 'ItemViews.Stock': function()
                 {
                     return new ProductLineStockView({
@@ -59,5 +57,4 @@ define(
             })
 
         });
-
     });

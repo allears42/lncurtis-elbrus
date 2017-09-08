@@ -38,22 +38,7 @@
 	</div>
 	{{/if}}-->
 	<div data-view="ItemDetails.Options"></div>
-	{{#if canAddToCart}}
-		<form class="facets-item-cell-table-add-to-cart" data-toggle="add-to-cart">
-			<input class="facets-item-cell-table-add-to-cart-itemid" type="hidden" value="{{itemId}}" name="item_id">
-			<div class="col-xs-4 col-sm-2 col-sm-offset-4">
-				<input name="quantity" class="facets-item-cell-grid-add-to-cart-quantity" type="number" min="{{minQuantity}}" value="{{minQuantity}}" {{#if setMaxQuantity}}max="{{maxQuantity}}"{{/if}}/>
-			</div>
-			<div class="col-sm-6 col-xs-8">
-				<input type="submit" class="facets-item-cell-grid-add-to-cart-button" value="{{translate 'Add to Cart'}}"/>
-			</div>
-			<div data-type="alert-placeholder-module"></div>
-		</form>
-	{{else}}
-		<div class="facets-item-cell-grid-view-details">
-			<a href="{{url}}" class="facets-item-cell-grid-view-details-button">{{translate 'View All Options'}}</a>
-		</div>
-	{{/if}}
+	<div data-view="Cart.QuickAddToCart"></div>
 	<!--<div class="facets-item-cell-table-stock">
 		<div data-view="ItemViews.Stock"></div>
 	</div>-->
