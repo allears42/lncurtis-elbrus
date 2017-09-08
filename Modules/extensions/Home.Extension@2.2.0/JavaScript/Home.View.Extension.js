@@ -61,19 +61,18 @@ define(
 
 		,	getContext: _.wrap( HomeView.prototype.getContext, function(fn)
 			{
-
 				var self = this
-				,   returnVariable = fn.apply(self, _.toArray(arguments).slice(1))
                 ,   carouselImages = Configuration.get('home.carouselImages', []);
 
-				_.extend(returnVariable , {
-                    imageHomeSize: Utils.getViewportWidth() < 480 ? '480' : 'homeslider'
+			console.log(carouselImages)
+			return {
+				// @property {String} imageResizeId
+				imageHomeSize: Utils.getViewportWidth() < 480 ? '480' : 'homeslider'
 				,   isDesktop: Utils.getViewportWidth() > 991
 				,   isTablet: Utils.getViewportWidth() > 767
-                ,   carouselImages: carouselImages
-                });
-
-			return returnVariable
+				// @property {Array} carouselImages
+				,   carouselImages: carouselImages
+			}
 			})
 
         });

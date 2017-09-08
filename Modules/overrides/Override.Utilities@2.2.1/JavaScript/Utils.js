@@ -647,7 +647,7 @@ define('Utils'
 				, fileReplace = file ? file : '';
 			//return base_url ? base_url.replace('{{file}}', fileReplace) : file;
 			//CUSTOM - FIX for double replacement
-			return base_url && fileReplace.indexOf(base_url.replace('{{file}}', '')) < 0 ? base_url.replace('{{file}}', fileReplace) : file;
+			return base_url && fileReplace &&  fileReplace.indexOf(base_url.replace('{{file}}', '')) < 0 ? base_url.replace('{{file}}', fileReplace) : file;
 		}
 		
 		// @method getAbsoluteUrlOfNonManagedResources @param {String} file @returns {String}

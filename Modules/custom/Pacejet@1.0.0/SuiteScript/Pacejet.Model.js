@@ -374,7 +374,7 @@ define(
 
                             //  update the summary total and rate
                             if (results.shipmethods.length) {
-                                var selectedShipmethod = _.find(results.shipmethods, function (e) { return e.internalid == results.shipmethod; });
+                                var selectedShipmethod = _.find(results.shipmethods, function (e) { return e.internalid === results.shipmethod; });
                                 //nlapiLogExecution('debug', 'selectedShipmethod', JSON.stringify(selectedShipmethod,null,2));
                                 if (selectedShipmethod) {
                                     // update the total by the delta between the existing shipping amount and the pacejet-provided rate
