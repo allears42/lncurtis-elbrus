@@ -8,6 +8,7 @@ define(
         'NavigationHelper.Plugins.Standard'
     ,   'SC.Configuration'
 
+    ,	'jQuery'
     ,	'underscore'
 
     ]
@@ -15,13 +16,14 @@ define(
         NavigationHelperPluginsStandard
     ,   Configuration
 
+    , 	jQuery
     , 	_
 
     )
     {
         'use strict';
 
-        _.extend( NavigationHelperPluginsStandard.prototype, {
+        _.extend( NavigationHelperPluginsStandard, {
 
             clickNavigation: function (layout, e)
             {
