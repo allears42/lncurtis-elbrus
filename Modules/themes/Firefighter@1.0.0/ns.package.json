@@ -9,9 +9,13 @@
         "suitecommerce/Address@2.4.0/Sass/_address-list.scss": "Sass/Address/_address-list.scss",
 
         "suitecommerce/Cart@4.0.0/Sass/_cart.scss": "Sass/Cart/_cart.scss",
+        "suitecommerce/Cart@4.0.0/Sass/_cart-add-to-cart-button.scss": "Sass/Cart/_cart-add-to-cart-button.scss",
         "suitecommerce/Cart@4.0.0/Sass/_cart-confirmation-modal.scss": "Sass/Cart/_cart-confirmation-modal.scss",
         "suitecommerce/Cart@4.0.0/Sass/_cart-detailed.scss": "Sass/Cart/_cart-detailed.scss",
+        "suitecommerce/Cart@4.0.0/Sass/_cart-item-actions.scss": "Sass/Cart/_cart-item-actions.scss",
         "suitecommerce/Cart@4.0.0/Sass/_cart-item-summary.scss": "Sass/Cart/_cart-item-summary.scss",
+        "suitecommerce/Cart@4.0.0/Sass/_cart-lines.scss": "Sass/Cart/_cart-lines.scss",
+        "suitecommerce/Cart@4.0.0/Sass/_cart-quickaddtocart.scss": "Sass/Cart/_cart-quickaddtocart.scss",
         "suitecommerce/Cart@4.0.0/Sass/_cart-summary.scss": "Sass/Cart/_cart-summary.scss",
 
         "suitecommerce/CheckoutApplication@2.3.0/Sass/_checkout-layout.scss": "Sass/CheckoutApplication/_checkout-layout.scss",
@@ -74,6 +78,10 @@
         "suitecommerce/Overview@1.1.2/Sass/_overview-home.scss" : "Sass/Overview/_overview-home.scss",
         "suitecommerce/Overview@1.1.2/Sass/_overview-shipping.scss" : "Sass/Overview/_overview-shipping.scss",
 
+        "suitecommerce/ProductDetails@1.0.0/Sass/_product-details-full.scss" : "Sass/ProductDetails/_product-details-full.scss",
+        "suitecommerce/ProductDetails@1.0.0/Sass/_product-details-quantity.scss" : "Sass/ProductDetails/_product-details-quantity.scss",
+        "suitecommerce/ProductDetails@1.0.0/Sass/_product-details-quickview.scss" : "Sass/ProductDetails/_product-details-quickview.scss",
+
         "suitecommerce/ProductList@3.0.0/Sass/_product-list-added-to-cart.scss" : "Sass/ProductList/_product-list-added-to-cart.scss",
         "suitecommerce/ProductList@3.0.0/Sass/_product-list-bulk-actions.scss" : "Sass/ProductList/_product-list-bulk-actions.scss",
         "suitecommerce/ProductList@3.0.0/Sass/_product-list-control.scss" : "Sass/ProductList/_product-list-control.scss",
@@ -95,6 +103,8 @@
         "suitecommerce/ShoppingApplication@4.0.0/Sass/_shopping-layout.scss" : "Sass/ShoppingApplication/_shopping-layout.scss",
 
         "suitecommerce/SiteSearch@2.1.2/Sass/_site-search.scss":"Sass/SiteSearch/_site-search.scss",
+
+        "suitecommerce/Transaction.Line.Views@1.0.0/Sass/_transaction-line-views-cell-actionable.scss":"Sass/Transaction.Line.Views/_transaction-line-views-cell-actionable.scss",
 
         "third_parties/twitter-bootstrap-sass@3.3.1/assets/stylesheets/bootstrap/_print.scss" : "Sass/twitter-bootstrap-sass/_print.scss",
         "third_parties/twitter-bootstrap-sass@3.3.1/assets/stylesheets/bootstrap/_variables.scss" : "Sass/twitter-bootstrap-sass/_variables.scss"

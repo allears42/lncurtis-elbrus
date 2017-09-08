@@ -145,13 +145,6 @@
   }
 }
 
-.facets-item-cell-grid-view-details-button {
-  @extend .button-secondary;
-  @extend .button-medium;
-  margin-top: $sc-base-margin;
-  padding-left: $sc-base-padding*2;
-  padding-right: $sc-base-padding*2;
-}
 
 .facets-item-cell-grid-sku {
   @extend .item-cell-sku;

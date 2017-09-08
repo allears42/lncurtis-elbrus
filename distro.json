@@ -173,7 +173,7 @@
         "overrides/Override.BackboneExtras": "2.4.0",
         "overrides/Override.Backbone.CollectionView": "1.2.0",
         "overrides/Override.Balance": "2.1.2",
-        "overrides/Override.Cart": "2.1.2",
+        "overrides/Override.Cart": "4.0.0",
         "overrides/Override.Case": "2.3.0",
         "overrides/Override.Categories": "3.0.1",
         "overrides/Override.CheckoutApplication": "2.3.0",
@@ -185,6 +185,7 @@
         "overrides/Override.GlobalViews": "1.4.0",
         "overrides/Override.Header": "1.3.0",
         "overrides/Override.Home": "2.2.0",
+        "overrides/Override.ItemRelations": "3.0.0",
         "overrides/Override.ItemsSearcher": "2.0.0",
         "overrides/Override.jQuery-bxslider": "4.1.2-custom",
         "overrides/Override.jQueryExtras": "2.3.0",
@@ -193,13 +194,16 @@
         "overrides/Override.MyAccountApplication": "3.1.0",
         "overrides/Override.OrderHistory": "5.0.0",
         "overrides/Override.OrderWizard.Module.PaymentMethod": "4.0.0",
+        "overrides/Override.ProductDetails": "1.0.0",
+        "overrides/Override.ProductLine": "1.0.0",
         "overrides/Override.ProductList": "3.0.0",
+        "overrides/Override.ProductViews": "1.0.0",
         "overrides/Override.Profile": "3.3.0",
         "overrides/Override.RecentlyViewedItems": "2.3.0",
         "overrides/Override.ShoppingApplication": "4.0.0",
         "overrides/Override.SiteSearch": "2.1.2",
         "overrides/twitter-bootstrap-sass": "3.3.1",
-        "overrides/Utilities": "2.2.1",
+        "overrides/Override.Utilities": "2.2.1",
 
         "extensions/Backbone.FormView.Extension": "1.2.0",
         "extensions/Cart.Extension": "4.0.0",
@@ -210,6 +214,7 @@
         "extensions/GlobalViews.Extension": "1.4.0",
         "extensions/Header.Extension": "1.3.0",
         "extensions/Home.Extension": "2.2.0",
+        "extensions/Item.Extension": "1.0.0",
         "extensions/ItemRelations.Extension": "3.0.0",
         "extensions/ItemsSearcher.Extension": "2.0.0",
         "extensions/ListHeader.Extension": "2.3.0",
@@ -221,17 +226,22 @@
         "extensions/ProductDetails.Extension": "1.1.0",
         "extensions/ProductList.Extension": "3.0.0",
         "extensions/Profile.Extension": "3.0.0",
-        "extensions/RecentlyViewedItems.Extension": "2.3.0",
+        "extensions/RecentlyViewedItems.Fix": "2.3.0",
         "extensions/SC.Configuration.Extension": "4.0.0",
         "extensions/Session.Extension": "2.2.1",
         "extensions/SiteSearch.Extension": "2.1.2",
         "extensions/Wizard.Extension": "2.2.0",
 
+        "custom/CallForPricing": "1.0.0",
         "custom/CreditCard.Icon": "1.0.0",
         "custom/CustomerServiceForm": "1.0.0",
         "custom/FacetContent": "1.0.0",
         "custom/LinkHierarchy": "1.0.0",
         "custom/Pacejet": "1.0.0",
+        "custom/Product.BackOrders": "1.0.0",
+        "custom/Product.Options.Single": "1.0.0",
+        "custom/ProductViews.SizeChart": "1.0.0",
+
         "themes/Firefighter": "1.0.0"
     },
     "tasksConfig": {
@@ -300,10 +310,14 @@
                     "Newsletter",
                     "ProductDetailToQuote",
                     "StoreLocator",
+                    "CallForPricing",
+                    "CreditCard.Icon",
                     "CustomerServiceForm",
                     "FacetContent",
                     "LinkHierarchy",
-                    "CreditCard.Icon",
+                    "Product.BackOrders",
+                    "Product.Options.Single",
+                    "ProductViews.SizeChart",
                     "Backbone.FormView.Extension",
                     "Cart.Extension",
                     "Categories.Extension",
@@ -313,6 +327,7 @@
                     "GlobalViews.Extension",
                     "Header.Extension",
                     "Home.Extension",
+                    "Item.Extension",
                     "ItemRelations.Extension",
                     "ItemsSearcher.Extension",
                     "ListHeader.Extension",
@@ -321,12 +336,13 @@
                     "NavigationHelper.Extension",
                     "OrderHistory.Extension",
                     "Overview.Extension",
+                    "ProductDetails.Extension",
                     "ProductList.Extension",
                     "Profile.Extension",
-                    "Session.Extension",
-                    "Wizard.Extension",
+                    "RecentlyViewedItems.Fix",
                     "SC.Configuration.Extension",
-                    "ProductDetails.Extension"
+                    "Session.Extension",
+                    "Wizard.Extension"
                 ],
                 "amdclean": true,
                 "amdConfig": {
@@ -440,20 +456,17 @@
                     "GoogleMap",
                     "GoogleMap.Configuration",
                     "StoreLocatorAccessPoints",
-                    "Backbone.FormView.Extension",
-                    "Session.Extension",
-                    "LinkHierarchy",
+                    "CallForPricing",
                     "CreditCard.Icon",
+                    "LinkHierarchy",
+                    "Product.BackOrders",
                     "Backbone.FormView.Extension",
-                    "Cart.Extension",
                     "Categories.Extension",
                     "ErrorManagement.Extension",
-                    "Facets.Extension",
                     "Footer.Extension",
                     "GlobalViews.Extension",
                     "Header.Extension",
-                    "Home.Extension",
-                    "ItemRelations.Extension",
+                    "Item.Extension",
                     "ItemsSearcher.Extension",
                     "ListHeader.Extension",
                     "LiveOrder.Extension",
@@ -463,10 +476,9 @@
                     "Overview.Extension",
                     "ProductList.Extension",
                     "Profile.Extension",
-                    "Session.Extension",
-                    "Wizard.Extension",
                     "SC.Configuration.Extension",
-                    "ProductDetails.Extension"
+                    "Session.Extension",
+                    "Wizard.Extension"
                 ],
                 "amdclean": true,
                 "amdConfig": {
@@ -578,17 +590,15 @@
                     "GoogleMap.Configuration",
                     "StoreLocatorAccessPoints",
                     "StoreLocator",
+                    "CallForPricing",
                     "CreditCard.Icon",
+                    "LinkHierarchy",
                     "Backbone.FormView.Extension",
-                    "Cart.Extension",
-                    "Categories.Extension",
                     "ErrorManagement.Extension",
-                    "Facets.Extension",
                     "Footer.Extension",
                     "GlobalViews.Extension",
                     "Header.Extension",
-                    "Home.Extension",
-                    "ItemRelations.Extension",
+                    "Item.Extension",
                     "ItemsSearcher.Extension",
                     "ListHeader.Extension",
                     "LiveOrder.Extension",
@@ -598,10 +608,9 @@
                     "Overview.Extension",
                     "Profile.Extension",
                     "ProductList.Extension",
-                    "Session.Extension",
-                    "Wizard.Extension",
                     "SC.Configuration.Extension",
-                    "ProductDetails.Extension"
+                    "Session.Extension",
+                    "Wizard.Extension"
                 ],
                 "amdclean": true,
                 "amdConfig": {
@@ -924,7 +933,7 @@
                         {
                             "module": "Firefighter",
                             "include": [
-                                "custom"
+                                "shopping"
                             ]
                         }
                     ]
@@ -1081,7 +1090,13 @@
                             ]
                         },
                         "Location.SCA",
-                        "LinkHierarchy"
+                        "LinkHierarchy",
+                        {
+                            "module": "Firefighter",
+                            "include": [
+                                "myaccount"
+                            ]
+                        }
                     ]
                 },
                 {
@@ -1187,7 +1202,14 @@
                         "StoreLocator",
                         "StoreLocatorAccessPoints",
                         "Footer",
-                        "Location.SCA"
+                        "Location.SCA",
+                        "LinkHierarchy",
+                        {
+                            "module": "Firefighter",
+                            "include": [
+                                "checkout"
+                            ]
+                        }
                     ]
                 }
             ]

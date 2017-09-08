@@ -1,0 +1,132 @@
+
+.cart-lines-row {
+  table {
+    td {
+      @media (min-width: $screen-sm-min) {
+        padding-top: $sc-base-padding*4;
+      }
+    }
+  }
+  .global-views-message {
+    margin-bottom: $sc-base-margin;
+    padding: $sc-base-padding 0;
+    border-bottom: 0;
+    span {
+      font-size: $sc-small-font-size;
+    }
+  }
+}
+
+.cart-lines-price .transaction-line-views-price-lead {
+  color: $sc-color-dark-copy;
+  line-height: $sc-target-size;
+  font-weight: normal;
+  font-size: $sc-h5-font-size;
+  @media (min-width: $screen-md-min) {
+    font-size: $sc-h4-font-size;
+  }
+}
+
+.cart-summary-promocode-container {
+  .cart-summary-expander-head-toggle,
+  .cart-summary-expander-body {
+    border: 0;
+  }
+}
+
+.cart-lines-row-seondary {
+  padding: 0;
+}
+
+.cart-detailed-print-page {
+  @extend .product-details-print-page;
+}
+
+div.cart-detailed-print-page {
+  margin-top: 0;
+  vertical-align: top;
+
+}
+
+.product-views-cell-actionable-table-last {
+  @media (min-width: $screen-sm-min) {
+
+    text-align: right;
+  }
+}
+
+.cart-detailed-item-view-cell-actionable-td-outer {
+  padding: 0;
+}
+
+.product-views-cell-actionable-table-header-first {
+  padding-left: 0;
+}
+
+.cart-lines-table-middle-price {
+  @media (min-width: $screen-sm-min) {
+    text-align: right;
+  }
+}
+
+.product-views-cell-actionable-table-header-middle {
+  span {
+    display: inline-block;
+    text-align: center;
+  }
+}
+
+.product-views-cell-actionable-table-header-amount, .product-views-cell-actionable-table-header-quantity {
+  text-align: center;
+}
+
+.product-views-cell-actionable-table-header-amount,
+.cart-lines-table-middle-price {
+  width: 120px;
+}
+
+.cart-lines-table-middle-quantity,
+.product-views-cell-actionable-table-header-quantity {
+
+
+  @media (min-width: $screen-md-min) {
+    width: 100px;
+  }
+
+  @media (min-width: $screen-sm-min) {
+    width: 170px;
+  }
+}
+
+.cart-lines-table-last,
+.product-views-cell-actionable-table-header-last {
+  width: 120px;
+  @media (min-width: $screen-sm-min) {
+    text-align: right;
+    padding-right: 0;
+  }
+}
+
+.cart-detailed-product-view-cell-actionable-table-outer {
+  th {
+    padding-bottom: $sc-base-padding*2;
+  }
+  thead {
+    tr {
+      border-bottom: 1px solid $sc-color-theme-border-dark;
+    }
+  }
+  @media screen and (max-width: $screen-sm) {
+    thead {
+      display: none;
+
+    }
+  }
+
+  .product-line-stock-msg-out {
+    padding-left: 0;
+    .product-line-stock-icon-out {
+      display: none;
+    }
+  }
+}
