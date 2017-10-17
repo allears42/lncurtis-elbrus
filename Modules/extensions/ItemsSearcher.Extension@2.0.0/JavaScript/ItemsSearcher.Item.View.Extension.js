@@ -29,7 +29,7 @@ define(
 				{
 					return new ProductViewsPriceView({
 						model: this.model
-					,	origin: 'ITEMCELL'
+					,	origin: 'ITEMCELL_SEARCH'
 					});
    				 }
 			})

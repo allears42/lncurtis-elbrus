@@ -9,11 +9,15 @@ define(
 		'Cart.Confirmation.View.Extension'
 	,	'Cart.Detailed.View.Extension'
 	,	'Cart.Lines.View.Extension'
+	,	'Cart.Confirmation.Helpers.Extension'
+	,	'Cart.QuickAddToCart.View.Extension'
 	]
 ,	function(
         CartConfirmationViewExtension
 	,	CartDetailedViewExtension
 	,	CartLinesViewExtension
+	,	CartConfirmationHelpersExtension
+	,	CartQuickAddToCartViewExtension
 	)
 {
 	'use strict';
@@ -22,6 +26,8 @@ define(
         CartConfirmationViewExtension: CartConfirmationViewExtension
 	,	CartDetailedViewExtension: CartDetailedViewExtension
 	,	CartLinesViewExtension: CartLinesViewExtension
+	,	CartConfirmationHelpersExtension: CartConfirmationHelpersExtension
+	,	CartQuickAddToCartViewExtension: CartQuickAddToCartViewExtension
 	}
 
 });

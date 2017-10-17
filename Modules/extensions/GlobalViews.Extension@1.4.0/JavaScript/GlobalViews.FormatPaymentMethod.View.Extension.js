@@ -7,11 +7,13 @@ define(
     ,	[
         'GlobalViews.FormatPaymentMethod.View'
 
+        ,	'SC.Configuration'
         ,	'underscore'
     ]
     ,	function(
         GlobalViewsFormatPaymentMethodView
 
+        , 	Configuration
         , 	_
     )
     {

@@ -9,7 +9,7 @@
 	{{#if showQuantity}}
 		<div class="product-details-quantity-options" data-validation="control-group">
 			<label for="quantity" class="product-details-quantity-options-title">
-				{{translate 'Quantity'}}
+				{{translate 'Qty'}}
 			</label>
 
 			{{#if showBackorderMessage}}

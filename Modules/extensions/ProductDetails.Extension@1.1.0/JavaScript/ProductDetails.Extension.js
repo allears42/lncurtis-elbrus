@@ -9,6 +9,7 @@ define(
     ,   'ProductDetails.Full.View.Extension'
     ,   'ProductDetails.Information.View.Extension'
     ,   'ProductDetails.QuickView.View.Extension'
+    ,   'ProductDetails.Base.View.OptionsFix'
 
     ,	'underscore'
     ]
@@ -17,6 +18,7 @@ define(
     ,   ProductDetailsFullViewExtension
     ,   ProductDetailsInformationViewExtension
     ,   ProductDetailsQuickViewViewExtension
+    ,   ProductDetailsBaseViewOptionsFix
     ,	_
     )
     {
@@ -27,5 +29,6 @@ define(
         ,   ProductDetailsFullViewExtension: ProductDetailsFullViewExtension
         ,   ProductDetailsInformationViewExtension: ProductDetailsInformationViewExtension
         ,   ProductDetailsQuickViewViewExtension: ProductDetailsQuickViewViewExtension
+        ,   ProductDetailsBaseViewOptionsFix: ProductDetailsBaseViewOptionsFix
         }
     });

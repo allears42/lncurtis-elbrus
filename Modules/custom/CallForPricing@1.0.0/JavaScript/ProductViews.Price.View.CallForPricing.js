@@ -21,8 +21,12 @@ define(
 
 	_.extend(ProductViewsPriceView.prototype, {
 		getContext: _.wrap(ProductViewsPriceView.prototype.getContext, function (fn) {
+			
+			var origins = ["ITEMCELL_SEARCH", "RELATEDITEM"];
+			
 			var returnVariable = fn.apply(this, _.toArray(arguments).slice(1))
-			,   isCallForPricing = this.model.get('item') && this.model.get('item').get('_isCallForPricing') || false;
+			,   itemModel = origins.indexOf(this.options.origin) > -1 ? this.model : this.model.get('item')
+			,   isCallForPricing = itemModel && itemModel.get('_isCallForPricing') || false;
 			
 			_.extend(returnVariable, {
 				isCallForPricing: isCallForPricing

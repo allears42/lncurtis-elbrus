@@ -1,5 +1,5 @@
 {{!
-	© 2016 NetSuite Inc.
+	© 2017 NetSuite Inc.
 	User may not copy, modify, distribute, or re-bundle or otherwise make available this code;
 	provided, however, if you are an authorized user with a NetSuite account or log-in, you
 	may use this code subject to the terms that govern your access and use.
@@ -7,32 +7,29 @@
 
 <div class="cart-confirmation-modal">
 	<div class="cart-confirmation-modal-img">
-		<img data-loader="false" src="{{image}}" alt="{{item._thumbnail.altimagetext}}">
+		<img data-loader="false" src="{{image}}" alt="{{thumbnail.altimagetext}}">
 	</div>
 	<div class="cart-confirmation-modal-details" itemscope itemtype="https://schema.org/Product">
-		<a href="{{item._url}}" class="cart-confirmation-modal-item-name">{{item._name}}</a>
+		<a href="{{model.item._url}}" class="cart-confirmation-modal-item-name">{{itemName}}</a>
 		<div class="cart-confirmation-modal-price">
-			<div data-view="Item.Price"></div>
+			<div data-view="Line.Price"></div>
 		</div>
 		<!-- SKU -->
-		<div class="cart-confirmation-modal-sku">
-			<span class="cart-confirmation-modal-sku-label">{{translate 'Item #: '}}</span>
-			<span class="cart-confirmation-modal-sku-value">{{itemPropSku}}</span>
-		</div>
+		<div data-view="Line.Sku" class="cart-confirmation-modal-sku"></div>
 		<!-- Item Options -->
 		<div class="cart-confirmation-modal-options">
-			<div data-view="Item.SelectedOptions"></div>
+			<div data-view="Line.SelectedOptions"></div>
 		</div>
 		<!-- Quantity -->
 		{{#if showQuantity}}
-		<div class="cart-confirmation-modal-quantity">
-			<span class="cart-confirmation-modal-quantity-label">{{translate 'Quantity: '}}</span>
-			<span class="cart-confirmation-modal-quantity-value">{{line.quantity}}</span>
-		</div>
+			<div class="cart-confirmation-modal-quantity">
+				<span class="cart-confirmation-modal-quantity-label">{{translate 'Quantity: '}}</span>
+				<span class="cart-confirmation-modal-quantity-value">{{model.quantity}}</span>
+			</div>
 		{{/if}}
 		<div class="cart-confirmation-modal-actions">
 			<div class="cart-confirmation-modal-view-cart">
-				<a href="/cart" class="cart-confirmation-modal-view-cart-button" data-trigger="go-to-cart">{{translate 'View Cart &amp; Checkout'}}</a>
+				<a href="/cart" class="cart-confirmation-modal-view-cart-button">{{translate 'View Cart &amp; Checkout'}}</a>
 			</div>
 			<div class="cart-confirmation-modal-continue-shopping">
 				<button class="cart-confirmation-modal-continue-shopping-button" data-dismiss="modal">{{translate 'Continue Shopping'}}</button>
@@ -40,3 +37,31 @@
 		</div>
 	</div>
 </div>
+
+
+
+{{!----
+Use the following context variables when customizing this template:
+
+	model (Object)
+	model.item (Object)
+	model.item.internalid (Number)
+	model.quantity (Number)
+	model.options (Array)
+	model.options.0 (Object)
+	model.options.0.cartOptionId (String)
+	model.options.0.itemOptionId (String)
+	model.options.0.label (String)
+	model.options.0.type (String)
+	model.options.0.value (Object)
+	model.options.0.value.internalid (String)
+	model.options.0.value.label (String)
+	model.location (String)
+	model.fulfillmentChoice (String)
+	thumbnail (Object)
+	thumbnail.altimagetext (String)
+	thumbnail.url (String)
+	showQuantity (Boolean)
+	itemName (String)
+
+----}}

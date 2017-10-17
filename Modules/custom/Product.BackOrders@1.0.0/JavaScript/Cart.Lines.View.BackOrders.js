@@ -21,7 +21,7 @@ define('Cart.Lines.View.BackOrders'
 			var returnVariable = fn.apply(this, _.toArray(arguments).slice(1))
 				,   stock_level = this.model.get('item').get('_stock')
 				,   current_quantity = this.model.get('quantity')
-				,   allowBackorders = this.model.get('item').get('_allowBackorders', true);
+				,   allowBackorders = this.model.get('item').get('_isBackorderable', true);
 			
 			//console.log(stock_level, current_quantity);
 			

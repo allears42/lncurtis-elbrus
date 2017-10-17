@@ -51,7 +51,7 @@ define(
             {
 	            'Product.Options.Single': function ()
 	            {
-		            return new ProductDetailsOptionsSelectorSinglesView({
+	            	return new ProductDetailsOptionsSelectorSinglesView({
 			            model: this.model
 			            ,	application: this.application
 			            ,	show_pusher: this.showOptionsPusher()

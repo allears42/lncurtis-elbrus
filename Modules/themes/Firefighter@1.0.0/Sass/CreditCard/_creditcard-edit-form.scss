@@ -100,6 +100,8 @@
   @extend .col-sm-7;
   @extend .col-md-4;
   @extend .col-xs-12;
+  padding-left: 0;
+  padding-right: 0;
 }
 
 .global-views-modal-content-body {

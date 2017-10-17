@@ -75,7 +75,10 @@ define(
 			,	new_quantity = old_value + value;
 			
 			if(!this.allowBackorders) this.checkForAllowableQuantity(new_quantity, $input_quantity);
-			$input_quantity.trigger('blur');
+			else {
+				$input_quantity.val(new_quantity);
+				this.model.set('quantity', new_quantity);
+			}
 		}
 		
 		// custom handling for items with no back orders allowed
@@ -83,14 +86,16 @@ define(
 		// if not, update the field to contain the allowable quantity
 	,	updateQuantity: function setQuantity (e)
 		{
-			console.log('setQuantity');
-			
 			e.preventDefault();
 			
 			var new_quantity = parseInt(this.$(e.currentTarget).val(), 10)
 			,	$input_quantity = this.$('[name="quantity"]');
 			
-			if(!this.allowBackorders) this.checkForAllowableQuantity(new_quantity, $input_quantity)
+			if(!this.allowBackorders) this.checkForAllowableQuantity(new_quantity, $input_quantity);
+			else {
+				$input_quantity.val(new_quantity);
+				this.model.set('quantity', new_quantity);
+			}
 		}
 		
 	,   checkForAllowableQuantity: function (new_quantity, $input_quantity)
@@ -114,7 +119,7 @@ define(
 		
 	,   reconcileQuantity: function () {
 			this.backorderMessage = "";
-			this.allowBackorders = this.model.get('item').get('_allowBackorders', true);
+			this.allowBackorders = this.model.get('item').get('_isBackorderable', true);
 			this.stock_level = this.lineForItemInCart && this.lineForItemInCart.get('item').get("_stock", true) || 0;
 			
 			if (this.cart_quantity > 0) {
@@ -130,10 +135,11 @@ define(
 			
 			var returnVariable = fn.apply(this, _.toArray(arguments).slice(1))
 			, current_quantity = this.model.get('quantity')
-			, set_max_quantity = this.stock_level && this.stock_level > 0 && !this.allowBackorders
-			, allowed_quantity = (this.stock_level - this.cart_quantity < 0) ? 0 : this.stock_level - this.cart_quantity;
+			, set_max_quantity = this.stock_level > 0 && !this.allowBackorders
+			, allowed_quantity = (this.stock_level - this.cart_quantity <= 0) ? 0 : this.stock_level - this.cart_quantity;
 			
-			if(current_quantity > allowed_quantity) {
+			
+			if(!this.allowBackorders && current_quantity > allowed_quantity) {
 				current_quantity = allowed_quantity;
 			}
 			

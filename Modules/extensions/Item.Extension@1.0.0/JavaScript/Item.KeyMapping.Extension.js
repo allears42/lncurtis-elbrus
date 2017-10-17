@@ -129,10 +129,11 @@ define('Item.KeyMapping.Extension'
 	    {
 		    if (item.get("onlinematrixpricerange")) {
 		    	var prices = item.get("onlinematrixpricerange").split(" ");
-			    if (prices[0] !== prices[1]) return prices;
+			    if (prices[0] !== prices[1]) return {min: prices[0],  min_formatted: "$" + parseFloat(prices[0]).toFixed(2)
+				    , max: prices[1],  max_formatted: "$" + parseFloat(prices[1]).toFixed(2)};
 		    }
 		    
-		    return [];
+		    return {};
 	    }
 	
 	    // @property {String} _thumbnail Object containing the url and the altimagetext of the thumbnail
@@ -192,24 +193,22 @@ define('Item.KeyMapping.Extension'
 			    ,	altimagetext: item.get('_name')
 		    };
 	    }
-	
-	,   _allowBackorders: 'isbackorderable'
 	    
 	    // @property {Boolean} _allowBackordersOld
 	    // this doesn't work anymore because matrix parents don't seem to be tracked on a fully configured item...
-    ,	_allowBackordersOld: function (item) {
+    ,	_allowBackorders: function (item) {
 		    var allowBackOrders = ['Allow back orders with no out-of-stock message', 'Allow back orders but display out-of-stock message', '- Default -']
 		    ,   noBackorders = ['Disallow back orders but display out-of-stock message', 'Remove item when out-of-stock']
 		    ,   oosBehavior = item.get('outofstockbehavior');
 		
 		    var parent = item.get('_matrixParent');
-		    console.log(parent, item, item.getPosibleOptions())
+		    console.log(parent, item, item.getPosibleOptions());
 		    if (parent.get('internalid'))
 		    {
 			    oosBehavior = parent.get('outofstockbehavior')
 		    }
 		
-		    console.log(oosBehavior)
+		    console.log(oosBehavior);
 		    if( noBackorders.indexOf(oosBehavior) > -1) {
 			
 			    return false

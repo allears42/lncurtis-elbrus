@@ -26,6 +26,7 @@
 }
 .cart-confirmation-modal-sku{
 	@extend .product-line-sku-container;
+  margin: $sc-base-margin*2 0;
 }
 .cart-confirmation-modal-sku-label{
 	@extend .sc-label-sku;

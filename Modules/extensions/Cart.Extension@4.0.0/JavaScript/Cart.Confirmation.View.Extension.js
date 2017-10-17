@@ -3,24 +3,20 @@
 	Custom extension logic for Cart.Confirmation.View.Extension
 */
 
-define(
-	'Cart.Confirmation.View.Extension'
+define('Cart.Confirmation.View.Extension'
 	, [
 		'Cart.Confirmation.View'
-		, 'Transaction.Line.Views.Price.View'
-		, 'Backbone.CompositeView'
-		
 		, 'underscore'
 	]
-	, function (CartConfirmationViewExtension
-		, TransactionLineViewsPriceView
-		, BackboneCompositeView
-		, _) {
+	, function (
+		CartConfirmationView
+		, _
+	) {
 		'use strict';
 		
-		_.extend(CartConfirmationViewExtension.prototype, {
+		_.extend(CartConfirmationView.prototype, {
 			
-			 getContext: _.wrap(CartConfirmationViewExtension.prototype.getContext, function (fn) {
+			 getContext: _.wrap(CartConfirmationView.prototype.getContext, function (fn) {
 			 
 				var returnVariable = fn.apply(this, _.toArray(arguments).slice(1))
 				,   item = this.model.get('item')
@@ -28,6 +24,8 @@ define(
 				,   customImage = _.first(_.filter(itemOptions, function (option) {
 					return option && option.id === "CUSTCOL_SC_ITEM_IMAGE"
 				}));
+				
+				//console.log((customImage && customImage.value) ? customImage.value : item.get('_thumbnail').url, returnVariable);
 				
 				// add custom parameters to return variable
 				_.extend(returnVariable, {

@@ -23,10 +23,6 @@
 				<!--<div class="product-details-full-rating" data-view="Global.StarRating"></div>-->
 				<div data-cms-area="item_info" data-cms-area-filters="path"></div>
 			</div>
-			<div class="product-details-upper-info-outer">
-				<div data-view="Product.Price"></div>
-				<div data-view="Product.Sku" class="product-details-sku-container"></div>
-			</div>
 			<div class="product-details-full-main-content-left">
 				<div class="product-details-full-image-gallery-container">
 					<div id="banner-image-top" class="content-banner banner-image-top"></div>
@@ -36,6 +32,11 @@
 			</div>
 
 			<div class="product-details-full-main-content-right">
+
+				<div class="product-details-upper-info-outer">
+					<div data-view="Product.Price"></div>
+					<div data-view="Product.Sku" class="product-details-sku-container"></div>
+				</div>
 				<div class="product-details-full-divider"></div>
 
 				<div class="product-details-full-main">
@@ -60,15 +61,23 @@
 
 							{{#if isPriceEnabled}}
 								<div data-view="Quantity"></div>
-								<section class="product-details-full-actions">
+								<section class="product-details-full-actions row">
 									{{#unless isCallForPricing}}
-										<div class="product-details-full-actions-container">
-											<div data-view="MainActionView"></div>
+										<div class="col-sm-6">
+											<div class="product-details-full-actions-container">
+												<div data-view="MainActionView"></div>
+											</div>
 										</div>
 									{{/unless}}
-									<div class="product-details-full-actions-container">
-										<div data-view="AddToProductList" class="product-details-full-actions-addtowishlist"></div>
-										<div data-view="ProductDetails.AddToQuote" class="product-details-full-actions-addtoquote"></div>
+									<div class="col-sm-6">
+										{{#if callForPricing}}
+											<div data-view="Product.Stock.Info"></div>
+											<div data-view="StockDescription"></div>
+										{{/if}}
+										<div class="product-details-full-actions-container">
+											<div data-view="AddToProductList" class="product-details-full-actions-addtowishlist"></div>
+											<!--<div data-view="ProductDetails.AddToQuote" class="product-details-full-actions-addtoquote"></div>-->
+										</div>
 									</div>
 
 								</section>

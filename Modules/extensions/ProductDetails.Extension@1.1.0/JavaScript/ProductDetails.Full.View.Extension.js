@@ -29,6 +29,9 @@ define(
 			,	'date': 'change'
 		}
 		
+	,   showOptionsPusher: function () {
+			return false;
+		}
 		
 	,   getContext: _.wrap(ProductDetailsFullView.prototype.getContext, function (fn) {
 			

@@ -50,17 +50,16 @@ define(
 			var item = this.model.get('item')
 			,   childs = self.model.getSelectedMatrixChilds();
 			
-			//console.log(childs);
 			
 			if(childs && childs.length === 1) item = childs[0];
 			
 			var stock_level = item.get('_stock')
-			,   new_quantity = this.model.get('quantity')
-			,   allow_backorders = this.model.get('_allowBackorders')
+			,   new_quantity = item.get('quantity')
+			,   allow_backorders = item.get('_isBackorderable')
 			,   lineForItemInCart = Utils.findItemInCart(item, self.cart)
 			,   cart_quantity = lineForItemInCart && lineForItemInCart.get('quantity') || 0;
 			
-			//console.log(lineForItemInCart, cart_quantity, stock_level, new_quantity);
+			//console.log(this.model, allow_backorders, lineForItemInCart, cart_quantity, stock_level, new_quantity);
 			
 			if(!allow_backorders) {
 				// DO CHECK

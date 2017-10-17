@@ -1,6 +1,6 @@
 /*
 	© 2017 LN Curtis
-	Custom extension logic for Cart.Confirmation.View.Extension
+	Custom extension logic for Cart.Detailed.View.Extension
 */
 
 define(
@@ -42,7 +42,7 @@ define(
 						, current_quantity = parseInt(line.get('quantity'), 10)
 						// custom - get stock level
 						, stock_level = item.get("_stock", true)
-						, allowBackorders = item.get("_allowBackorders", true);
+						, allowBackorders = item.get("_isBackorderable", true);
 					
 					// customize calculations around new quantity
 					new_quantity = (new_quantity >= min_quantity && new_quantity) ? new_quantity : current_quantity;

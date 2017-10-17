@@ -79,6 +79,7 @@
         "suitecommerce/Overview@1.1.2/Sass/_overview-shipping.scss" : "Sass/Overview/_overview-shipping.scss",
 
         "suitecommerce/ProductDetails@1.0.0/Sass/_product-details-full.scss" : "Sass/ProductDetails/_product-details-full.scss",
+        "suitecommerce/ProductDetails@1.0.0/Sass/_product-details-options-selector.scss" : "Sass/ProductDetails/_product-details-options-selector.scss",
         "suitecommerce/ProductDetails@1.0.0/Sass/_product-details-quantity.scss" : "Sass/ProductDetails/_product-details-quantity.scss",
         "suitecommerce/ProductDetails@1.0.0/Sass/_product-details-quickview.scss" : "Sass/ProductDetails/_product-details-quickview.scss",
 
@@ -90,6 +91,8 @@
         "suitecommerce/ProductList@3.0.0/Sass/_product-list-display-full.scss" : "Sass/ProductList/_product-list-display-full.scss",
         "suitecommerce/ProductList@3.0.0/Sass/_product-list-edit-item.scss" : "Sass/ProductList/_product-list-edit-item.scss",
         "suitecommerce/ProductList@3.0.0/Sass/_product-list-list-details.scss" : "Sass/ProductList/_product-list-list-details.scss",
+
+        "suitecommerce/QuickAdd@2.0.0/Sass/_quick-add.scss" : "Sass/QuickAdd/_quick-add.scss",
 
         "suitecommerce/RecentlyViewedItems@2.3.0/Sass/_recently-viewed-cell.scss" : "Sass/RecentlyViewedItems/_recently-viewed-cell.scss",
         "suitecommerce/RecentlyViewedItems@2.3.0/Sass/_recently-viewed-items.scss" : "Sass/RecentlyViewedItems/_recently-viewed-items.scss",
@@ -103,6 +106,7 @@
         "suitecommerce/ShoppingApplication@4.0.0/Sass/_shopping-layout.scss" : "Sass/ShoppingApplication/_shopping-layout.scss",
 
         "suitecommerce/SiteSearch@2.1.2/Sass/_site-search.scss":"Sass/SiteSearch/_site-search.scss",
+        "suitecommerce/SocialSharing@2.0.3/Sass/_social-sharing-flyout.scss":"Sass/SocialSharing/_social-sharing-flyout.scss",
 
         "suitecommerce/Transaction.Line.Views@1.0.0/Sass/_transaction-line-views-cell-actionable.scss":"Sass/Transaction.Line.Views/_transaction-line-views-cell-actionable.scss",
 

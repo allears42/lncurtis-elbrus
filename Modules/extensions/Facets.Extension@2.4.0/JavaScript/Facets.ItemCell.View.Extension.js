@@ -42,7 +42,7 @@ define(
                 var self = this
                 ,   returnVariable = fn.apply(self, _.toArray(arguments).slice(1))
                 ,   stock_level = this.model.get("_stock", true) || 0
-                ,   allowBackorders = this.model.get("_allowBackorders", true)
+                ,   allowBackorders = this.model.get("_isBackorderable", true)
                 ,   set_max_quantity = stock_level > 0 && !allowBackorders;
                 
                 _.extend(returnVariable ,{

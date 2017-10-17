@@ -6,11 +6,13 @@ define(
 	'Footer.Simplified.View.Extension'
 ,	[
 		'Footer.Simplified.View'
+	,	'SC.Configuration'
 	,	'underscore'
 
 	]
 ,	function(
 		FooterSimplifiedView
+	,	Configuration
 	,	_
 
 	)

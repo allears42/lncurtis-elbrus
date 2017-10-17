@@ -8,7 +8,7 @@
 ///////////////////////////////////////////////////////////////
 //fix for select to be displayed consistently across browsers
 select[class]{
-	@include angle-down-background($sc-color-theme);
+	@include angle-down-background($dark-background);
 	@include appearance(none);
 	background-color:$sc-color-tertiary;
 	padding-right: 30px;

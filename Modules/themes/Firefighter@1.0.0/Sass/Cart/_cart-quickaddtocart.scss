@@ -26,4 +26,17 @@
 }
 
 .cart-quickaddtocart-itemid {}
-.cart-quickaddtocart-price {}
+.cart-quickaddtocart-price {
+  @extend .small-price;
+  margin-bottom:$sc-small-margin;
+  position:relative;
+  padding: $sc-base-padding 0;
+  border-top: 1px solid $sc-color-theme-border;
+  border-bottom: 1px solid $sc-color-theme-border;
+
+  .product-views-price-lead {
+    font-size: $sc-h4-font-size;
+
+    color: $sc-color-dark-copy;
+  }
+}

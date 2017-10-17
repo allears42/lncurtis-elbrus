@@ -98,13 +98,14 @@
   .product-details-tab-content-panel {
     padding: $sc-base-padding * 4;
   }
-  .product-details-more-info-content-tabs{
+  .product-details-information-content-tabs{
     display:none ;
-  } .product-details-add-to-cart-help {
+  }
+  .product-details-add-to-cart-help {
       display:none !important;
     }
 
-  .bx-controls {display:none;}
+  .bx-controls, .bx-clone { display:none !important; visibility: hidden}
   html .bx-wrapper .bx-viewport  {
     height: auto !important;
   }

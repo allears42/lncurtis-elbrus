@@ -13,6 +13,7 @@ define(
     ,   'ProductLine.Stock.View'
     ,   'ProductViews.SizeChart'
 
+    ,	'Backbone'
     ,	'underscore'
     ]
     ,	function(
@@ -24,11 +25,20 @@ define(
     ,   ProductLineStockView
     ,   ProductViewsSizeChartView
 
+    ,	Backbone
     ,	_
     )
     {
         'use strict';
 
+        ProductDetailsFullView.prototype.optionBindEventByType = {
+	        //@class ProductDetails.Base.View.OptionBinding This class associated an option type with the event used to set the option's value
+	        // @extend Dictionary<String, String>
+	        'select': 'change'
+	        ,	'text': 'blur'
+	        ,	'date': 'change'
+        };
+        
         _.extend( ProductDetailsBaseView.prototype, {
 
             events: _.extend({}, ProductDetailsBaseView.prototype.events, {
@@ -100,9 +110,8 @@ define(
 			        , model: model
 		        }));
 	        }
-	
-	
-        ,   getContext: _.wrap(ProductDetailsBaseView.prototype.getContext, function (fn) {
+	        
+		,   getContext: _.wrap(ProductDetailsBaseView.prototype.getContext, function (fn) {
 		        var returnVariable = fn.apply(this, _.toArray(arguments).slice(1))
 		        ,   isCallForPricing = this.model.get('item').get('_isCallForPricing');
 		
@@ -114,5 +123,4 @@ define(
             })
 
         });
-        
     });

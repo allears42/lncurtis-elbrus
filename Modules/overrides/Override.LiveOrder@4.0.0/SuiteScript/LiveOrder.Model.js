@@ -170,6 +170,7 @@ define(
 		// @param {LiveOrder.Model.Data} data
 	,	update: function update (data)
 		{
+			// custom - add data to order
             data.purchasenumber = 'WEB';
 
             // Pacejet rates status is saved in the order, not passed from the site so need to look it up here
@@ -178,58 +179,61 @@ define(
                 return e.name == 'custbody_pacejet_rates_status'
             });
             data.options.custbody_pacejet_rates_status = !!status ? status.value : 'F';
-
+            // end custom
+			
             var current_order = this.get(data);
 
-            // Only do this if it's capable of shipping multiple items.
-            if (this.isMultiShippingEnabled)
-            {
-                if (this.isSecure && ModelsInit.session.isLoggedIn2())
-                {
-                    ModelsInit.order.setEnableItemLineShipping(!!data.ismultishipto);
-                    if (!current_order.ismultishipto && data.ismultishipto)
-                    {
-                        this.automaticallyRemovedPromocodes = this.getAutomaticallyRemovedPromocodes(current_order);
-                    }
+			// Only do this if it's capable of shipping multiple items.
+			if (this.isMultiShippingEnabled)
+			{
+				if (this.isSecure && ModelsInit.session.isLoggedIn2())
+				{
+					ModelsInit.order.setEnableItemLineShipping(!!data.ismultishipto);
+					if (!current_order.ismultishipto && data.ismultishipto)
+					{
+						this.automaticallyRemovedPromocodes = this.getAutomaticallyRemovedPromocodes(current_order);
+					}
 				}
-                // Do the following only if multishipto is active (if the data received determine that MST is enabled and pass the MST Validation)
-                if (data.ismultishipto) {
-                    ModelsInit.order.removeShippingAddress();
+				// Do the following only if multishipto is active (if the data received determine that MST is enabled and pass the MST Validation)
+				if (data.ismultishipto)
+				{
+					ModelsInit.order.removeShippingAddress();
 
-                    ModelsInit.order.removeShippingMethod();
+					ModelsInit.order.removeShippingMethod();
 
-                    this.removeAllPromocodesForMST(current_order.promocodes);
+					this.splitLines(data, current_order);
 
-                    this.splitLines(data, current_order);
+					this.setShippingAddressAndMethod(data, current_order);
+				}
+			}
 
-                    this.setShippingAddressAndMethod(data, current_order);
-                }
-            }
+			if (!this.isMultiShippingEnabled || !data.ismultishipto)
+			{
+				this.setShippingAddress(data, current_order);
 
-            if (!this.isMultiShippingEnabled || !data.ismultishipto) {
-                this.setShippingAddress(data, current_order);
+				this.setShippingMethod(data, current_order);
+			}
 
-                this.setShippingMethod(data, current_order);
-            }
+			this.setPromoCodes(data, current_order);
 
-            this.setPromoCodes(data, current_order);
+			this.setBillingAddress(data, current_order);
 
-            this.setBillingAddress(data, current_order);
+			this.setPaymentMethods(data, current_order);
 
-            this.setPaymentMethods(data, current_order);
+			this.setPurchaseNumber(data, current_order);
 
-            this.setPurchaseNumber(_.extend(data, {purchasenumber: 'WEB'}), current_order);
+			this.setTermsAndConditions(data, current_order);
 
-            this.setTermsAndConditions(data, current_order);
-
-            this.setTransactionBodyField(data, current_order);
-        }
-
+			this.setTransactionBodyField(data, current_order);
+		}
 
 		// @method submit will call ModelsInit.order.submit() taking in account paypal payment
 	,	submit: function submit ()
 		{
-			var	paypal_address = _.find(ModelsInit.customer.getAddressBook(), function (address){ return !address.phone && address.isvalid === 'T'; })
+			var	paypal_address = _.find(ModelsInit.customer.getAddressBook(), function (address)
+				{
+					return !address.phone && address.isvalid === 'T';
+				})
 			,	confirmation = ModelsInit.order.submit();
 			// We need remove the paypal's address because after order submit the address is invalid for the next time.
 			this.removePaypalAddress(paypal_address);
@@ -389,10 +393,8 @@ define(
 				,	handlingcost: Utils.toCurrency(placed_order.getFieldValue('althandlingcost'))
 				,	handlingcost_formatted: Utils.formatCurrency(placed_order.getFieldValue('althandlingcost'))
 
-
 				,	discounttotal: Utils.toCurrency(placed_order.getFieldValue('discounttotal'))
 				,	discounttotal_formatted: Utils.formatCurrency(placed_order.getFieldValue('discounttotal'))
-
 
 				,	giftcertapplied: Utils.toCurrency(placed_order.getFieldValue('giftcertapplied'))
 				,	giftcertapplied_formatted: Utils.formatCurrency(placed_order.getFieldValue('giftcertapplied'))
@@ -400,7 +402,7 @@ define(
 				,	total: Utils.toCurrency(placed_order.getFieldValue('total'))
 				,	total_formatted: Utils.formatCurrency(placed_order.getFieldValue('total'))
 				}
-				}
+			}
 			,	i = 0;
 
 			result.promocodes = [];
@@ -413,8 +415,8 @@ define(
 			{
 				result.promocodes.push({
 					internalid: promocode
-			,	code: placed_order.getFieldText('couponcode')
-			,	isvalid: true
+				,	code: placed_order.getFieldText('couponcode')
+				,	isvalid: true
 				,	discountrate_formatted: ''
 				});
 			}
@@ -426,11 +428,12 @@ define(
 				,	code: placed_order.getLineItemValue('promotions', 'couponcode_display', i)
 				,	isvalid: placed_order.getLineItemValue('promotions', 'promotionisvalid', i) === 'T'
 				//TODO Uncomment this line when this issue is fixed: https://system.netsuite.com/app/crm/support/issuedb/issue.nl?id=46640914&whence=&cmid=1467749011534
-				,	discountrate_formatted: ''//placed_order.getLineItemValue('promotions', 'discountrate', i)
+				,	discountrate_formatted: '' //placed_order.getLineItemValue('promotions', 'discountrate', i)
 				});
 			}
 
 			result.paymentmethods = [];
+
 			for (i = 1; i <= placed_order.getLineItemCount('giftcertredemption'); i++)
 			{
 				result.paymentmethods.push({
@@ -450,18 +453,15 @@ define(
 			result.lines = [];
 			for (i = 1; i <= placed_order.getLineItemCount('item'); i++)
 			{
+
 				var line_item = {
 						item: {
-                            id: placed_order.getLineItemValue('item', 'item', i)
-                        ,	type: placed_order.getLineItemValue('item', 'itemtype', i)
-                        ,   internalid: placed_order.getLineItemValue('item', 'item', i)
-							// 'item_display' returns the 'sku' or if is a matrix returns 'sku_parent : sku_child'
-							// getLineItemValue of 'item_display' returns the same as getLineItemText of 'item'
-                        ,	itemDisplay: placed_order.getLineItemValue('item', 'item_display', i)
+							id: placed_order.getLineItemValue('item', 'item', i)
+						,	type: placed_order.getLineItemValue('item', 'itemtype', i)
 						}
-					    ,	quantity: parseInt(placed_order.getLineItemValue('item', 'quantity', i), 10)
+					,	quantity: parseInt(placed_order.getLineItemValue('item', 'quantity', i), 10)
 						,	rate: parseInt(placed_order.getLineItemValue('item', 'rate', i), 10)
-						,	options: self.parseLineOptionsFromSuiteScript(placed_order.getLineItemValue('item', 'options', i))
+					,	options: self.parseLineOptionsFromSuiteScript(placed_order.getLineItemValue('item', 'options', i))
 				};
 
 				if (self.isPickupInStoreEnabled)
@@ -484,7 +484,7 @@ define(
 			_.each(result.lines, function (line)
 			{
 				line.item = StoreItem.get(line.item.id, line.item.type);
-				});
+			});
 
 			return result;
 		}
@@ -566,7 +566,9 @@ define(
 
 			// Stores the current order
 			var lines_sort = this.getLinesSort();
+
 			lines_sort.unshift(line_id);
+
 			this.setLinesSort(lines_sort);
 
 			return line_id;
@@ -643,6 +645,7 @@ define(
 			if (!_.isNumber(line_data.quantity) || line_data.quantity > 0)
 			{
 				var new_line_id;
+
 				try
 				{
 					new_line_id = this.addLine(line_data);
@@ -651,7 +654,9 @@ define(
 				{
 					// we try to roll back the item to the original state
 					var roll_back_item = {
-						item: { internalid: parseInt(original_line_object.internalid, 10) }
+						item: {
+							internalid: parseInt(original_line_object.internalid, 10)
+						}
 					,	quantity: parseInt(original_line_object.quantity, 10)
 					};
 
@@ -729,6 +734,7 @@ define(
 			}
 
 			order_field_keys.items = field_keys.items;
+
 			_.each(field_keys.keys, function (key)
 			{
 				order_field_keys[key] = null;
@@ -757,29 +763,18 @@ define(
 
 			return ModelsInit.order.getFieldValues(order_field_keys, false);
 		}
-
-		//@method removeAllPromocodesForMST Removes all the promocodes. In the context of MST
-		//not all promocodes are valid and there is not way to determine which promocodes are valid and which arent
-		//TODO This is thanks to the following Platform issue: https://system.netsuite.com/app/crm/support/issuedb/issue.nl?id=46343025&whence=
-		//TODO This method just exists to make it easy to localize where the MST restriction are located
-
 		//@method removeAllPromocodes Removes all the promocodes or the ones passed by parameter
-        //@param {Array<LiveOrder.Model.PromoCode>} promocodes_to_remove List of promocodes that will removed
+		//@param {Array<LiveOrder.Model.PromoCode>} promocodes_to_remove List of promocodes that will removed
 		//@return {Void}
-	,	removeAllPromocodesForMST: function removeAllPromocodesForMST (promocodes_to_remove)
-		{
-			this.removeAllPromocodes(promocodes_to_remove);
-		}
-
 	,	removeAllPromocodes: function removeAllPromocodes (promocodes_to_remove)
 		{
 			if (promocodes_to_remove)
 			{
 				_.each(promocodes_to_remove, function (promo)
-			{
-				ModelsInit.order.removePromotionCode(promo.code);
-			});
-		}
+				{
+					ModelsInit.order.removePromotionCode(promo.code);
+				});
+			}
 			else
 			{
 				ModelsInit.order.removeAllPromotionCodes();
@@ -799,11 +794,11 @@ define(
 				{
 					// @class LiveOrder.Model.PromoCode
 					result.push({
-					// @property {String} internalid
+						// @property {String} internalid
 						internalid: promo_code.internalid
-					// @property {String} code
+						// @property {String} code
 					,	code: promo_code.promocode
-					// @property {Boolean} isvalid
+						// @property {Boolean} isvalid
 					,	isvalid: promo_code.isvalid === 'T'
 						// @property {String} discountrate_formatted
 						// TODO Populate this line when the issue https://system.netsuite.com/app/crm/support/issuedb/issue.nl?id=46640914&whence=&cmid=1467749011534 is fixed
@@ -813,16 +808,6 @@ define(
 					,	rate: promo_code.discount_rate
 					,	type: promo_code.discount_type
 					});
-
-					//TODO Remove this false when this issue https://system.netsuite.com/app/crm/support/issuedb/issue.nl?id=46343025&whence= is finishes
-					if (promo_code.isvalid !== 'T' && false)
-					{
-						//Given certain scenarios, for instance when toggling MST state, some promocodes can start to be invalid
-						//in which case we DO returned them ONLY ONCE and removed them
-						//In the case of MST, the module that toggle the MST state will ask the user what to do with the removed promocodes
-						ModelsInit.order.removePromotionCode(promo_code.promocode);
-			}
-
 				});
 			}
 
@@ -864,8 +849,8 @@ define(
 
 			var valid_promocodes = _.filter(only_in_data, function (promocode)
 			{
-					return promocode.isvalid !== false;
-				});
+				return promocode.isvalid !== false;
+			});
 
 			if (!SC.Configuration.get('promocodes.allowMultiples', true) && valid_promocodes.length > 1)
 			{
@@ -880,7 +865,7 @@ define(
 			{
 				try
 				{
-				ModelsInit.order.applyPromotionCode(promo.code);
+					ModelsInit.order.applyPromotionCode(promo.code);
 				}
 				catch (e)
 				{
@@ -1535,7 +1520,6 @@ define(
 			}
 		}
 
-
 		// @method setPaymentMethods
 		// @param {LiveOrder.Model.Data} data
 	,	setPaymentMethods: function setPaymentMethods (data)
@@ -1596,7 +1580,7 @@ define(
 								ModelsInit.order.setPayment({
 									paymentterms: 'CreditCard'
 								,	creditcard: cc_obj
-									,	paymentmethod: cc_obj.paymentmethod.key
+								,	paymentmethod: cc_obj.paymentmethod.key
 								});
 
 								ModelsInit.context.setSessionObject('paypal_complete', 'F');
@@ -1636,15 +1620,15 @@ define(
 						}
 
 						ModelsInit.context.setSessionObject('paypal_complete', 'F');
-						}
-					else if (paymentmethod.type === 'paypal')
-						{
-						if (ModelsInit.context.getSessionObject('paypal_complete') !== 'T')
-					{
-						ModelsInit.order.removePayment();
-						var paypal = _.findWhere(ModelsInit.session.getPaymentMethods(), {ispaypal: 'T'});
-						paypal && ModelsInit.order.setPayment({paymentterms: '', paymentmethod: paypal.key});
 					}
+					else if (paymentmethod.type === 'paypal')
+					{
+						if (ModelsInit.context.getSessionObject('paypal_complete') !== 'T')
+						{
+							ModelsInit.order.removePayment();
+							var paypal = _.findWhere(ModelsInit.session.getPaymentMethods(), {ispaypal: 'T'});
+							paypal && ModelsInit.order.setPayment({paymentterms: '', paymentmethod: paypal.key});
+						}
 
 					}
 					else if (paymentmethod.type && ~paymentmethod.type.indexOf('external_checkout'))
@@ -1669,9 +1653,9 @@ define(
 			}
 
 			gift_certificate_methods = _.map(gift_certificate_methods, function (gift_certificate)
-				{
-					return gift_certificate.giftcertificate;
-				});
+			{
+				return gift_certificate.giftcertificate;
+			});
 
 			this.setGiftCertificates(gift_certificate_methods);
 		}
@@ -1694,6 +1678,7 @@ define(
 		// @param current_order
 	,	setShippingMethod: function setShippingMethod (data, current_order)
 		{
+			// customized
             if ((!this.isMultiShippingEnabled || !data.ismultishipto) && this.isSecure /* && data.shipmethod !== current_order.shipmethod */)
 			{
 				var shipmethod = _.findWhere(current_order.shipmethods, {internalid: data.shipmethod});

@@ -29,6 +29,20 @@
   }
 }
 
+.cart-confirmation-modal-price {
+  .transaction-line-views-price-lead {
+    color: $sc-color-dark-copy;
+    line-height: $sc-target-size;
+    font-weight: $sc-font-weight-bold;
+    font-size: $sc-h5-font-size;
+
+    @media (min-width: $screen-md-min) {
+      font-size: $sc-h4-font-size;
+    }
+  }
+}
+
+
 .cart-summary-promocode-container {
   .cart-summary-expander-head-toggle,
   .cart-summary-expander-body {

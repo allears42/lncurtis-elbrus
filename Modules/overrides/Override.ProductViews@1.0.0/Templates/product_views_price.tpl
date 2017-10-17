@@ -13,49 +13,55 @@
 			</div>
 		{{else}}
 			{{#if isPriceRange}}
-			<span class="product-views-price-range" itemprop="offers" itemscope itemtype="https://schema.org/AggregateOffer">
+				<span class="product-views-price-range" itemprop="offers" itemscope itemtype="https://schema.org/AggregateOffer">
 				<meta itemprop="priceCurrency" content="{{currencyCode}}"/>
-				<!-- Price Range -->
+					<!-- Price Range -->
 				<span class="product-views-price-lead">
 					{{translate '<span itemprop="lowPrice" data-rate="$(0)" >$(1)</span> to <span itemprop="highPrice" data-rate="$(2)">$(3)</span>' minPrice minPriceFormatted maxPrice maxPriceFormatted}}
 				</span>
-				{{#if showComparePrice}}
-					<small class="product-views-price-old">
-						{{comparePriceFormatted}}
-					</small>
-				{{/if}}
-				<link itemprop="availability" href="{{#if isInStock}}https://schema.org/InStock{{else}}https://schema.org/OutOfStock{{/if}}"/>
+					{{#if showComparePrice}}
+						<small class="product-views-price-old">
+							{{comparePriceFormatted}}
+						</small>
+					{{/if}}
+					<link itemprop="availability" href="{{#if isInStock}}https://schema.org/InStock{{else}}https://schema.org/OutOfStock{{/if}}"/>
 			</span>
 
-		{{else}}
-			<span class="product-views-price-exact" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+			{{else}}
+				<span class="product-views-price-exact" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
 				<meta itemprop="priceCurrency" content="{{currencyCode}}"/>
-				<!-- Single -->
+					<!-- Single -->
 				<span class="product-views-price-lead" itemprop="price" data-rate="{{price}}">
 					{{priceFormatted}}
 				</span>
-				{{#if showComparePrice}}
-					<small class="product-views-price-old">
-						{{comparePriceFormatted}}
-					</small>
-				{{/if}}
-				<link itemprop="availability" href="{{#if isInStock}}https://schema.org/InStock{{else}}https://schema.org/OutOfStock{{/if}}"/>
+					{{#if showComparePrice}}
+						<small class="product-views-price-old">
+							{{comparePriceFormatted}}
+						</small>
+					{{/if}}
+					<link itemprop="availability" href="{{#if isInStock}}https://schema.org/InStock{{else}}https://schema.org/OutOfStock{{/if}}"/>
 			</span>
-		{{/if}}
+			{{/if}}
 		{{/if}}
 	{{else}}
-		{{#if showHighlightedMessage}}
-			<div class="product-views-price-login-to-see-prices-highlighted">
-				<p class="product-views-price-message">
-					{{translate 'Please <a href="$(0)">log in</a> to see price or purchase this item' urlLogin}}
-				</p>
+		{{#if isCallForPricing}}
+			<div class="product-views-price-call-for-pricing">
+				<p class="product-views-price-message"> Call For Pricing </p>
 			</div>
 		{{else}}
-			<div class="product-views-price-login-to-see-prices">
-				<p class="product-views-price-message">
-					{{translate '<a href="$(0)">Log in</a> to see price' urlLogin}}
-				</p>
-			</div>
+			{{#if showHighlightedMessage}}
+				<div class="product-views-price-login-to-see-prices-highlighted">
+					<p class="product-views-price-message">
+						{{translate 'Please <a href="$(0)">log in</a> to see price or purchase this item' urlLogin}}
+					</p>
+				</div>
+			{{else}}
+				<div class="product-views-price-login-to-see-prices">
+					<p class="product-views-price-message">
+						{{translate '<a href="$(0)">Log in</a> to see price' urlLogin}}
+					</p>
+				</div>
+			{{/if}}
 		{{/if}}
 	{{/if}}
 </div>

@@ -1,15 +1,13 @@
 /*
 	© 2017 LN Curtis
-	Custom extension logic for Cart.Confirmation.View.Extension
+	Custom extension logic for Cart.Detailed.View.Extension
 */
 
 define(
 	'Cart.Detailed.View.Extension'
 	, [
 		'Cart.Detailed.View'
-		
 	,	'Backbone.CollectionView'
-	, 	'Cart.Summary.View'
 	,	'Cart.Lines.View'
 	,	'Cart.Item.Summary.View'
 	, 	'Cart.Item.Actions.View'
@@ -24,9 +22,7 @@ define(
 	]
 	, function (
 		CartDetailedView
-		
 	,	BackboneCollectionView
-	, 	CartSummaryView
 	,	CartLinesView
 	,	CartItemSummaryView
     , 	CartItemActionsView

@@ -28,9 +28,9 @@ define('Cart.Item.Summary.View.BackOrders'
 			var returnVariable = fn.apply(this, _.toArray(arguments).slice(1))
 			,   stock_level = this.model.get('item').get('_stock')
 		   ,    current_quantity = this.model.get('quantity')
-			,   allowBackorders = this.model.get('item').get('_allowBackorders', true);
+			,   allowBackorders = this.model.get('item').get('_isBackorderable', true);
 			
-		    //console.log(stock_level, current_quantity, !this.allowBackorders && current_quantity > stock_level);
+		    console.log(stock_level, current_quantity, !this.allowBackorders && current_quantity > stock_level);
 			
 			_.extend(returnVariable, {
 				//@property {String} showMawQuantity
@@ -55,7 +55,7 @@ define('Cart.Item.Summary.View.BackOrders'
 			,	quantity_input = $element.parent().find('input')
 			,	old_value = quantity_input.val()
 			,	new_val = parseFloat(old_value) + 1
-			,   allowBackorders = this.model.get('item').get('_allowBackorders', true)
+			,   allowBackorders = this.model.get('item').get('_isBackorderable', true)
 			,   stock_level = this.model.get('item').get('_stock');
 			
 			// check for stock levels based on backorder behavior

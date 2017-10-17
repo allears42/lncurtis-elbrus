@@ -26,7 +26,6 @@ define('ProductDetails.QuickView.View.Extension'
 			// make modal header product title
 			this.title = this.model.get('item').get('_pageTitle');
 			this.pageHeader = this.title;
-			console.log(this.title)
 		})
 		
 		, attributes: _.extend({}, ProductDetailsQuickViewView.prototype.attributes, {
@@ -37,7 +36,6 @@ define('ProductDetails.QuickView.View.Extension'
 		, getContext: _.wrap(ProductDetailsQuickViewView.prototype.getContext, function (fn) {
 			var returnVariable = fn.apply(this, _.toArray(arguments).slice(1));
 			
-			console.log(this.model, this.model.get('item'))
 			_.extend(returnVariable, {
 				storedescription: this.model.get('item').get('storedescription')
 			});

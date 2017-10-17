@@ -21,10 +21,11 @@
 					{{#if showLabel}}
 						<label class="product-views-option-dropdown-label" for="{{cartOptionId}}">
 							{{label}}
+							{{#if showRequiredLabel}}<span class="product-views-option-dropdown-label-required">*</span>{{/if}}
 							{{#if showSelectedValue}}
 								: <span data-value="{{cartOptionId}}" class="product-views-selected-option">{{selectedValue.label}}</span>
 							{{/if}}
-							{{#if showRequiredLabel}}<span class="product-views-option-dropdown-label-required">*</span>{{/if}}
+
 						</label>
 					{{/if}}
 					<div class="{{cartOptionId}}-controls product-views-option-dropdown-control">
@@ -32,7 +33,7 @@
 							<option value="">{{translate '- Select -'}}</option>
 							{{#each values}}
 								{{#if internalId}}
-									<option
+									<option data-stickit-bind-val="{{internalId}}"
 											value="{{internalId}}"
 											data-label="{{../../cartOptionId}}"
 											{{#if isActive}}selected{{/if}}
@@ -58,7 +59,7 @@
 		<strong>{{label}}s</strong>
 	</p>
 	<div class="print-only print-available-options container-fluid">
-		{{#each options}}<span>{{label}}</span> {{/each}}
+		{{#each values}}<span>{{label}}</span> {{/each}}
 	</div>
 {{/if}}
 
