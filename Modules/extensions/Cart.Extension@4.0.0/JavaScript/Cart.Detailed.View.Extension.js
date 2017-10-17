@@ -17,7 +17,9 @@ define(
 
 	, 	'GlobalViews.Message.View'
 
+	, 	'SC.Configuration'
 	, 	'Backbone'
+	, 	'Utils'
 	, 	'underscore'
 	]
 	, function (
@@ -30,7 +32,10 @@ define(
 	
 	,	RecentlyViewedItemsView
 	, 	GlobalViewsMessageView
+	
+	, 	Configuration
 	, 	Backbone
+	, 	Utils
 	, 	_
 	)
 	{
@@ -74,6 +79,16 @@ define(
 				jQuery(window).on('resize', this._windowResizeHandler);
 				
 			})
+			
+			// @method initPlugins
+			// initialize plugins
+			, initPlugins: function initPlugins() {
+				if (Configuration.get('siteSettings.sitetype') === 'ADVANCED' && this.model.get('lines').length > 0) {
+					this.$('[data-action="sticky"]').scStickyButton();
+				}
+				
+				Utils.initBxSlider(this.$('[data-type="carousel-items"]'), Configuration.get('bxSliderDefaults'));
+			}
 			
 			// add destroy handler to remove resize events when view is destroyed
 			, destroy: function () {

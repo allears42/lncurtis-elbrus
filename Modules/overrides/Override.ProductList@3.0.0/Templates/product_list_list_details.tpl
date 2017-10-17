@@ -1,5 +1,5 @@
 {{!
-	© 2016 NetSuite Inc.
+	© 2017 NetSuite Inc.
 	User may not copy, modify, distribute, or re-bundle or otherwise make available this code;
 	provided, however, if you are an authorized user with a NetSuite account or log-in, you
 	may use this code subject to the terms that govern your access and use.
@@ -24,7 +24,7 @@
 				{{/if}}
 
 				{{#if hasLastItem}}
-					({{translate 'last added'}} <a class="product-list-list-details-last-item" {{lastProductItemUrl}}>{{lastItemDisplayName}}</a>)
+					({{translate 'last added'}} <a class="product-list-list-details-last-item" {{{lastProductItemUrl}}}>{{lastItemDisplayName}}</a>)
 				{{/if}}
 			{{else}}
 				<span> {{translate 'No items yet'}}</span>
@@ -59,7 +59,7 @@
 				{{#if isTypePredefined}}
 						{{translate listDescription}}
 				{{else}}
-						{{listDescription}} 
+						{{listDescription}}
 				{{/if}}
 			</span>
 			</p>
@@ -89,3 +89,29 @@
 		{{/unless}}
 	</td>
 </tr>
+
+
+
+
+{{!----
+Use the following context variables when customizing this template:
+
+	internalId (String)
+	isAvailableForCart (Number)
+	templateId (String)
+	isTypePredefined (Boolean)
+	listName (String)
+	hasItems (Boolean)
+	itemsLength (Number)
+	hasOneItem (Boolean)
+	hasLastItem (Boolean)
+	lastProductItemUrl (String)
+	lastItemDisplayName (String)
+	hasOutOfStockItems (Boolean)
+	hasMinimumQuantityItems (Boolean)
+	lastModifiedDate (String)
+	listDescription (String)
+	hasListDescription (Boolean)
+	isListPrivate (Boolean)
+
+----}}

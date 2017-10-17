@@ -1,5 +1,5 @@
 <%/*
-	© 2016 NetSuite Inc.
+	© 2017 NetSuite Inc.
 	User may not copy, modify, distribute, or re-bundle or otherwise make available this code;
 	provided, however, if you are an authorized user with a NetSuite account or log-in, you
 	may use this code subject to the terms that govern your access and use.
@@ -72,6 +72,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 		<title>My Account</title>
 
+		<link rel="shortcut icon" href="<%= session.getAbsoluteUrl(Application.getNonManageResourcesPathPrefix() + 'img/ln-favicon.ico') %>" />
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Bitter:400,700" rel="stylesheet">
 		<!--[if !IE]><!-->
 			<link rel="stylesheet" href="<%= ROOT %>{{#if distro.isSCLite}}tmp/{{/if}}css/myaccount.css"></link>
@@ -113,16 +114,11 @@
 			};
 		</script>
 
-		<% if (SC.Configuration.cms.useCMS) { %>
-			<script src="/cms/2/assets/js/postframe.js"></script>
-		<% } %>
-
 		<script src="<%= session.getAbsoluteUrl('myaccount.environment.ssp?' + environmentParameters.join('&')) %>&t={{timestamp}}"></script>
-        <script src="<%= session.getAbsoluteUrl('customFieldsMetadata.ssp?')%>t={{timestamp}}"></script>
-        <% if (Error) { %>
+		<script src="<%= session.getAbsoluteUrl('customFieldsMetadata.ssp?')%>t={{timestamp}}"></script>
+		<% if (Error) { %>
 		<script>SC.ENVIRONMENT.contextError = <%= JSON.stringify(Error) %>;</script>
 		<% } %>
-		<script type="text/javascript" src="/cms/1/cms.js"></script>
 	</head>
 	<body>
 
@@ -165,9 +161,10 @@
 							if (window.jQuery)
 							{
 								// Load CMS
-					jQuery.getScript('/cms/2/cms.js')
-						.done(function() {
-							CMS.trigger('cms:load');
+								jQuery.getScript('/cms/2/cms.js')
+									.done(function()
+									{
+										CMS.trigger('cms:load');
 									});
 
 								clearInterval(nlTimer);

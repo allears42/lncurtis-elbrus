@@ -1,5 +1,5 @@
 {{!
-	© 2016 NetSuite Inc.
+	© 2017 NetSuite Inc.
 	User may not copy, modify, distribute, or re-bundle or otherwise make available this code;
 	provided, however, if you are an authorized user with a NetSuite account or log-in, you
 	may use this code subject to the terms that govern your access and use.
@@ -12,8 +12,20 @@
 	</button>-->
 	
 	<!--<ul class="product-list-bulk-actions-dropdown" role="menu">
-		<li>
-	-->		<button  class="product-list-bulk-actions-button-removefromlist" data-action="delete-items" {{#unless isRemovableEnabled}} disabled {{/unless}}>{{translate 'Remove Items $(0)' numberRemovable}}</button>
+		<li>-->
+			<a href="#" data-action="delete-items">{{translate 'Remove Items'}}</a>
 		<!--</li>
 	</ul>-->
 </div>
+
+
+
+{{!----
+Use the following context variables when customizing this template:
+
+	isAtLeastOneItemChecked (Boolean)
+	hasItems (Number)
+	isAddToCartEnabled (Boolean)
+	isTypePredefined (Boolean)
+
+----}}

@@ -21,7 +21,7 @@ define(
 
         _.extend( ProductListRouter.prototype, {
 
-            routes: _.extend(ProductListRouter.prototype,
+            routes: _.extend({}, ProductListRouter.prototype.routes,
             {
                 // add url mappings for product list instead of wishlist
                 'productlist': 'showProductListsList'

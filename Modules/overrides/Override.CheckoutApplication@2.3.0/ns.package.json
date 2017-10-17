@@ -27,6 +27,7 @@
         ]
     }
 , "overrides": {
+    "suitecommerce/CheckoutApplication@2.3.0/JavaScript/SC.Checkout.Configuration.Steps.Standard.js" : "JavaScript/SC.Checkout.Configuration.Steps.Standard.js",
     "suitecommerce/CheckoutApplication@2.3.0/JavaScript/SC.Checkout.Starter.js" : "JavaScript/SC.Checkout.Starter.js",
 
     "suitecommerce/CheckoutApplication@2.3.0/Internal/cart-local.ssp" : "Internal/cart-local.ssp",

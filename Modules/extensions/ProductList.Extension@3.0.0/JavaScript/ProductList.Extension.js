@@ -11,7 +11,6 @@ define(
 	,   'ProductList.CartSaveForLater.View.Copy.Extension'
 	,   'ProductList.Control.View.Copy.Extension'
 	,   'ProductList.ControlSingle.View.Copy.Extension'
-	,   'ProductList.Details.View.CallForPricing.Extension'
 	,   'ProductList.Details.View.Copy.Extension'
 	,   'ProductList.DisplayFull.View.Extension'
 	,   'ProductList.Edit.View.Copy.Extension'
@@ -26,7 +25,6 @@ define(
 	,   ProductListCartSaveForLaterViewCopyExtension
 	,   ProductListControlViewCopyExtension
 	,   ProductListControlSingleViewCopyExtension
-	,   ProductListDetailsViewCallForPricingExtension
 	,   ProductListDetailsViewCopyExtension
 	,   ProductListDisplayFullViewExtension
 	,   ProductListEditViewCopyExtension
@@ -45,7 +43,6 @@ define(
 		,   ProductListCartSaveForLaterViewCopyExtension: ProductListCartSaveForLaterViewCopyExtension
 		,   ProductListControlViewCopyExtension: ProductListControlViewCopyExtension
 		,   ProductListControlSingleViewCopyExtension: ProductListControlSingleViewCopyExtension
-		,   ProductListDetailsViewCallForPricingExtension: ProductListDetailsViewCallForPricingExtension
 		,   ProductListDetailsViewCopyExtension: ProductListDetailsViewCopyExtension
 		,   ProductListDisplayFullViewExtension: ProductListDisplayFullViewExtension
 		,   ProductListEditViewCopyExtension: ProductListEditViewCopyExtension

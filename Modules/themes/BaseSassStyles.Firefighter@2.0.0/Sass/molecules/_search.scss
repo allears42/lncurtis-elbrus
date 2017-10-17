@@ -16,7 +16,7 @@
     }
 }
 .nav-search-content{
-    @extend .container;  
+    @extend .container;
     clear:both;
     margin-top: 0;
     margin-bottom: 0;
@@ -45,7 +45,7 @@
             content: '';
             z-index: 1001;
         }
-        
+
         &::after {
             position: absolute;
             top: -16px;
@@ -93,9 +93,9 @@
     padding: $sc-base-padding * 2;
     height: 20px;
     box-shadow:none;
-    margin: 0; 
+    margin: 0;
     width: calc(100% - #{$sc-base-padding * 4});
-    
+
     width: expression(100% - #{$sc-base-padding * 4});/* IE-OLD */
 
     -webkit-tap-highlight-color: transparentize($sc-color-overlay, 1);
@@ -124,9 +124,9 @@
 }
 .nav-search-input-reset-icon{
     @extend .fa;
-    @extend %fa-times-circle; 
-    color: $sc-color-theme-light; 
-    font-size: $sc-h3-font-size; 
+    @extend %fa-times-circle;
+    color: $sc-color-theme-light;
+    font-size: $sc-h3-font-size;
 }
 .nav-search-button-submit{
     border-radius:0;
@@ -180,7 +180,7 @@
   -webkit-box-shadow: 0 8px 12px transparentize($sc-color-overlay, 1-0.105);
     box-shadow: 0 3px 6px transparentize($sc-color-overlay, 1-0.105);
     overflow:hidden;
-    
+
     @media (min-width: $screen-md-min){
         margin-top: 3px;
     }
@@ -229,7 +229,7 @@
 
 //Typeahead Item
 .item-results {
-    padding: $sc-base-padding * 3 0;
+    padding: $sc-base-padding 0 0;
     cursor: pointer;
     display: block;
     @extend .clearfix;
@@ -242,10 +242,10 @@
     background:$sc-color-theme-border-light;
 }
 
-.item-results-image{    
+.item-results-image{
     width: 20%;
     float: left;
-    display: none;
+    /*display: none;*/
     padding:0 $sc-base-padding * 3;
     @media (min-width: $screen-sm-min){
         display: block;

@@ -105,7 +105,7 @@
 <!DOCTYPE html>
 <html <%= Language ? 'lang="' + Language.replace('_', '-') + '"' : '' %>>
 	<head>
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Bitter:400,700" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Bitter:400,700" rel="stylesheet">
 		<!--[if !IE]><!-->
 			<link rel="stylesheet" href="<%= ROOT %>{{#if distro.isSCLite}}tmp/{{/if}}css/checkout.css"></link>
 		<!--<![endif]-->
@@ -186,10 +186,6 @@
 			</div>
 		</noscript>
 
-		<% if (SC.Configuration.cms.useCMS) { %>
-			<script src="/cms/2/assets/js/postframe.js"></script>
-		<% } %>
-
 		<% if (siteType && siteType === 'STANDARD') { %>
 			<div id='div__header' style="overflow: hidden;" class='noprint' leftmargin='0' topmargin='0' marginwidth='1' >
 				<table border='0' cellspacing='0' cellpadding='0' width='100%'>
@@ -224,16 +220,16 @@
 			setTimeout(function ()
 			{
 			<% if (login) { %>
-			/* require(['SC.Checkout'], function(Checkout)
+				require(['SC.Checkout'], function(Checkout)
 			{
 				Checkout.Configuration.currentTouchpoint = 'login';
-			}); */
-			<% } %>
-            <% if (parameters.is === 'storelocator') { %>
-            require(['SC.Checkout'], function(Checkout)
-            {
-                Checkout.Configuration.currentTouchpoint = 'storelocator';
-            });
+				});
+				<% } %>
+				<% if (parameters.is === 'storelocator') { %>
+					require(['SC.Checkout'], function(Checkout)
+					{
+						Checkout.Configuration.currentTouchpoint = 'storelocator';
+					});
 			<% } %>
 			},1000);
 		</script>
@@ -261,14 +257,15 @@
 				{
 					(function() {
 		    			var nlTimer = setInterval(function()
-					{
+						{
 		    				if (window.jQuery)
 							{
 		      					// Load CMS
-						jQuery.getScript('/cms/2/cms.js')
-							.done(function() {
-								CMS.trigger('cms:load');
-							});
+		      					jQuery.getScript('/cms/2/cms.js')
+			        				.done(function()
+									{
+			          					CMS.trigger('cms:load');
+			        				});
 
 		      					clearInterval(nlTimer);
 		    				}

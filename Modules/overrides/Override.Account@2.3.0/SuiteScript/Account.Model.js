@@ -49,15 +49,13 @@ define(
 		//@returns {Account.Model.Attributes} ret touchpoints and user profile data
 	,	login: function (email, password, redirect)
 		{
-
 			ModelsInit.session.login({
 				email: email
 			,	password: password
 			});
 
 			var user = Profile.get();
-
-            user.isLoggedIn = ModelsInit.session.isLoggedIn2() ? 'T' : 'F';
+			user.isLoggedIn = ModelsInit.session.isLoggedIn2() ? 'T' : 'F';
 			user.isRecognized = ModelsInit.session.isRecognized() ? 'T' : 'F';
 
 			var ret = {
@@ -143,7 +141,6 @@ define(
 		//@return {Account.Model.Attributes}
 	,	registerAsGuest: function (user)
 		{
-
 			var site_settings = SiteSettings.get();
 
 			if (site_settings.registration.companyfieldmandatory === 'T')
@@ -173,9 +170,7 @@ define(
 		{
 			//var customer = ModelsInit.getCustomer();
 
-            var customerExists = false;
-
-			if (ModelsInit.customer.isGuest())
+            if (ModelsInit.customer.isGuest())
 			{
 				var guest_data = ModelsInit.customer.getFieldValues();
 
@@ -200,23 +195,24 @@ define(
 			}
 			else
 			{
-                user_data.emailsubscribe = (user_data.emailsubscribe && user_data.emailsubscribe !== 'F') ? 'T' : 'F';
+				user_data.emailsubscribe = (user_data.emailsubscribe && user_data.emailsubscribe !== 'F') ? 'T' : 'F';
 
-                ModelsInit.session.registerCustomer({
-                    firstname: user_data.firstname
-                    ,	lastname: user_data.lastname
-                    ,	companyname: user_data.company
-                    ,	email:user_data.email
-                    ,	password:user_data.password
-                    ,	password2:user_data.password2
-                    ,	emailsubscribe: (user_data.emailsubscribe && user_data.emailsubscribe !== 'F') ? 'T' : 'F'
-                });
-            }
+				ModelsInit.session.registerCustomer({
+					firstname: user_data.firstname
+				,	lastname: user_data.lastname
+				,	companyname: user_data.company
+				,	email:user_data.email
+				,	password:user_data.password
+				,	password2:user_data.password2
+				,	emailsubscribe: (user_data.emailsubscribe && user_data.emailsubscribe !== 'F') ? 'T' : 'F'
+				});
+			}
 
 			var user = Profile.get();
 			user.isLoggedIn = ModelsInit.session.isLoggedIn2() ? 'T' : 'F';
 			user.isRecognized = ModelsInit.session.isRecognized() ? 'T' : 'F';
 
+			// set custom variables on account
             try {
     
                 nlapiLogExecution('DEBUG', ' register ', 'trying to set custom field values');
@@ -255,8 +251,6 @@ define(
 			,	cart: LiveOrder.get()
 			,	address: Address.list()
 			,	creditcard: CreditCard.list()
-            ,   isNewCustomer: customerExists
-
 			};
 		}
 	});

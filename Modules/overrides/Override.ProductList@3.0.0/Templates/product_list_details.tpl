@@ -1,11 +1,11 @@
 {{!
-	© 2016 NetSuite Inc.
+	© 2017 NetSuite Inc.
 	User may not copy, modify, distribute, or re-bundle or otherwise make available this code;
 	provided, however, if you are an authorized user with a NetSuite account or log-in, you
 	may use this code subject to the terms that govern your access and use.
 }}
 
-<a href="/wishlist" class="product-list-details-button-back">
+<a href="/productlist" class="product-list-details-button-back">
 	<i class="product-list-details-button-back-icon"></i>
 	{{translate 'Go to Product Lists'}}
 </a>
@@ -31,3 +31,17 @@
 		</div>
 	{{/if}}
 </section>
+
+
+
+{{!----
+Use the following context variables when customizing this template:
+
+	showListHeader (Boolean)
+	isTypePredefined (Boolean)
+	name (String)
+	hasItems (Boolean)
+	itemsLength (Number)
+	hasOneItem (Boolean)
+
+----}}

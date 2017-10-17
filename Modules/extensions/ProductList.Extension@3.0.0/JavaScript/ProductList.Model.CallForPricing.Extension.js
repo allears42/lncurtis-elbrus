@@ -6,13 +6,11 @@ define(
     'ProductList.Model.CallForPricing.Extension'
     ,	[
         'ProductList.Model'
-
     ,	'underscore'
 
     ]
     ,	function(
         ProductListModel
-
     , 	_
 
     )

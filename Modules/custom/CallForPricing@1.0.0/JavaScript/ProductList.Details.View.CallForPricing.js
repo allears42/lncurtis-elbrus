@@ -3,7 +3,7 @@
 */
 
 define(
-	'ProductList.Details.View.CallForPricing.Extension'
+	'ProductList.Details.View.CallForPricing'
 	, [
 		'ProductList.Details.View'
 		, 'ProductList.Item.Edit.View'

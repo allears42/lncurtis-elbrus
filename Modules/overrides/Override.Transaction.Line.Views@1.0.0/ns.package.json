@@ -1,0 +1,16 @@
+{
+    "gulp": {
+        "javascript": [
+            "JavaScript/*.js"
+        ],
+        "sass": [
+            "Sass/*.scss"
+        ],
+        "templates": [
+            "Templates/*"
+        ]
+    },
+    "overrides": {
+        "suitecommerce/Transaction.Line.Views@1.0.0/Templates/transaction_line_views_options_selected.tpl": "Templates/transaction_line_views_options_selected.tpl"
+    }
+}

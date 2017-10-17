@@ -70,9 +70,14 @@
         "suitecommerce/OrderHistory@5.0.0/Sass/_order-history-item-actions.scss":"Sass/OrderHistory/_order-history-item-actions.scss",
         "suitecommerce/OrderHistory@5.0.0/Sass/_order-history-summary.scss":"Sass/OrderHistory/_order-history-summary.scss",
 
-        "suitecommerce/OrderWizard.Module.Address@2.2.1/Sass/_order-wizard-address-module.scss" : "Sass/OrderWizardModuleAddress/_order-wizard-address-module.scss",
-        "suitecommerce/OrderWizard.Module.PaymentMethod@4.0.0/Sass/_order-wizard-showpayments-module.scss": "Sass/OrderWizardModulePaymentMethod/_order-wizard-showpayments-module.scss",
-        "suitecommerce/OrderWizard.Module.SubmitButton@1.1.1/Sass/_order-wizard-submitbutton-module.scss":"Sass/OrderWizardModuleSubmitButton/_order-wizard-submitbutton-module.scss",
+        "suitecommerce/OrderWizard.Module.Address@2.2.1/Sass/_order-wizard-address-module.scss" : "Sass/OrderWizard.Module.Address/_order-wizard-address-module.scss",
+        "suitecommerce/OrderWizard.Module.CartItems@2.0.0/Sass/_order-wizard-cartitems-module.scss" : "Sass/OrderWizard.Module.CartItems/_order-wizard-cartitems-module.scss",
+        "suitecommerce/OrderWizard.Module.Confirmation@3.0.0/Sass/_order-wizard-confirmation-module.scss" : "Sass/OrderWizard.Module.Confirmation/_order-wizard-confirmation-module.scss",
+        "suitecommerce/OrderWizard.Module.PaymentMethod@4.0.0/Sass/_order-wizard-showpayments-module.scss": "Sass/OrderWizard.Module.PaymentMethod/_order-wizard-showpayments-module.scss",
+
+        "suitecommerce/OrderWizard.Module.Shipmethod@3.0.0/Sass/_order-wizard-shipmethod-module.scss" : "Sass/OrderWizard.Module.Shipmethod/_order-wizard-shipmethod-module.scss",
+        "suitecommerce/OrderWizard.Module.Shipmethod@3.0.0/Sass/_order-wizard-showshipments-module.scss" : "Sass/OrderWizard.Module.Shipmethod/_order-wizard-showshipments-module.scss",
+        "suitecommerce/OrderWizard.Module.SubmitButton@1.1.1/Sass/_order-wizard-submitbutton-module.scss":"Sass/OrderWizard.Module.SubmitButton/_order-wizard-submitbutton-module.scss",
         "suitecommerce/OrderWizard@3.0.0/Sass/_order-wizard-step.scss": "Sass/OrderWizard/_order-wizard-step.scss",
 
         "suitecommerce/Overview@1.1.2/Sass/_overview-home.scss" : "Sass/Overview/_overview-home.scss",
@@ -93,6 +98,7 @@
         "suitecommerce/ProductList@3.0.0/Sass/_product-list-list-details.scss" : "Sass/ProductList/_product-list-list-details.scss",
 
         "suitecommerce/QuickAdd@2.0.0/Sass/_quick-add.scss" : "Sass/QuickAdd/_quick-add.scss",
+        "suitecommerce/QuickAdd@2.0.0/Sass/_quick-add-item.scss" : "Sass/QuickAdd/_quick-add-item.scss",
 
         "suitecommerce/RecentlyViewedItems@2.3.0/Sass/_recently-viewed-cell.scss" : "Sass/RecentlyViewedItems/_recently-viewed-cell.scss",
         "suitecommerce/RecentlyViewedItems@2.3.0/Sass/_recently-viewed-items.scss" : "Sass/RecentlyViewedItems/_recently-viewed-items.scss",
@@ -109,6 +115,7 @@
         "suitecommerce/SocialSharing@2.0.3/Sass/_social-sharing-flyout.scss":"Sass/SocialSharing/_social-sharing-flyout.scss",
 
         "suitecommerce/Transaction.Line.Views@1.0.0/Sass/_transaction-line-views-cell-actionable.scss":"Sass/Transaction.Line.Views/_transaction-line-views-cell-actionable.scss",
+        "suitecommerce/Transaction.Line.Views@1.0.0/Sass/_transaction-line-views-cell-navigable.scss":"Sass/Transaction.Line.Views/_transaction-line-views-cell-navigable.scss",
 
         "third_parties/twitter-bootstrap-sass@3.3.1/assets/stylesheets/bootstrap/_print.scss" : "Sass/twitter-bootstrap-sass/_print.scss",
         "third_parties/twitter-bootstrap-sass@3.3.1/assets/stylesheets/bootstrap/_variables.scss" : "Sass/twitter-bootstrap-sass/_variables.scss"

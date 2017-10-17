@@ -6,74 +6,63 @@
 */
 
 define(
-    'SC.Checkout.Starter'
-    ,	[
-        'SC.Checkout'
-        ,	'underscore'
-        ,	'jQuery'
-        ,	'Backbone'
-        ,	'Utils'
-
-        ,	'SC.Checkout.Starter.Dependencies' // Auto generated at build time using configuration from distro.json
-    ]
-    ,	function(
-        application
-        ,	_
-        ,	jQuery
-        ,	Backbone
-        ,	Utils
-
-        ,	entryPointModules
-    )
-    {
-
-        'use strict';
-
-        jQuery(function ()
-        {
-            application.getConfig().siteSettings = SC.ENVIRONMENT.siteSettings || {};
-
-            if (SC.ENVIRONMENT.CHECKOUT.skipLogin)
-            {
-                application.Configuration.checkout = application.Configuration.checkout || {};
-                application.Configuration.checkout.skipLogin = SC.ENVIRONMENT.CHECKOUT.skipLogin;
-                delete SC.ENVIRONMENT.CHECKOUT.skipLogin;
-            }
-
-            application.start(entryPointModules, function ()
-            {
-                // Checks for errors in the context
-                if (SC.ENVIRONMENT.contextError)
-                {
-                    // Shows the error.
-                    if (SC.ENVIRONMENT.contextError.errorCode === 'ERR_WS_EXPIRED_LINK')
-                    {
-                        application.getLayout().expiredLink(SC.ENVIRONMENT.contextError.errorMessage);
-                    }
-                    else
-                    {
-                        application.getLayout().internalError(SC.ENVIRONMENT.contextError.errorMessage, 'Error ' + SC.ENVIRONMENT.contextError.errorStatusCode + ': ' + SC.ENVIRONMENT.contextError.errorCode);
-                    }
-                }
-                else
-                {
-                    var fragment = _.parseUrlOptions(location.search).fragment
-                        ,   parameters = _.parseUrlOptions(location.search);
-
-                    if (parameters.acctredirect) {
-                        var touchpoints = SC.getSessionInfo('touchpoints');
-                        window.location.href = touchpoints.customercenter + (parameters.acctredirect.indexOf('#') !== 0 ? "#" : "") + parameters.acctredirect;
-                    }
-
-                    if (fragment && !location.hash)
-                    {
-                        location.hash = decodeURIComponent(fragment);
-                    }
-
-                    Backbone.history.start();
-                }
-
-                application.getLayout().appendToDom();
-            });
-        });
-    });
+	'SC.Checkout.Starter'
+	, [
+		'SC.Checkout'
+		, 'underscore'
+		, 'jQuery'
+		, 'Backbone'
+		, 'Utils'
+		
+		, 'SC.Checkout.Starter.Dependencies' // Auto generated at build time using configuration from distro.json
+	]
+	, function (application
+		, _
+		, jQuery
+		, Backbone
+		, Utils
+		, entryPointModules) {
+		
+		'use strict';
+		
+		jQuery(function () {
+			application.getConfig().siteSettings = SC.ENVIRONMENT.siteSettings || {};
+			
+			if (SC.ENVIRONMENT.CHECKOUT.skipLogin) {
+				application.Configuration.checkout = application.Configuration.checkout || {};
+				application.Configuration.checkout.skipLogin = SC.ENVIRONMENT.CHECKOUT.skipLogin;
+				delete SC.ENVIRONMENT.CHECKOUT.skipLogin;
+			}
+			
+			application.start(entryPointModules, function () {
+				// Checks for errors in the context
+				if (SC.ENVIRONMENT.contextError) {
+					// Shows the error.
+					if (SC.ENVIRONMENT.contextError.errorCode === 'ERR_WS_EXPIRED_LINK') {
+						application.getLayout().expiredLink(SC.ENVIRONMENT.contextError.errorMessage);
+					}
+					else {
+						application.getLayout().internalError(SC.ENVIRONMENT.contextError.errorMessage, 'Error ' + SC.ENVIRONMENT.contextError.errorStatusCode + ': ' + SC.ENVIRONMENT.contextError.errorCode);
+					}
+				}
+				else {
+					var fragment = _.parseUrlOptions(location.search).fragment
+						, parameters = _.parseUrlOptions(location.search);
+					
+					// custom - redirect to account page if acctredirect is present
+					if (parameters.acctredirect) {
+						var touchpoints = SC.getSessionInfo('touchpoints');
+						window.location.href = touchpoints.customercenter + (parameters.acctredirect.indexOf('#') !== 0 ? "#" : "") + parameters.acctredirect;
+					}
+					
+					if (fragment && !location.hash) {
+						location.hash = decodeURIComponent(fragment);
+					}
+					
+					Backbone.history.start();
+				}
+				
+				application.getLayout().appendToDom();
+			});
+		});
+	});
