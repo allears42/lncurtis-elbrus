@@ -5,30 +5,30 @@
 define(
     'ProductDetails.Extension'
     ,	[
-        'ProductDetails.Base.View.Extension'
-    ,   'ProductDetails.Full.View.Extension'
-    ,   'ProductDetails.Information.View.Extension'
-    ,   'ProductDetails.QuickView.View.Extension'
+        'ProductDetails.Information.View.Extension'
     ,   'ProductDetails.Base.View.OptionsFix'
+	,   'ProductDetails.Base.View.Extension'
+	,   'ProductDetails.Full.View.Extension'
+	,   'ProductDetails.QuickView.View.Extension'
 
     ,	'underscore'
     ]
     ,	function(
-        ProductDetailsBaseViewExtension
-    ,   ProductDetailsFullViewExtension
-    ,   ProductDetailsInformationViewExtension
-    ,   ProductDetailsQuickViewViewExtension
-    ,   ProductDetailsBaseViewOptionsFix
+        ProductDetailsInformationViewExtension
+	,   ProductDetailsBaseViewOptionsFix
+    ,   ProductDetailsBaseViewExtension
+	,   ProductDetailsFullViewExtension
+	,   ProductDetailsQuickViewViewExtension
     ,	_
     )
     {
         'use strict';
 
         return {
-            ProductDetailsBaseViewExtension: ProductDetailsBaseViewExtension
+	        ProductDetailsQuickViewViewExtension: ProductDetailsQuickViewViewExtension
+        ,   ProductDetailsBaseViewExtension: ProductDetailsBaseViewExtension
         ,   ProductDetailsFullViewExtension: ProductDetailsFullViewExtension
         ,   ProductDetailsInformationViewExtension: ProductDetailsInformationViewExtension
-        ,   ProductDetailsQuickViewViewExtension: ProductDetailsQuickViewViewExtension
         ,   ProductDetailsBaseViewOptionsFix: ProductDetailsBaseViewOptionsFix
         }
     });
