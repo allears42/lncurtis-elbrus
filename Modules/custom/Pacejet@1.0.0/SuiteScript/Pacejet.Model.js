@@ -157,6 +157,13 @@ define(
                     // nlapiLogExecution('debug', 'results.address', JSON.stringify(results.address,null,2));
                     // nlapiLogExecution('debug', 'results.summary (before)', JSON.stringify(results.summary,null,2));
 
+                    // If not in checkout, no need to call PaceJet
+                    nlapiLogExecution('debug', 'PacejetModel#updateOrder: Utils.isInCheckout() = ', JSON.stringify(Utils.isInCheckout(),null,2));
+                    if (!Utils.isInCheckout()) {
+                        nlapiLogExecution('debug', 'PacejetModel#updateOrder: skipping Pacejet lookup because not in checkout');
+                        return results;
+                    }
+
                     results.hasFreeShipItems = this._hasFreeShipItems(order_fields);
                     results.allFreeShipItems = this._allFreeShipItems(order_fields);
                     //nlapiLogExecution('debug', 'FreeShipItems', 'allFreeShipItems = ' + results.allFreeShipItems + ', hasFreeShipItems = ' + results.hasFreeShipItems);
@@ -217,9 +224,9 @@ define(
                     // cache requests since LiveOver.Model#get is called repeatedly through the checkout process
                     var cache = {};
                     try { cache = JSON.parse(nlapiGetContext().getSessionObject('pjrcache')); } catch (ignore) {}
-                    // nlapiLogExecution('audit', '_getRates: get cache', JSON.stringify(cache,null,2));
+                    nlapiLogExecution('audit', '_getRates: get cache', JSON.stringify(cache,null,2));
                     if ( cache && cache.h && cache.h == this._hashCode(JSON.stringify(request)) ) {
-                        //nlapiLogExecution('debug', '_getRates returning cached result', JSON.stringify(cache.r,null,2));
+                        nlapiLogExecution('debug', '_getRates returning cached result', JSON.stringify(cache.r,null,2));
                         return cache.r;
                     }
 
@@ -240,7 +247,7 @@ define(
                     // throw "test of client-side rates failure";
 
                     var pacejetResponse = nlapiRequestURL(pacejetUrl, JSON.stringify(request), pacejetHeaders);
-                    //nlapiLogExecution('debug', 'Pacejet.Rates: elapsed time in ms', new Date().getTime() - ts);
+                    nlapiLogExecution('debug', 'Pacejet.Rates: elapsed time in ms', new Date().getTime() - ts);
                     // nlapiLogExecution('debug', 'pacejetResponse', pacejetResponse);
 
                     var rates = JSON.parse( pacejetResponse.getBody() );
@@ -265,7 +272,7 @@ define(
                         , r: ratingResultsList
                     };
                     nlapiGetContext().setSessionObject('pjrcache', JSON.stringify(newCache));
-                    // nlapiLogExecution('audit', '_getRates: set cache', JSON.stringify(newCache,null,2));
+                    nlapiLogExecution('audit', '_getRates: set cache', JSON.stringify(newCache,null,2));
                 }
                 catch (e) {
                     nlapiLogExecution('debug', 'Pacejet.js:_getRates: exception', e);
