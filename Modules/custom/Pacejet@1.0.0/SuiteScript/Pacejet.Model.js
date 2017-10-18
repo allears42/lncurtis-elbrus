@@ -157,6 +157,13 @@ define(
                     // nlapiLogExecution('debug', 'results.address', JSON.stringify(results.address,null,2));
                     // nlapiLogExecution('debug', 'results.summary (before)', JSON.stringify(results.summary,null,2));
 
+                    // If not in checkout, no need to call PaceJet
+                    nlapiLogExecution('debug', 'PacejetModel#updateOrder: Utils.isInCheckout() = ', JSON.stringify(Utils.isInCheckout(),null,2));
+                    if (!Utils.isInCheckout()) {
+                        nlapiLogExecution('debug', 'PacejetModel#updateOrder: skipping Pacejet lookup because not in checkout');
+                        return results;
+                    }
+
                     results.hasFreeShipItems = this._hasFreeShipItems(order_fields);
                     results.allFreeShipItems = this._allFreeShipItems(order_fields);
                     //nlapiLogExecution('debug', 'FreeShipItems', 'allFreeShipItems = ' + results.allFreeShipItems + ', hasFreeShipItems = ' + results.hasFreeShipItems);
@@ -212,14 +219,14 @@ define(
                     var pacejetConfig = this.pacejetConfiguration.production;
 
                     _.extend(request, shipaddress, this._packageDetailsList(order, results), pacejetConfig);
-                    // nlapiLogExecution('audit', 'rates request', JSON.stringify(request,null,2));
+                    nlapiLogExecution('debug', 'rates request', JSON.stringify(request,null,2));
 
                     // cache requests since LiveOver.Model#get is called repeatedly through the checkout process
                     var cache = {};
                     try { cache = JSON.parse(nlapiGetContext().getSessionObject('pjrcache')); } catch (ignore) {}
-                    // nlapiLogExecution('audit', '_getRates: get cache', JSON.stringify(cache,null,2));
+                    nlapiLogExecution('audit', '_getRates: get cache', JSON.stringify(cache,null,2));
                     if ( cache && cache.h && cache.h == this._hashCode(JSON.stringify(request)) ) {
-                        //nlapiLogExecution('debug', '_getRates returning cached result', JSON.stringify(cache.r,null,2));
+                        nlapiLogExecution('debug', '_getRates returning cached result');
                         return cache.r;
                     }
 
@@ -240,7 +247,7 @@ define(
                     // throw "test of client-side rates failure";
 
                     var pacejetResponse = nlapiRequestURL(pacejetUrl, JSON.stringify(request), pacejetHeaders);
-                    //nlapiLogExecution('debug', 'Pacejet.Rates: elapsed time in ms', new Date().getTime() - ts);
+                    nlapiLogExecution('debug', 'Pacejet.Rates: elapsed time in ms', new Date().getTime() - ts);
                     // nlapiLogExecution('debug', 'pacejetResponse', pacejetResponse);
 
                     var rates = JSON.parse( pacejetResponse.getBody() );
@@ -265,7 +272,7 @@ define(
                         , r: ratingResultsList
                     };
                     nlapiGetContext().setSessionObject('pjrcache', JSON.stringify(newCache));
-                    // nlapiLogExecution('audit', '_getRates: set cache', JSON.stringify(newCache,null,2));
+                    nlapiLogExecution('audit', '_getRates: set cache', JSON.stringify(newCache,null,2));
                 }
                 catch (e) {
                     nlapiLogExecution('debug', 'Pacejet.js:_getRates: exception', e);
@@ -322,10 +329,16 @@ define(
                     }
 
                     var shipaddress = this._shippingAddress(order, address);
+                    // nlapiLogExecution('debug', '_updateShippingRates: shipaddress = ', shipaddress);
+                    // nlapiLogExecution('debug', '_updateShippingRates: shipaddress.Destination = ', shipaddress.Destination);
+                    // nlapiLogExecution('debug', '_updateShippingRates: shipaddress.Destination.Address1 = ', shipaddress.Destination.Address1);
+
+                    var existsAddress1 = !!(shipaddress && shipaddress.Destination && shipaddress.Destination.Address1);
+                    nlapiLogExecution('debug', '_updateShippingRates: existsAddress1 = ', existsAddress1);
 
                     // look up rates and update both shipmethods and summary
-                    if (shipaddress) {
-                        //nlapiLogExecution('debug', '_updateShippingRates', 'have address, call pacejet');
+                    if (existsAddress1) {
+                        nlapiLogExecution('debug', '_updateShippingRates', 'have address, call pacejet');
 
                         var ratingResultsList = this._getRates(shipaddress, order, results);
 
@@ -529,12 +542,12 @@ define(
             }
 
             ,	_packageDetailsList: function (order, results) {
-                nlapiLogExecution('debug', '_packageDetailsList', 'start');
-                nlapiLogExecution('debug', 'hasFreeShipItems', results.hasFreeShipItems);
-                nlapiLogExecution('debug', 'allFreeShipItems', results.allFreeShipItems);
+                // nlapiLogExecution('debug', '_packageDetailsList', 'start');
+                // nlapiLogExecution('debug', 'hasFreeShipItems', results.hasFreeShipItems);
+                // nlapiLogExecution('debug', 'allFreeShipItems', results.allFreeShipItems);
 
                 var skipFreeShipItems = results.hasFreeShipItems && !results.allFreeShipItems;
-                nlapiLogExecution('debug', 'skipFreeShipItems', skipFreeShipItems);
+                // nlapiLogExecution('debug', 'skipFreeShipItems', skipFreeShipItems);
 
                 var items = order.getItems() || [];
                 //nlapiLogExecution('debug', 'items.length', items.length);
@@ -555,7 +568,7 @@ define(
 
                     // if there are some free shipping items, exclude them from the PaceJet calculation
                     if (skipFreeShipItems && item.custitem_web_free_ship) {
-                        nlapiLogExecution('debug', 'skipping free shipping item ' + i, '');
+                        // nlapiLogExecution('debug', 'skipping free shipping item ' + i, '');
                         continue;
                     }
 
@@ -599,7 +612,7 @@ define(
                     };
                     productDetailsList.push(productDetails);
                 };
-                nlapiLogExecution('debug', 'productDetailsList', JSON.stringify(productDetailsList,null));
+                // nlapiLogExecution('debug', 'productDetailsList', JSON.stringify(productDetailsList,null));
 
                 return { PackageDetailsList: [{ ProductDetailsList: productDetailsList }] };
             }
