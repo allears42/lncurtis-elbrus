@@ -26,6 +26,15 @@ define('ProductDetails.QuickView.View.Extension'
 			// make modal header product title
 			this.title = this.model.get('item').get('_pageTitle');
 			this.pageHeader = this.title;
+			
+			var self = this
+			,   layout = this.application.getLayout();
+			
+			layout.once('afterAppendView', function () {
+				self.model.setSingleOptions();
+				self.showContent();
+				
+			}, self);
 		})
 		
 		, attributes: _.extend({}, ProductDetailsQuickViewView.prototype.attributes, {

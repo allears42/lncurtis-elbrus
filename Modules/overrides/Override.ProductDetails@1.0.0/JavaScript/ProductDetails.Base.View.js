@@ -365,7 +365,6 @@ define(
 
 		,	showOptionsPusher: function showOptionsPusher ()
 			{
-				console.log('showOptionsPusher')
 				return false;
 			}
 

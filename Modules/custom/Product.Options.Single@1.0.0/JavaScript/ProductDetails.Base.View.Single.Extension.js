@@ -7,6 +7,7 @@ define(
     ,	[
         'ProductDetails.Base.View'
     ,   'ProductDetails.Full.View'
+    ,   'ProductDetails.QuickView.View'
     ,   'ProductDetails.Options.Selector.Singles.View'
 
     ,	'underscore'
@@ -14,6 +15,7 @@ define(
     ,	function(
         ProductDetailsBaseView
     ,   ProductDetailsFullView
+    ,   ProductDetailsQuickViewView
     ,   ProductDetailsOptionsSelectorSinglesView
 
     ,	_
@@ -22,6 +24,17 @@ define(
         'use strict';
 	
 	    ProductDetailsFullView.prototype.childViews['Product.Options.Single'] = function ()
+	    {
+		    return new ProductDetailsOptionsSelectorSinglesView({
+			    model: this.model
+			    ,	application: this.application
+			    ,	show_pusher: this.showOptionsPusher()
+			    ,	show_required_label: this.model.get('item').get('itemtype') === 'GiftCert'
+		    });
+		
+	    };
+	
+	    ProductDetailsQuickViewView.prototype.childViews['Product.Options.Single'] = function ()
 	    {
 		    return new ProductDetailsOptionsSelectorSinglesView({
 			    model: this.model
