@@ -12,8 +12,10 @@ define(
 	,	'SC.Configuration'
 
 	,	'link_menu.tpl'
+	,	'Backbone.CompositeView'
 
     ,	'underscore'
+    ,	'jQuery'
 	]
 ,	function (
 		FooterView
@@ -24,7 +26,10 @@ define(
 
 	,	link_menu_tpl
 
+    ,   BackboneCompositeView
+
     ,   _
+    ,   jQuery
 	)
 {
 	'use strict';
@@ -69,6 +74,33 @@ define(
 				});
 			}
 		})
+		
+	,	initialize: function (options)
+		{
+			/*'#main-container'*/
+			this.application = options.application;
+			
+			BackboneCompositeView.add(this);
+			
+			//after appended to DOM, we add the footer height as the content bottom padding, so the footer doesn't go on top of the content
+			//wrap it in a setTimeout because if not, calling height() can take >150 ms in slow devices - forces the browser to re-compute the layout.
+			this.application.getLayout().on('afterAppendToDom', function ()
+			{
+				var headerMargin = 25;
+				
+				setTimeout(function ()
+				{
+					// custom - this throws and error in the SEO Debugger
+					if(jQuery('#site-header') && jQuery('#site-header').length > 0) {
+						// TODO REMOVE this HARDCODED Ids!, this parameters should be pass in by each specific layout, for this the header and footer SHOULD BE removed from the
+						// ApplicationSkeleton.Layout as this is generic and should not have any concrete view
+						var contentHeight = jQuery(window).innerHeight() - jQuery('#site-header')[0].offsetHeight - headerMargin - jQuery('#site-footer')[0].offsetHeight;
+						jQuery('#main-container').css('min-height', contentHeight);
+					}
+				},10);
+			});
+			
+		}
 
 	,	getContext: _.wrap( FooterView.prototype.getContext, function(fn)
 		{
