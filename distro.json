@@ -170,6 +170,7 @@
 
         "overrides/Override.Account": "2.3.0",
         "overrides/Override.Address": "2.4.0",
+        "overrides/Override.ApplicationSkeleton": "2.4.0",
         "overrides/Override.BackboneExtras": "2.4.0",
         "overrides/Override.Backbone.CollectionView": "1.2.0",
         "overrides/Override.Balance": "2.1.2",
@@ -218,7 +219,6 @@
         "extensions/ItemRelations.Extension": "3.0.0",
         "extensions/ItemsSearcher.Extension": "2.0.0",
         "extensions/ListHeader.Extension": "2.3.0",
-        "extensions/LiveOrder.Extension": "4.0.0",
         "extensions/LoginRegister.Extension": "2.3.0",
         "extensions/NavigationHelper.Extension": "2.1.0",
         "extensions/OrderHistory.Extension": "5.0.0",
@@ -241,6 +241,7 @@
         "custom/LinkHierarchy": "1.0.0",
         "custom/Pacejet": "1.0.0",
         "custom/Product.BackOrders": "1.0.0",
+        "custom/Product.Configurator": "1.0.0",
         "custom/Product.Options.Single": "1.0.0",
         "custom/ProductViews.SizeChart": "1.0.0",
 
@@ -326,7 +327,6 @@
                     "ItemRelations.Extension",
                     "ItemsSearcher.Extension",
                     "ListHeader.Extension",
-                    "LiveOrder.Extension",
                     "NavigationHelper.Extension",
                     "ProductDetails.Extension",
                     "ProductList.Extension",
@@ -342,6 +342,7 @@
                     "FacetContent",
                     "LinkHierarchy",
                     "Product.BackOrders",
+                    "Product.Configurator",
                     "Product.Options.Single",
                     "ProductViews.SizeChart"
                 ],
@@ -472,7 +473,6 @@
                     "Item.Extension",
                     "ItemsSearcher.Extension",
                     "ListHeader.Extension",
-                    "LiveOrder.Extension",
                     "LoginRegister.Extension",
                     "NavigationHelper.Extension",
                     "OrderHistory.Extension",
@@ -605,7 +605,6 @@
                     "Item.Extension",
                     "ItemsSearcher.Extension",
                     "ListHeader.Extension",
-                    "LiveOrder.Extension",
                     "LoginRegister.Extension",
                     "NavigationHelper.Extension",
                     "ProductViews.Extension",
@@ -931,6 +930,7 @@
                         "Location.SCA",
                         "CustomerServiceForm",
                         "FacetContent",
+                        "Product.Configurator",
                         "LinkHierarchy",
                         {
                             "module": "Firefighter",

@@ -49,6 +49,7 @@ define('RecentlyViewedItems.View'
 			,	collection = application.getConfig('siteSettings.sitetype') === 'ADVANCED' ? RecentlyViewedItemsCollection.getInstance() : new Backbone.Collection()
 			,	number_of_items_displayed = application.getConfig('recentlyViewedItems.numberOfItemsDisplayed')
 			,	self = this;
+			
 			BackboneCollectionView.prototype.initialize.call(this, {
 				collection: collection
 			,	viewsPerRow: Infinity

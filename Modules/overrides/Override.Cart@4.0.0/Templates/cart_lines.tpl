@@ -13,10 +13,10 @@
 					<div class="cart-lines-thumbnail">
 						{{#if isNavigable}}
 							<a {{{linkAttributes}}}>
-								<img src="{{resizeImage thumbnail.url 'thumbnail'}}" alt="{{thumbnail.altimagetext}}">
+								<img src="{{resizeImage thumbnail.url 'item_small'}}" alt="{{thumbnail.altimagetext}}">
 							</a>
 						{{else}}
-							<img src="{{resizeImage thumbnail.url 'thumbnail'}}" alt="{{thumbnail.altimagetext}}">
+							<img src="{{resizeImage thumbnail.url 'item_small'}}" alt="{{thumbnail.altimagetext}}">
 						{{/if}}
 					</div>
 				</td>

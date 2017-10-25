@@ -999,8 +999,8 @@
         };
         _.mixin(Input.prototype, EventEmitter, {
             _onBlur: function onBlur() {
-                this.resetInputValue();
-                this.trigger("blurred");
+                //this.resetInputValue();
+                //this.trigger("blurred");
             },
             _onFocus: function onFocus() {
                 this.trigger("focused");

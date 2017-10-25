@@ -47,18 +47,17 @@ define(
                 }
             })
 
-		,	getContext: _.wrap( HeaderMiniCartItemCellView.prototype.getConetxt, function(fn)
+		,	getContext: _.wrap( HeaderMiniCartItemCellView.prototype.getContext, function(fn)
 			{
-
-                var returnVariable = fn.apply(this, _.toArray(arguments).slice(1))
-				,   itemOptions = this.model.get('options')
-				,   customImage = _.first(_.filter(itemOptions, function (option)
+        		var returnVariable = fn.apply(this, _.toArray(arguments).slice(1))
+				,   itemOptions = this.model.get('item').get('options')
+				,   customImage = _.first(_.filter(itemOptions.models, function (option)
 					{
-						return option.id == "CUSTCOL_SC_ITEM_IMAGE"
+						return option.get('cartOptionId').toUpperCase() === "CUSTCOL_SC_ITEM_IMAGE"
 					}));
-
+                
                 _.extend(returnVariable , {
-                    image: (customImage && customImage.value) ? customImage.value : item.get('_thumbnail').url
+                    image: (customImage && customImage.get('value')) ? customImage.get('value') : this.model.get('item').get('_thumbnail').url
                 });
 
                 return returnVariable

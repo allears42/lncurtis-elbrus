@@ -26,6 +26,7 @@
 								: <span data-value="{{cartOptionId}}" class="product-views-selected-option">{{selectedValue.label}}</span>
 							{{/if}}
 
+							{{#if showTooltip}}<i class="product-views-option-icon-question-sign" data-toggle="tooltip" title="" data-original-title="{{tooltip}}"></i>{{/if}}
 						</label>
 					{{/if}}
 					<div class="{{cartOptionId}}-controls product-views-option-dropdown-control">

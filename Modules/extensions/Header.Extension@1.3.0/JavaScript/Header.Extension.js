@@ -8,7 +8,7 @@ define(
         'Header.Logo.View.Extension'
     ,   'Header.Menu.View.Extension'
     ,   'Header.MiniCart.View.Extension'
-    ,   'Header.MiniCartItemCell.View'
+    ,   'Header.MiniCartItemCell.View.Extension'
     ,   'Header.Profile.View'
     ,   'Header.View.Extension'
         

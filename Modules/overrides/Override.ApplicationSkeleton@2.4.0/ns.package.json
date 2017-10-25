@@ -17,6 +17,7 @@
         ]
     },
     "overrides": {
+        "suitecommerce/ApplicationSkeleton@2.4.0/Configuration/ApplicationSkeleton.Layout.Images.json": "Configuration/ApplicationSkeleton.Layout.Images.json",
         "suitecommerce/ApplicationSkeleton@2.4.0/JavaScript/ApplicationSkeleton.Layout.js": "JavaScript/ApplicationSkeleton.Layout.js"
     }
 }

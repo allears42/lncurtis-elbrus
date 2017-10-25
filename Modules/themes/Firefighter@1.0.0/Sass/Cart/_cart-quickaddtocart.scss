@@ -5,31 +5,38 @@
 	may use this code subject to the terms that govern your access and use.
 */
 
-.cart-quickaddtocart {}
+.cart-quickaddtocart {
+}
 
 .cart-quickaddtocart-quantity {
-	height: $sc-target-size-mobile;
- 	padding:$sc-base-margin * 2 $sc-base-padding * 3 $sc-base-margin * 2 $sc-base-padding * 3;
- 	width: 90px;
- 	text-align: right;
-	background-color: $sc-color-theme-background-light;
-	border: 0;
-	-webkit-border-radius: 0 0 0 0;
-	border-radius: 0 0 0 0;
-	font-weight:$sc-font-weight-normal;
-	margin-bottom:$sc-small-margin;
+  height: $sc-target-size-mobile;
+  padding: $sc-base-margin * 2 $sc-base-padding * 3 $sc-base-margin * 2 $sc-base-padding * 3;
+  width: 90px;
+  text-align: right;
+  background-color: $sc-color-theme-background-light;
+  border: 0;
+  -webkit-border-radius: 0 0 0 0;
+  border-radius: 0 0 0 0;
+  font-weight: $sc-font-weight-normal;
+  margin-bottom: $sc-small-margin;
 }
 
 .cart-quickaddtocart-button {
-	@extend .button-primary;
-	@extend .button-medium;
+  @extend .button-primary;
+  @extend .button-medium;
 }
 
-.cart-quickaddtocart-itemid {}
+.cart-quickaddtocart-itemid {
+}
+
 .cart-quickaddtocart-price {
   @extend .small-price;
-  margin-bottom:$sc-small-margin;
-  position:relative;
+
+}
+
+@mixin quickaddtocart-price {
+  margin-bottom: $sc-small-margin;
+  position: relative;
   padding: $sc-base-padding 0;
   border-top: 1px solid $sc-color-theme-border;
   border-bottom: 1px solid $sc-color-theme-border;
@@ -37,5 +44,11 @@
   .product-views-price-lead {
     font-size: $sc-h4-font-size;
     color: $sc-color-dark-copy;
+  }
+}
+
+.facets-facet-browse-items {
+  .cart-quickaddtocart-price {
+    @include quickaddtocart-price;
   }
 }

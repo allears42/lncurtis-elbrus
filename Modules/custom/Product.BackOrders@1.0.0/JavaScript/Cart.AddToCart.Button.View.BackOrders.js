@@ -81,6 +81,7 @@ define(
 			else
 			{
 				var line = LiveOrderLineModel.createFromProduct(this.model);
+				
 				cart_promise = this.cart.addLine(line);
 				CartConfirmationHelpers.showCartConfirmation(cart_promise, line, self.options.application);
 			}
