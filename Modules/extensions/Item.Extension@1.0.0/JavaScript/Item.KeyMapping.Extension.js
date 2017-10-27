@@ -28,14 +28,17 @@ define('Item.KeyMapping.Extension'
 		    ,   defaultcategoryPath = _.compact(_.pluck(tokens, 'url')).join('/')
 		    ,   breadcrumbString = "";
 		
-		    //console.log(tokens, defaultcategoryPath);
+		    if (tokens.length >= 3) {
+		    	tokens.splice(3,tokens.length-1)
+		    }
 		    
-		    _.each(tokens, function (token)
+		    console.log(tokens)
+		    _.each(tokens, function (token, index)
 		    {
 		    	var href = breadcrumbString + "/" + (token.url.length > 0 ? token.url : token.label);
 			    if(token.label.toLowerCase() !== "home") {
 				    breadcrumb.push({
-					    href: href,
+					    href: href.toLowerCase(),
 					    text: token.label
 				    });
 				

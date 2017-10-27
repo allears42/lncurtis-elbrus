@@ -14,7 +14,7 @@ define(
 	,	'LiveOrder.Line.Model'
 	,	'Cart.Confirmation.Helpers'
 
-	,	'product-configurator_add_to_cart_button.tpl'
+	,	'product_configurator_add_to_cart_button.tpl'
 
 	,	'Backbone'
 	,	'underscore'

@@ -66,7 +66,7 @@ define('ItemRelations.Related.View'
 			}
 		}
 
-	,	loadItems: function loadRelatedItem ()
+	,	loadRelatedItem: function loadRelatedItem ()
 		{
 			var self = this;
 

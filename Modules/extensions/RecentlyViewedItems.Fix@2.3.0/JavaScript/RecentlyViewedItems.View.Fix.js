@@ -93,7 +93,7 @@ define('RecentlyViewedItems.View.Fix'
 
 		}
 		
-		,	loadItems: function loadRelatedItem ()
+		,	loadRelatedItem: function loadRelatedItem ()
 		{
 			var self = this
 			,	application = this.options.application

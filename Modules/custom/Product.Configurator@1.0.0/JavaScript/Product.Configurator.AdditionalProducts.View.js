@@ -62,7 +62,7 @@ define('Product.Configurator.AdditionalProducts.View'
 				}
 			}
 			
-		,	loadItems: function loadRelatedItem ()
+		,	loadItems: function ()
 			{
 				var self = this;
 				

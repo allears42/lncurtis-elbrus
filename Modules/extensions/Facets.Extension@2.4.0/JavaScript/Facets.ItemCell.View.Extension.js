@@ -1,5 +1,8 @@
 /*
 	© 2017 LN Curtis
+	
+	
+	Add hideComparePrice to pass variable that allows us to hide the compare price on the PLP
 */
 
 define(
@@ -8,6 +11,8 @@ define(
             'Facets.ItemCell.View'
         ,   'ProductViews.Price.View'
         ,   'ProductLine.Stock.View'
+        ,   'Product.Model'
+        ,   'Cart.QuickAddToCart.View'
         ,   'SC.Configuration'
     
         ,	'underscore'
@@ -17,6 +22,8 @@ define(
             FacetsItemCellView
         ,   ProductViewsPriceView
         ,   ProductLineStockView
+        ,   ProductModel
+        ,   CartQuickAddToCartView
         ,   Configuration
         , 	_
         
@@ -34,6 +41,20 @@ define(
 	                    , application: this.application
                     });
                 }
+				// override to pass custom showComparePrice var
+			,	'Cart.QuickAddToCart': function ()
+				{
+					var product = new ProductModel({
+						item: this.model
+						,	quantity: this.model.get('_minimumQuantity', true)
+					});
+					
+					return new CartQuickAddToCartView({
+						model: product
+					,	application: this.options.application
+					,   hideComparePrice: true
+					});
+				}
 
             })
 

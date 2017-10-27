@@ -1,6 +1,9 @@
 /*
 	© 2017 Satellite
 	Adds pricing schedule to item price views
+	Add other data to context object
+	Add custom handling for matrix price ranges when not using the child matrix fieldset (performance)
+	Add hideComparePrice to pass variable that allows us to hide the compare price on the PLP
 */
 
 // @module ItemViews
@@ -29,9 +32,15 @@ define(
 
     // @class ItemViews.Price.View.Extension @extends ItemViews.Price.View
     _.extend(ProductViewsPriceView.prototype, {
+	
+	    initialize: _.wrap(ProductViewsPriceView.prototype.initialize, function (fn, options) {
+		    fn.apply(this, _.toArray(arguments).slice(1));
+		
+		    this.hideComparePrice = options.hideComparePrice || false;
+	    })
         // @method getContext
         // @return {Header.View.Context}
-        getContext: _.wrap(ProductViewsPriceView.prototype.getContext, function (fn) {
+    ,   getContext: _.wrap(ProductViewsPriceView.prototype.getContext, function (fn) {
          
         	//console.log('this.model', this.model, this.options.origin);
         	
@@ -65,6 +74,9 @@ define(
 				    showComparePrice = is_price_range.max.price < is_price_range.compare_price
 			    }
 		    }
+		    
+		    // take passed in variable as last consideration
+		    if(!this.showComparePrice) showComparePrice = false;
 			   
 			_.extend(returnVariable, {
 				// @property {Boolean} isPriceEnabled
@@ -98,6 +110,7 @@ define(
 				,   phone: Configuration.get("header.telephone", "877-488-0469")
 				
 				,   isDesktop: _.isPhoneDevice() === false && _.isTabletDevice() === false
+				
             });
 			
 			return returnVariable;
