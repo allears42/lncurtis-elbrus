@@ -50,6 +50,7 @@
 						</div>
 				</div>
 				{{/each}}
+
 			</fieldset>
 
 		{{/if}}
@@ -59,3 +60,17 @@
 		</div>
 	</form>
 </section>
+
+
+
+
+{{!----
+Use the following context variables when customizing this template:
+
+	pageHeader (String)
+	subscriptions (Array)
+	isEmailSuscribe (Boolean)
+	campaignSubscriptions (Boolean)
+	showBackToAccount (Boolean)
+
+----}}

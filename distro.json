@@ -200,7 +200,7 @@
         "overrides/Override.ProductLine": "1.0.0",
         "overrides/Override.ProductList": "3.0.0",
         "overrides/Override.ProductViews": "1.0.0",
-        "overrides/Override.Profile": "3.3.0",
+        "overrides/Override.Profile": "3.0.0",
         "overrides/Override.RecentlyViewedItems": "2.3.0",
         "overrides/Override.ShoppingApplication": "4.0.0",
         "overrides/Override.SiteSearch": "2.1.2",
@@ -246,6 +246,7 @@
         "custom/Product.Configurator": "1.0.0",
         "custom/Product.Options.Single": "1.0.0",
         "custom/ProductDetails.ImageGallery.Video.View": "1.0.0",
+        "custom/ProductList.Copy": "1.0.0",
         "custom/ProductViews.SizeChart": "1.0.0",
 
         "themes/Firefighter": "1.0.0"
@@ -349,6 +350,7 @@
                     "Product.Configurator",
                     "Product.Options.Single",
                     "ProductDetails.ImageGallery.Video.View",
+                    "ProductList.Copy",
                     "ProductViews.SizeChart"
                 ],
                 "amdclean": true,
@@ -468,6 +470,7 @@
                     "CreditCard.Icon",
                     "LinkHierarchy",
                     "Product.BackOrders",
+                    "ProductList.Copy",
 
                     "Backbone.FormView.Extension",
                     "Categories.Extension",
