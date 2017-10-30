@@ -28,11 +28,10 @@ define('Item.KeyMapping.Extension'
 		    ,   defaultcategoryPath = _.compact(_.pluck(tokens, 'url')).join('/')
 		    ,   breadcrumbString = "";
 		
-		    if (tokens.length >= 3) {
+		    if (tokens && tokens.length >= 3) {
 		    	tokens.splice(3,tokens.length-1)
 		    }
 		    
-		    console.log(tokens)
 		    _.each(tokens, function (token, index)
 		    {
 		    	var href = breadcrumbString + "/" + (token.url.length > 0 ? token.url : token.label);
@@ -251,36 +250,6 @@ define('Item.KeyMapping.Extension'
 		    }
 		
 	    }
-	
-    ,   _videos: function (item) {
-		
-		    var videos = item.get('custitem_storevideos')
-			    ,   videoString = videos && videos.length > 0 ? videos.split(/\r?\n/g) : []
-			    ,   videoObjArr = []
-			    ,   MAXWIDTH = 430
-			    ,   vidWidth = Utils.getViewportWidth() >= MAXWIDTH ? MAXWIDTH : Utils.getViewportWidth() - 40;
-		
-		    if (item.application && item.application.getLayout().$containerModal) vidWidth = 335;
-		
-		    _.each(videoString, function (vid) {
-			    var $elem = $(vid)
-				    ,   h = parseInt($elem.attr('height'))
-				    ,   w = parseInt($elem.attr('width'))
-				    ,   r = h/w;
-			
-			    if(w > MAXWIDTH){
-				    $elem.attr('width', vidWidth);
-				    $elem.attr('height', Math.floor(vidWidth*r))
-			    }
-			
-			    //console.log($elem.prop('outerHTML'))
-			    videoObjArr.push($elem.prop('outerHTML'))
-		    });
-		
-		    //console.log(videoObjArr);
-		    return videoObjArr;
-	    }
-	
 	
     });
 

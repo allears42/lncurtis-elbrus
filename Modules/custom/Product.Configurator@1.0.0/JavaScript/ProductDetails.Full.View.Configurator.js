@@ -92,13 +92,11 @@ define(
 			
 		})
 		
-	,   events: {
+	,   events: _.extend({}, ProductDetailsFullView.prototype.events, {
 			'blur .product-configurator-additional-quantity-input': 'quantityChanged'
-		}
+		})
 		
 	,   quantityChanged: function (evt) {
-			console.log('change', this.additionalProductsView.collection);
-			
 			var self = this
 			,   $elem = jQuery(evt.target)
 			,   itemID = $elem.data('item-id');

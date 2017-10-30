@@ -11,7 +11,6 @@ define(
     ,   'LiveOrder.Model'
     ,   'ProductDetails.ImageGallery.View'
     ,   'ProductLine.Stock.View'
-    ,   'ProductViews.SizeChart'
 
     ,	'Backbone'
     ,	'underscore'
@@ -23,7 +22,6 @@ define(
     ,   LiveOrderModel
     ,   ProductDetailsImageGalleryView
     ,   ProductLineStockView
-    ,   ProductViewsSizeChartView
 
     ,	Backbone
     ,	_
@@ -42,10 +40,15 @@ define(
         _.extend( ProductDetailsBaseView.prototype, {
 
             events: _.extend({}, ProductDetailsBaseView.prototype.events, {
-                'click [data-action="print-page"]': 'triggerPrint'
-            ,   'click [data-action="show-size-chart"]': 'showSizeChart'
-            ,   'contextmenu img': 'preventContextMenu'
+                'contextmenu img': 'preventContextMenu'
             })
+	
+        ,   preventContextMenu: function (e)
+	        {
+		        e.preventDefault();
+		        console.error('You\'re attempting to access an image that is copyrighted by LNCurtis.com');
+		        return false;
+	        }
 
         ,   initialize: _.wrap( ProductDetailsBaseView.prototype.initialize, function(fn)
             {
@@ -87,29 +90,6 @@ define(
                 }
 
             })
-
-        ,   preventContextMenu: function (e)
-            {
-                e.preventDefault();
-                console.error('You\'re attempting to access an image that is copyrighted by LNCurtis.com');
-                return false;
-            }
-	
-        ,   triggerPrint: function (e)
-	        {
-		        window.print();
-	        }
-	
-        ,   showSizeChart: function (e)
-	        {
-		
-		        var model = this.model;
-		        this.application.getLayout().showInModal(new ProductViewsSizeChartView({
-			        layout: this
-			        , application: this.application
-			        , model: model
-		        }));
-	        }
 	        
 		,   getContext: _.wrap(ProductDetailsBaseView.prototype.getContext, function (fn) {
 		        var returnVariable = fn.apply(this, _.toArray(arguments).slice(1))

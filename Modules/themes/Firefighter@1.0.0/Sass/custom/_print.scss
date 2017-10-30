@@ -98,6 +98,11 @@
   .product-details-tab-content-panel {
     padding: $sc-base-padding * 4;
   }
+  .product-details-information-pusher,
+  .product-details-information-pusher i {
+    border:none;
+  }
+  .product-details-information-hint,
   .product-details-information-content-tabs{
     display:none ;
   }

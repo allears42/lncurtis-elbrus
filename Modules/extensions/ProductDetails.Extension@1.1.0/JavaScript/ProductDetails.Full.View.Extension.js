@@ -7,18 +7,20 @@ define(
 	'ProductDetails.Full.View.Extension'
 ,	[
 		'ProductDetails.Full.View'
+	,   'ProductViews.SizeChart'
 	,	'SC.Configuration'
 	,	'underscore'
 
 	]
 ,	function (
 		ProductDetailsFullView
+	,   ProductViewsSizeChartView
 	,	Configuration
 	,	_
 	)
 {
 	'use strict';
-
+	
 	_.extend(ProductDetailsFullView.prototype, {
 		//fix for click event on select - should be change
 		optionBindEventByType: {
@@ -29,6 +31,38 @@ define(
 			,	'date': 'change'
 		}
 		
+	,   events: _.extend({}, ProductDetailsFullView.prototype.events, {
+			'click [data-action="print-page"]': 'triggerPrint'
+			,   'click [data-action="print-page"] i': 'triggerPrint'
+			,   'click [data-action="show-size-chart"]': 'showSizeChart'
+			,   'contextmenu img': 'preventContextMenu'
+		})
+		
+		
+	,   preventContextMenu: function (e)
+		{
+			e.preventDefault();
+			console.error('You\'re attempting to access an image that is copyrighted by LNCurtis.com');
+			return false;
+		}
+		
+	,   triggerPrint: function (e)
+		{
+			e.preventDefault();
+			window.print();
+		}
+		
+	,   showSizeChart: function (e)
+		{
+			
+			var model = this.model;
+			this.application.getLayout().showInModal(new ProductViewsSizeChartView({
+				layout: this
+				, application: this.application
+				, model: model
+			}));
+		}
+	
 	,   showOptionsPusher: function () {
 			return false;
 		}
@@ -47,5 +81,7 @@ define(
 			return returnVariable;
 		})
 	});
+	
+	//console.log(ProductDetailsFullView.prototype.events)
 
 });

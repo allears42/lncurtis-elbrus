@@ -7,12 +7,14 @@ define(
     ,	[
         'Profile.EmailPreferences.View'
     ,   'GlobalViews.Message.View'
+    ,   'SC.Configuration'
 
     ,   'underscore'
     ]
     ,	function(
         ProfileEmailPreferencesView
     ,   GlobalViewsMessageView
+    ,   Configuration
 
     ,   _
     )

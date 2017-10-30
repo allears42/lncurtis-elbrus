@@ -20,7 +20,18 @@ define('ProductDetails.QuickView.View.Extension'
 	_.extend(ProductDetailsQuickViewView.prototype, {
 		showModalPageHeader: true
 		
-	,   initialize: _.wrap(ProductDetailsQuickViewView.prototype.initialize, function (fn, options) {
+		,   events: _.extend({}, ProductDetailsQuickViewView.prototype.events, {
+			'contextmenu img': 'preventContextMenu'
+		})
+		
+		,   preventContextMenu: function (e)
+		{
+			e.preventDefault();
+			console.error('You\'re attempting to access an image that is copyrighted by LNCurtis.com');
+			return false;
+		}
+		
+		,   initialize: _.wrap(ProductDetailsQuickViewView.prototype.initialize, function (fn, options) {
 			fn.apply(this, _.toArray(arguments).slice(1));
 			
 			// make modal header product title

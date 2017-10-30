@@ -6,6 +6,7 @@ define(
     'LoginRegister.Login.View.Extension'
     ,	[
         'LoginRegister.Login.View'
+    ,   'SC.Configuration'
 
         ,	'underscore'
 
@@ -13,6 +14,7 @@ define(
     ,	function(
         LoginRegisterLoginView
 
+        , 	Configuration
         , 	_
 
     )

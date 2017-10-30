@@ -23,7 +23,7 @@ define(
 
         _.extend( LoginRegisterView.prototype, {
 
-            initialize: _.wrap( LoginRegisterView.prototype.initialize, function(fn)
+            initialize: _.wrap( LoginRegisterView.prototype.initialize, function(fn, options)
             {
                 var self = this
 				,	parameters = Utils.parseUrlOptions(location.search);
