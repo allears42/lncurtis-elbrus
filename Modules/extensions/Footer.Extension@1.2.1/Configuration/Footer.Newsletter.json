@@ -1,0 +1,75 @@
+{
+    "type": "object",
+    "properties": {
+        "newsletter.subscribeButtonText": {
+            "group": "layout",
+            "subtab": "footer",
+            "type": "string",
+            "title": "Subscribe Button Text",
+            "description": "Subscribe button text",
+            "default": "Sign Up for Email"
+        },
+        "newsletter.modalTitle":{
+            "group": "shoppingApplication",
+            "subtab": "newsletter",
+            "type": "string",
+            "title": "Modal Title",
+            "description": "Title of newsletter modal",
+            "default": "Sign up for the LN Curtis Newsletter"
+        },
+        "newsletter.optInText":{
+            "group": "shoppingApplication",
+            "subtab": "newsletter",
+            "type": "string",
+            "title": "Opt In text",
+            "nsType": "textarea",
+            "description": "Opt in text - shows on register page and in My Account",
+            "default": "Please sign me up for Curtis offers, promotions and news"
+        },
+        "newsletter.modalContent":{
+            "group": "shoppingApplication",
+            "subtab": "newsletter",
+            "type": "string",
+            "nsType": "textarea",
+            "title": "Modal Content",
+            "description": "Additional content for newsletter modal",
+            "default": ""
+        },
+        "newsletter.success":{
+            "group": "shoppingApplication",
+            "subtab": "newsletter",
+            "type": "string",
+            "nsType": "textarea",
+            "title": "Newsletter Success",
+            "description": "Messaging for successful signup",
+            "default": "Thank you! Welcome to our newsletter"
+        },
+        "newsletter.warning":{
+            "group": "shoppingApplication",
+            "subtab": "newsletter",
+            "type": "string",
+            "nsType": "textarea",
+            "title": "Newsletter Already Subscribed",
+            "description": "Messaging for customer that is already subscribed",
+            "default": "Sorry, the specified email is already subscribed."
+        },
+        "newsletter.disabled":{
+            "group": "shoppingApplication",
+            "subtab": "newsletter",
+            "type": "string",
+            "nsType": "textarea",
+            "title": "Newsletter User Disabled",
+            "description": "Messaging for customer that is disabled",
+            "default": "Sorry, the specified email cannot be subscribed."
+        },
+        "newsletter.error":{
+            "group": "shoppingApplication",
+            "subtab": "newsletter",
+            "type": "string",
+            "nsType": "textarea",
+            "title": "Newsletter Error",
+            "description": "Messaging for error when trying to subscribe",
+            "default": "Sorry, subscription cannot be done. Try again later."
+        }
+    }
+}
