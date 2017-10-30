@@ -935,8 +935,10 @@
                         "ProductDetailToQuote",
                         "PickupInStore",
                         "Location.SCA",
+
                         "CustomerServiceForm",
                         "FacetContent",
+                        "Newsletter.Extension",
                         "Product.Configurator",
                         "LinkHierarchy",
                         {
@@ -1100,6 +1102,7 @@
                         },
                         "Location.SCA",
                         "LinkHierarchy",
+                        "Newsletter.Extension",
                         {
                             "module": "Firefighter",
                             "include": [
@@ -1213,6 +1216,7 @@
                         "Footer",
                         "Location.SCA",
                         "LinkHierarchy",
+                        "Newsletter.Extension",
                         {
                             "module": "Firefighter",
                             "include": [

@@ -66,6 +66,8 @@
 
         "suitecommerce/MyAccountApplication@3.1.0/Sass/_myaccount-layout.scss" : "Sass/MyAccountApplication/_myaccount-layout.scss",
 
+        "suitecommerce/Newsletter@2.1.0/Sass/_newsletter.scss" : "Sass/Newsletter/_newsletter.scss",
+
         "suitecommerce/OrderHistory@5.0.0/Sass/_order-history-details.scss":"Sass/OrderHistory/_order-history-details.scss",
         "suitecommerce/OrderHistory@5.0.0/Sass/_order-history-item-actions.scss":"Sass/OrderHistory/_order-history-item-actions.scss",
         "suitecommerce/OrderHistory@5.0.0/Sass/_order-history-summary.scss":"Sass/OrderHistory/_order-history-summary.scss",
@@ -84,6 +86,7 @@
         "suitecommerce/Overview@1.1.2/Sass/_overview-shipping.scss" : "Sass/Overview/_overview-shipping.scss",
 
         "suitecommerce/ProductDetails@1.0.0/Sass/_product-details-full.scss" : "Sass/ProductDetails/_product-details-full.scss",
+        "suitecommerce/ProductDetails@1.0.0/Sass/_product-details-image-gallery.scss" : "Sass/ProductDetails/_product-details-image-gallery.scss",
         "suitecommerce/ProductDetails@1.0.0/Sass/_product-details-options-selector.scss" : "Sass/ProductDetails/_product-details-options-selector.scss",
         "suitecommerce/ProductDetails@1.0.0/Sass/_product-details-quantity.scss" : "Sass/ProductDetails/_product-details-quantity.scss",
         "suitecommerce/ProductDetails@1.0.0/Sass/_product-details-quickview.scss" : "Sass/ProductDetails/_product-details-quickview.scss",

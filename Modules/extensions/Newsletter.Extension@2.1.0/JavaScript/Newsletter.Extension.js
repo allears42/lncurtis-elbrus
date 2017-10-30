@@ -9,14 +9,14 @@ define(
 		'Newsletter'
 	,	'Footer.View'
 	,	'Newsletter.Model.Extension'
-	,	'Newsletter.View'
+	,	'Newsletter.View.Extension'
 	,	'Newsletter.Router'
 	]
 ,   function (
 		Newsletter
 	,	FooterView
 	,	NewsletterModelExtension
-	,	NewsletterView
+	,	NewsletterViewExtension
 	,	NewsletterRouter
 	)
 {
@@ -26,7 +26,7 @@ define(
 		//@method mountToApp
 		//@param {ApplicationSkeleton} application
 		//@return {Void}
-		mountToApp: _.wrap(Newsletter.prototype.mountToApp, function mountToApp (fn, application)
+		mountToApp: _.wrap(Newsletter.mountToApp, function mountToApp (fn, application)
 		{
 			fn.apply(this, _.toArray(arguments).slice(1));
 			
@@ -37,6 +37,7 @@ define(
 	//@class Newsletter @extend ApplicationModule
 	return  {
 		NewsletterModelExtension: NewsletterModelExtension
+	,   NewsletterViewExtension: NewsletterViewExtension
 	
 	};
 });

@@ -1,0 +1,30 @@
+/*
+	© 2017 JHM Services
+*/
+
+
+.modal-newsletter {
+  .global-views-modal-content {
+    padding: $sc-base-padding*10;
+  }
+  .global-views-modal-content-header-title {
+    @extend h1;
+    text-align: center;
+  }
+}
+
+.newsletter-modal-intro {
+  text-align: center;
+}
+
+.std-form-label {
+  @extend .input-label;
+  margin-top: $sc-base-margin * 2;
+}
+
+.newsletter-grecaptcha {
+  clear: both;
+  > div {
+    margin: 0 auto;
+  }
+}

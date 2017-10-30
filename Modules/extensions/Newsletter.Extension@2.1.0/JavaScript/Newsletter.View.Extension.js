@@ -63,6 +63,7 @@ define('Newsletter.View.Extension'
 		
 		,	showInModal: function (options)
 		{
+			console.log('showInModal');
 			this.title = Configuration.get('newsletter.modalTitle', '');
 			this.template = newsletter_modal_tpl;
 			

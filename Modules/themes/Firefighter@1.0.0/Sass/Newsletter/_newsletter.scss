@@ -6,7 +6,9 @@
 */
 
 .newsletter-suscription-form {
-  padding-bottom: $sc-padding-medium;
+  @extend .row;
+  padding: $sc-padding-medium 0;
+
 }
 
 .newsletter-subscription-form-label {
@@ -20,12 +22,17 @@
 }
 
 .newsletter-subscription-form-container {
+
+  [data-validation-error="block"] {
+    @extend .col-sm-12;
+    text-align: left;
+  }
+
   input {
     @extend .input-base;
     margin: 0 auto;
     height: $sc-target-size;
     margin-bottom: $sc-small-margin;
-    @extend .col-sm-7;
     @extend .col-xs-12;
   }
 }
@@ -36,13 +43,6 @@
   @extend .button-secondary;
   @extend .col-sm-5;
   @extend .col-xs-12;
-}
-
-.newsletter-subscription-form-container {
-  [data-validation-error="block"] {
-    @extend .col-sm-12;
-    text-align: left;
-  }
 }
 
 .newsletter-alert-placeholder {
@@ -63,6 +63,7 @@
 }
 
 .newsletter-suscription-form-input {
+  @extend .input-large;
 }
 
 .newsletter-suscription-form-button-suscribe {
