@@ -6,24 +6,30 @@
 
 define('CallForPricing',
 	[
-		'Cart.QuickAddToCart.View.CallForPricing',
-		'ProductDetails.Base.View.CallForPricing',
-		'ProductList.Details.View.CallForPricing',
-		'ProductViews.Price.View.CallForPricing'
+		'Cart.QuickAddToCart.View.CallForPricing'
+		,   'ProductDetails.Base.View.CallForPricing'
+		,   'ProductList.Details.View.CallForPricing'
+		,   'ProductList.Lists.View.CallForPricing.Extension'
+		,   'ProductList.Model.CallForPricing.Extension'
+		,   'ProductViews.Price.View.CallForPricing'
 	],
 	function (
-		CartQuickAddToCartViewCallForPricing,
-		ProductDetailsBaseViewCallForPricing,
-		ProductListDetailsViewCallForPricing,
-		ProductViewsPriceViewCallForPricing
+		CartQuickAddToCartViewCallForPricing
+		,   ProductDetailsBaseViewCallForPricing
+		,   ProductListDetailsViewCallForPricing
+		,   ProductListListsViewCallForPricingExtension
+		,   ProductListModelCallForPricingExtension
+		,   ProductViewsPriceViewCallForPricing
 	){
 		'use strict';
 		
 		return {
-			CartQuickAddToCartViewCallForPricing: CartQuickAddToCartViewCallForPricing,
-			ProductDetailsBaseViewCallForPricing: ProductDetailsBaseViewCallForPricing,
-			ProductListDetailsViewCallForPricing: ProductListDetailsViewCallForPricing,
-			ProductViewsPriceViewCallForPricing: ProductViewsPriceViewCallForPricing
+			CartQuickAddToCartViewCallForPricing: CartQuickAddToCartViewCallForPricing
+			,   ProductDetailsBaseViewCallForPricing: ProductDetailsBaseViewCallForPricing
+			,   ProductListDetailsViewCallForPricing: ProductListDetailsViewCallForPricing
+			,   ProductListListsViewCallForPricingExtension: ProductListListsViewCallForPricingExtension
+			,   ProductListModelCallForPricingExtension: ProductListModelCallForPricingExtension
+			,   ProductViewsPriceViewCallForPricing: ProductViewsPriceViewCallForPricing
 		}
 	}
 );

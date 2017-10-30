@@ -48,6 +48,25 @@ define('ProductList.Details.View.Copy.Extension'
 			
 			this.application.getLayout().showInModal(this.addedToCartView);
 		}
+		
+		
+		// modification for links - from wishlist to product list
+		, getBreadcrumbPages: function () {
+			var breadcrumb = [
+				{
+					text: _('Product Lists').translate(),
+					href: '/productlist'
+				}
+				, {
+					text: this.model.get('name'),
+					href: '/productlist/' + (this.model.get('internalid') ? this.model.get('internalid') : 'tmpl_' + this.model.get('templateid'))
+				}
+			];
+			if (this.application.ProductListModule.Utils.isSingleList()) {
+				breadcrumb.splice(0, 1); //remove first
+			}
+			return breadcrumb;
+		}
 	});
 	
 });

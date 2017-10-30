@@ -7,16 +7,10 @@
             "Templates/*"
         ],
         "sass": [
-            "Sass/*.scss"
-        ],
-        "ssp-libraries": [
-            "SuiteScript/*.js"
+            "Sass/**/*.scss"
         ],
         "configuration": [
             "Configuration/*.json"
         ]
-    },
-    "overrides": {
-        "suitecommerce/ProductList@3.0.0/JavaScript/ProductList.Utils.js": "JavaScript/ProductList.Utils.js"
     }
 }
