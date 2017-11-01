@@ -17,7 +17,7 @@
 				<meta itemprop="priceCurrency" content="{{currencyCode}}"/>
 					<!-- Price Range -->
 				<span class="product-views-price-lead">
-					{{translate '<span itemprop="lowPrice" data-rate="$(0)" >$(1)</span> to <span itemprop="highPrice" data-rate="$(2)">$(3)</span>' minPrice minPriceFormatted maxPrice maxPriceFormatted}}
+					{{translate '<span itemprop="lowPrice" content="$(0)" >$(1)</span> to <span itemprop="highPrice" content="$(2)">$(3)</span>' minPrice minPriceFormatted maxPrice maxPriceFormatted}}
 				</span>
 					{{#if showComparePrice}}
 						<small class="product-views-price-old">
@@ -31,7 +31,7 @@
 				<span class="product-views-price-exact" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
 				<meta itemprop="priceCurrency" content="{{currencyCode}}"/>
 					<!-- Single -->
-				<span class="product-views-price-lead" itemprop="price" data-rate="{{price}}">
+				<span class="product-views-price-lead" itemprop="price" content="{{price}}">
 					{{priceFormatted}}
 				</span>
 					{{#if showComparePrice}}

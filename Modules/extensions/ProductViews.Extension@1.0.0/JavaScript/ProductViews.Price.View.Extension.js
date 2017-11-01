@@ -42,17 +42,15 @@ define(
         // @return {Header.View.Context}
     ,   getContext: _.wrap(ProductViewsPriceView.prototype.getContext, function (fn) {
          
-        	//console.log('this.model', this.model, this.options.origin);
-        	
         	var origins = ["ITEMCELL_SEARCH", "RELATEDITEM"];
         	
             var returnVariable = fn.apply(this, _.toArray(arguments).slice(1))
             ,   itemModel = origins.indexOf(this.options.origin) > -1 ? this.model : this.model.get('item')
-            ,   details_object = itemModel && itemModel.get('_priceDetails') || {}
-            ,   price_container_object = itemModel.getPrice()
 	           
             // custom - handling matrix price ranges when not using the child martrix fieldset (performance)
-            ,   price_range = itemModel.get('getMatrixPriceRange')
+            ,   matrix_price_range = itemModel.get('getMatrixPriceRange')
+	
+            ,   is_matrix_price_range = !!(matrix_price_range.min && matrix_price_range.max)
 	           
             ,   isCallForPricing = returnVariable.isCallForPricing || itemModel.get('_isCallForPricing');
 	        
@@ -60,19 +58,14 @@ define(
             // reset sale pricing variables
             var showComparePrice = returnVariable.showComparePrice
 	
-            ,	is_price_range = !!(price_container_object.min && price_container_object.max) || (price_range && price_range.min && price_range.max)
-
-            ,   price_min = price_range && price_range.min_formatted || ''
-            ,   price_max = price_range && price_range.max_formatted || '';
+            ,	is_price_range = returnVariable.isPriceRange;
 		
-		
-            // handle sale pricing with a price range
-		    if (!this.options.hideComparePrice && is_price_range)
+			// handle sale pricing with a price range
+		    if (is_matrix_price_range)
 		    {
-			    showComparePrice = false;
-			    if (!!(is_price_range.min && is_price_range.max)){
-				    showComparePrice = is_price_range.max.price < is_price_range.compare_price
-			    }
+			    showComparePrice = matrix_price_range.min.price < matrix_price_range.max.price;
+				is_price_range = true;
+			   
 		    }
 		    
 		    // take passed in variable as last consideration
@@ -83,27 +76,19 @@ define(
 				isPriceEnabled: !ProfileModel.getInstance().hidePrices() && !isCallForPricing
 				
                 ,   showComparePrice: showComparePrice
-	            
-	            // @property {String} priceFormatted
-	            ,	priceFormatted: price_container_object.price_formatted || ''
-	            // @property {Number} price
-	            ,	price: price_container_object.price ? price_container_object.price : 0
 				
 	            // @property {Boolean} isPriceRange
 	            ,	isPriceRange: is_price_range
 				
-				// reset the pricing variables
-				
-				// @property {Number} comparePrice
-				,	comparePrice: price_container_object.compare_price ? price_container_object.compare_price : 0
+				// reset the pricing variables if matrix is there
 				// @property {String} minPriceFormatted
-				,	minPriceFormatted: price_container_object.min ? price_container_object.min.price_formatted : price_min
+				,	minPriceFormatted: is_matrix_price_range ? matrix_price_range.min_formatted : returnVariable.minPriceFormatted
 				// @property {String} maxPriceFormatted
-				,	maxPriceFormatted: price_container_object.max ? price_container_object.max.price_formatted : price_max
+				,	maxPriceFormatted: is_matrix_price_range ? matrix_price_range.max_formatted : returnVariable.maxPriceFormatted
 				// @property {Number} minPrice
-				,	minPrice: price_container_object.min ? price_container_object.min.price : 0
+				,	minPrice: is_matrix_price_range ? matrix_price_range.min : returnVariable.minPrice
 				// @property {Number} maxPrice
-				,	maxPrice: price_container_object.max ? price_container_object.max.price : 0
+				,	maxPrice: is_matrix_price_range ? matrix_price_range.max : returnVariable.maxPrice
 				
 				,   callForPricing: isCallForPricing
 				

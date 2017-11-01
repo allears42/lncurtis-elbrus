@@ -157,6 +157,7 @@ define('Backbone.CollectionView'
 		// @method createCell Internal method for generate the render result of a child view wrapping it into a cell container.
 	,	createCell: function (model, index)
 		{
+			//console.log('createCell', this.childViewOptions);
 			var options = _.extend({}, this.childViewOptions, {model: model, index: index})
 			,	child_view_instance = new (this.childView)(options);
 

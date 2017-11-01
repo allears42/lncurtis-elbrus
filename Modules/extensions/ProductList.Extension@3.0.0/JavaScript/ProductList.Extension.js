@@ -10,12 +10,14 @@ define(
 		'ProductList.BulkActions.View.Extension'
 	,   'ProductList.Control.View.Extension'
 	,   'ProductList.DisplayFull.View.Extension'
+	,   'ProductList.Item.Edit.View.Extension'
 	,   'ProductList.Router.Extension'
 	]
 	,	function (
 		ProductListBulkActionsViewExtension
 	,   ProductListControlViewExtension
 	,   ProductListDisplayFullViewExtension
+	,   ProductListItemEditViewExtension
 	,   ProductListRouterExtension
 	
 	)
@@ -26,6 +28,7 @@ define(
 			ProductListBulkActionsViewExtension: ProductListBulkActionsViewExtension
 		,   ProductListControlViewExtension: ProductListControlViewExtension
 		,   ProductListDisplayFullViewExtension: ProductListDisplayFullViewExtension
+		,   ProductListItemEditViewExtension: ProductListItemEditViewExtension
 		,   ProductListRouterExtension: ProductListRouterExtension
 		}
 		

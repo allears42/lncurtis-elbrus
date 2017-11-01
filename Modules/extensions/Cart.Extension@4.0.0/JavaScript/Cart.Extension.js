@@ -13,7 +13,7 @@ define(
 	,	'Cart.QuickAddToCart.View.Extension'
 	]
 ,	function(
-        CartConfirmationViewExtension
+		CartConfirmationViewExtension
 	,	CartDetailedViewExtension
 	,	CartLinesViewExtension
 	,	CartConfirmationHelpersExtension
@@ -23,7 +23,7 @@ define(
 	'use strict';
 	
 	return {
-        CartConfirmationViewExtension: CartConfirmationViewExtension
+		CartConfirmationViewExtension: CartConfirmationViewExtension
 	,	CartDetailedViewExtension: CartDetailedViewExtension
 	,	CartLinesViewExtension: CartLinesViewExtension
 	,	CartConfirmationHelpersExtension: CartConfirmationHelpersExtension

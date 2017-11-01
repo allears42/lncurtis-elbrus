@@ -222,7 +222,6 @@ define('LiveOrder.Model'
 		//@return {jQuery.Deferred}
 	,	addProduct: function addProduct (product)
 		{
-			console.log('addProduct')
 			return this.addLine(LiveOrderLineModel.createFromProduct(product));
 		}
 
@@ -231,7 +230,6 @@ define('LiveOrder.Model'
 		//@return {jQuery.Deferred}
 	,	addProducts: function addProducts (products)
 		{
-			console.log('addProducts')
 			var lines = _.map(products, function (product)
 			{
 				return LiveOrderLineModel.createFromProduct(product);

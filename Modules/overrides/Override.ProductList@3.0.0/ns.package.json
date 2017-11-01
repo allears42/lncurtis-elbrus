@@ -22,6 +22,7 @@
         "suitecommerce/ProductList@3.0.0/Templates/product_list_details.tpl": "Templates/product_list_details.tpl",
         "suitecommerce/ProductList@3.0.0/Templates/product_list_details_later_macro.tpl": "Templates/product_list_details_later_macro.tpl",
         "suitecommerce/ProductList@3.0.0/Templates/product_list_display_full.tpl": "Templates/product_list_display_full.tpl",
+        "suitecommerce/ProductList@3.0.0/Templates/product_list_edit_item.tpl": "Templates/product_list_edit_item.tpl",
         "suitecommerce/ProductList@3.0.0/Templates/product_list_list_details.tpl": "Templates/product_list_list_details.tpl",
         "suitecommerce/ProductList@3.0.0/Templates/product_list_lists.tpl": "Templates/product_list_lists.tpl"
     }

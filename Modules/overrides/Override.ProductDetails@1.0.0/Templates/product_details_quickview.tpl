@@ -29,7 +29,6 @@
 				<form id="product-details-quickview-form" data-action="submit-form" method="POST">
 
 					<section class="product-details-quickview-info">
-
 						<div id="banner-summary-bottom" class="product-details-quickview-banner-summary-bottom"></div>
 
 					</section>
@@ -40,21 +39,25 @@
 
 					<section data-view="Product.Options"></section>
 
-					<div data-view="Product.Stock.Info"></div>
-
+					{{#unless isCallForPricing}}
+						<div data-view="Product.Stock.Info"></div>
+					{{/unless}}
 					<!--<div data-view="Product.Sku"></div>-->
 
 					<!--<div data-view="Product.Price"></div>-->
 					<div data-view="Quantity.Pricing"></div>
 
 					{{#if isPriceEnabled}}
-						<div data-view="Quantity"></div>
+						{{#unless isCallForPricing}}
+							<div data-view="Quantity"></div>
+						{{/unless}}
 
 						<section class="product-details-quickview-actions">
-
-							<div class="product-details-quickview-actions-container">
-								<div data-view="MainActionView"></div>
-							</div>
+							{{#unless isCallForPricing}}
+								<div class="product-details-quickview-actions-container">
+									<div data-view="MainActionView"></div>
+								</div>
+							{{/unless}}
 							<div class="product-details-quickview-actions-container">
 								<div data-view="AddToProductList" class="product-details-quickview-actions-container-add-to-wishlist"></div>
 								<!--<div data-view="ProductDetails.AddToQuote" class="product-details-quickview-actions-container-add-to-quote"></div>-->
@@ -63,7 +66,9 @@
 						</section>
 					{{/if}}
 
-					<div data-view="StockDescription"></div>
+					{{#unless isCallForPricing}}
+						<div data-view="StockDescription"></div>
+					{{/unless}}
 
 					<div class="product-details-quickview-main-bottom-banner">
 						<div id="banner-summary-bottom" class="product-details-quickview-banner-summary-bottom"></div>

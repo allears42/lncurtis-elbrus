@@ -2,6 +2,9 @@
     "gulp": {
         "sass": [
             "Sass/**/*.scss"
+        ],
+        "images": [
+            "Images/*"
         ]
     },
     "overrides": {

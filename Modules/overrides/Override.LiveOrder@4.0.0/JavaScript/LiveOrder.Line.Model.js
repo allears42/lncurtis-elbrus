@@ -96,7 +96,6 @@ define('LiveOrder.Line.Model'
 			//@return {LiveOrder.Line.Model}
 			createFromProduct: function createFromProduct (product)
 			{
-				console.log('createFromProduct')
 				var line = new LiveOrderLineModel(product.toJSON())
 				,	item = product.get('item')
 				,	item_images_detail = item.get('itemimages_detail')
@@ -121,8 +120,9 @@ define('LiveOrder.Line.Model'
 					if(product_option.get('cartOptionId') === 'custcol_sc_item_image') {
 						var image = _.first(item.get('_images'))
 						,   imageURL = image.url;
-						imageURL = imageURL.replace(/ /g, '%20') + "?resizeid=2&resizeh=200&resizew=200"
-						line_option.set('value', imageURL)
+						
+						imageURL = imageURL.replace(/ /g, '%20') + "?resizeid=2&resizeh=200&resizew=200";
+						line_option.set('value', imageURL);
 					}
 					if(product_option.get('cartOptionId') === 'custcol_sc_item_title') {
 						line_option.set('value', item.get('_pageHeader'))
@@ -135,6 +135,8 @@ define('LiveOrder.Line.Model'
 					}
 					
 				});
+				
+				console.log('line options', line.get('options'), line.get('item'));
 
 				if (is_matrix_item)
 				{

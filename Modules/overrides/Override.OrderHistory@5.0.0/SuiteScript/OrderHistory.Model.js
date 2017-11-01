@@ -345,7 +345,7 @@ define(
 				{
 					if (line.fulfillmentChoice && line.fulfillmentChoice === 'pickup')
 					{
-					line.quantityfulfilled = parseInt(ffline.getValue('quantityshiprecv') || 0, 10);
+						line.quantityfulfilled = parseInt(ffline.getValue('quantityshiprecv') || 0, 10);
 						line.quantitypicked = pick_pack_ship_is_enabled ? parseInt(ffline.getValue('quantitypicked') || 0, 10) - line.quantityfulfilled : 0;
 						line.quantitybackordered = line.quantity - line.quantityfulfilled - line.quantitypicked;
 					}

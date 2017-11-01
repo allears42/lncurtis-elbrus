@@ -1,0 +1,61 @@
+{
+    "type": "object",
+    "properties": {
+        "itemOptionsSort": {
+            "group": "shoppingApplication",
+            "type": "array",
+            "title": "Item Options Sort",
+            "description": "Custom Sort Options",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "itemOptionName": {
+                        "type": "string",
+                        "title": "Item Option Name",
+                        "description": "The name of an option in the item. This is a text field that is for reference purposes only"
+                    },
+                    "itemOptionId": {
+                        "type": "string",
+                        "title": "Item Option Id",
+                        "description": "The id of an option in the item",
+                        "mandatory": true
+                    },
+                    "sortOrder": {
+                        "type": "string",
+                        "title": "Sort Order",
+                        "description": "The sort order",
+                        "mandatory": true
+                    }
+                }
+            },
+            "default":[
+                {"itemOptionId": "custitem58", "sortOrder": 1, "itemOptionName": "GENDER"},
+                {"itemOptionId": "custitem33", "sortOrder": 2, "itemOptionName": "MATERIAL"},
+                {"itemOptionId": "custitem47", "sortOrder": 3, "itemOptionName": "SIZE"},
+                {"itemOptionId": "custitem38", "sortOrder": 4, "itemOptionName": "CHEST SIZE"},
+                {"itemOptionId": "custitem42", "sortOrder": 5, "itemOptionName": "NECK SIZE"},
+                {"itemOptionId": "custitem43", "sortOrder": 6, "itemOptionName": "SLEEVE LENGTH"},
+                {"itemOptionId": "custitem44", "sortOrder": 7, "itemOptionName": "WAIST"},
+                {"itemOptionId": "custitem41", "sortOrder": 8, "itemOptionName": "LENGTH"},
+                {"itemOptionId": "custitem39", "sortOrder": 9, "itemOptionName": "COLOR"},
+                {"itemOptionId": "custitem48", "sortOrder": 10, "itemOptionName": "WEIGHT"},
+                {"itemOptionId": "custitem45", "sortOrder": 11, "itemOptionName": "WIDTH"},
+                {"itemOptionId": "custitem54", "sortOrder": 12, "itemOptionName": "EYE PROTECTION"},
+                {"itemOptionId": "custitem57", "sortOrder": 13, "itemOptionName": "HELMET LIGHT"},
+                {"itemOptionId": "custitem40", "sortOrder": 14, "itemOptionName": "HOSE COUPLING"},
+                {"itemOptionId": "custitem34", "sortOrder": 15, "itemOptionName": "INLET SIZE"},
+                {"itemOptionId": "custitem35", "sortOrder": 16, "itemOptionName": "INLET THREAD"},
+                {"itemOptionId": "custitem36", "sortOrder": 17, "itemOptionName": "OUTLET SIZE"},
+                {"itemOptionId": "custitem37", "sortOrder": 18, "itemOptionName": "OUTLET THREAD"},
+                {"itemOptionId": "custitem49", "sortOrder": 19, "itemOptionName": "REAR TIP SIZE"},
+                {"itemOptionId": "custitem50", "sortOrder": 20, "itemOptionName": "FRONT TIP SIZE"},
+                {"itemOptionId": "custitem51", "sortOrder": 21, "itemOptionName": "PRESSURE"},
+                {"itemOptionId": "custitem52", "sortOrder": 22, "itemOptionName": "NOZZLE TEETH"},
+                {"itemOptionId": "custitem46", "sortOrder": 23, "itemOptionName": "STYLE"},
+                {"itemOptionId": "custitem53", "sortOrder": 24, "itemOptionName": "NOSE CUP"},
+                {"itemOptionId": "custitem55", "sortOrder": 25, "itemOptionName": "TRIM TYPE"},
+                {"itemOptionId": "custitem56", "sortOrder": 26, "itemOptionName": "TRIM COLOR"}
+            ]
+        }
+    }
+}

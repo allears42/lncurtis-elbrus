@@ -35,11 +35,11 @@ define('Item.KeyMapping.Videos'
 					$elem.attr('height', Math.floor(vidWidth*r))
 				}
 				
-				console.log($elem.prop('outerHTML'));
+				//console.log($elem.prop('outerHTML'));
 				videoObjArr.push($elem.prop('outerHTML'))
 			});
 			
-			console.log(videoObjArr);
+			//console.log(videoObjArr);
 			return videoObjArr;
 		}
 	});

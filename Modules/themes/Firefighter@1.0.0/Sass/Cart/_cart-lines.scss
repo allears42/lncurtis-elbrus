@@ -106,5 +106,9 @@
 	}
 }
 
-.cart-lines-stock{}
+.cart-lines-stock{
+  .product-line-stock-msg-out {
+    font-size: $sc-small-font-size;
+  }
+}
 .cart-lines-summary{}

@@ -44,7 +44,7 @@ define('Wizard.Step.OOSMessage'
 				
 				this.$('[data-type="alert-placeholder-step"]').html(global_view_message.render().$el.html());
 				
-				jQuery('body').animate({
+				jQuery('html, body').animate({
 					scrollTop: jQuery('body .global-views-message-error:first').offset().top
 				}, 600);
 				

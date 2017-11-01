@@ -24,6 +24,9 @@
 
 .product-list-bulk-actions-button-addtocart{
   @extend .button-primary;
+  margin-right: $sc-base-margin*2;
+  height: auto;
+
 }
 .product-list-bulk-actions-button-removefromlist{
   @extend .button-secondary;

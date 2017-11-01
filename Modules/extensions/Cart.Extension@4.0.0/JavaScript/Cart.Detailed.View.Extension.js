@@ -53,8 +53,8 @@ define(
 				
 				// custom handling for items added from related
 				var self = this;
-				this.model.on('itemAddedFromRelated', function () {
-					self.showContent();
+				
+				this.model.on('change', function () {
 					jQuery(document).scrollTop(0);
 				}, this);
 				
@@ -161,18 +161,7 @@ define(
 			}
 			
 			, childViews: _.extend({}, CartDetailedView.prototype.childViews, {
-				'RecentlyViewed.Items': function () {
-					// add child view options
-					return new RecentlyViewedItemsView(
-					{
-						application: this.application
-					,   childViewOptions: {
-							showAddToCart: true
-						}
-					});
-				}
-				
-				, 'Item.ListNavigable': function () {
+				'Item.ListNavigable': function () {
 					return new BackboneCollectionView({
 						collection: this.model.get('lines')
 						, viewsPerRow: 1

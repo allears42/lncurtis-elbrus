@@ -1,0 +1,251 @@
+<html>
+<head>
+	<#if .locale == "ru_RU">
+		<link name="verdana" type="font" subtype="opentype" src="${nsfont.verdana}" src-bold="${nsfont.verdana_bold}" bytes="2"/>
+	</#if>
+	<style type="text/css">table {
+		< #if . locale = = "zh_CN" >
+		font-family  : stsong, sans-serif;
+		< #elseif . locale = = "zh_TW" >
+		font-family  : msung, sans-serif;
+		< #elseif . locale = = "ja_JP" >
+		font-family  : heiseimin, sans-serif;
+		< #elseif . locale = = "ko_KR" >
+		font-family  : hygothic, sans-serif;
+		< #elseif . locale = = "ru_RU" >
+		font-family  : verdana;
+		< #else >
+		font-family  : sans-serif;
+		< / #if >
+		font-size    : 9pt;
+		table-layout : fixed;
+	}
+	</style>
+	<style type="text/css">.tg { border-collapse : collapse; border-spacing : 0; margin : 0px auto; }
+	.tg td { font-family : Arial, sans-serif; font-size : 12px; overflow : hidden; word-break : normal; }
+	.tg th { font-family : Arial, sans-serif; font-size : 12px; font-weight : normal; overflow : hidden; word-break : normal; }
+	.tg .tg-lqy6 { text-align : right; vertical-align : top }
+	.tg .tg-yw4l { vertical-align : top }
+	</style>
+</head>
+<body size="Letter">
+<div style="width:800px">
+	<hr style="margin-top:10px; border-style:solid; border-color:#ececec"/>
+	<table style="undefined;table-layout: fixed" width="800px">
+		<colgroup>
+			<col style="width: 678px"/>
+		</colgroup>
+		<tbody>
+			<tr>
+				<th>&nbsp;</th>
+			</tr>
+			<tr>
+				<td>
+					<#if companyInformation.logoUrl?length != 0>
+						<img src="http://lncurtis.production.na1.netsuitestaging.com/assets/images/logo.png"/>
+					</#if>
+					<hr style="margin-top:10px"/>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<p style="font-size:22px; font-weight:600; color:#444">ORDER CONFIRMATION</p>
+				</td>
+			</tr>
+			<tr style="font-size:15px">
+				<td><span style="color:#BE2323;font-weight:600">${transaction@title} </span> #${transaction.tranid} / <span style="font-weight:bold"> ${transaction.trandate?string.full}</span></td>
+			</tr>
+			<tr>
+				<td>
+					<p style="color:#777"><#list transaction.entity?split(" ") as names><#if names_index != 0>${names}</#if></#list>, thank you for shopping with us. Your order has been received and is in process. We&#39;ll follow up with another email once your items are on their way.
+					</p>
+
+					<hr style="margin-top:10px; border-style:solid; border-color:#ececec"/>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<p style="font-size:22px; color:#444;font-weight:600">ORDER SUMMARY</p>
+
+					<hr style="margin-top:10px; border-style:solid; border-color:#ececec"/>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<#if transaction.item?has_content><!-- start items -->
+
+		<table class="tg" style="undefined;table-layout: fixed; width: 800px">
+			<#list transaction.item as item>
+				<colgroup>
+					<col style="width: 110px"/>
+					<col style="width: 200px"/>
+					<col style="width: 100px"/>
+					<col style="width: 290px"/>
+				</colgroup>
+				<tbody>
+					<tr>
+						<th class="tg-yw4l" colspan="4" height="0">&nbsp;</th>
+					</tr>
+					<tr>
+						<td class="tg-yw4l" rowspan="3">
+							<img src="${item.custcol_sc_item_image}?resizeid=3" style="border-style:solid;border-width:1px;border-color:#d2d2d2" width="100px"/>
+						</td>
+						<td class="tg-yw4l" colspan="2">
+							<h3 style="margin:0; color:#BE2323;font-size:15px;margin-left:10px;float:left">${item.description}</h3>
+						</td>
+						<td class="tg-031e" rowspan="2">
+							<#if item.quantitybackordered >0}&gt; <label style="float:left">This item is on backorder</label></#if>
+						</td>
+					</tr>
+					<tr>
+						<td class="tg-yw4l" colspan="2" style="padding-left:10px; color:#666; font-size:11px">ITEM #${item.item}</td>
+					</tr>
+					<tr>
+						<td class="tg-yw4l" style="padding-left:10px;">${item.options} ${item.quantity@label}: ${item.quantity}</td>
+						<td class="tg-lqy6">Unit Price<br/>
+							<b>${item.rate}</b></td>
+						<td class="tg-yw4l">&nbsp;</td>
+					</tr>
+			</#list>
+	</#if>
+	</tbody>
+	</table>
+
+	<table style="undefined;table-layout: fixed; width: 800px">
+		<colgroup>
+			<col style="width: 400px"/>
+			<col style="width: 200px"/>
+			<col style="width: 200px"/>
+		</colgroup>
+		<tbody>
+			<tr>
+				<th>&nbsp;</th>
+				<th>&nbsp;</th>
+				<th>&nbsp;</th>
+			</tr>
+			<tr>
+				<td colspan="3" style="padding-bottom:30px">&nbsp;</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<p style="font-size:22px; color:#444;font-weight:600">BILLING SUMMARY</p>
+
+					<hr style="margin-top:10px; border-style:solid; border-color:#ececec" width="800px"/>
+				</td>
+			</tr>
+			<tr>
+				<td style="font-size:15px; font-weight:600; color:#777777" width="400px">${transaction.subtotal@label}</td>
+				<td style="font-size:15px; font-weight:600; color:#777777" width="200px">${transaction.subtotal}</td>
+				<td rowspan="3" style="font-size:15px; font-weight:600; color:#777777" width="200px">${transaction.billaddress@label}<br/>
+					<span style="font-size:12px; font-weight:200">${transaction.billaddress}</span></td>
+			</tr>
+			<tr>
+				<td style="font-size:15px; font-weight:600; color:#777777">${transaction.shippingcost@label}</td>
+				<td style="font-size:15px; font-weight:600; color:#777777">${transaction.shippingcost}</td>
+			</tr>
+			<tr>
+				<td style="font-size:15px; font-weight:600; color:#777777">${transaction.taxtotal@label}</td>
+				<td style="font-size:15px; font-weight:600; color:#777777">${transaction.taxtotal}</td>
+			</tr>
+			<tr>
+				<td style="font-size:15px; font-weight:600; color:#555555; background:#F3F3F3">${transaction.total@label}</td>
+				<td style="font-size:15px; font-weight:600; color:#555555; background:#F3F3F3">${transaction.total}</td>
+				<td style="font-size:15px; font-weight:600; color:#777777">${transaction.paymentmethod@label}<br/>
+					<span style="font-size:12px; font-weight:200">${transaction.paymentmethod}</span></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<table style="table-layout: fixed; width: 800px">
+		<colgroup>
+			<col style="width: 200px"/>
+			<col style="width: 600px"/>
+		</colgroup>
+		<tbody>
+			<tr>
+				<th colspan="2">&nbsp;</th>
+			</tr>
+			<tr>
+				<td colspan="3" style="padding-bottom:30px">&nbsp;</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<p style="font-size:22px; color:#444;font-weight:600">SHIPPING SUMMARY</p>
+
+					<hr style="margin-top:10px; border-style:solid; border-color:#ececec" width="800px"/>
+				</td>
+			</tr>
+			<tr>
+				<td style="font-size:15px; font-weight:600; color:#BE2323" width="200px">${transaction.shipmethod@label}</td>
+				<td style="font-size:15px; font-weight:600; color:#BE2323" width="600px">${transaction.shipaddress@label}</td>
+			</tr>
+			<tr>
+				<td style="color:#777" width="200px">${transaction.shipmethod}</td>
+				<td style="color:#777" width="600px">${transaction.shipaddress}</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<a href="#" style="text-decoration: none; height: 35px; width: 150px; background: #0087da; float: left; color: white; text-align: center">View My Order Status</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<table style="undefined;table-layout: fixed; width: 800px">
+		<colgroup>
+			<col style="width: 250px"/>
+			<col style="width: 250px"/>
+			<col style="width: 300px"/>
+		</colgroup>
+		<tbody>
+			<tr>
+				<td colspan="3" style="padding-bottom:30px">&nbsp;</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<p style="font-size:22px; color:#444;font-weight:600">CONTACT US</p>
+
+					<hr style="margin-top:10px; border-style:solid; border-color:#ececec"/>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3" style="font-size:15px; font-weight:600; color:#BE2323; padding-bottom:6px">Questions?</td>
+			</tr>
+			<tr>
+				<td style="color:#777" width="300px"><b>8:00</b> am to <b>5:00</b> pm - Mon. to Fri.</td>
+				<td style="color:#777" width="200px">Call: 877.488.0469</td>
+				<td style="color:#777" width="300px">customerservice@lncurtis.com</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<hr style="margin-top:10px; border-style:solid; border-color:#BE2323"/>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" style="font-size:15px; font-weight:600; color:#777777; text-decoration:underline" width="600px">
+					<a href="" style="color:#0087da">Sign Up</a>
+					to receive special offers and news from LNCurtis.com
+				</td>
+				<td style="text-align:right" width="200px">
+					<a href="#" style="display:inline-block">
+						<img src="http://lncurtis.production.na1.netsuitestaging.com/assets/images/content/facebook.jpg" width="25px"/>
+					</a>
+					<img src="http://lncurtis.production.na1.netsuitestaging.com/assets/images/content/separator.png" width="25px"/>
+					<a href="#" style="display:inline-block">
+						<img src="http://lncurtis.production.na1.netsuitestaging.com/assets/images/content/twitter.jpg" width="25px"/>
+					</a>
+					<img src="http://lncurtis.production.na1.netsuitestaging.com/assets/images/content/separator.png" width="25px"/>
+					<a href="#" style="display:inline-block">
+						<img src="http://lncurtis.production.na1.netsuitestaging.com/assets/images/content/linkedin.jpg" width="25px"/>
+					</a>
+					<img src="http://lncurtis.production.na1.netsuitestaging.com/assets/images/content/separator.png" width="25px"/>
+					<a href="#" style="display:inline-block">
+						<img src="http://lncurtis.production.na1.netsuitestaging.com/assets/images/content/google.jpg" width="25px"/>
+					</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+</body>
+</html>

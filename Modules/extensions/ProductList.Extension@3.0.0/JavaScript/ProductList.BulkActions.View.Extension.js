@@ -32,11 +32,14 @@ define(
                     ,   numberRemovable = model.get('items').filter(function (product_list_item) {
                         return product_list_item.get('checked');
                     });
-
+	
+	                console.log(isAtLeastOneItemChecked , model.canBeAddedToCart(true))
+	                
                     _.extend( returnVariable , {
                         isRemovableEnabled: isAtLeastOneItemChecked
                     ,   numberRemovable: numberRemovable.length > 0 ? "("+ numberRemovable.length +")" : ""
                     ,	numberAddable: numberAddable > 0 ? "("+ numberAddable +")" : ""
+                    ,   isAddToCartEnabled: isAtLeastOneItemChecked && numberAddable > 0
 
                     });
 

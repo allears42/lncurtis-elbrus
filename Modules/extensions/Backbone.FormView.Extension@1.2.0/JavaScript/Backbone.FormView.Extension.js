@@ -13,7 +13,8 @@ define(
 		, 'backbone.stickit'
 		, 'Backbone.Validation'
 	]
-	, function (BackboneFormView
+	, function (
+		BackboneFormView
 		, Backbone
 		, _
 		, jQuery) {
@@ -28,7 +29,7 @@ define(
 			});
 		}
 		
-		_.extend(BackboneFormView.prototype, {
+		_.extend(BackboneFormView, {
 			
 			closeModalOnSuccess: true
 			

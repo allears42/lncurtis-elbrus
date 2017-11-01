@@ -45,6 +45,7 @@ define('RecentlyViewedItems.View'
 
 		initialize: function ()
 		{
+			console.trace()
 			var application = this.options.application
 			,	collection = application.getConfig('siteSettings.sitetype') === 'ADVANCED' ? RecentlyViewedItemsCollection.getInstance() : new Backbone.Collection()
 			,	number_of_items_displayed = application.getConfig('recentlyViewedItems.numberOfItemsDisplayed')

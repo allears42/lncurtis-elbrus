@@ -43,8 +43,9 @@ define('ItemRelations.Related.View'
 	// @class ItemRelations.Related.View @extends Backbone.CollectionView
 	return BackboneCollectionView.extend({
 
-		initialize: function ()
+		initialize: function (options)
 		{
+			console.log('options', options)
 			var is_sca_advance = this.options.application.getConfig('siteSettings.sitetype') === 'ADVANCED'
 			,	collection = is_sca_advance ? new ItemRelationsRelatedCollection({itemsIds: this.options.itemsIds}) : new Backbone.Collection()
 			,	layout = this.options.application.getLayout()
@@ -57,6 +58,10 @@ define('ItemRelations.Related.View'
 			,	rowTemplate: item_relations_row_tpl
 			,	childView: ItemRelationsRelatedItemView
 			,	template: item_relations_related_tpl
+				,   childViewOptions: {
+					showAddToCart: true
+					,   application: this.options.application
+				}
 			});
 
 			if (is_sca_advance)

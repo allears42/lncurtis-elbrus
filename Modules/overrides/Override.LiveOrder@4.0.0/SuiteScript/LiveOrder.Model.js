@@ -246,7 +246,7 @@ define(
 			}
 
 			//As the commerce API does not remove the purchase number after submitting the order we manually remove it
-			// this.setPurchaseNumber();
+			this.setPurchaseNumber();
 
 			if (confirmation.statuscode !== 'redirect')
 			{
@@ -1063,11 +1063,20 @@ define(
 		{
 			var options = {};
 
-			if (this.isSecure)
-			{
+			nlapiLogExecution('debug', 'getTransactionBodyField', 'start')
+			
+			/*if (this.isSecure)
+			{*/
 				var fieldsIdToBeExposed = CustomFieldsUtils.getCustomFieldsIdToBeExposed('salesorder');
+				
+				
+				nlapiLogExecution('debug', 'fieldsIdToBeExposed', JSON.stringify(fieldsIdToBeExposed, null, 2));
+				nlapiLogExecution('debug', 'ModelsInit.order.getCustomFieldValues()', JSON.stringify(ModelsInit.order.getCustomFieldValues(), null, 2));
+				
 				_.each(ModelsInit.order.getCustomFieldValues(), function (option)
 				{
+					
+					nlapiLogExecution('debug', 'fieldsIdToBeExposed', JSON.stringify(option, null, 2))
 					//expose the custom field value if was configured in the backend configuration
 					if(_.find(fieldsIdToBeExposed, function (fieldIdToBeExposed){ return option.name === fieldIdToBeExposed;}))
 					{
@@ -1075,7 +1084,7 @@ define(
 					}
 				});
 
-			}
+			/*}*/
 			return options;
 		}
 
@@ -1510,13 +1519,14 @@ define(
 		// @param {LiveOrder.Model.Data} data
 	,	setPurchaseNumber: function setPurchaseNumber (data)
 		{
-            if (data && data.purchasenumber)
-			{
-				ModelsInit.order.setPurchaseNumber(data.purchasenumber);
-			}
-			else
-			{
-				ModelsInit.order.removePurchaseNumber();
+			// addded  ModelsInit.session.isLoggedIn2() check from patch
+			if(ModelsInit.session.isLoggedIn2()) {
+				if (data && data.purchasenumber) {
+					ModelsInit.order.setPurchaseNumber(data.purchasenumber);
+				}
+				else {
+					ModelsInit.order.removePurchaseNumber();
+				}
 			}
 		}
 
@@ -1703,7 +1713,8 @@ define(
 		{
 			var require_terms_and_conditions = ModelsInit.session.getSiteSettings(['checkout']).checkout.requiretermsandconditions;
 
-			if (require_terms_and_conditions.toString() === 'T' && this.isSecure && !_.isUndefined(data.agreetermcondition))
+			// added  && ModelsInit.session.isLoggedIn2() for patch
+			if (require_terms_and_conditions.toString() === 'T' && this.isSecure && !_.isUndefined(data.agreetermcondition) && ModelsInit.session.isLoggedIn2() )
 			{
 				ModelsInit.order.setTermsAndConditions(data.agreetermcondition);
 			}
@@ -1714,10 +1725,14 @@ define(
 	,	setTransactionBodyField: function setTransactionBodyField (data)
 		{
 			// Transaction Body Field
-			if (this.isSecure && !_.isEmpty(data.options))
+			// added  && ModelsInit.session.isLoggedIn2() for patch
+			if (this.isSecure && !_.isEmpty(data.options) && ModelsInit.session.isLoggedIn2())
 			{
+			
+			nlapiLogExecution('debug', 'setTransactionBodyField', JSON.stringify(data.options, null, 2))
 				_.each(data.options, function(value, key)
 				{
+					nlapiLogExecution('debug', 'setTransactionBodyField', JSON.stringify(data.options, null, 2))
 					if (Array.isArray(value))
 					{
 						data.options[key] = value.join(String.fromCharCode(5));

@@ -64,6 +64,10 @@
 					<div class="cart-lines-stock" data-view="Product.Stock.Info"></div>
 					<div data-view="StockDescription"></div>
 
+					{{#if freeGroundShipping}}
+						<p  class="cart-lines-free-shipping-message"><i class="fa fa-truck" aria-hidden="true"></i>Free Ground Shipping</p>
+					{{/if}}
+
 					<div class="cart-lines-item-actions-desktop" data-view="Item.Actions.View"></div>
 					<div class="cart-lines-item-actions-mobile" data-view="Item.Actions.View"></div>
 

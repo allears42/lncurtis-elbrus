@@ -6,8 +6,9 @@
 */
 
 // @module Cart
-define('RecentlyViewedItems.View.Fix'
-,	[	'Backbone.CollectionView'
+define('RecentlyViewedItems.View'
+,	[
+		'Backbone.CollectionView'
 	,	'ItemRelations.RelatedItem.View'
 	,	'RecentlyViewedItems.Collection'
 	,	'SC.Configuration'
@@ -40,60 +41,63 @@ define('RecentlyViewedItems.View.Fix'
 	)
 {
 	'use strict';
-
+	
+	
 	return BackboneCollectionView.extend({
 
 		initialize: function (options)
 		{
-			var is_sca_advance = this.options.application.getConfig('siteSettings.sitetype') === 'ADVANCED'
-			,	application = this.options.application
-			,	layout = this.options.application.getLayout()
-			,	self = this;
+			this.options = options;
+		
+			var application = this.options.application;
 			
-			self.collection = application.getConfig('siteSettings.sitetype') === 'ADVANCED' ? RecentlyViewedItemsCollection.getInstance() : new Backbone.Collection();
-			
-			BackboneCollectionView.prototype.initialize.call(this, {
-				collection: self.collection
-			,	viewsPerRow: Infinity
-			,	cellTemplate: recently_viewed_cell_tpl
-			,	rowTemplate: recently_viewed_row_tpl
-			,	childView: ItemRelationsRelatedItemView
-			,	template: recently_viewed_items_tpl
-				,   childViewOptions: {
-					showAddToCart: true
-					,   application: application
+			if(application) {
+				var is_sca_advance = application.getConfig('siteSettings.sitetype') === 'ADVANCED'
+				,   layout = application.getLayout()
+				,   self = this;
+				
+				self.collection = application.getConfig('siteSettings.sitetype') === 'ADVANCED' ? RecentlyViewedItemsCollection.getInstance() : new Backbone.Collection();
+				
+				BackboneCollectionView.prototype.initialize.call(this, {
+					collection: self.collection
+					, viewsPerRow: Infinity
+					, cellTemplate: recently_viewed_cell_tpl
+					, rowTemplate: recently_viewed_row_tpl
+					, childView: ItemRelationsRelatedItemView
+					, template: recently_viewed_items_tpl
+					, childViewOptions: {
+						showAddToCart: true
+						, application: application
+					}
+				});
+				
+				
+				if (is_sca_advance) {
+					layout.once('afterAppendView', self.loadRelatedItem, self);
+					layout.currentView && layout.currentView.once('afterCompositeViewRender', self.loadRelatedItem, self);
 				}
-			});
-			
-			
-			if (is_sca_advance)
-			{
-				layout.once('afterAppendView', self.loadRelatedItem, self);
-				layout.currentView && layout.currentView.once('afterCompositeViewRender', self.loadRelatedItem, self);
+				
+				var windowResizeHandler = _.throttle(function () {
+					if (_.getDeviceType(this.windowWidth) === _.getDeviceType(jQuery(window).width())) {
+						return;
+					}
+					
+					self.renderSlider();
+					
+					_.resetViewportWidth();
+					
+					this.windowWidth = jQuery(window).width();
+					
+				}, 1000);
+				
+				this._windowResizeHandler = _.bind(windowResizeHandler, this);
+				
+				jQuery(window).on('resize', this._windowResizeHandler);
 			}
-			
-			var windowResizeHandler = _.throttle(function ()
-			{
-				if (_.getDeviceType(this.windowWidth) === _.getDeviceType(jQuery(window).width()))
-				{
-					return;
-				}
-				
-				self.renderSlider();
-				
-				_.resetViewportWidth();
-				
-				this.windowWidth = jQuery(window).width();
-				
-			}, 1000);
-			
-			this._windowResizeHandler = _.bind(windowResizeHandler, this);
-			
-			jQuery(window).on('resize', this._windowResizeHandler);
 
 		}
 		
-		,	loadRelatedItem: function loadRelatedItem ()
+	,	loadRelatedItem: function loadRelatedItem ()
 		{
 			var self = this
 			,	application = this.options.application
@@ -102,7 +106,7 @@ define('RecentlyViewedItems.View.Fix'
 			self.collection.promise && self.collection.promise.done(function ()
 			{
 				Tracker.getInstance().trackProductList(self.collection, 'Recently Viewed Items');
-				self.collection = collection.first(number_of_items_displayed);
+				self.collection = self.collection.first(number_of_items_displayed);
 				self.render();
 				
 				var carousel = self.$el.find('[data-type="carousel-items"]');
@@ -119,7 +123,7 @@ define('RecentlyViewedItems.View.Fix'
 			});
 		}
 		
-		,	destroy: function destroy ()
+	,	destroy: function destroy ()
 		{
 			this._destroy();
 			

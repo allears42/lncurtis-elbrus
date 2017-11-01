@@ -115,7 +115,7 @@ define('ProductList.Utils',
 								if (is_single_list)
 								{
 									var the_single_list = product_lists.at(0);
-									return 'wishlist/' + (the_single_list.get('internalid') ? the_single_list.get('internalid') : ('tmpl_' + the_single_list.get('templateId')));
+									return 'productlist/' + (the_single_list.get('internalid') ? the_single_list.get('internalid') : ('tmpl_' + the_single_list.get('templateId')));
 								}
 								else
 								{

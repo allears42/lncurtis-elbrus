@@ -24,9 +24,10 @@ define(
 
         	getContext: _.wrap( ProductListDisplayFullView.prototype.getContext, function(fn)
             {
+            	console.log(options, this.model)
                 var returnVariable = fn.apply(this, _.toArray(arguments).slice(1))
                 ,	options = this.options
-                ,	product = item.get('item')
+                ,	product = this.model.get('item')
                 ,   isCallForPricing = product.custitem_sc_call_for_pricing || false
                 ,   showCheckBox = !isCallForPricing && (!options || !options.hide_checkbox);
 

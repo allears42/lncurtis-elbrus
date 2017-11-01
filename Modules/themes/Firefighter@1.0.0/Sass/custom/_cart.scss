@@ -1,4 +1,16 @@
 
+.header-mini-cart-item-cell-product-stock{
+  .product-line-stock-msg-out {
+    margin-bottom: 0;
+    margin-top: $sc-base-margin;
+    line-height:1.2;
+    font-size: $sc-small-font-size;
+    span {
+      font-size: $sc-small-font-size;
+    }
+  }
+}
+
 .cart-lines-row {
   border-bottom: 1px solid $sc-color-theme-border;
 
@@ -149,4 +161,10 @@ div.cart-detailed-print-page {
 
 .transaction-line-views-options-selected-content {
   margin-bottom: $sc-base-margin*2;
+}
+
+
+.cart-lines-free-shipping-message {
+  color: $sc-color-dark-copy;
+  font-weight: bold;
 }

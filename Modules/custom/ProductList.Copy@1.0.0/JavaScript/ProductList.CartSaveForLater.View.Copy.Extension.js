@@ -12,11 +12,13 @@ define('ProductList.CartSaveForLater.View.Copy.Extension'
 	,	'ProductList.CartSaveForLater.View'
 
 	,	'underscore'
+	,	'jQuery'
 	]
 ,	function (
 		Configuration
 	,	ProductListCartSaveForLaterView
 	,	_
+	,	jQuery
 	)
 {
 	'use strict';
@@ -35,7 +37,7 @@ define('ProductList.CartSaveForLater.View.Copy.Extension'
 			}
 			
 			var cart_line = this.model.get('lines').get(jQuery(e.target).data('internalid'))
-				,	internalid = cart_line.get('internalid')
+				,	internalid = cart_line && cart_line.get('internalid')
 				,	whole_promise = jQuery.Deferred()
 				,	self = this;
 			

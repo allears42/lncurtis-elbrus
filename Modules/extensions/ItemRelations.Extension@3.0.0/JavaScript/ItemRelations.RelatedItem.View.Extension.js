@@ -25,17 +25,23 @@ define(
 	'use strict';
 
 	_.extend(ItemRelationsRelatedItemView.prototype, {
-		childViews: _.extend({}, ItemRelationsRelatedItemView.prototype.childViews, {
+		initialize: _.wrap(ItemRelationsRelatedItemView.prototype.initialize, function (fn, options) {
+			//console.log('ItemRelationsRelatedItemView', options);
+			this.options = options;
+			fn.apply(this, _.toArray(arguments).slice(1));
+		})
+		
+	,   childViews: _.extend({}, ItemRelationsRelatedItemView.prototype.childViews, {
 			'Cart.QuickAddToCart': function ()
 			{
 				var product = new ProductModel({
 					item: this.model
-					,	quantity: this.model.get('_minimumQuantity', true)
+				,	quantity: this.model.get('_minimumQuantity', true)
 				});
 				
 				return new CartQuickAddToCartView({
 					model: product
-					,	application: this.options.application
+				,	application: this.options.application
 				});
 			}
 		})
