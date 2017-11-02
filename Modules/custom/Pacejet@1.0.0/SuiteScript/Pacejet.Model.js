@@ -158,8 +158,8 @@ define(
                     // nlapiLogExecution('debug', 'results.summary (before)', JSON.stringify(results.summary,null,2));
 
                     // If not in checkout, no need to call PaceJet
-                    nlapiLogExecution('debug', 'PacejetModel#updateOrder: Utils.isInCheckout() = ', JSON.stringify(Utils.isInCheckout(),null,2));
-                    if (!Utils.isInCheckout()) {
+                    nlapiLogExecution('debug', 'PacejetModel#updateOrder: Utils.isInCheckout(request) = ', JSON.stringify(Utils.isInCheckout(request),null,2));
+                    if (!Utils.isInCheckout(request)) {
                         nlapiLogExecution('debug', 'PacejetModel#updateOrder: skipping Pacejet lookup because not in checkout');
                         return results;
                     }
