@@ -64,7 +64,6 @@ define(
 				var self = this
                 ,   carouselImages = Configuration.get('home.carouselImages', []);
 
-			console.log(carouselImages)
 			return {
 				// @property {String} imageResizeId
 				imageHomeSize: Utils.getViewportWidth() < 480 ? '480' : 'homeslider'

@@ -204,13 +204,11 @@ define('Item.KeyMapping.Extension'
 		    ,   oosBehavior = item.get('outofstockbehavior');
 		
 		    var parent = item.get('_matrixParent');
-		    console.log(parent, item, item.getPosibleOptions());
 		    if (parent.get('internalid'))
 		    {
 			    oosBehavior = parent.get('outofstockbehavior')
 		    }
 		
-		    console.log(oosBehavior);
 		    if( noBackorders.indexOf(oosBehavior) > -1) {
 			
 			    return false

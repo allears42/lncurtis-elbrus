@@ -150,8 +150,6 @@ define('LiveOrder.Line.Model'
 					
 				});
 				
-				console.log('line options', line.get('options'), line.get('item'));
-
 				if (is_matrix_item)
 				{
 					line.get('item').set('matrix_parent', product.get('item'));

@@ -193,7 +193,6 @@ define(
 			//@return {Boolean}
 		,	mainActionHandler: function mainActionHandler (e)
 			{
-				console.log('mainActionHandler');
 				if (ProductDetailsBaseView.mainActionView)
 				{
 					return this.mainActionViewInstance.submitHandler(e);

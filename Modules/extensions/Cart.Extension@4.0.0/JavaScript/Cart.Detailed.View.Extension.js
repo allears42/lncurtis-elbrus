@@ -122,8 +122,6 @@ define(
 						});
 					}
 					
-					console.log(line);
-					
 					placeholder = line.find('[data-type="alert-placeholder"]');
 					this.hideError(line);
 				}
