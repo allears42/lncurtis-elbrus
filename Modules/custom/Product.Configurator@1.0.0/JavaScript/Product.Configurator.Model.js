@@ -36,7 +36,7 @@ define('Product.Configurator.Model'
 					{}
 				,	Session.getSearchApiParams()
 				, {
-						fieldset: 'search'
+						fieldset: 'configurator'
 					}
 				)
 			);

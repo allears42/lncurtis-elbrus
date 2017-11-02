@@ -13,8 +13,10 @@ define(
 	,	'GlobalViews.StarRating.View'
 	
 	,	'Product.Model'
+	,	'ProductViews.Option.View'
 	,	'Cart.QuickAddToCart.View'
 	
+	,	'Backbone.CollectionView'
 	,	'Backbone.CompositeView'
 
 	,	'additional_product_item.tpl'
@@ -26,8 +28,10 @@ define(
 	,	GlobalViewsStarRatingView
 	
 	,	ProductModel
+	,	ProductViewsOptionView
 	,	CartQuickAddToCartView
 	
+	,	BackboneCollectionView
 	,	BackboneCompositeView
 
 	,	additional_product_item_tpl
@@ -74,12 +78,37 @@ define(
 			{
 				var product = new ProductModel({
 					item: this.model
-					,	quantity: this.model.get('_minimumQuantity', true)
+				,	quantity: this.model.get('_minimumQuantity', true)
 				});
 				
 				return new CartQuickAddToCartView({
 					model: product
-					,	application: this.options.application
+				,	application: this.options.application
+				});
+			}
+		
+		,   'Product.Options': function () {
+				var product = new ProductModel({
+					item: this.model
+					,	quantity: this.model.get('_minimumQuantity', true)
+				})
+				, options_to_render = product.getVisibleOptions() || [];
+				// get the singles
+				options_to_render = _.filter(options_to_render, function (option) {
+					return option.get('values') && option.get('values').length > 2
+				});
+				
+				
+				return new BackboneCollectionView({
+					collection: options_to_render
+					,	childView: ProductViewsOptionView
+					,	viewsPerRow: 1
+					,	childViewOptions: {
+						line: this.model
+						,	item: this.model.get('item')
+						,	templateName: 'selector'
+						,	show_required_label: this.options.show_required_label
+					}
 				});
 			}
 		}
@@ -102,18 +131,6 @@ define(
 			,	itemId: this.model.get('_id')
 				// @property {Item.Model} model
 			,	model: this.model
-
-				//TODO MOVE THIS TO THE PRODUCT REVIEWS MODULE
-				//@property {Boolean} showRating
-			,	showRating: SC.ENVIRONMENT.REVIEWS_CONFIG && SC.ENVIRONMENT.REVIEWS_CONFIG.enabled
-
-				//TODO RE-DESIGN THIS CODE (IT IS USED BY GOOGLE TAG MANAGER!)
-				//@property {String} track_productlist_list
-			,	track_productlist_list: this.model.get('track_productlist_list')
-				//@property {String} track_productlist_position
-			,	track_productlist_position: this.model.get('track_productlist_position')
-				//@property {String} track_productlist_category
-			,	track_productlist_category: this.model.get('track_productlist_category')
 			};
 			//@class ItemViews.RelatedItem.View
 		}

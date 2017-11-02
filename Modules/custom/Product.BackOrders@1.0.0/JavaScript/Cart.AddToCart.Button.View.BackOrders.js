@@ -16,6 +16,7 @@ define(
 	,	'Backbone'
 	,	'underscore'
 	,	'Utils'
+	,	'jQuery'
 	]
 ,	function (
 		CartAddToCartButtonView
@@ -83,7 +84,18 @@ define(
 				var line = LiveOrderLineModel.createFromProduct(this.model);
 				
 				cart_promise = this.cart.addLine(line);
-				CartConfirmationHelpers.showCartConfirmation(cart_promise, line, self.options.application);
+				
+				if (location.href.indexOf('cart') > -1) {
+					if (SC.ENVIRONMENT.jsEnvironment === "browser") {
+						setTimeout(function () {
+							jQuery('html, body').animate({scrollTop: '0px'}, 300);
+						}, 500);
+					}
+				}
+				else {
+					CartConfirmationHelpers.showCartConfirmation(cart_promise, line, self.options.application);
+				}
+				
 			}
 			
 			cart_promise.fail(function (jqXhr)

@@ -1,5 +1,6 @@
 // sizing
 //custcol_carrier_armor_brand - dropdown
+//custcol_carrier_armor_other - other text field
 //custcol_back_panel_size - text
 //custcol_front_panel_size - free form
 
@@ -35,9 +36,9 @@ define(
 		'use strict';
 		
 		return {
-			generalIDs: ['custcol_carrier_color']
+			generalIDs: ['custcol_gender_nonmatrix', 'custcol_carrier_color']
 			
-		,   sizingIDs: ['custcol_carrier_armor_brand', 'custcol_back_panel_size',  'custcol_front_panel_size']
+		,   sizingIDs: ['custcol_carrier_armor_brand', 'custcol_back_panel_size',  'custcol_front_panel_size', 'custcol_carrier_armor_other']
 		
 		,   frontPatchIDs: ['custcol_front_patch_color', 'custcol_front_patch_size',  'custcol_front_patch_text']
 		

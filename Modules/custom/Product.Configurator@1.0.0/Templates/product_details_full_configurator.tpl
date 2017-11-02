@@ -95,7 +95,8 @@
 		</div>
 
 		<div class="product-details-full-main-content-pouches product-details-options-configurator">
-			<h2>{{translate 'Add Pouches'}} <i class="product-views-option-icon-question-sign" data-toggle="tooltip" title="" data-original-title="Safariland pouches come at a discounted rate when ordered with a LAPD Carrier. Pouches will be the same color as your carrier."></i></h2>
+			<h2>{{sectionTitle}}
+				<i class="product-views-option-icon-question-sign" data-toggle="tooltip" title="" data-original-title="{{tooltip}}"></i></h2>
 			<div data-view="AdditionalProducts" class=""></div>
 		</div>
 

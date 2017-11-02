@@ -11,11 +11,12 @@
 			<img src="{{resizeImage thumbnail.url 'tinythumb'}}" alt="{{thumbnail.altimagetext}}"/>
 		</a>
 	</div>
-	<div class="col-xs-6">
-		<a {{{itemURL}}} class="additiona-product-title">
+	<div class="col-xs-8 col-sm-7 col-md-8">
+		<a {{{itemURL}}} class="additional-product-title">
 			<span itemprop="name">{{itemName}}</span>
 		</a>
 		<div class="product-configurator-additional-price" data-view="Item.Price"></div>
+		<div class="product-configurator-additional-options" data-view="Product.Options"></div>
 	</div>
 	<div class="col-xs-2 product-configurator-additional-quantity">
 		<input type="number" class="product-configurator-additional-quantity-input" placeholder="Qty" min="0" value="0" data-item-id="{{itemId}}">

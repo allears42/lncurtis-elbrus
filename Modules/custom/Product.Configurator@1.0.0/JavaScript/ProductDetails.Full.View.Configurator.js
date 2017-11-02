@@ -61,19 +61,13 @@ define(
 				this.template = product_details_full_configurator_tpl;
 				
 				this.customSortOrder = Configuration.get("itemOptionsSort");
-				this.additionalProductsView = new ProductConfiguratorAdditionalProductsView({
-					application: this.application
-					,   itemsIds: '531962,240499,338436'
-					,   additionalProductsTitle: 'Pouches'
-				});
-				
+			
 				this.cart = LiveOrderModel.getInstance();
-				
-				this.additionalProductsView.on('sync', this.additionalProductsLoaded, this);
 				
 				this.tooltips = Configuration.get('configurator.tooltips');
 				
-				console.log(this.model.get('item').getPrice());
+				this.additionalProductsConfig = this.getAdditionalProducts();
+				this.setAdditionalProductsView();
 				
 				this.subtotalView = new ProductConfiguratorSubtotalView({
 					application: this.application
@@ -95,6 +89,41 @@ define(
 	,   events: _.extend({}, ProductDetailsFullView.prototype.events, {
 			'blur .product-configurator-additional-quantity-input': 'quantityChanged'
 		})
+		
+	,   getAdditionalProducts: function () {
+			var additionalProductsConfig = Configuration.get('configurator.additionalProducts', [])
+			,   thisProduct = this.model.get('item').get('internalid')
+			,   areasForThisProduct = {};
+			
+			if(_.isArray(additionalProductsConfig) ) {
+				areasForThisProduct = _.first(_.filter(additionalProductsConfig, function (config) {
+					return config.configuratorProductIDs.indexOf(thisProduct) > -1;
+				}));
+			}
+			else {
+				if(additionalProductsConfig.configuratorProductIDs.indexOf(thisProduct) > -1) {
+					areasForThisProduct = additionalProductsConfig
+				}
+			}
+			
+			console.log(areasForThisProduct);
+			return areasForThisProduct;
+			
+		}
+		
+	,   setAdditionalProductsView: function () {
+			
+			this.additionalProductsView = new ProductConfiguratorAdditionalProductsView({
+				application: this.application
+				, itemsIds: this.additionalProductsConfig.productIDs
+				, additionalProductsTitle: this.additionalProductsConfig.sectionTitle
+				, additionalProductsToottip: this.additionalProductsConfig.tooltip
+			});
+			
+			this.additionalProductsView.on('sync', this.additionalProductsLoaded, this);
+			
+			// todo: handle multiple sets of additional products
+		}
 		
 	,   quantityChanged: function (evt) {
 			var self = this
@@ -204,6 +233,20 @@ define(
 			this.additionalProductsView.setElement(this.$('[data-view="AdditionalProducts"]')).delegateEvents().render();
 			
 		}
+		
+	,   getContext: _.wrap(ProductDetailsFullView.prototype.getContext, function (fn) {
+			var returnVar = fn.apply(this, _.toArray(arguments).slice(1));
+			
+			if(this.additionalProductsConfig) {
+				_.extend(returnVar, {
+					sectionTitle: this.additionalProductsConfig.sectionTitle
+					, tooltip: this.additionalProductsConfig.tooltip
+				});
+			}
+			
+			return returnVar;
+			
+		})
 	});
 
 });

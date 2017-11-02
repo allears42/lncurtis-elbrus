@@ -77,6 +77,14 @@
 .product-configurator-additional-item-cell {
   @extend .col-sm-6;
   @extend .col-xs-12;
+  border-bottom: 1px solid $sc-color-theme-border-light;
+  padding: $sc-base-padding*2 0;
+  margin-bottom: $sc-base-margin*2;
+
+}
+
+.additiona-product-title {
+  min-height: 30px;
 }
 
 .product-configurator-additional-quantity {
@@ -128,4 +136,27 @@
 
 .product-configurator-subtotal-container {
   margin-top: $sc-base-margin*6;
+}
+
+.product-configurator-additional-options {
+  .product-views-option-dropdown-label {
+    font-size: $sc-small-font-size;
+    min-width: 50px;
+    text-align: left;
+  }
+  .product-views-option-dropdown-control {
+    select.product-views-option-dropdown-select {
+      font-size: $sc-small-font-size;
+      min-width: 100px;
+      max-width: 150px;
+    }
+  }
+
+  .product-views-option-tile-title-with-control {
+    padding-left: 0 !important;
+  }
+}
+
+#custcol_carrier_armor_other-container {
+  display: none;
 }
