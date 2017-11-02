@@ -116,22 +116,36 @@ define('LiveOrder.Line.Model'
 					var line_option = line.get('options').findWhere({cartOptionId: product_option.get('cartOptionId')});
 					line_option.attributes = _.extend({}, product_option.attributes, line_option.attributes);
 					
+					console.log(line_option, product_option, line_option.attributes);
+					
 					// custom - set additional properties on item
 					if(product_option.get('cartOptionId') === 'custcol_sc_item_image') {
 						var image = _.first(item.get('_images'))
 						,   imageURL = image.url;
 						
 						imageURL = imageURL.replace(/ /g, '%20') + "?resizeid=2&resizeh=200&resizew=200";
-						line_option.set('value', imageURL);
+						line_option.set('value', {
+							internalid: imageURL
+							,   label: imageURL
+						});
 					}
 					if(product_option.get('cartOptionId') === 'custcol_sc_item_title') {
-						line_option.set('value', item.get('_pageHeader'))
+						line_option.set('value', {
+							internalid: item.get('_pageHeader')
+							,   label: item.get('_pageHeader')
+						})
 					}
 					if(product_option.get('cartOptionId') === 'custcol_sc_item_sku') {
-						line_option.set('value', item.get('_sku'))
+						line_option.set('value', {
+							internalid: item.get('_sku')
+							,   label: item.get('_sku')
+						})
 					}
 					if(product_option.get('cartOptionId') === 'custcol_web_free_ship') {
-						line_option.set('value', item.get('custitem_web_free_ship') ? 'T' : 'F')
+						line_option.set('value', {
+							internalid: item.get('custitem_web_free_ship') ? 'T' : 'F'
+							,   label: item.get('custitem_web_free_ship') ? 'T' : 'F'
+						})
 					}
 					
 				});

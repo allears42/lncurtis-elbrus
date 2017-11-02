@@ -195,6 +195,7 @@
         "overrides/Override.MyAccountApplication": "3.1.0",
         "overrides/Override.Newsletter": "2.1.0",
         "overrides/Override.OrderHistory": "5.0.0",
+        "overrides/Override.OrderWizard.Module.Confirmation": "3.0.0",
         "overrides/Override.OrderWizard.Module.PaymentMethod": "4.0.0",
         "overrides/Override.ProductDetails": "1.0.0",
         "overrides/Override.ProductLine": "1.0.0",
@@ -248,6 +249,7 @@
         "custom/ProductDetails.ImageGallery.Video.View": "1.0.0",
         "custom/ProductList.Copy": "1.0.0",
         "custom/ProductViews.SizeChart": "1.0.0",
+        "custom/Wizard.Step.Fix": "2.3.0",
 
         "themes/Firefighter": "1.0.0"
     },
@@ -606,6 +608,7 @@
                     "CallForPricing",
                     "CreditCard.Icon",
                     "LinkHierarchy",
+                    "Wizard.Step.Fix",
 
                     "Backbone.FormView.Extension",
                     "ErrorManagement.Extension",
