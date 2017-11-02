@@ -56,8 +56,8 @@ define(
 			
 			, _getSelection: function () {
 				var items = []
-					, items_for_cart = []
 					, button_selector = [];
+				
 				
 				//Filter items for bulk operation to remove call for pricing
 				_.each(this.collection.models, function (pli) {
@@ -66,22 +66,19 @@ define(
 						return;
 					}
 					
-					items.push(pli);
-					
 					var item = pli.get('item')
-					, item_internal_id = item.internalid
-					, item_for_cart = pli.getItemForCart(item_internal_id, pli.get('quantity'), item.itemoptions_detail, pli.getOptionsArray())
-					, isCallForPricing = item.custitem_sc_call_for_pricing || false;
+					, item_internal_id = pli.getItemId()
+					, isCallForPricing = item.get('custitem_sc_call_for_pricing') || false;
 					
 					if (!isCallForPricing) {
-						items_for_cart.push(item_for_cart);
+						items.push(pli);
 						button_selector.push('article[data-item-id="' + item_internal_id + '"] a, article[data-item-id="' + item_internal_id + '"] button');
 					}
 					
 				});
 				
 				return {
-					items: new ProductListItemCollection(items_for_cart)
+					items: new ProductListItemCollection(items)
 					, button_selector: button_selector
 				};
 			}
@@ -99,7 +96,8 @@ define(
 				
 				var button_selector = selected_models.button_selector.join(',');
 				
-				_.each(selected_models.items_for_cart, function (item) {
+				_.each(selected_models.items.models, function (item) {
+					
 					var matchingItem = _.findWhere(selected_models.items, function (model) {
 						return model.get('item').get('internalid') === item.get('internalid')
 					});
@@ -121,7 +119,7 @@ define(
 				});
 				
 				//add items to cart
-				var add_to_cart_promise = this.cart.addItems(selected_models.items_for_cart);
+				var add_to_cart_promise = this.cart.addProducts(selected_models.items.models);
 				
 				add_to_cart_promise.then(function () {
 					//TODO: confirm if this modification is necessary

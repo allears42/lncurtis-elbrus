@@ -44,6 +44,7 @@ define(
                         , isCallForPricing = matrix_parent.custitem_sc_call_for_pricing || false;
 
 
+                    console.log(pli)
                     if (store_item.ispurchasable && !isCallForPricing)
                     {
                         var cart_item_detail = pli.getItemForCart(store_item.internalid, pli.get('quantity'), store_item.itemoptions_detail, pli.getOptionsArray());

@@ -1065,8 +1065,8 @@ define(
 
 			nlapiLogExecution('debug', 'getTransactionBodyField', 'start')
 			
-			/*if (this.isSecure)
-			{*/
+			if (this.isSecure)
+			{
 				var fieldsIdToBeExposed = CustomFieldsUtils.getCustomFieldsIdToBeExposed('salesorder');
 				
 				
@@ -1084,7 +1084,7 @@ define(
 					}
 				});
 
-			/*}*/
+			}
 			return options;
 		}
 

@@ -33,7 +33,7 @@ define('ProductList.Details.View.Copy.Extension'
 		// @method showConfirmationHelper
 		showConfirmationHelper: function (selected_item)
 		{
-			this.showConfirmationMessage(_(Configuration.get('productList.itemAddedToCartConfirmationText', '')).translate(selected_models.items_for_cart.length, list.get('internalid'), list.get('name')));
+			this.showConfirmationMessage(Configuration.get('productList.itemAddedToCartConfirmationText', ''));
 			
 			//selected item may be undefined
 			if (_.isUndefined(selected_item) === true) {

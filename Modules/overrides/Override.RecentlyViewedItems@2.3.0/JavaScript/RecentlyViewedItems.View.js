@@ -97,6 +97,70 @@ define('RecentlyViewedItems.View'
 
 		}
 		
+	,   renderSlider: function ()
+		{
+			var self = this
+				,   application = this.options.application
+				,	carousel = this.$el.find('[data-type="carousel-items"]');
+			
+			if (_.isPhoneDevice() === false && application.getConfig('siteSettings.imagesizes')) {
+				var img_min_height = _.where(application.getConfig('siteSettings.imagesizes'), {name: application.getConfig('imageSizeMapping.thumbnail')})[0].maxheight;
+				
+				carousel.find('.item-relations-related-item-thumbnail').css('minHeight', img_min_height);
+			}
+			
+			if(this.collection.length > 1) {
+				var sliderDefaults = Configuration.bxSliderDefaults;
+				
+				_.extend(sliderDefaults, {
+					slideMargin: 20
+					, pager: false
+					, controls: true
+					, infiniteLoop: false
+					, slideWidth: 160
+					, maxSlides: 5
+				});
+				if (_.getViewportWidth() < 992) {
+					_.extend(sliderDefaults, {
+						maxSlides: 4
+					});
+					
+				}
+				if (_.getViewportWidth() < 768) {
+					_.extend(sliderDefaults, {
+						maxSlides: 3
+					});
+				}
+				if (_.getViewportWidth() < 480) {
+					_.extend(sliderDefaults, {
+						maxSlides: 1
+						,   slideWidth: 340
+					});
+				}
+				
+				var screenWidth = _.getViewportWidth() > 1170 ? 1170 : _.getViewportWidth()
+				,   slideWidth = Math.floor(screenWidth / sliderDefaults.maxSlides) - sliderDefaults.slideMargin - sliderDefaults.maxSlides;
+				
+				_.extend(sliderDefaults, {
+					slideWidth: slideWidth
+				});
+				
+				
+				this.slider && this.slider.destroySlider();
+				this.slider = _.initBxSlider(carousel, sliderDefaults);
+				
+				setTimeout(function ()
+				{
+					if(self.slider && self.slider.redrawSlider) self.slider.redrawSlider()
+				}, 500)
+				
+			}
+			else {
+				this.slider && this.slider.destroySlider();
+				this.slider = null;
+			}
+		}
+		
 	,	loadRelatedItem: function loadRelatedItem ()
 		{
 			var self = this
@@ -109,17 +173,8 @@ define('RecentlyViewedItems.View'
 				self.collection = self.collection.first(number_of_items_displayed);
 				self.render();
 				
-				var carousel = self.$el.find('[data-type="carousel-items"]');
+				self.renderSlider();
 				
-				if(_.isPhoneDevice() === false && application.getConfig('siteSettings.imagesizes'))
-				{
-					var img_min_height = _.where(application.getConfig('siteSettings.imagesizes'), {name: application.getConfig('imageSizeMapping.thumbnail')})[0].maxheight;
-					
-					carousel.find('.item-views-related-item-thumbnail').css('minHeight', img_min_height);
-				}
-				
-				var sliderConfig = Configuration.bxSliderDefaults;
-				_.initBxSlider(carousel, sliderConfig);
 			});
 		}
 		

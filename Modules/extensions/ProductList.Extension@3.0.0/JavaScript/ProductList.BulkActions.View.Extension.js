@@ -33,7 +33,7 @@ define(
                         return product_list_item.get('checked');
                     });
 	
-	                console.log(isAtLeastOneItemChecked , model.canBeAddedToCart(true))
+	                //console.log(isAtLeastOneItemChecked , model.canBeAddedToCart(true))
 	                
                     _.extend( returnVariable , {
                         isRemovableEnabled: isAtLeastOneItemChecked

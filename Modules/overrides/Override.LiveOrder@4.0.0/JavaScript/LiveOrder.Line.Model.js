@@ -116,7 +116,7 @@ define('LiveOrder.Line.Model'
 					var line_option = line.get('options').findWhere({cartOptionId: product_option.get('cartOptionId')});
 					line_option.attributes = _.extend({}, product_option.attributes, line_option.attributes);
 					
-					console.log(line_option, product_option, line_option.attributes);
+					//console.log(line_option, product_option, line_option.attributes);
 					
 					// custom - set additional properties on item
 					if(product_option.get('cartOptionId') === 'custcol_sc_item_image') {

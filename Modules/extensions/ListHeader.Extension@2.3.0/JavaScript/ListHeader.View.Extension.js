@@ -28,7 +28,7 @@ define(
 
                 _.extend(returnVariable , {
                     // removed collection param as we want this option to always be available for CFP items
-                    showSelectAll: this.selectable //&& this.collection.length > 1
+                    showSelectAll: this.selectable && this.collection.length > 1
                 });
 
                 return returnVariable

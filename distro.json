@@ -436,6 +436,7 @@
                     "ReturnAuthorization",
                     "ReorderItems",
                     "Receipt",
+                    "Newsletter",
                     "NavigationHelper",
                     "NavigationHelper.Plugins.Standard",
                     "NavigationHelper.Plugins.DataTouchPoint",
@@ -579,6 +580,7 @@
                     "NavigationHelper.Plugins.DataTouchPoint",
                     "NavigationHelper.Plugins.Modals",
                     "NavigationHelper.Plugins.Pushers",
+                    "Newsletter",
                     "SocialSharing",
                     "SocialSharing.Plugins.Facebook",
                     "SocialSharing.Plugins.Twitter",
@@ -1109,6 +1111,7 @@
                         },
                         "Location.SCA",
                         "LinkHierarchy",
+                        "Newsletter",
                         "Newsletter.Extension",
                         {
                             "module": "Firefighter",
@@ -1223,6 +1226,7 @@
                         "Footer",
                         "Location.SCA",
                         "LinkHierarchy",
+                        "Newsletter",
                         "Newsletter.Extension",
                         {
                             "module": "Firefighter",
