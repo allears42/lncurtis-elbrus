@@ -8,13 +8,12 @@
 <div>
 	{{#if showQuantity}}
 		<div class="product-details-quantity-options" data-validation="control-group">
-			<label for="quantity" class="product-details-quantity-options-title">
-				{{translate 'Qty'}}
-			</label>
-
 			{{#if showBackorderMessage}}
 				<div class="global-views-message global-views-message-warning alert"><span>{{{backorderMessage}}}</span></div>
 			{{/if}}
+			<label for="quantity" class="product-details-quantity-options-title">
+				{{translate 'Qty'}}
+			</label>
 			<div data-validation="control">
 				<div>
 					<button type="button" class="product-details-quantity-remove" data-action="updateQuantity" data-type="product-details-quantity-remove" data-value="-1" {{#if isMinusButtonDisabled}}disabled="disabled"{{/if}}>-</button>
