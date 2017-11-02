@@ -245,6 +245,7 @@
         "custom/Pacejet": "1.0.0",
         "custom/Product.BackOrders": "1.0.0",
         "custom/Product.Configurator": "1.0.0",
+        "custom/Product.Options.Single": "1.0.0",
         "custom/ProductDetails.ImageGallery.Video.View": "1.0.0",
         "custom/ProductList.Copy": "1.0.0",
         "custom/ProductViews.SizeChart": "1.0.0",
@@ -349,6 +350,7 @@
                     "LinkHierarchy",
                     "Product.BackOrders",
                     "Product.Configurator",
+                    "Product.Options.Single",
                     "ProductDetails.ImageGallery.Video.View",
                     "ProductList.Copy",
                     "ProductViews.SizeChart"
@@ -471,6 +473,7 @@
                     "CreditCard.Icon",
                     "LinkHierarchy",
                     "Product.BackOrders",
+                    "Product.Options.Single",
                     "ProductList.Copy",
 
                     "Backbone.FormView.Extension",
