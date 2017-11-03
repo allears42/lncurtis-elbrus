@@ -75,7 +75,7 @@ define(
 				// @property {Boolean} isPriceEnabled
 				isPriceEnabled: !ProfileModel.getInstance().hidePrices() && !isCallForPricing
 				
-                ,   showComparePrice: showComparePrice
+                ,   showComparePrice: false//showComparePrice
 				
 	            // @property {Boolean} isPriceRange
 	            ,	isPriceRange: is_price_range

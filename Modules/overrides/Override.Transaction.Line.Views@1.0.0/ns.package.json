@@ -11,6 +11,7 @@
         ]
     },
     "overrides": {
-        "suitecommerce/Transaction.Line.Views@1.0.0/Templates/transaction_line_views_options_selected.tpl": "Templates/transaction_line_views_options_selected.tpl"
+        "suitecommerce/Transaction.Line.Views@1.0.0/Templates/transaction_line_views_options_selected.tpl": "Templates/transaction_line_views_options_selected.tpl",
+        "suitecommerce/Transaction.Line.Views@1.0.0/Templates/transaction_line_views_price.tpl": "Templates/transaction_line_views_price.tpl"
     }
 }

@@ -6,9 +6,9 @@
 	<div class="cart-item-summary-item-list-actionable-amount">
 		<span class="cart-item-summary-item-list-actionable-amount-label">{{translate 'Amount: ' }}</span>
 		<span class="cart-item-summary-amount-value">{{ line.total_formatted}}</span>
-		{{#if showComparePrice}}
+		<!--{{#if showComparePrice}}
 			<small class="muted cart-item-summary-item-view-old-price">{{ line.amount_formatted}}</small>
-		{{/if}}
+		{{/if}}-->
 	</div>
 {{/if}}
 
