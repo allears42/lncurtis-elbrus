@@ -25,7 +25,7 @@ define('OrderWizard.Module.Address.Fix'
 		manageError: _.wrap(OrderWizardModuleAddress.prototype.manageError, function (fn, error) {
 			fn.apply(this, _.toArray(arguments).slice(1));
 			
-			console.log('manage error');
+			//console.log('manage error');
 			jQuery('html, body').animate({
 				scrollTop: jQuery('[data-type="alert-placeholder-step"]:first').offset().top - 30
 			}, 600);

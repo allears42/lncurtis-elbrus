@@ -24,7 +24,7 @@ define(
 		manageError: _.wrap(OrderWizardModulePaymentMethodCreditcard.prototype.manageError, function (fn, error) {
 			fn.apply(this, _.toArray(arguments).slice(1));
 			
-			console.log('manage error - cc');
+			//console.log('manage error - cc');
 			
 			// errors data-validation-error="block"
 			var errorsStep = jQuery('[data-type="alert-placeholder-step"]:first')

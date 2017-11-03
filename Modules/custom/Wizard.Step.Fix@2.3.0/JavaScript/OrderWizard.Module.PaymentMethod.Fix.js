@@ -25,7 +25,7 @@ define('OrderWizard.Module.PaymentMethod.Fix'
 		manageError: _.wrap(OrderWizardModulePaymentMethod.prototype.manageError, function (fn, error) {
 			fn.apply(this, _.toArray(arguments).slice(1));
 			
-			console.log('manage error');
+			//console.log('manage error');
 			
 			// errors data-validation-error="block"
 			var errorsStep = jQuery('[data-type="alert-placeholder-step"]:first')
