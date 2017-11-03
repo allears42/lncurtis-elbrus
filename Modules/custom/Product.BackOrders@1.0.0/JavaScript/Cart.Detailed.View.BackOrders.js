@@ -7,11 +7,13 @@ define(
 	'Cart.Detailed.View.BackOrders'
 	, [
 		'Cart.Detailed.View'
+	, 	'RecentlyViewedItems.View'
 	, 	'Backbone'
 	, 	'underscore'
 	]
 	, function (
 		CartDetailedView
+	, 	RecentlyViewedItemsView
 	, 	Backbone
 	, 	_
 	)

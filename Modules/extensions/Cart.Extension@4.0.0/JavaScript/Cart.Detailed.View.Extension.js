@@ -13,7 +13,6 @@ define(
 	, 	'Cart.Item.Actions.View'
 	,	'Cart.Item.Total.View'
 	
-	,	'RecentlyViewedItems.View'
 
 	, 	'GlobalViews.Message.View'
 
@@ -30,7 +29,6 @@ define(
     , 	CartItemActionsView
 	,	CartItemTotalView
 	
-	,	RecentlyViewedItemsView
 	, 	GlobalViewsMessageView
 	
 	, 	Configuration

@@ -93,6 +93,7 @@ define('RecentlyViewedItems.View'
 				this._windowResizeHandler = _.bind(windowResizeHandler, this);
 				
 				jQuery(window).on('resize', this._windowResizeHandler);
+				
 			}
 
 		}
@@ -172,7 +173,6 @@ define('RecentlyViewedItems.View'
 				Tracker.getInstance().trackProductList(self.collection, 'Recently Viewed Items');
 				self.collection = self.collection.first(number_of_items_displayed);
 				self.render();
-				
 				self.renderSlider();
 				
 			});

@@ -33,15 +33,14 @@ define('RecentlyViewedItems.Collection'
 				this.useCookie = Configuration.recentlyViewedItems && Configuration.recentlyViewedItems.useCookie;
 				this.searchApiMasterOptions = Configuration.searchApiMasterOptions.Facets;
 
-				// don't need to use this because we aren't fetching the items unless were calling an explicit fetch
-				/*if (this.useCookie)
+				if (this.useCookie)
 				{
 					this.promise = this.loadItemsFromCookie();
 				}
 				else
 				{
 					this.promise = jQuery.Deferred().resolveWith(this);
-				}*/
+				}
 			}
 			
 			//@method addHistoryItem
@@ -62,7 +61,7 @@ define('RecentlyViewedItems.Collection'
 						jQuery.cookie('recentlyViewedIds', news_items, {path: '/'});
 					}
 					
-					/*this.promise.done(function ()
+					this.promise.done(function ()
 					{
 
 						// If the item is already in the recently viewed, we remove it
@@ -78,7 +77,7 @@ define('RecentlyViewedItems.Collection'
 
 							jQuery.cookie('recentlyViewedIds', news_items, {path: '/'});
 						}
-					});*/
+					});
 				}
 
 			}
