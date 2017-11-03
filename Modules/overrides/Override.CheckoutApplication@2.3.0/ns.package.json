@@ -34,6 +34,7 @@
     "suitecommerce/CheckoutApplication@2.3.0/Internal/index-local.ssp" : "Internal/index-local.ssp",
 
     "suitecommerce/CheckoutApplication@2.3.0/SuiteScript/cart.ssp" : "SuiteScript/cart.ssp",
+    "suitecommerce/CheckoutApplication@2.3.0/SuiteScript/checkout.environment.ssp" : "SuiteScript/checkout.environment.ssp",
     "suitecommerce/CheckoutApplication@2.3.0/SuiteScript/checkout.ssp" : "SuiteScript/checkout.ssp"
 }
 }

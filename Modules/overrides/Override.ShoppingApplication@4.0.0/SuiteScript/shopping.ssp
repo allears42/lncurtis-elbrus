@@ -163,7 +163,8 @@
 </script>
 
 <script src="<%= session.getAbsoluteUrl("shopping.environment.ssp?lang=" + Language + "&cur=" + Currency + "&X-SC-Touchpoint=shopping") %>&t={{timestamp}}" ></script>
-<script src="<%= session.getAbsoluteUrl("languages/shopping_" + Language + ".js") %>?t={{timestamp}}"></script>
+
+<!-- this always 404s. Removing all translation mappings or will have an error <script src="<%= session.getAbsoluteUrl("languages/shopping_" + Language + ".js") %>?t={{timestamp}}"></script>-->
 
 
 {{#if distro.isSCLite}}

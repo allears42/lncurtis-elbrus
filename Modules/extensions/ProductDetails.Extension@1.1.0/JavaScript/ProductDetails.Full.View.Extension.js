@@ -76,6 +76,7 @@ define(
 				curtisCarePopover: Configuration.get("curtisCarePopover", "")
 				, curtisCarePopoverTitle: Configuration.get("curtisCarePopoverTitle", "")
 				, mfgPartNo: this.model.get('item').get('mfgPartNo')
+				,   origin: document.location.origin
 			});
 			
 			return returnVariable;

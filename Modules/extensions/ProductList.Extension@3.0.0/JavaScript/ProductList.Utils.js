@@ -1,8 +1,6 @@
 /*
-	© 2017 NetSuite Inc.
-	User may not copy, modify, distribute, or re-bundle or otherwise make available this code;
-	provided, however, if you are an authorized user with a NetSuite account or log-in, you
-	may use this code subject to the terms that govern your access and use.
+	© 2017 JHM Services
+	Have to OVERRIDE due to changes to variables, removal of included class
 */
 
 // @module ProductList
@@ -17,7 +15,6 @@ define('ProductList.Utils',
 	,	'MenuTree.View'
 	,	'underscore'
 	,	'jQuery'
-	,	'ProductList.CartSaveForLater.View'
 	]
 ,	function
 	(
@@ -203,7 +200,10 @@ define('ProductList.Utils',
 				});
 
 				// Put this code block outside afterAppendView to avoid infinite loop!
-				utils.getProductListsPromise().done(utils.productListsPromiseDone);
+				// CUSTOM remove so list doesn't load unless in my account
+				if (SC.ENVIRONMENT.SCTouchpoint === 'myaccount') {
+					utils.getProductListsPromise().done(utils.productListsPromiseDone);
+				}
 
 				ProductListItemModel.prototype.keyMapping = application.getConfig('itemKeyMapping', {});
 				ProductListItemModel.prototype.itemOptionsConfig = application.getConfig('itemOptions', []);

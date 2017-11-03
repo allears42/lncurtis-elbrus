@@ -7,18 +7,22 @@ define(
     ,	[
         'Header.View'
 	,	'Header.Logo.View'
+	,	'Header.Menu.View'
 	,	'LinkHierarchy.View'
 	,	'SC.Configuration'
 
 	,	'underscore'
+	,	'Utils'
     ]
     ,	function(
         HeaderView
 	,	HeaderLogoView
+	,	HeaderMenuView
 	,	LinkHierarchyView
 	,	Configuration
 
 	, 	_
+	, 	Utils
     )
     {
         'use strict';
@@ -65,6 +69,19 @@ define(
 						}
 					});
 				}
+				
+			,	'Header.Menu': function()
+			{
+				if (Utils.isInShopping() ||  SC.ENVIRONMENT.SCTouchpoint === 'myaccount') {
+					var header_view_options = _.extend(
+						{
+							application: this.options.application
+						}
+						, this.options.headerProfileViewOptions || {});
+					
+					return new HeaderMenuView(header_view_options);
+				}
+			}
 
 			})
 

@@ -108,7 +108,12 @@
 						{{translate 'Back'}}
 					</a>
 				</li>
-				{{#if productListsReady}}
+				<li>
+					<a href="#" class="header-menu-myaccount-anchor-level3" data-touchpoint="customercenter" data-hashtag="#wishlist" name="allmylists">
+						{{translate 'All My Lists'}}
+					</a>
+				</li>
+				<!--{{#if productListsReady}}
 
 					{{#unless isSingleList}}
 						<li>
@@ -130,7 +135,7 @@
 							{{translate 'Loading...'}}
 						</a>
 					</li>
-				{{/if}}
+				{{/if}}-->
 			</ul>
 		</li>
 	{{/if}}

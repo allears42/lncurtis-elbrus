@@ -97,6 +97,7 @@ define(
 		
 		        _.extend(returnVariable, {
 					isCallForPricing: isCallForPricing
+		        ,   origin: document.location.origin
 		        });
 		
 		        return returnVariable;
