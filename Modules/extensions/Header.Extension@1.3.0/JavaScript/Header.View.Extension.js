@@ -51,7 +51,7 @@ define(
                     this.hideSiteSearch();
                 }
             }
-
+            
 		,	childViews: _.extend( HeaderView.prototype.childViews,
 			{
                 'Header.Logo': function()
@@ -103,5 +103,6 @@ define(
                 return returnVariable
 
         	})
+         
     	});
     });

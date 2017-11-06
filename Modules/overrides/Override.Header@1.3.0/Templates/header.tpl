@@ -12,7 +12,7 @@
 		<div class="header-subheader-container">
 			<ul class="header-subheader-options header-subheader-options-right">
 				<li>
-					<a href="tel:{{telephone}}">{{telephone}}</a>
+					<a data-action="gtm-track-header-phone" href="tel:{{telephone}}">{{telephone}}</a>
 				</li>
 				<li>
 					<a href="{{contactLink}}" data-hashtag="{{contactLink}}" data-touchpoint="home">{{contactText}}</a>

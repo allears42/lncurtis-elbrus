@@ -12,7 +12,7 @@
                     {{translate 'Required'}}<span class="std-form-required">*</span>
                 </small>
 
-                <form action="#" class="std-form customer-service-form" novalidate>
+                <form action="#" class="std-form customer-service-form" data-action="gtm-track-header-email" novalidate>
 
 					<div class="row">
 						<div class="std-form-controls-group col-md-6" data-validation="control-group">

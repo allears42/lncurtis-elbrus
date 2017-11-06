@@ -251,6 +251,8 @@
         "custom/ProductViews.SizeChart": "1.0.0",
         "custom/Wizard.Step.Fix": "2.3.0",
 
+        "extensions/GoogleTagManager.Extension": "2.0.0",
+
         "themes/Firefighter": "1.0.0"
     },
     "tasksConfig": {
@@ -353,7 +355,9 @@
                     "Product.Options.Single",
                     "ProductDetails.ImageGallery.Video.View",
                     "ProductList.Copy",
-                    "ProductViews.SizeChart"
+                    "ProductViews.SizeChart",
+
+                    "GoogleTagManager.Extension"
                 ],
                 "amdclean": true,
                 "amdConfig": {
@@ -494,7 +498,9 @@
                     "ProductViews.Extension",
                     "Profile.Extension",
                     "SC.Configuration.Extension",
-                    "Session.Extension"
+                    "Session.Extension",
+
+                    "GoogleTagManager.Extension"
                 ],
                 "amdclean": true,
                 "amdConfig": {
@@ -627,7 +633,9 @@
                     "Profile.Extension",
                     "SC.Configuration.Extension",
                     "Session.Extension",
-                    "Wizard.Extension"
+                    "Wizard.Extension",
+
+                    "GoogleTagManager.Extension"
                 ],
                 "amdclean": true,
                 "amdConfig": {
