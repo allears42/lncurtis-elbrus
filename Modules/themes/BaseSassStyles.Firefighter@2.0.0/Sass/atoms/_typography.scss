@@ -218,13 +218,13 @@ b {
 }
 
 .middle-price{
-    font-size:$sc-base-font-size;
+    font-size:$sc-h5-font-size;
     font-weight:$sc-font-weight-semibold;
-    color: $sc-color-primary;
+    color: $sc-color-dark-copy;
 }
 
 .small-price{
-    font-size:14px;
+    font-size:$sc-base-font-size;
     color: $sc-color-primary;
 }
 

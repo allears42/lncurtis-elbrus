@@ -42,7 +42,7 @@
 	z-index:99999999999;
 	@media(min-width: $screen-sm-min){
 		position:absolute;
-		z-index:1;
+		z-index:100;
 	}
 }
 

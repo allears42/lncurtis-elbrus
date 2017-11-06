@@ -120,7 +120,7 @@ define(
 	,   reconcileQuantity: function () {
 			this.backorderMessage = "";
 			this.allowBackorders = this.model.get('item').get('_isBackorderable', true);
-			this.stock_level = this.lineForItemInCart && this.lineForItemInCart.get('item').get("_stock", true) || 0;
+			this.stock_level = this.lineForItemInCart ? this.lineForItemInCart.get('item').get("_stock", true) : this.model.get('item').get('quantityAvailable');
 			
 			if (this.cart_quantity > 0) {
 				this.backorderMessage = _.translate('Limited quantities, only $(0) available. You have $(1) in your cart.', this.stock_level, this.cart_quantity);

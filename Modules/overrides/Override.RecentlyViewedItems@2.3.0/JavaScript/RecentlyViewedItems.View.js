@@ -120,6 +120,7 @@ define('RecentlyViewedItems.View'
 					, infiniteLoop: false
 					, slideWidth: 160
 					, maxSlides: 5
+					, hideControlOnEnd: true
 				});
 				if (_.getViewportWidth() < 992) {
 					_.extend(sliderDefaults, {
