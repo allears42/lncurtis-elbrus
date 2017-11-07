@@ -70,7 +70,7 @@ define('Item.KeyMapping.Extension'
 		{
 			var prices = item.get('_priceDetails');
 
-			// debugger;
+			//
 
 			if (prices)
 			{

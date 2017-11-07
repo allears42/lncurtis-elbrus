@@ -36,6 +36,7 @@ function (
     CheckoutConfigurationStepsOPC,
     CheckoutConfigurationStepsStandard,
     OrderWizardModulePromocodeNotification,
+    
     BackboneCollectionView,
     $,
     _
@@ -63,6 +64,7 @@ function (
         // [2]
         initialize: _.wrap(CartDetailedView.prototype.initialize, function (fn)
         {
+            
             fn.apply(this, _.toArray(arguments).slice(1));
             this.model.on('promocodeNotificationShown', this.removePromocodeNotification, this);
         }),
@@ -72,6 +74,7 @@ function (
         // @return {Void}
         removePromocodeNotification: function (promocode_id)
         {
+            
             var promocode = _.findWhere(this.model.get('promocodes'), {internalid: promocode_id});
         
             delete promocode.notification;
@@ -81,7 +84,7 @@ function (
             
             'Promocode.Notifications': function ()
             {
-                debugger;
+                
                 var promotions = _.filter(this.model.get('promocodes') || [], function (promocode) { return promocode.notification === true; });
                 
                 if (promotions.length)
@@ -111,11 +114,9 @@ function (
         
         getContext: _.wrap(CartPromocodeListItemView.prototype.getContext, function (fn)
         {
-            debugger;
             var returnVariables = fn.apply(this, _.toArray(arguments).splice(1));
     
             var code = this.model.get('code')
-            , internalid = this.model.get('internalid')
             , hide_autoapply_promo = (!_.isUndefined(this.model.get('isautoapplied'))) ? this.model.get('applicabilityreason') === 'DISCARDED_BEST_OFFER' || (this.model.get('isautoapplied') && this.model.get('applicabilitystatus') === 'NOT_APPLIED') : false;
             
             _.extend(returnVariables, {
@@ -133,7 +134,6 @@ function (
     // the follow function is used to update the configuration steps identified in #9, 10 & 11
     function updateCheckoutStep (module, stepName, url, insertIndex, updatePayload)
     {
-        debugger;
         insertIndex = insertIndex ? insertIndex : 0;
         updatePayload = updatePayload ? updatePayload : [OrderWizardModulePromocodeNotification, {exclude_on_skip_step: true}];
         

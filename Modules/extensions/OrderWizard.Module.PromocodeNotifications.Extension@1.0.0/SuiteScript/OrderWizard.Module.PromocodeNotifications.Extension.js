@@ -292,21 +292,18 @@ function (
                     
                     if (!_.isUndefined(promo_code.is_auto_applied) && !_.isUndefined(promo_code.applicability_status) && !_.isUndefined(promo_code.applicability_reason) && !_.isUndefined(self.old_promocodes))
                     {
-                        var old_promocode = (
-                        self.old_promocodes
-                        ) ? _.find(self.old_promocodes, function (old_promo_code)
+                        var old_promocode = (self.old_promocodes) ? _.find(self.old_promocodes, function (old_promo_code)
                         {
                             return old_promo_code.internalid === promo_code.internalid;
                         }) : '';
                         
-                        if (!old_promocode || old_promocode.applicability_status !== promo_code.applicability_status || (
-                        !promo_code.is_auto_applied && promo_code.applicability_reason !== old_promocode.applicability_reason
-                        ))
+                        if (!old_promocode || old_promocode.applicability_status !== promo_code.applicability_status || (!promo_code.is_auto_applied && promo_code.applicability_reason !== old_promocode.applicability_reason))
                         {
                             promocode.notification = true;
                         }
                     }
                     
+                    nlapiLogExecution('debug', 'promocode', promocode);
                     result.push(promocode);
                 }
                 );

@@ -41,7 +41,6 @@
 				</a>
 			</div>
 			<div data-confirm-message class="cart-detailed-confirm-message"></div>
-            <!--<div data-view="Promocode.Notifications"></div>-->
 
 			<table class="cart-detailed-product-view-cell-actionable-table-outer">
 				<thead>
