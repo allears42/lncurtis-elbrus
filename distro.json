@@ -252,6 +252,8 @@
         "custom/Wizard.Step.Fix": "2.3.0",
 
         "extensions/GoogleTagManager.Extension": "2.0.0",
+        "custom/OrderWizard.Module.PromocodeNotifications": "1.0.0",
+        "extensions/OrderWizard.Module.PromocodeNotifications.Extension": "1.0.0",
 
         "themes/Firefighter": "1.0.0"
     },
@@ -635,7 +637,8 @@
                     "Session.Extension",
                     "Wizard.Extension",
 
-                    "GoogleTagManager.Extension"
+                    "GoogleTagManager.Extension",
+                    "OrderWizard.Module.PromocodeNotifications"
                 ],
                 "amdclean": true,
                 "amdConfig": {
@@ -743,7 +746,9 @@
                 "ExternalPayment.Model",
                 "SC.BaseComponent",
                 "Cart.Component",
-                "CustomerServiceForm.ServiceController"
+                "CustomerServiceForm.ServiceController",
+                "OrderWizard.Module.PromocodeNotifications.Extension"
+
             ],
             "exportFile": "ssp_libraries.js",
             "amdConfig": {
