@@ -28,6 +28,7 @@ function (
     
     // #1 MODIFY LIVEORDER\SUITESCRIPT\LIVEORDER.MODEL.JS
     _.extend(LiveOrderModel.prototype, {
+        
         update: function update (data)
         {
             var current_order = this.get();

@@ -48,16 +48,16 @@ function (
     _.extend(CartDetailedView.prototype, {
         
         // [1]
-        render: _.wrap(CartDetailedView.prototype.render, function (fn)
+        template: _.wrap(CartDetailedView.prototype.template, function (fn)
         {
-            var returnVariable = fn.apply(this, _.toArray(arguments).slice(1));
+            var template = $(fn.apply(this, _.toArray(arguments).slice(1)));
             
-            if (!$('div[data-view="Promocode.Notifications"]').length)
+            if (!template.find('div[data-view="Promocode.Notifications"]').length)
             {
-                $('.cart-detailed-confirm-message').append('<div data-view="Promocode.Notifications"></div>');
+                template.find('.cart-detailed-confirm-message').after('<div data-view="Promocode.Notifications"></div>');
             }
             
-            return returnVariable;
+            return template.prop("outerHTML");
         }),
         
         // [2]
@@ -66,11 +66,14 @@ function (
             fn.apply(this, _.toArray(arguments).slice(1));
             this.model.on('promocodeNotificationShown', this.removePromocodeNotification, this);
         }),
-        
+    
+        // @method removePromocodeNotification
+        // @param String promocode_id
+        // @return {Void}
         removePromocodeNotification: function (promocode_id)
         {
             var promocode = _.findWhere(this.model.get('promocodes'), {internalid: promocode_id});
-            
+        
             delete promocode.notification;
         },
         
@@ -78,6 +81,7 @@ function (
             
             'Promocode.Notifications': function ()
             {
+                debugger;
                 var promotions = _.filter(this.model.get('promocodes') || [], function (promocode) { return promocode.notification === true; });
                 
                 if (promotions.length)
@@ -97,26 +101,22 @@ function (
     });
     
     // #4 ADD THE FILE CART\TEMPLATES\CART_PROMOCODE_NOTIFICATIONS.TPL
-    /* SEE: ../Templates/cart_promocode_notifications.tpl */
+    /* SEE: ../Modules/custom/OrderWizard.Module.PromocodeNotifications/Templates/cart_promocode_notifications.tpl */
     
     // #5 ADD THE FILE CART\SASS\_CART-PROMOCODE-NOTIFICATIONS.SCSS
-    /* SEE: ../Sass/_cart-promocode-notifications.scss */
+    /* SEE: ../Modules/custom/OrderWizard.Module.PromocodeNotifications/Sass/_cart-promocode-notifications.scss */
     
     // #6 MODIFY CART\JAVASCRIPT\CART.PROMOCODE.LIST.ITEM.VIEW.JS
     _.extend(CartPromocodeListItemView.prototype, {
         
         getContext: _.wrap(CartPromocodeListItemView.prototype.getContext, function (fn)
         {
-            
-            var returnVariables = fn.apply(this, _.toArray(arguments).splice(1)),
-            code = this.model.get('code'),
-            hide_autoapply_promo = (
-            !_.isUndefined(this.model.get('isautoapplied'))
-            )
-            ? this.model.get('applicabilityreason') === 'DISCARDED_BEST_OFFER' || (
-            this.model.get('isautoapplied') && this.model.get('applicabilitystatus') === 'NOT_APPLIED'
-            )
-            : false;
+            debugger;
+            var returnVariables = fn.apply(this, _.toArray(arguments).splice(1));
+    
+            var code = this.model.get('code')
+            , internalid = this.model.get('internalid')
+            , hide_autoapply_promo = (!_.isUndefined(this.model.get('isautoapplied'))) ? this.model.get('applicabilityreason') === 'DISCARDED_BEST_OFFER' || (this.model.get('isautoapplied') && this.model.get('applicabilitystatus') === 'NOT_APPLIED') : false;
             
             _.extend(returnVariables, {
                 showPromo: !!code && !hide_autoapply_promo,
@@ -128,11 +128,12 @@ function (
     });
     
     // #7 ADD THE FILE CART\JAVASCRIPT\CART.PROMOCODE.NOTIFICATIONS.VIEW.JS
-    /* SEE: ../JavaScript/Cart.Promocode.Notifications.View.js */
+    /* SEE: ../Modules/custom/OrderWizard.Module.PromocodeNotifications/JavaScript/Cart.Promocode.Notifications.View.js */
     
     // the follow function is used to update the configuration steps identified in #9, 10 & 11
     function updateCheckoutStep (module, stepName, url, insertIndex, updatePayload)
     {
+        debugger;
         insertIndex = insertIndex ? insertIndex : 0;
         updatePayload = updatePayload ? updatePayload : [OrderWizardModulePromocodeNotification, {exclude_on_skip_step: true}];
         

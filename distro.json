@@ -359,7 +359,9 @@
                     "ProductList.Copy",
                     "ProductViews.SizeChart",
 
-                    "GoogleTagManager.Extension"
+                    "GoogleTagManager.Extension",
+                    "OrderWizard.Module.PromocodeNotifications",
+                    "OrderWizard.Module.PromocodeNotifications.Extension"
                 ],
                 "amdclean": true,
                 "amdConfig": {
@@ -502,7 +504,9 @@
                     "SC.Configuration.Extension",
                     "Session.Extension",
 
-                    "GoogleTagManager.Extension"
+                    "GoogleTagManager.Extension",
+                    "OrderWizard.Module.PromocodeNotifications",
+                    "OrderWizard.Module.PromocodeNotifications.Extension"
                 ],
                 "amdclean": true,
                 "amdConfig": {
@@ -638,7 +642,8 @@
                     "Wizard.Extension",
 
                     "GoogleTagManager.Extension",
-                    "OrderWizard.Module.PromocodeNotifications"
+                    "OrderWizard.Module.PromocodeNotifications",
+                    "OrderWizard.Module.PromocodeNotifications.Extension"
                 ],
                 "amdclean": true,
                 "amdConfig": {

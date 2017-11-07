@@ -24,6 +24,7 @@ define(
 
 )
 {
+    
     'use strict';
     // @class OrderWizard.Module.PromocodeNotifications @extends Wizard.Module
     return WizardModule.extend({
@@ -34,6 +35,7 @@ define(
         //@method initialize
         , initialize: function initialize ()
         {
+    
             WizardModule.prototype.initialize.apply(this, arguments);
             
             this.wizard.model.on('change:promocodes', this.render, this);
@@ -45,6 +47,7 @@ define(
         
         , render: function ()
         {
+    
             var promocodes = _.filter(this.wizard.model.get('promocodes') || [], function (promocode) { return promocode.notification === true; });
             
             if (promocodes.length)
@@ -60,7 +63,6 @@ define(
                 });
                 
                 message_collection_view.render();
-                
                 jQuery('[data-type="Promocode.Notifications"]').html(message_collection_view.$el.html());
             }
         }
@@ -70,6 +72,7 @@ define(
         // @return {Void}
         , removePromocodeNotification: function (promocode_id)
         {
+    
             var promocode = _.findWhere(this.wizard.model.get('promocodes'), {internalid: promocode_id});
             
             delete promocode.notification;
@@ -79,6 +82,7 @@ define(
         //@returns {OrderWizard.Module.PromocodeNotifications.Context}
         , getContext: function getContext ()
         {
+    
             //@class OrderWizard.Module.PromocodeNotifications.Context
             return {};
             //@class OrderWizard.Module.PromocodeNotifications
