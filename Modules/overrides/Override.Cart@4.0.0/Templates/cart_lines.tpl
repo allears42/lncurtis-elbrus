@@ -53,9 +53,14 @@
 			<tr>
 				<td  class="cart-lines-table-middle cart-lines-table-middle-secondary" colspan="4">
 					<div data-type="alert-placeholder"></div>
-					{{#if showBackorderMessage}}
-						<div class="global-views-message global-views-message-error alert"><span>{{{backorderMessage}}}</span></div>
+					{{#if showOverQuantityMessage}}
+						<div class="global-views-message global-views-message-error alert"><span>{{{overQuantityMessage}}}</span></div>
+					{{else}}
+						{{#if showBackorderMessage}}
+							<div class="global-views-message global-views-message-error alert"><span>{{{backOrderMessage}}}</span></div>
+						{{/if}}
 					{{/if}}
+
 
 					<div class="cart-lines-options">
 						<div data-view="Item.SelectedOptions"></div>
