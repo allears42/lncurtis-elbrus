@@ -14,7 +14,6 @@ define(
     'Transaction.Model',
     
     'underscore'
-
 ]
 ,
 function (
@@ -303,7 +302,6 @@ function (
                         }
                     }
                     
-                    nlapiLogExecution('debug', 'promocode', promocode);
                     result.push(promocode);
                 }
                 );
