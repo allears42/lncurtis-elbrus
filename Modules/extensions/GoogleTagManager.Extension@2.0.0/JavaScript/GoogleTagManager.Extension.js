@@ -19,7 +19,6 @@ define('GoogleTagManager.Extension'
     {
         'use strict';
         
-        debugger;
         _.extend(HeaderView.prototype, {
             
             events: _.extend( HeaderView.prototype.events, {
