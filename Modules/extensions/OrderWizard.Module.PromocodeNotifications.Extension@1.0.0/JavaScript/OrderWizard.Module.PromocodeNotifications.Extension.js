@@ -44,11 +44,10 @@ function (
 {
     'use strict';
     
-    // #3 MODIFY CART\TEMPLATES\CART_DETAILED.TPL [1]
-    // #8 MODIFY CART\JAVASCRIPT\CART.DETAILED.VIEW.JS [2]
+    
     _.extend(CartDetailedView.prototype, {
         
-        // [1]
+        // #3 MODIFY CART\TEMPLATES\CART_DETAILED.TPL [1]
         template: _.wrap(CartDetailedView.prototype.template, function (fn)
         {
             var template = $(fn.apply(this, _.toArray(arguments).slice(1)));
@@ -61,10 +60,9 @@ function (
             return template.prop("outerHTML");
         }),
         
-        // [2]
+        // #8 MODIFY CART\JAVASCRIPT\CART.DETAILED.VIEW.JS [2]
         initialize: _.wrap(CartDetailedView.prototype.initialize, function (fn)
         {
-            
             fn.apply(this, _.toArray(arguments).slice(1));
             this.model.on('promocodeNotificationShown', this.removePromocodeNotification, this);
         }),
@@ -74,7 +72,6 @@ function (
         // @return {Void}
         removePromocodeNotification: function (promocode_id)
         {
-            
             var promocode = _.findWhere(this.model.get('promocodes'), {internalid: promocode_id});
         
             delete promocode.notification;
@@ -138,7 +135,7 @@ function (
         updatePayload = updatePayload ? updatePayload : [OrderWizardModulePromocodeNotification, {exclude_on_skip_step: true}];
         
         var checkoutStep =_.chain(module)
-            .findWhere({'name': stepName})
+            .findWhere({'name': _(stepName).translate()})
             .pick('steps').values().first()
             .findWhere({'url': url})
             .pick('modules').values().first().value();

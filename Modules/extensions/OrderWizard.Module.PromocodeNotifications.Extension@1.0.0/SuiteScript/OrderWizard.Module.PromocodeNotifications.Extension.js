@@ -25,8 +25,10 @@ function (
 {
     'use strict';
     
-    // #1 MODIFY LIVEORDER\SUITESCRIPT\LIVEORDER.MODEL.JS
-    _.extend(LiveOrderModel.prototype, {
+    // REFERENCE: ..\Modules\overrides\Override.LiveOrder@4.0.0\SuiteScript\LiveOrder.Model.js
+    
+    /*_.extend(LiveOrderModel.prototype, {
+        // #1 MODIFY LIVEORDER\SUITESCRIPT\LIVEORDER.MODEL.JS
         
         update: function update (data)
         {
@@ -312,18 +314,13 @@ function (
             return result;
         },
         
-        getOptionByCartOptionId: function getOptionByCartOptionId (options, cart_option_id)
-        {
-            return _.findWhere(options, {cartOptionId: cart_option_id});
-        },
-        
         // @method setOldPromocodes sets a local instance of the order's promocodes, used to be able to detect changes in a promocode.
         setOldPromocodes: function setOldPromocodes ()
         {
             var order_fields = this.getFieldValues();
             this.old_promocodes = order_fields.promocodes;
         }
-    });
+    });*/
     
     // #2 MODIFY TRANSACTION\SUITESCRIPT\TRANSACTION.MODEL.JS
     _.extend(TransactionModel.prototype, {
