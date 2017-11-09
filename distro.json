@@ -749,9 +749,7 @@
                 "ExternalPayment.Model",
                 "SC.BaseComponent",
                 "Cart.Component",
-                "CustomerServiceForm.ServiceController",
-                "OrderWizard.Module.PromocodeNotifications.Extension"
-
+                "CustomerServiceForm.ServiceController"
             ],
             "exportFile": "ssp_libraries.js",
             "amdConfig": {
