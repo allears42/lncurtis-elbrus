@@ -56,7 +56,9 @@ define(
 					jQuery(document).scrollTop(0);
 				}, this);
 				
-				
+                // auto-apply promotions patch
+                this.model.on('promocodeNotificationShown', this.removePromocodeNotification, this);
+                
 				// custom handling for window resize event
 				this.windowWidth = jQuery(window).width();
 				var windowResizeHandler = _.throttle(function () {
@@ -171,9 +173,36 @@ define(
 							, showAlert: false
 						}
 					});
+            },
+            
+            // auto-apply promotions patch
+            'Promocode.Notifications': function ()
+            {
+                
+                var promotions = _.filter(this.model.get('promocodes') || [], function (promocode) { return promocode.notification === true; });
+                
+                if (promotions.length)
+                {
+                    return new BackboneCollectionView({
+                        collection: promotions
+                        , viewsPerRow: 1
+                        , childView: CartPromocodeNotifications
+                        , childViewOptions: {
+                            parentModel: this.model
 				}
+                    });
+                }
+            }
+            
 			})
 			
+        // auto-apply promotions patch
+        , removePromocodeNotification: function (promocode_id)
+        {
+            var promocode = _.findWhere(this.model.get('promocodes'), {internalid: promocode_id});
+        
+            delete promocode.notification;
+        }
 		});
 		
 	});

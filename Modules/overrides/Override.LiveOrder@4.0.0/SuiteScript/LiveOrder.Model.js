@@ -257,7 +257,8 @@ define(
 			{
 				confirmation.redirecturl = ExternalPayment.generateUrl(confirmation.internalid, 'salesorder');
 			}
-
+            nlapiLogExecution('debug', 'LiveOrder.Model.submit()', JSON.stringify(confirmation));
+			
 			return confirmation;
 		}
 
@@ -837,7 +838,7 @@ define(
              }
             }
         
-               nlapiLogExecution('debug', 'promocode', promocode);
+            nlapiLogExecution('debug', 'promocode', JSON.stringify(promocode));
             result.push(promocode);
            });
         
