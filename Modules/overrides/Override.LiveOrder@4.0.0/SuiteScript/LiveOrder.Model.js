@@ -837,6 +837,7 @@ define(
              }
             }
         
+               nlapiLogExecution('debug', 'promocode', promocode);
             result.push(promocode);
            });
         

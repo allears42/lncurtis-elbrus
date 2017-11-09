@@ -10,15 +10,19 @@ define(
 'OrderWizard.Module.PromocodeNotifications.Extension'
 ,
 [
+    /*
     'LiveOrder.Model',
     'Transaction.Model',
     'Cart.Detailed.View',
+    */
     'Cart.Promocode.List.Item.View',
+    /*
     'Cart.Promocode.Notifications.View',
     'SC.Checkout.Configuration.Steps.BillingFirst',
     'SC.Checkout.Configuration.Steps.OPC',
     'SC.Checkout.Configuration.Steps.Standard',
     'OrderWizard.Module.PromocodeNotifications',
+    */
     
     'Backbone.CollectionView',
     'jQuery',
@@ -27,15 +31,19 @@ define(
 ]
 ,
 function (
+    /*
     LiveOrderModel,
     TransactionModel,
     CartDetailedView,
+    */
     CartPromocodeListItemView,
+    /*
     CartPromocodeNotifications,
     CheckoutConfigurationStepsBillingFirst,
     CheckoutConfigurationStepsOPC,
     CheckoutConfigurationStepsStandard,
     OrderWizardModulePromocodeNotification,
+    */
     
     BackboneCollectionView,
     $,
@@ -44,10 +52,9 @@ function (
 {
     'use strict';
     
-    
-    _.extend(CartDetailedView.prototype, {
+    /*_.extend(CartDetailedView.prototype, {
         
-        // #3 MODIFY CART\TEMPLATES\CART_DETAILED.TPL [1]
+        // #3 MODIFY CART\TEMPLATES\CART_DETAILED.TPL
         template: _.wrap(CartDetailedView.prototype.template, function (fn)
         {
             var template = $(fn.apply(this, _.toArray(arguments).slice(1)));
@@ -60,7 +67,7 @@ function (
             return template.prop("outerHTML");
         }),
         
-        // #8 MODIFY CART\JAVASCRIPT\CART.DETAILED.VIEW.JS [2]
+        // #8 MODIFY CART\JAVASCRIPT\CART.DETAILED.VIEW.JS
         initialize: _.wrap(CartDetailedView.prototype.initialize, function (fn)
         {
             fn.apply(this, _.toArray(arguments).slice(1));
@@ -98,7 +105,7 @@ function (
             }
         })
         
-    });
+    });*/
     
     // #4 ADD THE FILE CART\TEMPLATES\CART_PROMOCODE_NOTIFICATIONS.TPL
     /* SEE: ../Modules/custom/OrderWizard.Module.PromocodeNotifications/Templates/cart_promocode_notifications.tpl */
@@ -129,7 +136,7 @@ function (
     /* SEE: ../Modules/custom/OrderWizard.Module.PromocodeNotifications/JavaScript/Cart.Promocode.Notifications.View.js */
     
     // the follow function is used to update the configuration steps identified in #9, 10 & 11
-    function updateCheckoutStep (module, stepName, url, insertIndex, updatePayload)
+    /*function updateCheckoutStep (module, stepName, url, insertIndex, updatePayload)
     {
         insertIndex = insertIndex ? insertIndex : 0;
         updatePayload = updatePayload ? updatePayload : [OrderWizardModulePromocodeNotification, {exclude_on_skip_step: true}];
@@ -148,21 +155,21 @@ function (
             console.log("Error in 'OrderWizard.Module.PromocodeNotification': Couldn't update step.")
         }
         
-    }
+    }*/
     
     // #9 MODIFY CHECKOUTAPPLICATION\JAVASCRIPT\SC.CHECKOUT.CONFIGURATION.STEPS.BILLINGFIRST.JS
-    updateCheckoutStep(CheckoutConfigurationStepsBillingFirst, 'Billing Address', 'billing/address');
+    /*updateCheckoutStep(CheckoutConfigurationStepsBillingFirst, 'Billing Address', 'billing/address');
     updateCheckoutStep(CheckoutConfigurationStepsBillingFirst, 'Shipping Address', 'shipping/address');
     updateCheckoutStep(CheckoutConfigurationStepsBillingFirst, 'Shipping method', 'shipping/method');
     updateCheckoutStep(CheckoutConfigurationStepsBillingFirst, 'Payment', 'billing');
-    updateCheckoutStep(CheckoutConfigurationStepsBillingFirst, 'Review', 'review', 2);
+    updateCheckoutStep(CheckoutConfigurationStepsBillingFirst, 'Review', 'review', 2);*/
     
     // #10 MODIFY CHECKOUTAPPLICATION\JAVASCRIPT\SC.CHECKOUT.CONFIGURATION.STEPS.OPC.JS
-    updateCheckoutStep(CheckoutConfigurationStepsOPC, 'Checkout Information', 'opc', 3);
+    // updateCheckoutStep(CheckoutConfigurationStepsOPC, 'Checkout Information', 'opc', 3);
     
     // #11 MODIFY CHECKOUTAPPLICATION\JAVASCRIPT\SC.CHECKOUT.CONFIGURATION.STEPS.STANDARD.JS
-    updateCheckoutStep(CheckoutConfigurationStepsStandard, 'Shipping Address', 'shipping/address');
+    /*updateCheckoutStep(CheckoutConfigurationStepsStandard, 'Shipping Address', 'shipping/address');
     updateCheckoutStep(CheckoutConfigurationStepsStandard, 'Payment', 'billing');
-    updateCheckoutStep(CheckoutConfigurationStepsStandard, 'Review', 'review', 2);
+    updateCheckoutStep(CheckoutConfigurationStepsStandard, 'Review', 'review', 2);*/
     
 });
