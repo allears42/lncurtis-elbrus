@@ -231,15 +231,19 @@ define(
 		// @method submit will call ModelsInit.order.submit() taking in account paypal payment
 	,	submit: function submit ()
 		{
-			var	paypal_address = _.find(ModelsInit.customer.getAddressBook(), function (address)
+            nlapiLogExecution('debug', 'LiveOrder.Model.submit()...','start');
+            
+		    var	paypal_address = _.find(ModelsInit.customer.getAddressBook(), function (address)
 				{
 					return !address.phone && address.isvalid === 'T';
 				})
 			,	confirmation = ModelsInit.order.submit();
+            
+            nlapiLogExecution('debug', 'LiveOrder.Model.submit() -> confirmation', JSON.stringify(confirmation));
+			
 			// We need remove the paypal's address because after order submit the address is invalid for the next time.
 			this.removePaypalAddress(paypal_address);
-
-			ModelsInit.context.setSessionObject('paypal_complete', 'F');
+            ModelsInit.context.setSessionObject('paypal_complete', 'F');
 
 			if (this.isMultiShippingEnabled)
 			{
@@ -257,7 +261,6 @@ define(
 			{
 				confirmation.redirecturl = ExternalPayment.generateUrl(confirmation.internalid, 'salesorder');
 			}
-            nlapiLogExecution('debug', 'LiveOrder.Model.submit()', JSON.stringify(confirmation));
 			
 			return confirmation;
 		}
