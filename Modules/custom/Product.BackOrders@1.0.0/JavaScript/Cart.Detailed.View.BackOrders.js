@@ -51,7 +51,7 @@ define(
 					
 					if (new_quantity > stock_level && !allowBackorders) {
 						new_quantity = stock_level;
-						self.showError("<span>Limited quantities, only " + stock_level + " available.</span>", this.$('#' + internalid + ' .cart-lines-table-middle-secondary'), false);
+						self.showError("<span>Only " + stock_level + " available. We've adjusted the quantity for you.</span>", this.$('#' + internalid + ' .cart-lines-table-middle-secondary'), false);
 					}
 					
 					$input.val(new_quantity);
