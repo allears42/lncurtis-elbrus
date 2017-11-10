@@ -40,6 +40,8 @@ define(
 {
 	'use strict';
 
+	var patchOn = true;
+	
 	// @class LiveOrder.Model Defines the model used by the LiveOrder.Service.ss service
 	// Available methods allow fetching and updating Shopping Cart's data. Works against the
 	// Shopping session order, this is, nlapiGetWebContainer().getShoppingSession().getOrder()
@@ -182,6 +184,12 @@ define(
             // end custom
 			
             var current_order = this.get(data);
+            
+            if(patchOn) {
+	            // suitepromotions patch
+	            this.setOldPromocodes();
+            }
+			
 
 			// Only do this if it's capable of shipping multiple items.
 			if (this.isMultiShippingEnabled)
@@ -408,28 +416,42 @@ define(
 			result.promocodes = [];
 
 			var promocode = placed_order.getFieldValue('promocode');
-
+			
+			
 			//If legacy behavior is present & a promocode is applied this IF will be true
 			//In case stackable promotions are enable this.record.getFieldValue('promocode') returns null
-			if (promocode)
-			{
+			if (promocode) {
+				
 				result.promocodes.push({
 					internalid: promocode
-				,	code: placed_order.getFieldText('couponcode')
-				,	isvalid: true
-				,	discountrate_formatted: ''
+					, code: placed_order.getFieldText('couponcode')
+					, isvalid: true
+					, discountrate_formatted: ''
 				});
+			
 			}
 
 			for (i = 1; i <= placed_order.getLineItemCount('promotions'); i++)
 			{
-				result.promocodes.push({
-					internalid: placed_order.getLineItemValue('promotions', 'couponcode', i)
-				,	code: placed_order.getLineItemValue('promotions', 'couponcode_display', i)
-				,	isvalid: placed_order.getLineItemValue('promotions', 'promotionisvalid', i) === 'T'
-				//TODO Uncomment this line when this issue is fixed: https://system.netsuite.com/app/crm/support/issuedb/issue.nl?id=46640914&whence=&cmid=1467749011534
-				,	discountrate_formatted: '' //placed_order.getLineItemValue('promotions', 'discountrate', i)
-				});
+				if (patchOn) {
+					if(placed_order.getLineItemValue('promotions', 'applicabilitystatus', i) !== 'NOT_APPLIED') {
+						result.promocodes.push({
+							internalid: placed_order.getLineItemValue('promotions', 'couponcode', i)
+							, code: placed_order.getLineItemValue('promotions', 'couponcode_display', i)
+							, isvalid: placed_order.getLineItemValue('promotions', 'promotionisvalid', i) === 'T'
+							, discountrate_formatted: '' //placed_order.getLineItemValue('promotions', 'discountrate', i)
+						});
+					}
+				}
+				else {
+					result.promocodes.push({
+						internalid: placed_order.getLineItemValue('promotions', 'couponcode', i)
+						, code: placed_order.getLineItemValue('promotions', 'couponcode_display', i)
+						, isvalid: placed_order.getLineItemValue('promotions', 'promotionisvalid', i) === 'T'
+						//TODO Uncomment this line when this issue is fixed: https://system.netsuite.com/app/crm/support/issuedb/issue.nl?id=46640914&whence=&cmid=1467749011534
+						, discountrate_formatted: '' //placed_order.getLineItemValue('promotions', 'discountrate', i)
+					});
+				}
 			}
 
 			result.paymentmethods = [];
@@ -581,6 +603,10 @@ define(
 			var items = []
 			,	self = this;
 
+			if(patchOn){
+				this.setOldPromocodes();
+			}
+			
 			_.each(lines_data, function (line_data)
 			{
 				var item = {
@@ -617,6 +643,9 @@ define(
 		// @param {String} line_id
 	,	removeLine: function removeLine (line_id)
 		{
+			if(patchOn){
+				this.setOldPromocodes();
+			}
 			// Removes the line
 			ModelsInit.order.removeItem(line_id);
 
@@ -786,29 +815,74 @@ define(
 		// @return {Array<LiveOrder.Model.PromoCode>}
 	,	getPromoCodes: function getPromoCodes (order_fields)
 		{
-			var result = [];
+			var result = []
+			,   self = this;
 
 			if (order_fields.promocodes && order_fields.promocodes.length)
 			{
 				_.each(order_fields.promocodes, function (promo_code)
 				{
-					// @class LiveOrder.Model.PromoCode
-					result.push({
-						// @property {String} internalid
-						internalid: promo_code.internalid
-						// @property {String} code
-					,	code: promo_code.promocode
-						// @property {Boolean} isvalid
-					,	isvalid: promo_code.isvalid === 'T'
-						// @property {String} discountrate_formatted
-						// TODO Populate this line when the issue https://system.netsuite.com/app/crm/support/issuedb/issue.nl?id=46640914&whence=&cmid=1467749011534 is fixed
-					,	discountrate_formatted: ''
-					,	errormsg : promo_code.errormsg
-					,	name: promo_code.discount_name
-					,	rate: promo_code.discount_rate
-					,	type: promo_code.discount_type
-					});
+					if(patchOn) {
+						// @class LiveOrder.Model.PromoCode
+						var promocode = {
+							// @property {String} internalid
+							internalid: promo_code.internalid
+							// @property {String} code
+							, code: promo_code.promocode
+							// @property {Boolean} isvalid
+							, isvalid: promo_code.isvalid === 'T'
+							// @property {String} discountrate_formatted
+							, discountrate_formatted: ''
+							, errormsg: promo_code.errormsg
+							, name: promo_code.discount_name
+							, rate: promo_code.discount_rate
+							, type: promo_code.discount_type
+						};
+						
+						if (!_.isUndefined(promo_code.is_auto_applied)) {
+							// @property {Boolean} isautoapplied
+							promocode.isautoapplied = promo_code.is_auto_applied;
+							// @property {String} applicabilitystatus
+							promocode.applicabilitystatus = (promo_code.applicability_status) ? promo_code.applicability_status : '';
+							// @property {String} applicabilityreason
+							promocode.applicabilityreason = (promo_code.applicability_reason) ? promo_code.applicability_reason : '';
+						}
+						
+						if (!_.isUndefined(promo_code.is_auto_applied) && !_.isUndefined(promo_code.applicability_status) && !_.isUndefined(promo_code.applicability_reason) && !_.isUndefined(self.old_promocodes)) {
+							var old_promocode = (self.old_promocodes) ? _.find(self.old_promocodes, function (old_promo_code) {
+								return old_promo_code.internalid === promo_code.internalid;
+							}) : '';
+							
+							if (!old_promocode || old_promocode.applicability_status !== promo_code.applicability_status || (!promo_code.is_auto_applied && promo_code.applicability_reason !== old_promocode.applicability_reason)) {
+								promocode.notification = true;
+							}
+						}
+						
+						result.push(promocode);
+						
+					} else {
+						// @class LiveOrder.Model.PromoCode
+						result.push({
+							// @property {String} internalid
+							internalid: promo_code.internalid
+							// @property {String} code
+							, code: promo_code.promocode
+							// @property {Boolean} isvalid
+							, isvalid: promo_code.isvalid === 'T'
+							// @property {String} discountrate_formatted
+							// TODO Populate this line when the issue https://system.netsuite.com/app/crm/support/issuedb/issue.nl?id=46640914&whence=&cmid=1467749011534 is fixed
+							, discountrate_formatted: ''
+							, errormsg: promo_code.errormsg
+							, name: promo_code.discount_name
+							, rate: promo_code.discount_rate
+							, type: promo_code.discount_type
+						});
+					}
 				});
+				
+				if(patchOn) {
+					delete this.old_promocodes;
+				}
 			}
 
 			return result;
@@ -1744,6 +1818,13 @@ define(
 	,	getOptionByCartOptionId: function getOptionByCartOptionId (options, cart_option_id)
 		{
 			return _.findWhere(options, {cartOptionId: cart_option_id});
+		}
+		
+		// @method setOldPromocodes sets a local instance of the order's promocodes, used to be able to detect changes in a promocode.
+	,   setOldPromocodes: function setOldPromocodes ()
+		{
+			var order_fields = this.getFieldValues();
+			this.old_promocodes = order_fields.promocodes;
 		}
 	});
 });

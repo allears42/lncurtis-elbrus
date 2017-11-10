@@ -11,6 +11,7 @@ define(
 	,	'Cart.Lines.View.Extension'
 	,	'Cart.Confirmation.Helpers.Extension'
 	,	'Cart.QuickAddToCart.View.Extension'
+	,	'Cart.Promocode.List.Item.View.Extension'
 	]
 ,	function(
 		CartConfirmationViewExtension
@@ -18,6 +19,7 @@ define(
 	,	CartLinesViewExtension
 	,	CartConfirmationHelpersExtension
 	,	CartQuickAddToCartViewExtension
+	,	CartPromocodeListItemViewExtension
 	)
 {
 	'use strict';
@@ -28,6 +30,7 @@ define(
 	,	CartLinesViewExtension: CartLinesViewExtension
 	,	CartConfirmationHelpersExtension: CartConfirmationHelpersExtension
 	,	CartQuickAddToCartViewExtension: CartQuickAddToCartViewExtension
+	,	CartPromocodeListItemViewExtension: CartPromocodeListItemViewExtension
 	}
 
 });

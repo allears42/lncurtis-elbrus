@@ -1,5 +1,5 @@
 /*
-	© 2016 NetSuite Inc.
+	© 2017 NetSuite Inc.
 	User may not copy, modify, distribute, or re-bundle or otherwise make available this code;
 	provided, however, if you are an authorized user with a NetSuite account or log-in, you
 	may use this code subject to the terms that govern your access and use.
@@ -27,6 +27,7 @@ define(
 	,	'OrderWizard.Module.Confirmation'
 	,	'OrderWizard.Module.RegisterGuest'
 	,	'OrderWizard.Module.PromocodeForm'
+	,   'OrderWizard.Module.PromocodeNotifications'
 
 	,	'OrderWizard.Module.MultiShipTo.Select.Addresses.Shipping'
 	,	'OrderWizard.Module.MultiShipTo.Package.Creation'
@@ -59,6 +60,7 @@ define(
 	,	OrderWizardModuleConfirmation
 	,	OrderWizardModuleRegisterGuest
 	,	OrderWizardModulePromocodeForm
+	,   OrderWizardModulePromocodeNotification
 
 	,	OrderWizardModuleMultiShipToSelectAddressesShipping
 	,	OrderWizardModuleMultiShipToPackageCreation
@@ -73,7 +75,7 @@ define(
 	,	OrderWizardModuleCartItemsPickupInStoreList
 	,	HeaderView
 	)
-{
+    {
 	'use strict';
 
 	var mst_delivery_options = 	{
@@ -132,7 +134,8 @@ define(
 							return !this.wizard.isMultiShipTo();
 						}
 					,	modules: [
-							OrderWizardModuleMultiShipToEnableLink
+						[OrderWizardModulePromocodeNotification, {exclude_on_skip_step: true}]
+						,   OrderWizardModuleMultiShipToEnableLink
 						,	OrderWizardModuleAddressShipping
 						,	[OrderWizardModuleShipmethod, mst_delivery_options]
 						,	[OrderWizardModuleCartSummary, cart_summary_options]
@@ -228,7 +231,8 @@ define(
 					,	url: 'billing'
 					,	bottomMessage: _('You will have an opportunity to review your order on the next step.').translate()
 					,	modules: [
-							OrderWizardModulePaymentMethodGiftCertificates
+							[OrderWizardModulePromocodeNotification, {exclude_on_skip_step: true}]
+						,   OrderWizardModulePaymentMethodGiftCertificates
 						,	[OrderWizardModulePaymentMethodSelector, {record_type:'salesorder', prevent_default: true}]
 						,	OrderWizardModulePaymentMethodPurchaseNumber
 						,	[OrderWizardModuleAddressBilling
@@ -294,6 +298,7 @@ define(
 									className: 'order-wizard-submitbutton-module-top'
 								}
 							]
+						, [OrderWizardModulePromocodeNotification, {exclude_on_skip_step: true}]
 
 						,	[
 								OrderWizardModuleCartItemsPickupInStoreList

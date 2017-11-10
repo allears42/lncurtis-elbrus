@@ -25,16 +25,16 @@
         "configuration": [
             "Configuration/*.json"
         ]
+    },
+    "overrides": {
+        "suitecommerce/CheckoutApplication@2.3.0/JavaScript/SC.Checkout.Configuration.Steps.Standard.js": "JavaScript/SC.Checkout.Configuration.Steps.Standard.js",
+        "suitecommerce/CheckoutApplication@2.3.0/JavaScript/SC.Checkout.Configuration.Steps.BillingFirst.js": "JavaScript/SC.Checkout.Configuration.Steps.BillingFirst.js",
+        "suitecommerce/CheckoutApplication@2.3.0/JavaScript/SC.Checkout.Configuration.Steps.OPC.js": "JavaScript/SC.Checkout.Configuration.Steps.OPC.js",
+        "suitecommerce/CheckoutApplication@2.3.0/JavaScript/SC.Checkout.Starter.js": "JavaScript/SC.Checkout.Starter.js",
+        "suitecommerce/CheckoutApplication@2.3.0/Internal/cart-local.ssp": "Internal/cart-local.ssp",
+        "suitecommerce/CheckoutApplication@2.3.0/Internal/index-local.ssp": "Internal/index-local.ssp",
+        "suitecommerce/CheckoutApplication@2.3.0/SuiteScript/cart.ssp": "SuiteScript/cart.ssp",
+        "suitecommerce/CheckoutApplication@2.3.0/SuiteScript/checkout.environment.ssp": "SuiteScript/checkout.environment.ssp",
+        "suitecommerce/CheckoutApplication@2.3.0/SuiteScript/checkout.ssp": "SuiteScript/checkout.ssp"
     }
-, "overrides": {
-    "suitecommerce/CheckoutApplication@2.3.0/JavaScript/SC.Checkout.Configuration.Steps.Standard.js" : "JavaScript/SC.Checkout.Configuration.Steps.Standard.js",
-    "suitecommerce/CheckoutApplication@2.3.0/JavaScript/SC.Checkout.Starter.js" : "JavaScript/SC.Checkout.Starter.js",
-
-    "suitecommerce/CheckoutApplication@2.3.0/Internal/cart-local.ssp" : "Internal/cart-local.ssp",
-    "suitecommerce/CheckoutApplication@2.3.0/Internal/index-local.ssp" : "Internal/index-local.ssp",
-
-    "suitecommerce/CheckoutApplication@2.3.0/SuiteScript/cart.ssp" : "SuiteScript/cart.ssp",
-    "suitecommerce/CheckoutApplication@2.3.0/SuiteScript/checkout.environment.ssp" : "SuiteScript/checkout.environment.ssp",
-    "suitecommerce/CheckoutApplication@2.3.0/SuiteScript/checkout.ssp" : "SuiteScript/checkout.ssp"
-}
 }

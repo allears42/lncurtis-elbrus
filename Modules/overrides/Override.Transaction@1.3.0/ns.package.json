@@ -1,0 +1,13 @@
+{
+    "gulp": {
+        "javascript": [
+            "JavaScript/*.js"
+        ],
+        "ssp-libraries": [
+            "SuiteScript/*.js"
+        ]
+    }
+    , "overrides": {
+        "suitecommerce/Transaction@1.3.0/SuiteScript/Transaction.Model.js" : "SuiteScript/Transaction.Model.js"
+    }
+}

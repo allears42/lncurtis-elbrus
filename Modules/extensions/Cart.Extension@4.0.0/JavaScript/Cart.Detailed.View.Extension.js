@@ -13,6 +13,7 @@ define(
 	, 	'Cart.Item.Actions.View'
 	,	'Cart.Item.Total.View'
 	
+	,   'Cart.Promocode.Notifications.View'
 
 	, 	'GlobalViews.Message.View'
 
@@ -28,6 +29,8 @@ define(
 	,	CartItemSummaryView
     , 	CartItemActionsView
 	,	CartItemTotalView
+	
+	, 	CartPromocodeNotificationsView
 	
 	, 	GlobalViewsMessageView
 	
@@ -173,30 +176,33 @@ define(
 							, showAlert: false
 						}
 					});
-            },
+            }
+            
             
             // auto-apply promotions patch
-            'Promocode.Notifications': function ()
+            ,   'Promocode.Notifications': function ()
             {
-                
-                var promotions = _.filter(this.model.get('promocodes') || [], function (promocode) { return promocode.notification === true; });
-                
-                if (promotions.length)
-                {
-                    return new BackboneCollectionView({
-                        collection: promotions
-                        , viewsPerRow: 1
-                        , childView: CartPromocodeNotifications
-                        , childViewOptions: {
-                            parentModel: this.model
-				}
-                    });
-                }
+	
+	            var promotions = _.filter(this.model.get('promocodes') || [], function (promocode) { return promocode.notification === true; });
+	
+	            if(promotions.length){
+		            return new BackboneCollectionView({
+			            collection: promotions
+			            , viewsPerRow: 1
+			            , childView: CartPromocodeNotificationsView
+			            , childViewOptions: {
+				            parentModel: this.model
+			            }
+		            });
+	            }
             }
             
 			})
 			
         // auto-apply promotions patch
+		// @method removePromocodeNotification
+		// @param String promocode_id
+		// @return {Void}
         , removePromocodeNotification: function (promocode_id)
         {
             var promocode = _.findWhere(this.model.get('promocodes'), {internalid: promocode_id});

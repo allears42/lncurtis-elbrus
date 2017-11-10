@@ -114,23 +114,7 @@ function (
     /* SEE: ../Modules/custom/OrderWizard.Module.PromocodeNotifications/Sass/_cart-promocode-notifications.scss */
     
     // #6 MODIFY CART\JAVASCRIPT\CART.PROMOCODE.LIST.ITEM.VIEW.JS
-    _.extend(CartPromocodeListItemView.prototype, {
-        
-        getContext: _.wrap(CartPromocodeListItemView.prototype.getContext, function (fn)
-        {
-            var returnVariables = fn.apply(this, _.toArray(arguments).splice(1));
     
-            var code = this.model.get('code')
-            , hide_autoapply_promo = (!_.isUndefined(this.model.get('isautoapplied'))) ? this.model.get('applicabilityreason') === 'DISCARDED_BEST_OFFER' || (this.model.get('isautoapplied') && this.model.get('applicabilitystatus') === 'NOT_APPLIED') : false;
-            
-            _.extend(returnVariables, {
-                showPromo: !!code && !hide_autoapply_promo,
-                isEditable: !this.options.isReadOnly && !this.model.get('isautoapplied')
-            });
-            
-            return returnVariables;
-        })
-    });
     
     // #7 ADD THE FILE CART\JAVASCRIPT\CART.PROMOCODE.NOTIFICATIONS.VIEW.JS
     /* SEE: ../Modules/custom/OrderWizard.Module.PromocodeNotifications/JavaScript/Cart.Promocode.Notifications.View.js */
