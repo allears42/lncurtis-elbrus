@@ -222,7 +222,7 @@ define(
 			{
 				confirmation.redirecturl = ExternalPayment.generateUrl(confirmation.internalid, 'salesorder');
 			}
-
+   
 			return confirmation;
 		}
 

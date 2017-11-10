@@ -227,7 +227,6 @@
         "extensions/Newsletter.Extension": "2.1.0",
         "extensions/OrderHistory.Extension": "5.0.0",
         "extensions/OrderWizard.Module.CartItems.Extension": "2.0.0",
-        "extensions/OrderWizard.Module.PromocodeNotifications.Extension": "1.0.0",
         "extensions/Overview.Extension": "1.1.2",
         "extensions/ProductViews.Extension": "1.0.0",
         "extensions/ProductDetails.Extension": "1.1.0",
@@ -244,7 +243,6 @@
         "custom/CustomerServiceForm": "1.0.0",
         "custom/FacetContent": "1.0.0",
         "custom/LinkHierarchy": "1.0.0",
-        "custom/OrderWizard.Module.PromocodeNotifications": "1.0.0",
         "custom/Pacejet": "1.0.0",
         "custom/Product.BackOrders": "1.0.0",
         "custom/Product.Configurator": "1.0.0",
@@ -358,9 +356,7 @@
                     "ProductList.Copy",
                     "ProductViews.SizeChart",
 
-                    "GoogleTagManager.Extension",
-                    "OrderWizard.Module.PromocodeNotifications",
-                    "OrderWizard.Module.PromocodeNotifications.Extension"
+                    "GoogleTagManager.Extension"
                 ],
                 "amdclean": true,
                 "amdConfig": {
@@ -639,9 +635,7 @@
                     "Session.Extension",
                     "Wizard.Extension",
 
-                    "GoogleTagManager.Extension",
-                    "OrderWizard.Module.PromocodeNotifications",
-                    "OrderWizard.Module.PromocodeNotifications.Extension"
+                    "GoogleTagManager.Extension"
                 ],
                 "amdclean": true,
                 "amdConfig": {
@@ -749,9 +743,7 @@
                 "ExternalPayment.Model",
                 "SC.BaseComponent",
                 "Cart.Component",
-                "CustomerServiceForm.ServiceController",
-                "OrderWizard.Module.PromocodeNotifications.Extension"
-
+                "CustomerServiceForm.ServiceController"
             ],
             "exportFile": "ssp_libraries.js",
             "amdConfig": {

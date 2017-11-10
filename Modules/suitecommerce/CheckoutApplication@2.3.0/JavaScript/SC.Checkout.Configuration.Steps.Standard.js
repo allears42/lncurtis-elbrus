@@ -73,7 +73,7 @@ define(
 	,	OrderWizardModuleCartItemsPickupInStoreList
 	,	HeaderView
 	)
-{
+    {
 	'use strict';
 
 	var mst_delivery_options = 	{
