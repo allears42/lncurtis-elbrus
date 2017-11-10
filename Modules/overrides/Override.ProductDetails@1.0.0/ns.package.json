@@ -1,0 +1,24 @@
+{
+    "gulp": {
+        "javascript": [
+            "JavaScript/*"
+        ],
+        "templates": [
+            "Templates/*"
+        ],
+        "sass": [
+            "Sass/*.scss"
+        ],
+        "configuration": [
+            "Configuration/*.json"
+        ]
+    },
+    "overrides": {
+        "suitecommerce/ProductDetails@1.0.0/JavaScript/ProductDetails.Base.View.js": "JavaScript/ProductDetails.Base.View.js",
+        "suitecommerce/ProductDetails@1.0.0/JavaScript/ProductDetails.Router.js": "JavaScript/ProductDetails.Router.js",
+        "suitecommerce/ProductDetails@1.0.0/Templates/product_details_full.tpl": "Templates/product_details_full.tpl",
+        "suitecommerce/ProductDetails@1.0.0/Templates/product_details_information.tpl": "Templates/product_details_information.tpl",
+        "suitecommerce/ProductDetails@1.0.0/Templates/product_details_quantity.tpl": "Templates/product_details_quantity.tpl",
+        "suitecommerce/ProductDetails@1.0.0/Templates/product_details_quickview.tpl": "Templates/product_details_quickview.tpl"
+    }
+}

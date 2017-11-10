@@ -111,6 +111,10 @@ define(
 		{
             $('section.customer-service-form-container').hide();
             $('section.customer-service-thanks-container').show();
+			
+			jQuery('html, body').animate({
+				scrollTop: 0
+			}, 600);
 		}
 
     ,   childViews: {

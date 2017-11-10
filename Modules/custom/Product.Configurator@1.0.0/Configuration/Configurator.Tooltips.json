@@ -1,0 +1,39 @@
+{
+    "type": "object",
+
+    "subtab": {
+        "id": "configuratorTooltips",
+        "title": "Configurator Tooltips",
+        "description": "Configure tooltips per field in cofigurator",
+        "group": "catalog"
+    },
+
+    "properties": {
+        "configurator.tooltips": {
+            "group": "catalog",
+            "subtab": "configuratorTooltips",
+            "type": "array",
+            "title": "Tooltips",
+            "description": "tooltips that will show next to their respective fields",
+
+            "items": {
+                "type": "object",
+                "properties": {
+                    "fieldID": {
+                        "type": "string",
+                        "title": "Field ID",
+                        "translate": true,
+                        "description": "ID of the Field for the Item Option",
+                        "mandatory": true
+                    },
+                    "tooltipe": {
+                        "type": "string",
+                        "title": "Tooltip text",
+                        "description": "Text to show in the tooltip",
+                        "nsType": "textarea"
+                    }
+                }
+            }
+        }
+    }
+}

@@ -26,7 +26,7 @@ define(
 	{
 		url = url || Utils.getAbsoluteUrlOfNonManagedResources(Configuration.get('imageNotAvailable'));
 		size = Configuration['imageSizeMapping.'+ size] || size;
-
+		
 		var resize = _.first(_.where(Configuration.get('siteSettings.imagesizes', []), {name: size}));
 
 		if (!!resize)

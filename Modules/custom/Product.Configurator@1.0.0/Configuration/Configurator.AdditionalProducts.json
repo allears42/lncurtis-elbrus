@@ -1,0 +1,50 @@
+{
+    "type": "object",
+
+    "subtab": {
+        "id": "configuratorAdditionalProds",
+        "title": "Configurator Additional Products",
+        "description": "Configure tooltips per field in cofigurator",
+        "group": "catalog"
+    },
+
+    "properties": {
+        "configurator.additionalProducts": {
+            "group": "catalog",
+            "subtab": "configuratorAdditionalProds",
+            "type": "array",
+            "title": "Additional Product Areas",
+            "description": "Configure Additional Product Areas",
+
+            "items": {
+                "type": "object",
+                "properties": {
+                    "configuratorProductIDs": {
+                        "type": "string",
+                        "title": "Configurator Product IDs",
+                        "description": "Internal IDs of the product to show this list of products on",
+                        "mandatory": true
+                    },
+                    "productIDs": {
+                        "type": "string",
+                        "title": "Product IDs",
+                        "description": "Internal IDs of the products to show",
+                        "mandatory": true,
+                        "nsType": "textarea"
+                    },
+                    "sectionTitle": {
+                        "type": "string",
+                        "title": "Section Title",
+                        "description": "Text to show at the top of the section"
+                    },
+                    "tooltip": {
+                        "type": "string",
+                        "title": "Tooltip text",
+                        "description": "Text to show in the tooltip",
+                        "nsType": "textarea"
+                    }
+                }
+            }
+        }
+    }
+}

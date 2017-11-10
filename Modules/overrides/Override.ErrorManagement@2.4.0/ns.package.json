@@ -1,0 +1,22 @@
+{
+    "gulp": {
+        "javascript": [
+            "JavaScript/*.js"
+        ],
+        "templates": [
+            "Templates/*"
+        ],
+        "unit-test-files": [
+            "Tests/*.js"
+        ],
+        "unit-test-entry-point": [
+            "Tests/UnitTest.ErrorManagement.js"
+        ],
+        "sass": [
+            "Sass/*.scss"
+        ]
+    }
+    , "overrides": {
+        "suitecommerce/ErrorManagement@2.4.0/Templates/error_management_page_not_found.tpl" : "Templates/error_management_page_not_found.tpl"
+    }
+}

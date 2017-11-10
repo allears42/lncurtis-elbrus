@@ -1,0 +1,23 @@
+{
+    "gulp": {
+        "javascript": [
+            "JavaScript/*"
+        ],
+        "templates": [
+            "Templates/*"
+        ],
+        "sass": [
+            "Sass/*.scss"
+        ],
+        "ssp-libraries": [
+            "SuiteScript/*.js"
+        ],
+        "configuration": [
+            "Configuration/*.json"
+        ]
+    },
+    "overrides": {
+        "suitecommerce/ProductList@3.0.0/JavaScript/ProductList.CartSaveForLater.View.js": "JavaScript/ProductList.CartSaveForLater.View.js",
+        "suitecommerce/ProductList@3.0.0/JavaScript/ProductList.Utils.js": "JavaScript/ProductList.Utils.js"
+    }
+}

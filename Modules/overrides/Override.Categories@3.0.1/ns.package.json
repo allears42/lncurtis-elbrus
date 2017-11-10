@@ -1,0 +1,18 @@
+{
+    "gulp": {
+        "javascript": [
+            "JavaScript/*"
+        ],
+        "ssp-libraries": [
+            "SuiteScript/*.js"
+        ],
+        "configuration": [
+            "Configuration/*.json"
+        ]
+    }
+    , "overrides": {
+
+        "suitecommerce/Categories@3.0.1/Configuration/Categories.json" : "Configuration/Categories.json"
+
+    }
+}

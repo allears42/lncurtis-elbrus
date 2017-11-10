@@ -108,6 +108,7 @@ define('ProductList.Item.Model'
 			// @method getOptionsArray Returns options as an array. This is the way ItemDetailModel expects when initialized. @return {Array<Object>}
 		,	getOptionsArray: function ()
 			{
+				console.trace();
 				// Iterate on the stored Product List Item options and create an id/value object compatible with the existing options renderer...
 				var option_values = []
 				,	selected_options = this.get('options');

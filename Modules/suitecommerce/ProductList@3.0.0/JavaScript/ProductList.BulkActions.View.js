@@ -30,6 +30,7 @@ define('ProductList.BulkActions.View'
 		{
 			var model = this.options.model
 			,	isAtLeastOneItemChecked = model.someCheckedItemsExist();
+			
 			return {
 				// @property {Boolean} isAtLeastOneItemChecked
 				isAtLeastOneItemChecked: isAtLeastOneItemChecked

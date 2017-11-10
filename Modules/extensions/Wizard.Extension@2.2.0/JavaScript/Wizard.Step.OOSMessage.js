@@ -23,7 +23,7 @@ define('Wizard.Step.OOSMessage'
 	_.extend(WizardStep.prototype, {
 		
 		// @method  showError
-		showError: function ()
+		showError: _.wrap(WizardStep.prototype.showError, function (fn)
 		{
 			if (this.error)
 			{
@@ -35,22 +35,10 @@ define('Wizard.Step.OOSMessage'
 					//console.log('true');
 					this.error.errorMessage = "One or more items in your order do not allow back-order due to discontinued or otherwise unavailable stock. Please <a class='errortext' href='#' data-touchpoint='viewcart' data-action='edit-module'>go back</a> and adjust your order quantity.";
 				}
-				
-				var global_view_message = new GlobalViewsMessageView({
-					message: this.wizard.processErrorMessage(this.error.errorMessage)
-					,	type: 'error'
-					,	closable: true
-				});
-				
-				this.$('[data-type="alert-placeholder-step"]').html(global_view_message.render().$el.html());
-				
-				jQuery('body').animate({
-					scrollTop: jQuery('body .global-views-message-error:first').offset().top
-				}, 600);
-				
-				this.error = null;
 			}
-		}
+			
+			fn.apply(this, _.toArray(arguments).slice(1))
+		})
 	});
 	
 });

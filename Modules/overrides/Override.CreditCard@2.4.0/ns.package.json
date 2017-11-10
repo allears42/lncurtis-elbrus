@@ -1,0 +1,31 @@
+{
+    "gulp": {
+        "javascript": [
+            "JavaScript/*.js"
+        ],
+        "templates": [
+            "Templates/*"
+        ],
+        "ssp-libraries": [
+            "SuiteScript/*.js"
+        ],
+        "sass": [
+            "Sass/**/*.scss"
+        ],
+        "unit-test-files": [
+            "Tests/*.js"
+        ],
+        "unit-test-entry-point": [
+            "Tests/UnitTest.CreditCard.js"
+        ],
+        "configuration": [
+            "Configuration/*.json"
+        ]
+    }
+    , "overrides": {
+
+        "suitecommerce/CreditCard@2.4.0/Templates/creditcard_edit_form.tpl" : "Templates/creditcard_edit_form.tpl",
+        "suitecommerce/CreditCard@2.4.0/Templates/creditcard.tpl" : "Templates/creditcard.tpl",
+        "suitecommerce/CreditCard@2.4.0/Templates/creditcard_edit_form_securitycode_tooltip.tpl" : "Templates/creditcard_edit_form_securitycode_tooltip.tpl"
+    }
+}

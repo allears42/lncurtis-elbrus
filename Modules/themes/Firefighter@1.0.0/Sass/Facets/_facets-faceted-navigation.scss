@@ -1,0 +1,156 @@
+/*
+	© 2016 NetSuite Inc.
+	User may not copy, modify, distribute, or re-bundle or otherwise make available this code;
+	provided, however, if you are an authorized user with a NetSuite account or log-in, you
+	may use this code subject to the terms that govern your access and use.
+*/
+
+.facets-faceted-navigation-results {
+  padding: $sc-base-padding*3;
+
+  @media (min-width: $screen-md-min) {
+    display: none;
+    padding-top: 0;
+    padding-left: $sc-base-padding * 3;
+    padding-right: $sc-base-padding * 3;
+    font-size: $sc-base-font-size;
+  }
+}
+
+.facets-faceted-navigation-title-alt {
+  color: $sc-color-primary;
+}
+
+.facets-faceted-navigation-facet-group {
+  padding: $sc-base-padding * 2 0;
+  border-top: 1px solid $sc-color-theme-border;
+}
+
+.facets-faceted-navigation-title {
+  display: none;
+
+  @media (min-width: $screen-md-min) {
+    font-size: $sc-base-font-size;
+    font-weight: $sc-font-weight-semibold;
+    text-align: left;
+    display: block;
+    color: $sc-color-dark-copy;
+    padding: $sc-base-padding * 2 0;
+  }
+}
+
+.facets-faceted-navigation-title-main {
+  color: $sc-color-dark-copy;
+  font-size: $sc-h4-font-size;
+}
+
+.facets-faceted-navigation-category-wrapper {
+}
+
+.facets-faceted-navigation-facets-clear {
+  width: initial;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: $sc-medium-margin;
+
+  padding: 12px 10px 8px;
+
+  @extend .button-tertiary;
+  @extend .button-small;
+
+  @media (min-width: $screen-md-min) {
+    position: initial;
+    display: inline-block;
+    margin: 0;
+    background: transparent;
+    padding: 0;
+    color: $sc-color-link;
+    border: none;
+    text-decoration: underline;
+    &:hover {
+      background: white;
+      color: $sc-color-primary;
+    }
+  }
+
+}
+
+.facets-faceted-navigation-facets-clear-icon {
+  @extend .facets-faceted-navigation-facet-option-circle;
+
+  @media (min-width: $screen-md-min) {
+    display: none;
+  }
+}
+
+.facets-faceted-navigation-facet-group-expander:hover {
+  text-decoration: none;
+}
+
+.facets-faceted-navigation-facet-group-title {
+  font-size: $sc-base-font-size;
+}
+
+.facets-faceted-navigation-facet-group-expander {
+  display: block;
+  padding: $sc-base-padding * 3;
+  @media (min-width: $screen-md-min) {
+
+    padding: $sc-base-padding * 2 0;
+  }
+}
+
+.facets-faceted-navigation-facet-group-expander-icon {
+  float: right;
+  color: $sc-color-copy;
+  font-size: $sc-navigation-icon-size;
+  margin-top: -3px;
+  @extend .icon-angle-up;
+  @include transition-transform(300ms ease);
+}
+
+.collapsed .facets-faceted-navigation-facet-group-expander-icon {
+  @include rotate(180deg);
+}
+
+.facets-faceted-navigation-facet-option {
+  @extend small;
+  color: $sc-color-copy;
+  padding: 7px 5px;
+  display: block;
+
+  input {
+    display: inline-block;
+    vertical-align: text-top;
+  }
+  span {
+    display: inline-block;
+    max-width: 90%;
+    vertical-align: text-top;
+  }
+}
+
+.facets-faceted-navigation-facet-option:hover {
+  text-decoration: none;
+}
+
+.facets-faceted-navigation-facet-option.option-active {
+  color: $sc-color-extra-dark-copy;
+  background: $sc-color-theme-background;
+}
+
+.facets-faceted-navigation-facet-option-circle {
+  @extend .icon-base;
+  @extend %fa-times-circle;
+  color: $sc-color-secondary;
+  margin-left: $sc-base-margin;
+  cursor: pointer;
+  float: right;
+  margin-top: -4px;
+
+}
+
+.facets-faceted-navigation-content .sc-pusher-header {
+  margin: 0;
+}

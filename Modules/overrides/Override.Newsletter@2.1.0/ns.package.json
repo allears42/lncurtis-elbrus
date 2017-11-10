@@ -1,0 +1,18 @@
+{
+    "gulp": {
+        "javascript": [
+            "JavaScript/*"
+        ],
+        "sass": [
+            "Sass/**/*.scss"
+        ],
+        "templates": [
+            "Templates/*"
+        ]
+    },
+    "overrides": {
+        "suitecommerce/Newsletter@2.1.0/SuiteScript/Newsletter.Model.js" : "SuiteScript/Newsletter.Model.js",
+        "suitecommerce/Newsletter@2.1.0/SuiteScript/Newsletter.ServiceController.js" : "SuiteScript/Newsletter.ServiceController.js",
+        "suitecommerce/Newsletter@2.1.0/Templates/newsletter.tpl" : "Templates/newsletter.tpl"
+    }
+}

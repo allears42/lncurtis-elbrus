@@ -48,9 +48,15 @@ define('FacetContent.View'
 
 			BackboneCompositeView.add(this);
 		}
+		
     ,   keys : {
             "custitem_facets_brand": "sortByLetter"
         }
+        
+    ,   getTitle: function () {
+			return "Brands | Curtis"
+		}
+    
     ,   sortByLetter: function (facetData) {
             var self = this
             ,  sortedValues = {}

@@ -1,0 +1,19 @@
+{
+    "gulp": {
+        "javascript": [
+            "JavaScript/*"
+        ],
+        "sass": [
+            "Sass/**/*.scss"
+        ],
+        "templates": [
+            "Templates/*"
+        ]
+    },
+    "overrides": {
+        "suitecommerce/LoginRegister@2.3.0/Templates/login_register.tpl" : "Templates/login_register.tpl",
+        "suitecommerce/LoginRegister@2.3.0/Templates/login_register_login.tpl" : "Templates/login_register_login.tpl",
+        "suitecommerce/LoginRegister@2.3.0/Templates/login_register_register.tpl" : "Templates/login_register_register.tpl",
+        "suitecommerce/LoginRegister@2.3.0/Templates/login_register_reset_password.tpl" : "Templates/login_register_reset_password.tpl"
+    }
+}

@@ -1,0 +1,158 @@
+{
+	"type": "object",
+    "subtab": {
+        "id": "header",
+        "title": "Header",
+        "description": "Header related settings",
+        "docRef": "bridgehead_4393268747",
+        "group": "layout"
+    }
+,	"properties": {
+		"header.notShowCurrencySelector": {
+			"group": "layout",
+			"subtab": "header"
+		,	"type": "boolean"
+		,	"title": "Hide Currency Selector"
+		,	"description": "Check this box to hide the currency selector in the application."
+		,	"default": false
+		}
+        ,	"header.logoUrl": {
+                "group": "layout",
+                "subtab": "header"
+            ,	"type": "string"
+            ,	"title": "Logo URL"
+            ,	"description": "Enter the URL location of the logo image file that is displayed at the top of the application."
+            ,	"default": "img/SCA_Logo.png"
+        }
+        ,	"header.catalogsLink": {
+                "group": "layout",
+                "subtab": "header"
+            ,	"type": "string"
+            ,	"title": "Catalogs Link"
+            ,	"description": "Enter the URL for the Catalogs link in the header."
+            ,	"default": "/catalogs"
+        }
+        ,	"header.agenciesLink": {
+                "group": "layout",
+                "subtab": "header"
+            ,	"type": "string"
+            ,	"title": "Government Agencies Link"
+            ,	"description": "Enter the URL for the Government Agencies link in the header."
+            ,	"default": "/us-government-agencies"
+        }
+        ,	"header.telephone": {
+                "group": "layout",
+                "subtab": "header"
+            ,	"type": "string"
+            ,	"title": "Header telephone"
+            ,	"description": "Enter telephone in the header."
+            ,	"default": "877-488-0469"
+        }
+        ,	"header.contactLink": {
+                "group": "layout",
+                "subtab": "header"
+            ,	"type": "string"
+            ,	"title": "Header Contact Us Link"
+            ,	"description": "Contact Us Link in the header."
+            ,	"default": "/contact-us"
+        }
+        ,	"header.contactText": {
+                "group": "layout",
+                "subtab": "header"
+            ,	"type": "string"
+            ,	"title": "Header Contact Us Text"
+            ,	"description": "Contact Us Text in the header."
+            ,	"default": "Contact Us"
+        }
+        ,	"header.customerServiceHours": {
+                "group": "layout",
+                "subtab": "header"
+            ,	"type": "string"
+            ,	"title": "Customer Service Hours"
+            ,	"description": "Customer Service Hours."
+            ,	"default": "Mon-Fri 8am to 5pm PT"
+        }
+        ,   "header.helpLinks": {
+                "group": "layout",
+                "subtab": "header",
+                "type": "array",
+                "title": "Help Links",
+                "description": "Links that show in the Help dropdown menu in the header ",
+
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "text": {
+                            "type": "string",
+                            "title": "Text",
+                            "translate": true,
+                            "description": "Link's text shown in the UI",
+                            "mandatory": true
+                        },
+                        "href": {
+                            "type": "string",
+                            "title": "href",
+                            "description": "The href of the link - for example '/search' will go to the search results page. It's ignored for parent entries.  Also it could be an absolute URL like https://google.com but in that case, make sure you really need to break the single page application. "
+                        },
+                        "level": {
+                            "type": "string",
+                            "title": "level",
+                            "description": "Hierarchy level of this navigation entry",
+                            "enum":["1", "2", "3"],
+                            "mandatory": true
+                        },
+                        "dataTouchpoint": {
+                            "type": "string",
+                            "title": "data-touchpoint",
+                            "description": "data-touchpoint value for the link if any",
+                            "enum": ["home", "login", "register", "logout", "customercenter", "viewcart", "checkout"]
+                        },
+                        "dataHashtag": {
+                            "type": "string",
+                            "title": "data-hashtag",
+                            "description": "data-hashtag value for the link if any"
+                        },
+                        "classnames": {
+                            "type": "string",
+                            "title": "class names",
+                            "description": "extra HTML class names to add to this entry"
+                        }
+                    }
+                },
+                "default":[
+                    {
+                        "text": "Order Status",
+                        "href": "/purchases",
+                        "dataTouchpoint": "customercenter",
+                        "dataHashtag": "#/purchases",
+                        "classnames": "header-menu-help-link"
+                    },
+                    {
+                        "text": "Help Center",
+                        "href": "/help-center",
+                        "dataTouchpoint": "home",
+                        "dataHashtag": "#/help-center",
+                        "level": "1",
+                        "classnames": "header-menu-help-link"
+                    },
+                    {
+                        "text": "Find your Sales Rep, Service Technician, or Product Specialist",
+                        "href": "/contact-us",
+                        "dataTouchpoint": "home",
+                        "dataHashtag": "#/contact-us",
+                        "level": "1",
+                        "classnames": "header-menu-help-link"
+                    },
+                    {
+                        "text": "Visit Us",
+                        "href": "/divisions",
+                        "dataTouchpoint": "home",
+                        "dataHashtag": "#/divisions",
+                            "level": "1",
+                            "classnames": "header-menu-help-link"
+                        }
+                ]
+        }
+	}
+
+}

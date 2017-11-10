@@ -1,0 +1,171 @@
+{
+	"type": "object"
+,	"subtab": {
+        "id": "home",
+        "title": "Home",
+        "description": "Home",
+        "group": "layout"
+    }
+,	"properties": {
+		"home.carouselImages": {
+			"group": "layout",
+            "type": "array",
+            "title": "Carousel images",
+            "docRef": "bridgehead_4666978268",
+            "description": "Carousel images Urls",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "imageURL": {
+                        "type": "string",
+                        "title": "Image URL",
+                        "description": "URL of slide image"
+                    },
+                    "altText": {
+                        "type": "string",
+                        "title": "Alt Text",
+                        "translate": true,
+                        "description": "Alt text for slide image"
+                    },
+                    "slideText": {
+                        "type": "string",
+                        "title": "Slide Text",
+                        "translate": true,
+                        "nsType": "textarea",
+                        "description": "Additional text for slide."
+                    },
+                    "href": {
+                        "type": "string",
+                        "title": "href",
+                        "description": "The href of the link - for example '/search' will go to the search results page. It's ignored for parent entries.  Also it could be an absolute URL like https://google.com but in that case, make sure you really need to break the single page application. "
+                    },
+                    "sortOrder": {
+                        "type": "string",
+                        "title": "Sort Order",
+                        "description": "Sort Order of Slides",
+                        "mandatory": true
+                    },
+                    "dataTouchpoint": {
+                        "type": "string",
+                        "title": "data-touchpoint",
+                        "description": "data-touchpoint value for the link if any",
+                        "enum": ["home", "login", "register", "logout", "customercenter", "viewcart", "checkout"]
+                    },
+                    "dataHashtag": {
+                        "type": "string",
+                        "title": "data-hashtag",
+                        "description": "data-hashtag value for the link if any"
+                    },
+                    "classnames": {
+                        "type": "string",
+                        "title": "class names",
+                        "description": "extra HTML class names to add to this entry"
+                    }
+                }
+            },
+            "default": [
+                {
+                    "imageURL": "img/banner1-home.jpg",
+                    "altText": "Hurst eDRAULIC rescure tools",
+                    "slideText": "<div><p><span class='white-letter'>Quicker than ever</span></p><p><span class='orange-letter'>to the <strong>rescue</strong></span></p><p><span class='small white-letter'>eDRAULIC Rescue Tools</span></p><a href='/brand/Hurst-eDRAULIC' data-touchpoint='home' data-hashtag='#brand/Hurst-eDRAULIC' class='button-orange'>Shop Now</a></div>",
+                    "sortOrder": "1",
+                    "classnames": ""
+
+                }
+            ]
+		}
+	,	"home.homepageFeaturedCategories": {
+			"group": "layout",
+            "type": "array",
+            "title": "Featured Blog Posts",
+            "description": "Featured blog posts",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "titleText": {
+                        "type": "string",
+                        "title": "Title Text",
+                        "description": "Text for the block of content. Accepts HTML"
+                    },
+                    "imageURL": {
+                        "type": "string",
+                        "title": "Image URL",
+                        "description": "URL of slide image"
+                    },
+                    "altText": {
+                        "type": "string",
+                        "title": "Alt Text",
+                        "translate": true,
+                        "description": "Alt text for slide image"
+                    },
+                    "href": {
+                        "type": "string",
+                        "title": "href",
+                        "description": "The href of the link - for example '/search' will go to the search results page. It's ignored for parent entries.  Also it could be an absolute URL like https://google.com but in that case, make sure you really need to break the single page application. "
+                    },
+                    "dataTouchpoint": {
+                        "type": "string",
+                        "title": "data-touchpoint",
+                        "description": "data-touchpoint value for the link if any",
+                        "enum": ["home", "login", "register", "logout", "customercenter", "viewcart", "checkout"]
+                    },
+                    "dataHashtag": {
+                        "type": "string",
+                        "title": "data-hashtag",
+                        "description": "data-hashtag value for the link if any"
+                    },
+                    "classnames": {
+                        "type": "string",
+                        "title": "class names",
+                        "description": "extra HTML class names to add to this entry"
+                    }
+                }
+            },
+            "default": [
+                {
+                    "imageURL": "img/featured-categories1-home.png",
+                    "altText": "Structural Gloves",
+                    "titleText": "<h2>Gloves</h2><h3>Structural</h3>",
+                    "href": "/PPE/PPE-Gloves/PPE-Gloves-Structural",
+                    "dataTouchpoint": "home",
+                    "dataHashtag": "#/PPE/PPE-Gloves/PPE-Gloves-Structural"
+
+                },
+                {
+                    "imageURL": "img/featured-categories2-home.png",
+                    "altText": "Footwear: Station Boots",
+                    "titleText": "<h2>Footwear</h2><h3>Station Boots</h3>",
+                    "href": "/PPE/PPE-Footwear/PPE-Footwear-Station-Uniform",
+                    "dataTouchpoint": "home",
+                    "dataHashtag": "#/PPE/PPE-Footwear/PPE-Footwear-Station-Uniform"
+
+                },
+                {
+                    "imageURL": "img/featured-categories3-home.png",
+                    "altText": "PPE: Hoods",
+                    "titleText": "<h2>PPE</h2><h3>Hoods</h3>",
+                    "href": "/PPE/PPE-Hoods",
+                    "dataTouchpoint": "home",
+                    "dataHashtag": "#/PPE/PPE-Hoods"
+
+                }
+            ]
+		}
+	,	"home.bottomBannerImages": {
+			"group": "layout",
+			"type": "array",
+			"title": "Bottom banners images",
+			"docRef": "bridgehead_4393296407",
+			"description": "Bottom banners images Urls",
+			"items": {
+				"type": "string",
+				"title": "Url"
+			},
+			"default": [
+				"img/banner-bottom-home-1.jpg"
+			,	"img/banner-bottom-home-2.jpg"
+			,	"img/banner-bottom-home-3.jpg"
+			]
+		}
+	}
+}

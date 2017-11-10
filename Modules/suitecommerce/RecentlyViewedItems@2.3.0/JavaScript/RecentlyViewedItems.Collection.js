@@ -42,13 +42,25 @@ define('RecentlyViewedItems.Collection'
 					this.promise = jQuery.Deferred().resolveWith(this);
 				}
 			}
+			
 			//@method addHistoryItem
+		// why call the api each time when we can just load it from the cookie??
 		,	addHistoryItem: function (item)
 			{
 				if (this.useCookie)
 				{
-					var self = this;
+					var self = this
+					,   currentCookie = this.loadCookie()
+					,   thisItem = item.get('internalid');
 
+					
+					console.log(currentCookie, thisItem);
+					
+					if (currentCookie.indexOf(thisItem) < 0) {
+						var news_items = currentCookie + (currentCookie.length > 0 ? "," : "")+ thisItem;
+						jQuery.cookie('recentlyViewedIds', news_items, {path: '/'});
+					}
+					
 					this.promise.done(function ()
 					{
 
@@ -69,6 +81,24 @@ define('RecentlyViewedItems.Collection'
 				}
 
 			}
+			
+		,   loadCookie: function () {
+				var cookie_ids = jQuery.cookie('recentlyViewedIds') || [];
+				
+				if(typeof cookie_ids === 'string')
+				{
+					cookie_ids = [cookie_ids.replace(/[\[\]]+/g,'')];
+				}
+				else if(!_.isArray(cookie_ids))
+				{
+					cookie_ids = [cookie_ids];
+				}
+				
+				var	items_ids = _.difference(cookie_ids, this.pluck('internalid')).join(',');
+				
+				return items_ids;
+		}
+			
 			//@method loadItemsFromCookie
 		,	loadItemsFromCookie: function ()
 			{

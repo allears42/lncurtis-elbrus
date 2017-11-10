@@ -97,6 +97,7 @@ define('LiveOrder.Line.Model'
 			//@return {LiveOrder.Line.Model}
 			createFromProduct: function createFromProduct (product)
 			{
+				console.log('createFromProduct')
 				var line = new LiveOrderLineModel(product.toJSON())
 				,	item = product.get('item')
 				,	item_images_detail = item.get('itemimages_detail')

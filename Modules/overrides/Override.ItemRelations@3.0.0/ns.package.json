@@ -1,0 +1,16 @@
+{
+    "gulp": {
+        "javascript": [
+            "JavaScript/*"
+        ],
+        "templates": [
+            "Templates/*"
+        ],
+        "sass": [
+            "Sass/*.scss"
+        ]
+    }
+, "overrides": {
+    "suitecommerce/ItemRelations@3.0.0/Templates/item_relations_related_item.tpl" : "Templates/item_relations_related_item.tpl"
+}
+}

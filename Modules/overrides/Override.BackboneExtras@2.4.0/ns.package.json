@@ -1,0 +1,19 @@
+{
+    "gulp": {
+        "javascript": [
+            "JavaScript/*.js"
+        ],
+        "sass": [
+            "Sass/*.scss"
+        ],
+        "unit-test-files": [
+            "Tests/*.js"
+        ],
+        "unit-test-entry-point": [
+            "Tests/UnitTest.BackboneExtras.js"
+        ]
+    }
+    , "overrides": {
+        "suitecommerce/BackboneExtras@2.4.0/JavaScript/Backbone.View.saveForm.js": "JavaScript/Backbone.View.saveForm.js"
+    }
+}

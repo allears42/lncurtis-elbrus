@@ -1,0 +1,1 @@
+<div data-type="Promocode.Notifications"></div>

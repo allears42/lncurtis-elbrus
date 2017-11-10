@@ -1,0 +1,21 @@
+{
+    "gulp": {
+        "javascript": [
+            "JavaScript/*"
+        ],
+        "templates": [
+            "Templates/*"
+        ],
+        "sass": [
+            "Sass/*.scss"
+        ],
+        "configuration": [
+            "Configuration/*.json"
+        ]
+    },
+    "overrides": {
+        "suitecommerce/ProductViews@1.0.0/Templates/product_views_option_dropdown.tpl": "Templates/product_views_option_dropdown.tpl",
+        "suitecommerce/ProductViews@1.0.0/Templates/product_views_option_text.tpl": "Templates/product_views_option_text.tpl",
+        "suitecommerce/ProductViews@1.0.0/Templates/product_views_price.tpl": "Templates/product_views_price.tpl"
+    }
+}

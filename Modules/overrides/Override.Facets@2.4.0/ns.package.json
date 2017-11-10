@@ -1,0 +1,36 @@
+{
+    "gulp": {
+        "javascript": [
+            "JavaScript/*"
+        ],
+        "templates": [
+            "Templates/*"
+        ],
+        "unit-test-files": [
+            "Tests/*.js"
+        ],
+        "sass": [
+            "Sass/*.scss"
+        ],
+        "unit-test-entry-point": [
+            "Tests/UnitTest.Facets.js"
+        ],
+        "configuration": [
+            "Configuration/*.json"
+        ]
+    }
+, "overrides": {
+
+    "suitecommerce/Facets@2.4.0/Configuration/Facets.json" : "Configuration/Facets.json",
+
+    "suitecommerce/Facets@2.4.0/Templates/facets_browse_category_heading.tpl" : "Templates/facets_browse_category_heading.tpl",
+    "suitecommerce/Facets@2.4.0/Templates/facets_empty.tpl" : "Templates/facets_empty.tpl",
+    "suitecommerce/Facets@2.4.0/Templates/facets_facet_browse.tpl" : "Templates/facets_facet_browse.tpl",
+    "suitecommerce/Facets@2.4.0/Templates/facets_faceted_navigation.tpl" : "Templates/facets_faceted_navigation.tpl",
+    "suitecommerce/Facets@2.4.0/Templates/facets_faceted_navigation_item_category.tpl" : "Templates/facets_faceted_navigation_item_category.tpl",
+    "suitecommerce/Facets@2.4.0/Templates/facets_faceted_navigation_item.tpl" : "Templates/facets_faceted_navigation_item.tpl",
+    "suitecommerce/Facets@2.4.0/Templates/facets_item_cell_grid.tpl" : "Templates/facets_item_cell_grid.tpl",
+    "suitecommerce/Facets@2.4.0/Templates/facets_item_cell_list.tpl" : "Templates/facets_item_cell_list.tpl",
+    "suitecommerce/Facets@2.4.0/Templates/facets_item_cell_table.tpl" : "Templates/facets_item_cell_table.tpl"
+}
+}

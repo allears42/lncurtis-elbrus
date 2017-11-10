@@ -1,0 +1,94 @@
+/*
+	© 2016 NetSuite Inc.
+	User may not copy, modify, distribute, or re-bundle or otherwise make available this code;
+	provided, however, if you are an authorized user with a NetSuite account or log-in, you
+	may use this code subject to the terms that govern your access and use.
+*/
+
+.order-wizard-step-header{
+	@extend .wizard-step-header;
+}
+
+.order-wizard-step-review-wrapper,
+.order-wizard-step-content-wrapper{
+	@extend .row;
+}
+
+.order-wizard-step-review-main,
+.order-wizard-step-content-main{
+	@extend .col-xs-12;
+	@extend .col-sm-6;
+	@extend .col-md-8;
+	@extend .col-lg-8;
+}
+
+.order-wizard-step-review-secondary,
+.order-wizard-step-content-secondary{
+	@extend .col-xs-12;
+	@extend .col-sm-6;
+	@extend .col-md-4;
+	@extend .col-lg-4;
+	float: right;
+}
+
+.order-wizard-step-content-secondary{
+	margin-bottom: $sc-medium-margin;
+}
+
+.order-wizard-step-actions{
+	@extend .col-xs-12;
+}
+
+.order-wizard-step-message{
+	@extend .wizard-step-message;
+
+    text-align: left !important;
+}
+
+.order-wizard-step-button-container{
+	@extend .wizard-step-button-container;
+}
+
+.order-wizard-step-button-continue {
+	@extend .wizard-step-button-continue;
+	margin-bottom:$sc-small-margin;
+    @media (min-width: $screen-sm-min) {
+      float : left !important;
+      margin-left: 0 !important;
+    }
+
+    @media (max-width: $screen-xs) {
+      width: 100%;
+      max-width: none;
+    }
+
+}
+
+.order-wizard-step-button-back{
+	@extend .wizard-step-button-back;
+  @media (max-width: $screen-xs) {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.order-wizard-step-guest-message{}
+.order-wizard-step-title{}
+
+// module overrides
+.order-wizard-paymentmethod-creditcard-module {
+  overflow : visible;
+  .creditcard-edit {
+    padding-left: 0;
+  }
+}
+
+.order-wizard-paymentmethod-selector-module {
+  padding-left: 0;
+}
+
+.OrderWizard-Module-PaymentMethod-Selector {
+  .order-wizard-paymentmethod-selector-module {
+    overflow : visible !important;
+  }
+}

@@ -1,0 +1,31 @@
+{
+    "gulp": {
+        "javascript": [
+            "JavaScript/*"
+        ],
+        "images": [
+            "Images/*"
+        ],
+        "templates": [
+            "Templates/*"
+        ],
+        "sass": [
+            "Sass/**/*.scss"
+        ],
+        "configuration": [
+            "Configuration/*.json"
+        ]
+    }
+    , "overrides": {
+        "suitecommerce/Header@1.3.0/Configuration/Header.json":"Configuration/Header.json",
+
+        "suitecommerce/Header@1.3.0/Templates/header.tpl":"Templates/header.tpl",
+        "suitecommerce/Header@1.3.0/Templates/header_logo.tpl":"Templates/header_logo.tpl",
+        "suitecommerce/Header@1.3.0/Templates/header_menu.tpl":"Templates/header_menu.tpl",
+        "suitecommerce/Header@1.3.0/Templates/header_menu_myaccount.tpl":"Templates/header_menu_myaccount.tpl",
+        "suitecommerce/Header@1.3.0/Templates/header_mini_cart.tpl":"Templates/header_mini_cart.tpl",
+        "suitecommerce/Header@1.3.0/Templates/header_mini_cart_item_cell.tpl":"Templates/header_mini_cart_item_cell.tpl",
+        "suitecommerce/Header@1.3.0/Templates/header_profile.tpl":"Templates/header_profile.tpl",
+        "suitecommerce/Header@1.3.0/Templates/header_sidebar.tpl":"Templates/header_sidebar.tpl"
+    }
+}

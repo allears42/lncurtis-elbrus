@@ -1,0 +1,12 @@
+{
+    "type": "object",
+    "properties": {
+        "videoThumbFallback": {
+            "group": "shoppingApplication",
+            "title": "Item Video Thumbnail Fallback",
+            "description": "URL of thumbnail fallback",
+            "type": "string"
+
+        }
+    }
+}

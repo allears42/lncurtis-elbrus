@@ -1,0 +1,22 @@
+<% var items_per_row = 4, grid_columns = 12 / items_per_row; %>
+
+<div class="row-fluid" data-slider>
+
+    <% _.each(data.items, function (item, index) { %>
+
+       <div class="merchandising-area-item">
+            <div class="merchandising-area-item-inner">
+            <% var item_url = '/'+ item.urlcomponent; %>
+            <div class="item-cell item-cell-grid">
+                <a class="thumbnail" href="<%= item_url %>">
+                    <img src="<%= item.cms.image.url %>" alt="<%= item.cms.image.alt_text %>" />
+                </a>
+                <h5>
+                    <a href="<%= item_url %>"><%= item.storedisplayname2 %></a>
+                </h5>
+                <a class="btn btn-small btn-primary btn-expanded" href="<%= item_url %>">See more</a>
+            </div>
+            </div>
+        </div>
+    <% }); %>
+</div>

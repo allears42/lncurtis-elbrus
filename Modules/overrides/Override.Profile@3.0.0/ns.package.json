@@ -1,0 +1,19 @@
+{
+    "gulp": {
+        "javascript": [
+            "JavaScript/*.js"
+        ],
+        "templates": [
+            "Templates/*"
+        ],
+        "ssp-libraries": [
+            "SuiteScript/*.js"
+        ],
+        "sass": [
+            "Sass/**/*.scss"
+        ]
+    },
+    "overrides": {
+        "suitecommerce/Profile@3.0.0/Templates/profile_emailpreferences.tpl": "Templates/profile_emailpreferences.tpl"
+    }
+}

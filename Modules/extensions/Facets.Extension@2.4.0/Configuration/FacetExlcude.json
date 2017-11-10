@@ -1,0 +1,13 @@
+{
+    "type": "object",
+    "properties": {
+        "excludedFacets": {
+            "type": "string",
+            "group": "catalog",
+            "title": "Facets to Exclude",
+            "description": "Enter the field ids of facet fields you don't want to show.",
+            "default": "custitem_feed_featured_product,onspecial,producttype,custitemfinder_manufacturer,custitemfinder_model",
+            "nsType": "textarea"
+        }
+    }
+}

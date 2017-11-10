@@ -1,0 +1,68 @@
+{
+    "type": "object",
+    "properties": {
+        "productList.listAddedText": {
+            "group": "shoppingApplication"
+        ,   "subtab": "productList"
+        ,	"type": "string"
+        ,	"title": "List Added Text"
+        ,	"description": "Message shown after a product list is created. Leave replacement variables $()"
+        ,	"default": "Good! Your <a href='/productlist/$(0)'>$(1)</a> list was successfully created."
+        ,   "nsType": "textarea"
+        }
+    ,	"productList.listUpdatedText": {
+            "group": "shoppingApplication"
+        ,   "subtab": "productList"
+        ,	"type": "string"
+        ,	"title": "List Updated Text"
+        ,	"description": "Message shown after a product list is updated. Leave replacement variables $()"
+        ,	"default": "Good! Your <a href='/productlist/$(0)'>$(1)</a> list was successfully updated."
+        ,   "nsType": "textarea"
+        }
+    ,	"productList.itemAddedConfirmationText": {
+            "group": "shoppingApplication"
+        ,   "subtab": "productList"
+        ,	"type": "string"
+        ,	"title": "Item Added To List Confirmation Text"
+        ,	"description": "Message shown after an item is successfully added to a product list"
+        ,	"default": "Good! You added this item to your product list"
+        ,   "nsType": "textarea"
+        }
+    ,	"productList.itemMovedConfirmationText": {
+            "group": "shoppingApplication"
+        ,   "subtab": "productList"
+        ,	"type": "string"
+        ,	"title": "Item Moved Between Lists Confirmation Text"
+        ,	"description": "Message shown after an item is moved between product lists. A link with the name of the product list is appended."
+        ,	"default": "Good! You successfully moved the item from this to"
+        ,   "nsType": "textarea"
+        }
+    ,	"productList.itemAddedToCartConfirmationText": {
+            "group": "shoppingApplication"
+        ,   "subtab": "productList"
+        ,	"type": "string"
+        ,	"title": "Item Added To Cart Confirmation Text"
+        ,	"description": "Message shown after an item add from a product list to the cart"
+        ,	"default": "Good! 1 item from your <a class='product-list-name' href='/productlist/$(0)'>$(1)</a> list was successfully added to your cart. You can continue to <a href='' data-touchpoint='viewcart'>view your cart and checkout</a>"
+        ,   "nsType": "textarea"
+        }
+    ,	"productList.itemsAddedToCartConfirmationText": {
+            "group": "shoppingApplication"
+        ,   "subtab": "productList"
+        ,	"type": "string"
+        ,	"title": "Items Added To Cart Confirmation Text"
+        ,	"description": "Message shown after items are added from a product list to the cart"
+        ,	"default": "Good! $(0) items from your <a class='product-list-name' href='/productlist/$(1)'>$(2)</a> list were successfully added to your cart. You can continue to <a href=''  data-touchpoint='viewcart'>view your cart and checkout</a>"
+        ,   "nsType": "textarea"
+        }
+    ,	"productList.itemSavedForLaterConfirmationText": {
+            "group": "shoppingApplication"
+        ,   "subtab": "productList"
+        ,	"type": "string"
+        ,	"title": "Item Added Confirmation Text"
+        ,	"description": "Message shown after an item is successfully added to a product list"
+        ,	"default": "Good! You saved the item for later. If you want to add it back to your cart, see below in <b>Saved for later</b>"
+        ,   "nsType": "textarea"
+        }
+    }
+}

@@ -2,39 +2,129 @@
     "gulp": {
         "sass": [
             "Sass/**/*.scss"
+        ],
+        "images": [
+            "Images/*"
         ]
     },
     "overrides": {
-        "suitecommerce/BaseSassStyles@2.0.0/Sass/_base.scss": "BaseSassStyles.Firefighter@2.0.0/Sass/_base.scss",
-        "suitecommerce/BaseSassStyles@2.0.0/Sass/_reset.scss": "BaseSassStyles.Firefighter@2.0.0/Sass/_reset.scss",
+        "suitecommerce/Address@2.4.0/Sass/_address-edit-fields.scss": "Sass/Address/_address-edit-fields.scss",
+        "suitecommerce/Address@2.4.0/Sass/_address-list.scss": "Sass/Address/_address-list.scss",
 
-        "suitecommerce/BaseSassStyles@2.0.0/Sass/atoms/_buttons.scss": "BaseSassStyles.Firefighter@2.0.0/Sass/atoms/_buttons.scss",
-        "suitecommerce/BaseSassStyles@2.0.0/Sass/atoms/_forms.scss": "BaseSassStyles.Firefighter@2.0.0/Sass/atoms/_forms.scss",
-        "suitecommerce/BaseSassStyles@2.0.0/Sass/atoms/_icons.scss": "BaseSassStyles.Firefighter@2.0.0/Sass/atoms/_icons.scss",
-        "suitecommerce/BaseSassStyles@2.0.0/Sass/atoms/_messages.scss": "BaseSassStyles.Firefighter@2.0.0/Sass/atoms/_messages.scss",
-        "suitecommerce/BaseSassStyles@2.0.0/Sass/atoms/_purchase-controls.scss": "BaseSassStyles.Firefighter@2.0.0/Sass/atoms/_purchase-controls.scss",
-        "suitecommerce/BaseSassStyles@2.0.0/Sass/atoms/_spacing.scss": "BaseSassStyles.Firefighter@2.0.0/Sass/atoms/_spacing.scss",
-        "suitecommerce/BaseSassStyles@2.0.0/Sass/atoms/_sticky-button.scss": "BaseSassStyles.Firefighter@2.0.0/Sass/atoms/_sticky-button.scss",
-        "suitecommerce/BaseSassStyles@2.0.0/Sass/atoms/_typography.scss": "BaseSassStyles.Firefighter@2.0.0/Sass/atoms/_typography.scss",
+        "suitecommerce/Cart@4.0.0/Sass/_cart.scss": "Sass/Cart/_cart.scss",
+        "suitecommerce/Cart@4.0.0/Sass/_cart-add-to-cart-button.scss": "Sass/Cart/_cart-add-to-cart-button.scss",
+        "suitecommerce/Cart@4.0.0/Sass/_cart-confirmation-modal.scss": "Sass/Cart/_cart-confirmation-modal.scss",
+        "suitecommerce/Cart@4.0.0/Sass/_cart-detailed.scss": "Sass/Cart/_cart-detailed.scss",
+        "suitecommerce/Cart@4.0.0/Sass/_cart-item-actions.scss": "Sass/Cart/_cart-item-actions.scss",
+        "suitecommerce/Cart@4.0.0/Sass/_cart-item-summary.scss": "Sass/Cart/_cart-item-summary.scss",
+        "suitecommerce/Cart@4.0.0/Sass/_cart-lines.scss": "Sass/Cart/_cart-lines.scss",
+        "suitecommerce/Cart@4.0.0/Sass/_cart-quickaddtocart.scss": "Sass/Cart/_cart-quickaddtocart.scss",
+        "suitecommerce/Cart@4.0.0/Sass/_cart-summary.scss": "Sass/Cart/_cart-summary.scss",
 
-        "suitecommerce/BaseSassStyles@2.0.0/Sass/molecules/_breadcrumb.scss": "BaseSassStyles.Firefighter@2.0.0/Sass/molecules/_breadcrumb.scss",
-        "suitecommerce/BaseSassStyles@2.0.0/Sass/molecules/_columns.scss": "BaseSassStyles.Firefighter@2.0.0/Sass/molecules/_columns.scss",
-        "suitecommerce/BaseSassStyles@2.0.0/Sass/molecules/_image-gallery.scss": "BaseSassStyles.Firefighter@2.0.0/Sass/molecules/_image-gallery.scss",
-        "suitecommerce/BaseSassStyles@2.0.0/Sass/molecules/_information_cards.scss": "BaseSassStyles.Firefighter@2.0.0/Sass/molecules/_information_cards.scss",
-        "suitecommerce/BaseSassStyles@2.0.0/Sass/molecules/_item-cells.scss": "BaseSassStyles.Firefighter@2.0.0/Sass/molecules/_item-cells.scss",
-        "suitecommerce/BaseSassStyles@2.0.0/Sass/molecules/_list-header.scss": "BaseSassStyles.Firefighter@2.0.0/Sass/molecules/_list-header.scss",
-        "suitecommerce/BaseSassStyles@2.0.0/Sass/molecules/_lists.scss": "BaseSassStyles.Firefighter@2.0.0/Sass/molecules/_lists.scss",
-        "suitecommerce/BaseSassStyles@2.0.0/Sass/molecules/_search.scss": "BaseSassStyles.Firefighter@2.0.0/Sass/molecules/_search.scss",
-        "suitecommerce/BaseSassStyles@2.0.0/Sass/molecules/_summary_box.scss": "BaseSassStyles.Firefighter@2.0.0/Sass/molecules/_summary_box.scss",
-        "suitecommerce/BaseSassStyles@2.0.0/Sass/molecules/_tabs.scss": "BaseSassStyles.Firefighter@2.0.0/Sass/molecules/_tabs.scss",
+        "suitecommerce/CheckoutApplication@2.3.0/Sass/_checkout-layout.scss": "Sass/CheckoutApplication/_checkout-layout.scss",
 
-        "suitecommerce/BaseSassStyles@2.0.0/Sass/variables/_colors.scss": "BaseSassStyles.Firefighter@2.0.0/Sass/variables/_colors.scss",
-        "suitecommerce/BaseSassStyles@2.0.0/Sass/variables/_sizing.scss": "BaseSassStyles.Firefighter@2.0.0/Sass/variables/_sizing.scss",
-        "suitecommerce/BaseSassStyles@2.0.0/Sass/variables/_spacing.scss": "BaseSassStyles.Firefighter@2.0.0/Sass/variables/_spacing.scss",
-        "suitecommerce/BaseSassStyles@2.0.0/Sass/variables/_typography.scss": "BaseSassStyles.Firefighter@2.0.0/Sass/variables/_typography.scss",
-        "suitecommerce/BaseSassStyles@2.0.0/Sass/variables/_variables.scss": "BaseSassStyles.Firefighter@2.0.0/Sass/variables/_variables.scss",
+        "suitecommerce/CreditCard@2.4.0/Sass/_creditcard.scss": "Sass/CreditCard/_creditcard.scss",
+        "suitecommerce/CreditCard@2.4.0/Sass/_creditcard-edit-form.scss": "Sass/CreditCard/_creditcard-edit-form.scss",
+        "suitecommerce/CreditCard@2.4.0/Sass/_creditcard-edit-form-securitycode.scss": "Sass/CreditCard/_creditcard-edit-form-securitycode.scss",
+
+        "suitecommerce/Facets@2.4.0/Sass/_facets-browse-category-heading.scss" : "Sass/Facets/_facets-browse-category-heading.scss",
+        "suitecommerce/Facets@2.4.0/Sass/_facets-facet-browse.scss" : "Sass/Facets/_facets-facet-browse.scss",
+        "suitecommerce/Facets@2.4.0/Sass/_facets-faceted-navigation.scss" : "Sass/Facets/_facets-faceted-navigation.scss",
+        "suitecommerce/Facets@2.4.0/Sass/_facets-faceted-navigation-item.scss" : "Sass/Facets/_facets-faceted-navigation-item.scss",
+        "suitecommerce/Facets@2.4.0/Sass/_facets-faceted-navigation-item-category.scss" : "Sass/Facets/_facets-faceted-navigation-item-category.scss",
+        "suitecommerce/Facets@2.4.0/Sass/_facets-facets-display.scss" : "Sass/Facets/_facets-facets-display.scss",
+        "suitecommerce/Facets@2.4.0/Sass/_facets-item-cell-grid.scss" : "Sass/Facets/_facets-item-cell-grid.scss",
+        "suitecommerce/Facets@2.4.0/Sass/_facets-item-cell-list.scss" : "Sass/Facets/_facets-item-cell-list.scss",
+        "suitecommerce/Facets@2.4.0/Sass/_facets-item-cell-table.scss" : "Sass/Facets/_facets-item-cell-table.scss",
+        "suitecommerce/Facets@2.4.0/Sass/_facets-items-collection-view-cell.scss" : "Sass/Facets/_facets-items-collection-view-cell.scss",
 
         "suitecommerce/Footer@1.2.1/Sass/_footer.scss": "Sass/Footer/_footer.scss",
-        "suitecommerce/Footer@1.2.1/Sass/_footer-simplified.scss": "Sass/Footer/_footer-simplified.scss"
+        "suitecommerce/Footer@1.2.1/Sass/_footer-simplified.scss": "Sass/Footer/_footer-simplified.scss",
+
+        "suitecommerce/GlobalViews@1.4.0/Sass/_global-views-format-payment-method.scss": "Sass/GlobalViews/_global-views-format-payment-method.scss",
+        "suitecommerce/GlobalViews@1.4.0/Sass/_global-views-message.scss": "Sass/GlobalViews/_global-views-message.scss",
+        "suitecommerce/GlobalViews@1.4.0/Sass/_global-views-modal.scss": "Sass/GlobalViews/_global-views-modal.scss",
+
+        "suitecommerce/Header@1.3.0/Sass/_header.scss":"Sass/Header/_header.scss",
+        "suitecommerce/Header@1.3.0/Sass/_header-logo.scss":"Sass/Header/_header-logo.scss",
+        "suitecommerce/Header@1.3.0/Sass/_header-menu.scss":"Sass/Header/_header-menu.scss",
+        "suitecommerce/Header@1.3.0/Sass/_header-menu-myaccount.scss":"Sass/Header/_header-menu-myaccount.scss",
+        "suitecommerce/Header@1.3.0/Sass/_header-mini-cart.scss":"Sass/Header/_header-mini-cart.scss",
+        "suitecommerce/Header@1.3.0/Sass/_header-mini-cart-item-cell.scss":"Sass/Header/_header-mini-cart-item-cell.scss",
+        "suitecommerce/Header@1.3.0/Sass/_header-profile.scss":"Sass/Header/_header-profile.scss",
+        "suitecommerce/Header@1.3.0/Sass/_header-sidebar.scss":"Sass/Header/_header-sidebar.scss",
+        "suitecommerce/Header@1.3.0/Sass/_header-simplified.scss":"Sass/Header/_header-simplified.scss",
+
+        "suitecommerce/Home@2.2.0/Sass/_home.scss": "Sass/Home/_home.scss",
+
+        "suitecommerce/ItemRelations@3.0.0/Sass/_item-relations-cell.scss":"Sass/ItemRelations/_item-relations-cell.scss",
+
+        "suitecommerce/ListHeader@2.3.0/Sass/_list-header-view.scss":"Sass/ListHeader/_list-header-view.scss",
+
+        "suitecommerce/LoginRegister@2.3.0/Sass/_login-register.scss" : "Sass/LoginRegister/_login-register.scss",
+        "suitecommerce/LoginRegister@2.3.0/Sass/_login-register-login.scss" : "Sass/LoginRegister/_login-register-login.scss",
+        "suitecommerce/LoginRegister@2.3.0/Sass/_login-register-forgot-password.scss" : "Sass/LoginRegister/_login-register-forgot-password.scss",
+        "suitecommerce/LoginRegister@2.3.0/Sass/_login-register-register.scss" : "Sass/LoginRegister/_login-register-register.scss",
+        "suitecommerce/LoginRegister@2.3.0/Sass/_login-register-reset-password.scss" : "Sass/LoginRegister/_login-register-reset-password.scss",
+
+        "suitecommerce/MyAccountApplication@3.1.0/Sass/_myaccount-layout.scss" : "Sass/MyAccountApplication/_myaccount-layout.scss",
+
+        "suitecommerce/Newsletter@2.1.0/Sass/_newsletter.scss" : "Sass/Newsletter/_newsletter.scss",
+
+        "suitecommerce/OrderHistory@5.0.0/Sass/_order-history-details.scss":"Sass/OrderHistory/_order-history-details.scss",
+        "suitecommerce/OrderHistory@5.0.0/Sass/_order-history-item-actions.scss":"Sass/OrderHistory/_order-history-item-actions.scss",
+        "suitecommerce/OrderHistory@5.0.0/Sass/_order-history-summary.scss":"Sass/OrderHistory/_order-history-summary.scss",
+
+        "suitecommerce/OrderWizard.Module.Address@2.2.1/Sass/_order-wizard-address-module.scss" : "Sass/OrderWizard.Module.Address/_order-wizard-address-module.scss",
+        "suitecommerce/OrderWizard.Module.CartItems@2.0.0/Sass/_order-wizard-cartitems-module.scss" : "Sass/OrderWizard.Module.CartItems/_order-wizard-cartitems-module.scss",
+        "suitecommerce/OrderWizard.Module.Confirmation@3.0.0/Sass/_order-wizard-confirmation-module.scss" : "Sass/OrderWizard.Module.Confirmation/_order-wizard-confirmation-module.scss",
+        "suitecommerce/OrderWizard.Module.PaymentMethod@4.0.0/Sass/_order-wizard-showpayments-module.scss": "Sass/OrderWizard.Module.PaymentMethod/_order-wizard-showpayments-module.scss",
+
+        "suitecommerce/OrderWizard.Module.Shipmethod@3.0.0/Sass/_order-wizard-shipmethod-module.scss" : "Sass/OrderWizard.Module.Shipmethod/_order-wizard-shipmethod-module.scss",
+        "suitecommerce/OrderWizard.Module.Shipmethod@3.0.0/Sass/_order-wizard-showshipments-module.scss" : "Sass/OrderWizard.Module.Shipmethod/_order-wizard-showshipments-module.scss",
+        "suitecommerce/OrderWizard.Module.SubmitButton@1.1.1/Sass/_order-wizard-submitbutton-module.scss":"Sass/OrderWizard.Module.SubmitButton/_order-wizard-submitbutton-module.scss",
+        "suitecommerce/OrderWizard@3.0.0/Sass/_order-wizard-step.scss": "Sass/OrderWizard/_order-wizard-step.scss",
+
+        "suitecommerce/Overview@1.1.2/Sass/_overview-home.scss" : "Sass/Overview/_overview-home.scss",
+        "suitecommerce/Overview@1.1.2/Sass/_overview-shipping.scss" : "Sass/Overview/_overview-shipping.scss",
+
+        "suitecommerce/ProductDetails@1.0.0/Sass/_product-details-full.scss" : "Sass/ProductDetails/_product-details-full.scss",
+        "suitecommerce/ProductDetails@1.0.0/Sass/_product-details-image-gallery.scss" : "Sass/ProductDetails/_product-details-image-gallery.scss",
+        "suitecommerce/ProductDetails@1.0.0/Sass/_product-details-options-selector.scss" : "Sass/ProductDetails/_product-details-options-selector.scss",
+        "suitecommerce/ProductDetails@1.0.0/Sass/_product-details-quantity.scss" : "Sass/ProductDetails/_product-details-quantity.scss",
+        "suitecommerce/ProductDetails@1.0.0/Sass/_product-details-quickview.scss" : "Sass/ProductDetails/_product-details-quickview.scss",
+
+        "suitecommerce/ProductList@3.0.0/Sass/_product-list-added-to-cart.scss" : "Sass/ProductList/_product-list-added-to-cart.scss",
+        "suitecommerce/ProductList@3.0.0/Sass/_product-list-bulk-actions.scss" : "Sass/ProductList/_product-list-bulk-actions.scss",
+        "suitecommerce/ProductList@3.0.0/Sass/_product-list-control.scss" : "Sass/ProductList/_product-list-control.scss",
+        "suitecommerce/ProductList@3.0.0/Sass/_product-list-details-later.scss" : "Sass/ProductList/_product-list-details-later.scss",
+        "suitecommerce/ProductList@3.0.0/Sass/_product-list-details-later-macro.scss" : "Sass/ProductList/_product-list-details-later-macro.scss",
+        "suitecommerce/ProductList@3.0.0/Sass/_product-list-display-full.scss" : "Sass/ProductList/_product-list-display-full.scss",
+        "suitecommerce/ProductList@3.0.0/Sass/_product-list-edit-item.scss" : "Sass/ProductList/_product-list-edit-item.scss",
+        "suitecommerce/ProductList@3.0.0/Sass/_product-list-list-details.scss" : "Sass/ProductList/_product-list-list-details.scss",
+
+        "suitecommerce/QuickAdd@2.0.0/Sass/_quick-add.scss" : "Sass/QuickAdd/_quick-add.scss",
+        "suitecommerce/QuickAdd@2.0.0/Sass/_quick-add-item.scss" : "Sass/QuickAdd/_quick-add-item.scss",
+
+        "suitecommerce/RecentlyViewedItems@2.3.0/Sass/_recently-viewed-cell.scss" : "Sass/RecentlyViewedItems/_recently-viewed-cell.scss",
+        "suitecommerce/RecentlyViewedItems@2.3.0/Sass/_recently-viewed-items.scss" : "Sass/RecentlyViewedItems/_recently-viewed-items.scss",
+
+        "suitecommerce/RecordViews@2.0.0/Sass/_recordviews.scss":"Sass/RecordViews/_recordviews.scss",
+        "suitecommerce/RecordViews@2.0.0/Sass/_recordviews-actionable.scss":"Sass/RecordViews/_recordviews-actionable.scss",
+
+        "suitecommerce/ReorderItems@3.0.0/Sass/_reorder-items-actions-quantity.scss" : "Sass/ReorderItems/_reorder-items-actions-quantity.scss",
+        "suitecommerce/ReorderItems@3.0.0/Sass/_reorder-items-list.scss" : "Sass/ReorderItems/_reorder-items-list.scss",
+
+        "suitecommerce/ShoppingApplication@4.0.0/Sass/_shopping-layout.scss" : "Sass/ShoppingApplication/_shopping-layout.scss",
+
+        "suitecommerce/SiteSearch@2.1.2/Sass/_site-search.scss":"Sass/SiteSearch/_site-search.scss",
+        "suitecommerce/SocialSharing@2.0.3/Sass/_social-sharing-flyout.scss":"Sass/SocialSharing/_social-sharing-flyout.scss",
+
+        "suitecommerce/Transaction.Line.Views@1.0.0/Sass/_transaction-line-views-cell-actionable.scss":"Sass/Transaction.Line.Views/_transaction-line-views-cell-actionable.scss",
+        "suitecommerce/Transaction.Line.Views@1.0.0/Sass/_transaction-line-views-cell-navigable.scss":"Sass/Transaction.Line.Views/_transaction-line-views-cell-navigable.scss",
+
+        "third_parties/twitter-bootstrap-sass@3.3.1/assets/stylesheets/bootstrap/_print.scss" : "Sass/twitter-bootstrap-sass/_print.scss",
+        "third_parties/twitter-bootstrap-sass@3.3.1/assets/stylesheets/bootstrap/_variables.scss" : "Sass/twitter-bootstrap-sass/_variables.scss"
+
     }
 }

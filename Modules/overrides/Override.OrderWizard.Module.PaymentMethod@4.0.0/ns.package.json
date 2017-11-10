@@ -1,0 +1,16 @@
+{
+    "gulp": {
+        "javascript": [
+            "JavaScript/*.js"
+        ],
+        "sass": [
+            "Sass/**/*.scss"
+        ],
+        "templates": [
+            "Templates/*"
+        ]
+    }
+    , "overrides": {
+        "suitecommerce/OrderWizard.Module.PaymentMethod@4.0.0/JavaScript/OrderWizard.Module.PaymentMethod.Selector.js": "JavaScript/OrderWizard.Module.PaymentMethod.Selector.js"
+    }
+}

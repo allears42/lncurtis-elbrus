@@ -6,4 +6,7 @@ node_modules/
 .idea/
 scratchpad/
 npm-debug.log
+Modules/extensions/_template/
 Modules/lncurtis/Backup/error.txt
+Modules/custom/CodeInspector/
+temp/

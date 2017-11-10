@@ -1,0 +1,55 @@
+<% var items_per_row = 4, grid_columns = 12 / items_per_row; %>
+
+<div class="row-fluid" data-slider>
+    <% _.each(data.items, function (item, index) { %>
+        <%
+        //console.log(item);
+        var item_url = '/'+ item.urlcomponent;
+        var lowest = {}
+        , details_object = item.onlinecustomerprice_detail
+        , priceSchedule = details_object && details_object.priceschedule || []
+        , isPriceSchedule = priceSchedule.length > 0;
+
+        if (isPriceSchedule){
+            var lowestSchedule = _.min(details_object.priceschedule, function(o){return o.price;});
+            lowest = lowestSchedule;
+            // reset for customers with custom pricing level
+            if(details_object.onlinecustomerprice < lowestSchedule.price) {
+                isPriceSchedule = false;
+            }
+        }
+
+        %>
+        <div itemprop="itemListElement" itemscope="" itemtype="http://schema.org/Product" data-item-id="<%= item.itemid %>" data-sku="" class="item-relations-related-merchandising">
+        	<a class="item-relations-related-item-thumbnail" href="<%= item_url %>">
+        		<img src="<%= item.cms.image.url %>" alt="<%= item.cms.image.alt_text %>" />
+        	</a>
+        	<a class="item-relations-related-item-title" href="<%= item_url %>">
+        		<span itemprop="name"><%= item.storedisplayname2 %></span>
+        	</a>
+        	<div class="yotpo bottomLine"
+            		data-appkey="pQRxz4OUexjKW6K4YkcDHgSrZtii4QztBQVIe5t7"
+            		data-domain="possupply.com"
+            		data-product-id="<%= item.custitem_magento_product_id %>"
+            		data-product-models=""
+            		data-name="<%= item.storedisplayname2 %>"
+            		data-url="<%= item_url %>"
+            		data-image-url="<%= item.cms.image.url %>"
+            		data-description=""
+            		data-bread-crumbs=""></div>
+        	<div class="item-relations-related-item-price" data-view="Item.Price">
+             <div class="item-relations-price">
+                <span class="item-relations-price-exact" itemprop="offers" itemscope="" itemtype="http://schema.org/Offer"><meta itemprop="priceCurrency" content="USD">
+                    <span class="item-relations-price-lead" itemprop="price" data-rate="<%= item.onlinecustomerprice_detail.onlinecustomerprice_formatted %>">
+                    <%= item.onlinecustomerprice_detail.onlinecustomerprice_formatted %>
+                    </span>
+                    <link itemprop="availability" href="http://schema.org/InStock">
+                </span>
+                <% if (isPriceSchedule) { %>
+                    <span class="product-views-price-schedule-lowest" itemprop="offers" itemscope="" itemtype="http://schema.org/Offer"> As Low As <%= lowest.price_formatted %> </span>
+                <% } %>
+                </div>
+            </div>
+        </div>
+    <% }); %>
+</div>

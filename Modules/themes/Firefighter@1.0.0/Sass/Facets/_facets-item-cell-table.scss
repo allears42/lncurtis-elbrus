@@ -1,0 +1,162 @@
+/*
+	© 2016 NetSuite Inc.
+	User may not copy, modify, distribute, or re-bundle or otherwise make available this code;
+	provided, however, if you are an authorized user with a NetSuite account or log-in, you
+	may use this code subject to the terms that govern your access and use.
+*/
+
+.facets-item-cell-table {
+	@extend .item-cell;
+    padding: $sc-base-padding * 3;
+    margin-bottom: $sc-base-margin*6;
+	.global-views-star-rating {
+		float:none;
+	}
+
+	.item-views-price {
+		text-align:center;
+	}
+
+	.item-views-option-color {
+		text-align:center;
+
+	}
+
+  [data-type="alert-placeholder-module"] {
+    span {
+      font-size: $sc-smallest-font-size;
+    }
+    div {
+      padding-right: 0;
+    }
+
+    .global-views-message {
+      padding: 0;
+      margin-bottom: 0;
+    }
+  }
+}
+
+.facets-item-cell-table-quick-view-wrapper {
+	@extend .item-cell-quick-view-wrapper;
+}
+
+.facets-item-cell-table-quick-view-link {
+	@extend .item-cell-quick-view-link;
+}
+
+.facets-item-cell-table-image-wrapper {
+	position:relative;
+  @media (min-width: $screen-sm-min) {
+
+    padding: $sc-base-padding*6  $sc-base-padding*2;
+  }
+	text-align:center;
+}
+
+.facets-item-cell-table-link-image {
+  display : block;
+  height: 250px
+}
+
+.facets-item-cell-table-quick-view-icon {}
+
+.facets-item-cell-table-add-to-cart {
+ @extend .row;
+  .col-xs-8{
+    padding-left :0;
+  }
+  @media (min-width: $screen-sm-min) {
+
+    [class*='col-'] {
+      padding-left: 0;
+    }
+  }
+}
+.facets-item-cell-grid-view-details {
+  text-align: center;
+}
+.facets-item-cell-table-add-to-cart-itemid {}
+
+.facets-item-cell-table-stock {
+	text-align:center;
+}
+
+.facets-item-cell-table-details {
+	text-align:center;
+}
+
+.facets-item-cell-table-image {
+	width: auto;
+	height:100%;
+}
+
+.facets-item-cell-table-title {
+  a {
+    @extend .item-cell-title;
+    @media (max-width : $screen-sm-min) {
+      min-height : 65px;
+    }
+    @media (max-width : $screen-xs) {
+      font-size  : $sc-base-font-size;
+    }
+  }
+}
+
+.facets-item-cell-table-price {
+	@extend .small-price;
+	margin-bottom:$sc-small-margin;
+}
+
+.facets-item-cell-table-rating {
+	text-align:center;
+}
+
+.facets-item-cell-table .item-details-option-color-tiles-container {
+	@extend .color-picker-sm;
+}
+
+.facets-item-cell-table .item-details-option-color-label {
+	display:none;
+}
+
+.facets-item-cell-table {
+	.global-views-star-rating-area {
+		float:none;
+		margin-bottom:$sc-small-margin;
+	}
+}
+
+.facets-item-cell-table-add-to-cart-quantity {
+  @extend .input-medium;
+  min-width: 40px;
+  margin-right: $sc-base-margin * 2;
+  max-width :100%;
+}
+
+.facets-item-cell-table-add-to-cart-button {
+	@extend .button-primary;
+	@extend .button-medium;
+    color:$sc-color-primary;
+    background:$sc-color-tertiary;
+    border: 2px solid $sc-color-primary;
+}
+
+.facets-item-cell-table-sku {
+  text-align: center;
+  margin-bottom: $sc-base-margin *2;
+  @media (max-width: $screen-xs) {
+    min-height: 65px;
+  }
+}
+
+.facets-items-collection-view-cell-span6 {
+  @media (max-width: $screen-xs) {
+    &:nth-child(even){
+      padding-left: 8px
+    }
+    &:nth-child(odd){
+      padding-right: 8px
+    }
+  }
+}

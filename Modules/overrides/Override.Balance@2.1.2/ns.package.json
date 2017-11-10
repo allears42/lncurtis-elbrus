@@ -1,0 +1,16 @@
+{
+    "gulp": {
+        "javascript": [
+            "JavaScript/*.js"
+        ],
+        "templates": [
+            "Templates/*"
+        ],
+        "sass": [
+            "Sass/*.scss"
+        ]
+    },
+    "overrides": {
+        "suitecommerce/Balance@2.1.2/JavaScript/Balance.js": "JavaScript/Balance.js"
+    }
+}
