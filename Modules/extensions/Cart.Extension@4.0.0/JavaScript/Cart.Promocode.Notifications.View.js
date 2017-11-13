@@ -13,7 +13,8 @@ define('Cart.Promocode.Notifications.View'
 		, cart_promocode_notifications
 		, Backbone
 		, BackboneCompositeView
-		, _) {
+		, _
+	) {
 		'use strict';
 		
 		//@class Cart.Promocode.Notification.View @extend Backbone.View
