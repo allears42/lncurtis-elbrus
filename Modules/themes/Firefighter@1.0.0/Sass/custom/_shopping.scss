@@ -296,6 +296,7 @@
   .global-views-message {
     margin-bottom: $sc-base-margin;
     padding: $sc-base-padding 0;
+    display: block;
     span {
       font-size: $sc-small-font-size;
     }
