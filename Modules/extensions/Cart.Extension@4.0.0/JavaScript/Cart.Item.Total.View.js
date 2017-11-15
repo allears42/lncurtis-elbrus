@@ -54,7 +54,7 @@ define('Cart.Item.Total.View'
 			,	lineId: this.model.get('internalid')
 				//@property {Boolean} isMinusButtonDisabled
 				//@property {Boolean} showComparePrice
-			,	showComparePrice: this.model.get('amount') > this.model.get('total')
+			,	showComparePrice: false//this.model.get('amount') > this.model.get('total')
 				// @property {Boolean} isPriceEnabled
 			,	isPriceEnabled: !ProfileModel.getInstance().hidePrices()
 			};
