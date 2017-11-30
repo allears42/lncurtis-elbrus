@@ -40,6 +40,8 @@ define(
 			
 				self.render();
 			});
+			
+			this.model.on('change', this.modelOptionsChanged, this);
 		})
 		
 	,   events: _.extend({}, ProductDetailsQuantityView.prototype.childViews, {
@@ -114,13 +116,26 @@ define(
 				
 				$input_quantity.val(new_quantity);
 				this.model.set('quantity', new_quantity);
+				
 			}
 		}
 		
+	,   modelOptionsChanged: function () {
+			this.reconcileQuantity();
+			this.render();
+		}
+		
 	,   reconcileQuantity: function () {
+			
+			var item = this.model.get('item')
+			,   childs = this.model.getSelectedMatrixChilds();
+			if(childs && childs.length === 1) item = childs[0];
+			
 			this.backorderMessage = "";
-			this.allowBackorders = this.model.get('item').get('_isBackorderable', true);
-			this.stock_level = this.lineForItemInCart ? this.lineForItemInCart.get('item').get("_stock", true) : this.model.get('item').get('quantityAvailable');
+			this.allowBackorders = item.get('_isBackorderable', true);
+			
+			
+			this.stock_level = this.lineForItemInCart ? this.lineForItemInCart.get('item').get("_stock", true) : item.get('quantityAvailable');
 			
 			if (this.cart_quantity > 0) {
 				this.backorderMessage = _.translate('Limited quantities, only $(0) available. You have $(1) in your cart.', this.stock_level, this.cart_quantity);

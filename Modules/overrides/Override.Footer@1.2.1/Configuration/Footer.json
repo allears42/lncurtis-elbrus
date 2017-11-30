@@ -92,14 +92,14 @@
                         "type": "string",
                         "title": "level",
                         "description": "Hierarchy level of this navigation entry",
-                        "enum":["1", "2", "3"],
+                        "enum":["", "1", "2", "3"],
                         "mandatory": true
                     },
                     "dataTouchpoint": {
                         "type": "string",
                         "title": "data-touchpoint",
                         "description": "data-touchpoint value for the link if any",
-                        "enum": ["home", "login", "register", "logout", "customercenter", "viewcart", "checkout"]
+                        "enum": ["", "home", "login", "register", "logout", "customercenter", "viewcart", "checkout"]
                     },
                     "dataHashtag": {
                         "type": "string",
@@ -115,7 +115,7 @@
                         "type": "string",
                         "title": "Target",
                         "description": "link target",
-                        "enum":["_blank", "_self", "_parent", "_top"]
+                        "enum":["", "_blank", "_self", "_parent", "_top"]
                     }
                 }
             },
@@ -170,7 +170,7 @@
                         "type": "string",
                         "title": "data-touchpoint",
                         "description": "data-touchpoint value for the link if any",
-                        "enum": ["home", "login", "register", "logout", "customercenter", "viewcart", "checkout"]
+                        "enum": ["", "home", "login", "register", "logout", "customercenter", "viewcart", "checkout"]
                     },
                     "dataHashtag": {
                         "type": "string",
@@ -186,7 +186,7 @@
                         "type": "string",
                         "title": "Target",
                         "description": "link target",
-                        "enum":["_blank", "_self", "_parent", "_top"]
+                        "enum":["", "_blank", "_self", "_parent", "_top"]
                     },
                     "sortOrder": {
                         "type": "string",
@@ -263,7 +263,7 @@
                         "type": "string",
                         "title": "data-touchpoint",
                         "description": "data-touchpoint value for the link if any",
-                        "enum": ["home", "login", "register", "logout", "customercenter", "viewcart", "checkout"]
+                        "enum": ["", "home", "login", "register", "logout", "customercenter", "viewcart", "checkout"]
                     },
                     "dataHashtag": {
                         "type": "string",
@@ -279,7 +279,7 @@
                         "type": "string",
                         "title": "Target",
                         "description": "link target",
-                        "enum":["_blank", "_self", "_parent", "_top"]
+                        "enum":["", "_blank", "_self", "_parent", "_top"]
                     },
                     "sortOrder": {
                         "type": "string",
@@ -333,7 +333,7 @@
                         "type": "string",
                         "title": "Target",
                         "description": "link target",
-                        "enum":["_blank", "_self", "_parent", "_top"]
+                        "enum":["", "_blank", "_self", "_parent", "_top"]
                     },
                     "sortOrder": {
                         "type": "string",

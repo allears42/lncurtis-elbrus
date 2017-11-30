@@ -36,7 +36,9 @@ define('Item.KeyMapping.Videos'
 				}
 				
 				//console.log($elem.prop('outerHTML'));
-				videoObjArr.push($elem.prop('outerHTML'))
+				videoObjArr.push({
+					isVideo: true
+				,   embed: $elem.prop('outerHTML')})
 			});
 			
 			//console.log(videoObjArr);

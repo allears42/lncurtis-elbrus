@@ -13,7 +13,7 @@
 					{{#if isVideo}}
 						<li>
 							{{! This might have to be changed based on format of data}}
-							{{{this}}}
+							{{{this.embed}}}
 						</li>
 					{{else}}
 						<li data-zoom class="product-details-image-gallery-container">

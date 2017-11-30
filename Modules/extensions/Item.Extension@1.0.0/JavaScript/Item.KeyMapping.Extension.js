@@ -55,12 +55,12 @@ define('Item.KeyMapping.Extension'
 	    
     ,   quantityAvailable: function (item)
 	    {
-	    	var matrixParent = item.get('_matrixParent');
+	    	/*var matrixParent = item.get('_matrixParent');
 		    // If this item is a child of a matrix return the quantity of the parent
 		    if (matrixParent && matrixParent.get('internalid'))
 		    {
 			    return item.get('_matrixParent').get('quantityavailable');
-		    }
+		    }*/
 		    // Other ways it will use the URL component or a default /product/ID
 		    return item.get('quantityavailable');
 		    
