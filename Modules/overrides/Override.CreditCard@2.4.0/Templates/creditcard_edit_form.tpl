@@ -21,7 +21,7 @@
 			<!--data-image="creditcard-icon"-->
 			<!--/>-->
 
-			<i class="fa fa-cc-{{iconClass}} creditcard-edit-form-card-icon {{#if hidden}} hidden {{/if}}" data-value="{{key}}"></i>
+			<i class="fa fa-cc-{{iconClass}} creditcard-edit-form-card-icon {{#if hidden}} hidden {{/if}}" data-value="{{key}}" data-image="creditcard-icon"></i>
 			{{/each}}
 		</div>
 

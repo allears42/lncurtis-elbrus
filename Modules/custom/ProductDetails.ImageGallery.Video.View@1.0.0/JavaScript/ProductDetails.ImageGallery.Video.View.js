@@ -41,8 +41,9 @@ define(
         
     ,   initialize: _.wrap(ProductDetailsImageGalleryView.prototype.initialize, function(fn, options) {
 			
-			this.fallBack = Configuration.get('videoThumbFallback', '/images/video.png');
             fn.apply(this, _.toArray(arguments).slice(1));
+			
+			this.fallBack = Configuration.get('videoThumbFallback', '/images/video.png');
             
         })
         
@@ -54,9 +55,9 @@ define(
         ,	buildSliderPager: function (slide_index)
         {
             var image = this.images && this.images[slide_index];
-	        
+            
             if(image && image.isVideo) {
-                return "<img src='"+this.fallBack+"' alt='play video' class='bx-video-fallback' />"
+                return "<img src='"+Configuration.get('videoThumbFallback', '/images/video.png')+"' alt='play video' class='bx-video-fallback' />"
             }
             else {
 	            return '<img src="' + resizeImage(image.url, 'tinythumb') + '" alt="' + image.altimagetext + '">';

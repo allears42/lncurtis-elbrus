@@ -54,7 +54,7 @@ define('RecentlyViewedItems.Collection'
 					,   thisItem = item.get('internalid');
 
 					
-					console.log(currentCookie, thisItem);
+					//console.log(currentCookie, thisItem);
 					
 					if (currentCookie.indexOf(thisItem) < 0) {
 						var news_items = currentCookie + (currentCookie.length > 0 ? "," : "")+ thisItem;
