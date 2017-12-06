@@ -92,8 +92,7 @@
                         "type": "string",
                         "title": "level",
                         "description": "Hierarchy level of this navigation entry",
-                        "enum":["", "1", "2", "3"],
-                        "mandatory": true
+                        "enum":["", "1", "2", "3"]
                     },
                     "dataTouchpoint": {
                         "type": "string",
