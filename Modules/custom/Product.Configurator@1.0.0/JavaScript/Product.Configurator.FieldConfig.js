@@ -6,19 +6,13 @@
 
 //custcol_carrier_color - color palette
 
-// name strip
-//custcol_carrier_name_color - color palette
-//custcol_carrier_name_text - free form
+/*
+Front Patch = FRONT PATCH BLZ STCH CUSTOM with Internal ID = 532317
 
+Rear Patch = REAR PATCH BLZ STCH CUSTOM with Internal ID = 532517
 
-// FRONT PATCH
-//custcol_front_patch_color - color palette
-//custcol_front_patch_size - dropdown
-//custcol_front_patch_text - free form
-
-// REAR PATCH
-//custcol_rear_patch_color - color palette
-//custcol_rear_patch_text - free form
+Name Strip = NAME STRIP BLZ STCH CUSTOM with Internal ID = 532617
+ */
 
 /*
 	© 2017 LN Curtis

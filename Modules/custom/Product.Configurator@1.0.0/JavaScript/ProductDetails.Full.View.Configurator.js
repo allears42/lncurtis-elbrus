@@ -83,7 +83,6 @@ define(
 					,	model: this.model
 				});
 			}
-			
 		})
 		
 	,   events: _.extend({}, ProductDetailsFullView.prototype.events, {
@@ -106,7 +105,7 @@ define(
 				}
 			}
 			
-			console.log(areasForThisProduct);
+			//console.log(areasForThisProduct);
 			return areasForThisProduct;
 			
 		}

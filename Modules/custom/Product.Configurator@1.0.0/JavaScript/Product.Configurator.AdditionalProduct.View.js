@@ -95,7 +95,8 @@ define(
 				, options_to_render = product.getVisibleOptions() || [];
 				// get the singles
 				options_to_render = _.filter(options_to_render, function (option) {
-					return option.get('values') && option.get('values').length > 2
+					if(option.get('type') === "select") return option.get('values') && option.get('values').length > 2;
+					else return true;
 				});
 				
 				
