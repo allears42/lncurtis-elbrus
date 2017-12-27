@@ -5,15 +5,17 @@ define('GoogleTagManager.Extension'
 ,	[
         'Header.View'
     ,   'CustomerServiceForm.View'
-    ,   'GoogleTagManager'
+    ,   'Tracker'
 	,	'underscore'
+    ,   'Backbone'
 ]
 ,	function (
 
 		HeaderView
     ,   CustomerServiceFormView
-    ,   GoogleTagManager
+    ,   Tracker
 	,	_
+    ,   Backbone
 
 	)
     {
@@ -29,11 +31,12 @@ define('GoogleTagManager.Extension'
             
         ,   gtmTrackCall: function() {
 
-               //onClick="ga('send', 'event', 'Header Phone Number', 'Click', 'Lead');"
-                GoogleTagManager.trackEvent({
+                Tracker.getInstance().trackEvent({
                     category: "Header Phone Number",
                     action: "Click",
-                    label: "Lead"
+                    label: "Lead",
+                    value: 1,
+                    page: '/' + Backbone.history.fragment
                 });
             }
             
@@ -49,11 +52,12 @@ define('GoogleTagManager.Extension'
             
         ,   gtmTrackEmail: function() {
             
-                //onClick="ga('send', 'event', 'Header Email', 'Click', 'Lead');"
-                GoogleTagManager.trackEvent({
+                Tracker.getInstance().trackEvent({
                     category: "Header Email",
                     action: "Click",
-                    label: "Lead"
+                    label: "Lead",
+                    value: 1,
+                    page: '/' + Backbone.history.fragment
                 });
             }
         
