@@ -145,7 +145,7 @@ define(
             ,	updateOrder: function (order_fields, results, order, data)
             {
                 try {
-                    //nlapiLogExecution('debug', 'updateOrder', 'start');
+                    nlapiLogExecution('debug', 'updateOrder', 'start');
                     // nlapiLogExecution('debug', 'results', JSON.stringify(_.omit(results, ['lines']),null,2));
                     // nlapiLogExecution('debug', 'order', order);
                     // nlapiLogExecution('debug', 'order_fields', JSON.stringify(order_fields,null,2));
@@ -158,9 +158,9 @@ define(
                     // nlapiLogExecution('debug', 'results.summary (before)', JSON.stringify(results.summary,null,2));
 
                     // If not in checkout, no need to call PaceJet
-                    nlapiLogExecution('debug', 'PacejetModel#updateOrder: Utils.isInCheckout(request) = ', JSON.stringify(Utils.isInCheckout(request),null,2));
+                    // nlapiLogExecution('debug', 'PacejetModel#updateOrder: Utils.isInCheckout(request) = ', JSON.stringify(Utils.isInCheckout(request),null,2));
                     if (!Utils.isInCheckout(request)) {
-                        nlapiLogExecution('debug', 'PacejetModel#updateOrder: skipping Pacejet lookup because not in checkout');
+                        nlapiLogExecution('debug', 'PacejetModel#updateOrder: skipping Pacejet lookup because not in checkout: results.shipmethods', JSON.stringify(results.shipmethods,null,2));
                         return results;
                     }
 
@@ -171,7 +171,7 @@ define(
                     this._updateShippingRates(results, order, data);
 
                     //nlapiLogExecution('debug', 'updateOrder: results.summary (after)', JSON.stringify(results.summary,null,2));
-                    //nlapiLogExecution('debug', 'updateOrder: results.shipmethods', JSON.stringify(results.shipmethods,null,2));
+                    nlapiLogExecution('debug', 'updateOrder: results.shipmethods', JSON.stringify(results.shipmethods,null,2));
                 }
                 catch (e) {
                     nlapiLogExecution('debug', 'updateOrder: exception', e);
@@ -224,7 +224,7 @@ define(
                     // cache requests since LiveOver.Model#get is called repeatedly through the checkout process
                     var cache = {};
                     try { cache = JSON.parse(nlapiGetContext().getSessionObject('pjrcache')); } catch (ignore) {}
-                    nlapiLogExecution('audit', '_getRates: get cache', JSON.stringify(cache,null,2));
+                    // nlapiLogExecution('audit', '_getRates: get cache', JSON.stringify(cache,null,2));
                     if ( cache && cache.h && cache.h == this._hashCode(JSON.stringify(request)) ) {
                         nlapiLogExecution('debug', '_getRates returning cached result');
                         return cache.r;
@@ -272,7 +272,7 @@ define(
                         , r: ratingResultsList
                     };
                     nlapiGetContext().setSessionObject('pjrcache', JSON.stringify(newCache));
-                    nlapiLogExecution('audit', '_getRates: set cache', JSON.stringify(newCache,null,2));
+                    // nlapiLogExecution('audit', '_getRates: set cache', JSON.stringify(newCache,null,2));
                 }
                 catch (e) {
                     nlapiLogExecution('debug', 'Pacejet.js:_getRates: exception', e);
@@ -334,7 +334,7 @@ define(
                     // nlapiLogExecution('debug', '_updateShippingRates: shipaddress.Destination.Address1 = ', shipaddress.Destination.Address1);
 
                     var existsAddress1 = !!(shipaddress && shipaddress.Destination && shipaddress.Destination.Address1);
-                    nlapiLogExecution('debug', '_updateShippingRates: existsAddress1 = ', existsAddress1);
+                    // nlapiLogExecution('debug', '_updateShippingRates: existsAddress1 = ', existsAddress1);
 
                     // look up rates and update both shipmethods and summary
                     if (existsAddress1) {
@@ -344,11 +344,11 @@ define(
 
                         // if there are no results, set shipping method and rates to the default.
                         if (!ratingResultsList || !ratingResultsList.length) {
-                            //nlapiLogExecution('debug', 'returning default ship method', '');
-                            //nlapiLogExecution('debug', 'setting custbody_pacejet_rates_status false', '');
+                            nlapiLogExecution('debug', 'returning default ship method', '');
 
                             try {
                                 nlapiGetWebContainer().getShoppingSession().isLoggedIn2() && order.setCustomFieldValues({ 'custbody_pacejet_rates_status': 'F' });
+                                nlapiLogExecution('debug', 'setting custbody_pacejet_rates_status false', '');
                             }
                             catch (e) {
                                 // ignore when in cart, only supported in checkout.
@@ -363,10 +363,9 @@ define(
                             return;
                         }
 
-                        //nlapiLogExecution('debug', 'setting custbody_pacejet_rates_status true', '');
-
                         try {
                             nlapiGetWebContainer().getShoppingSession().isLoggedIn2() && order.setCustomFieldValues({ 'custbody_pacejet_rates_status': 'T' });
+                            nlapiLogExecution('debug', 'setting custbody_pacejet_rates_status true', '');
                         }
                         catch (e) {
                             // ignore when in cart, only supported in checkout.
@@ -374,7 +373,7 @@ define(
 
                         //  if there are shipmethods
                         if (results.shipmethods && results.shipmethods.length) {
-                            // nlapiLogExecution('debug', '_updateShippingRates', 'found shipmethods');
+                            nlapiLogExecution('debug', '_updateShippingRates', 'found shipmethods');
 
                             // save original shipmethods array since order submission fails if we do not sent the original array
                             this._cloneShipmethods(results);
@@ -406,7 +405,7 @@ define(
                             //TODO: need to filter the ratingResults but the list of methods but we only know the NS ID.
                             // We need to add the PaceJet ID to the table as well.
 
-                            //nlapiLogExecution('debug', '_updateShippingRates', 'no shipmethods');
+                            nlapiLogExecution('debug', '_updateShippingRates', 'no shipmethods, using lowest rate from PaceJet');
                             var lowestRate = _.chain(ratingResultsList)
                                 .filter(function (e) { return _.contains(self.pacejetConfiguration.groundMethodsPacejet, e.shipCodeXRef); })
                                 .sortBy('consigneeFreight')
@@ -425,7 +424,7 @@ define(
 
                     // no update needed as the default shipping amount is zero
                     else {
-                        //nlapiLogExecution('debug', '_updateShippingRates', 'no address, skip rate update');
+                        nlapiLogExecution('debug', '_updateShippingRates', 'no address, skip rate update');
                     }
                 }
                 catch (e) {
@@ -461,6 +460,7 @@ define(
                 //nlapiLogExecution('debug', 'filterToGroundMethods', filterToGroundMethods);
 
                 if (results && results.shipmethods && results.shipmethods.length) {
+                    nlapiLogExecution('debug', '_filterShippingMethods', 'filtering');
 
                     ratingResultsList = _.map(ratingResultsList, function (e) {
                         return _.pick(e, ['consigneeFreight', 'shipCodeXRef']);
@@ -538,6 +538,9 @@ define(
                     //nlapiLogExecution('debug', 'results.shipmethod (after)', JSON.stringify(results.shipmethod,null,2));
 
                     results.shipmethods = shipmethods;
+                }
+                else {
+                    nlapiLogExecution('debug', '_filterShippingMethods', 'skipping');
                 }
             }
 

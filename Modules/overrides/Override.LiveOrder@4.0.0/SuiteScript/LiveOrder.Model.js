@@ -1806,7 +1806,6 @@ define(
 			nlapiLogExecution('debug', 'setTransactionBodyField', JSON.stringify(data.options, null, 2))
 				_.each(data.options, function(value, key)
 				{
-					nlapiLogExecution('debug', 'setTransactionBodyField', JSON.stringify(data.options, null, 2))
 					if (Array.isArray(value))
 					{
 						data.options[key] = value.join(String.fromCharCode(5));

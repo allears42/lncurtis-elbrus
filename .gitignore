@@ -1,4 +1,5 @@
 .nsdeploy
+package-lock.json
 payload.json
 DeployDistribution/
 LocalDistribution/
