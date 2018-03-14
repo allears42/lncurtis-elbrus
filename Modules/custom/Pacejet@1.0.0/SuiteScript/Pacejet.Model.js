@@ -206,90 +206,6 @@ define(
                 }
             }
 
-            ,	_getRates: function (shipaddress, order, results)
-            {
-                var ratingResultsList = [];
-                var request = {};
-
-                try {
-                    //nlapiLogExecution('debug', '_getRates', 'start');
-                    //nlapiLogExecution('debug', 'hasFreeShipItems', results.hasFreeShipItems);
-                    //nlapiLogExecution('debug', 'allFreeShipItems', results.allFreeShipItems);
-
-                    var pacejetConfig = this.pacejetConfiguration.production;
-
-                    _.extend(request, shipaddress, this._packageDetailsList(order, results), pacejetConfig);
-                    nlapiLogExecution('debug', 'rates request', JSON.stringify(request,null,2));
-
-                    // cache requests since LiveOver.Model#get is called repeatedly through the checkout process
-                    var cache = {};
-                    try { cache = JSON.parse(nlapiGetContext().getSessionObject('pjrcache')); } catch (ignore) {}
-                    // nlapiLogExecution('audit', '_getRates: get cache', JSON.stringify(cache,null,2));
-                    if ( cache && cache.h && cache.h == this._hashCode(JSON.stringify(request)) ) {
-                        nlapiLogExecution('debug', '_getRates returning cached result');
-                        return cache.r;
-                    }
-
-                    var pacejetUrl = 'https://api.pacejet.cc/Rates';
-                    //nlapiLogExecution('debug', 'pacejetUrl', JSON.stringify(pacejetUrl,null,2));
-                    //nlapiLogExecution('debug', 'request', JSON.stringify(request,null,2));
-
-                    var pacejetHeaders = {};
-                    pacejetHeaders.PacejetLocation = pacejetConfig.Location;
-                    pacejetHeaders.PacejetLicenseKey = pacejetConfig.LicenseKey;
-                    pacejetHeaders.UpsLicenseID = pacejetConfig.UpsLicenseID;
-                    pacejetHeaders['Content-Type'] = 'application/json';
-                    // nlapiLogExecution('debug', 'pacejetHeaders', JSON.stringify(pacejetHeaders,null,2));
-
-                    var ts = new Date().getTime();
-
-                    // uncomment this to test client-side failure case.
-                    // throw "test of client-side rates failure";
-
-                    var pacejetResponse = nlapiRequestURL(pacejetUrl, JSON.stringify(request), pacejetHeaders);
-                    nlapiLogExecution('debug', 'Pacejet.Rates: elapsed time in ms', new Date().getTime() - ts);
-                    // nlapiLogExecution('debug', 'pacejetResponse', pacejetResponse);
-
-                    var rates = JSON.parse( pacejetResponse.getBody() );
-                    // nlapiLogExecution('debug', 'rates', JSON.stringify(rates,null,2));
-
-                    ratingResultsList = rates.ratingResultsList;
-
-                    // _.each(ratingResultsList, function (e) {
-                    //     nlapiLogExecution('debug', 'ratingResult (before filtering and mapping', JSON.stringify(e,null,2));
-                    // });
-
-                    // filter out any rates that returned zero or are not in mapping table.
-                    // nlapiLogExecution('debug', 'ratingResultsList.length (raw)', JSON.stringify(ratingResultsList.length,null,2));
-                    ratingResultsList = _.filter(ratingResultsList, function (rate) {
-                        return !!rate.consignorFreight;
-                    });
-                    //nlapiLogExecution('debug', 'ratingResultsList.length (with rate amount)', JSON.stringify(ratingResultsList.length,null,2));
-
-                    // set rates cache here
-                    var newCache = {
-                        h: this._hashCode(JSON.stringify(request))
-                        , r: ratingResultsList
-                    };
-                    nlapiGetContext().setSessionObject('pjrcache', JSON.stringify(newCache));
-                    // nlapiLogExecution('audit', '_getRates: set cache', JSON.stringify(newCache,null,2));
-                }
-                catch (e) {
-                    nlapiLogExecution('debug', 'Pacejet.js:_getRates: exception', e);
-
-                    nlapiGetContext().setSessionObject('pjrcache', null);
-
-                    var body = 'Pacejet.js\nunexpected error: ' + e.toString() + '\nrequest = ' + JSON.stringify(request,null,2);
-                    if ( e instanceof nlobjError ) {
-                        body = 'Pacejet.js\nsystem error: \ncode = ' + e.getCode() + '\ndetails = ' + e.getDetails() + '\nrequest = ' + JSON.stringify(request,null,2);
-                    }
-                    nlapiSendEmail(-5, 'joelmcconaughy@gmail.com', 'PaceJet /rates error', body, null, null, null, null, true);
-                }
-
-                // nlapiLogExecution('debug', '_getRates returning uncached result', ratingResultsList);
-                return ratingResultsList;
-            }
-
             ,	_updateShippingRates: function (results, order, data)
             {
                 //nlapiLogExecution('debug', '_updateShippingRates', 'start');
@@ -312,12 +228,15 @@ define(
                     //nlapiLogExecution('debug', 'results.shipmethod', results.shipmethod);
                     // nlapiLogExecution('debug', 'results.shipaddress', results.shipaddress);
 
+                    nlapiLogExecution('debug', 'data.shipaddress', JSON.stringify(data.shipaddress,null,2));
+                    nlapiLogExecution('debug', 'data.addresses', JSON.stringify(data.addresses,null,2));
                     var address = data && _.find(data.addresses, function (a) {
                         return a.internalid === data.shipaddress;
                     });
+                    nlapiLogExecution('debug', 'address', JSON.stringify(address,null,2));
 
                     if (!address && results && results.addresses && results.addresses.length) {
-                        // nlapiLogExecution('debug', 'looking in results address list', '');
+                        nlapiLogExecution('debug', 'looking in results address list', '');
 
                         for (var i=0; i < results.addresses.length; i++) {
                             if (results.addresses[i].internalid == results.shipaddress) {
@@ -325,16 +244,16 @@ define(
                                 break;
                             }
                         }
-                        // nlapiLogExecution('debug', '_updateShippingRates: results.address', JSON.stringify(address,null,2));
+                        nlapiLogExecution('debug', '_updateShippingRates: results.address', JSON.stringify(address,null,2));
                     }
 
                     var shipaddress = this._shippingAddress(order, address);
-                    // nlapiLogExecution('debug', '_updateShippingRates: shipaddress = ', shipaddress);
-                    // nlapiLogExecution('debug', '_updateShippingRates: shipaddress.Destination = ', shipaddress.Destination);
-                    // nlapiLogExecution('debug', '_updateShippingRates: shipaddress.Destination.Address1 = ', shipaddress.Destination.Address1);
+                    nlapiLogExecution('debug', '_updateShippingRates: shipaddress = ', shipaddress);
+                    nlapiLogExecution('debug', '_updateShippingRates: shipaddress.Destination = ', shipaddress.Destination);
+                    nlapiLogExecution('debug', '_updateShippingRates: shipaddress.Destination.Address1 = ', shipaddress.Destination.Address1);
 
                     var existsAddress1 = !!(shipaddress && shipaddress.Destination && shipaddress.Destination.Address1);
-                    // nlapiLogExecution('debug', '_updateShippingRates: existsAddress1 = ', existsAddress1);
+                    nlapiLogExecution('debug', '_updateShippingRates: existsAddress1 = ', existsAddress1);
 
                     // look up rates and update both shipmethods and summary
                     if (existsAddress1) {
@@ -431,6 +350,90 @@ define(
                     nlapiLogExecution('error', '_updateShippingRates: exception', e);
                 }
 
+            }
+
+            ,	_getRates: function (shipaddress, order, results)
+            {
+                var ratingResultsList = [];
+                var request = {};
+
+                try {
+                    //nlapiLogExecution('debug', '_getRates', 'start');
+                    //nlapiLogExecution('debug', 'hasFreeShipItems', results.hasFreeShipItems);
+                    //nlapiLogExecution('debug', 'allFreeShipItems', results.allFreeShipItems);
+
+                    var pacejetConfig = this.pacejetConfiguration.production;
+
+                    _.extend(request, shipaddress, this._packageDetailsList(order, results), pacejetConfig);
+                    nlapiLogExecution('debug', 'rates request', JSON.stringify(request,null,2));
+
+                    // cache requests since LiveOver.Model#get is called repeatedly through the checkout process
+                    var cache = {};
+                    try { cache = JSON.parse(nlapiGetContext().getSessionObject('pjrcache')); } catch (ignore) {}
+                    // nlapiLogExecution('audit', '_getRates: get cache', JSON.stringify(cache,null,2));
+                    if ( cache && cache.h && cache.h == this._hashCode(JSON.stringify(request)) ) {
+                        nlapiLogExecution('debug', '_getRates returning cached result');
+                        return cache.r;
+                    }
+
+                    var pacejetUrl = 'https://api.pacejet.cc/Rates';
+                    //nlapiLogExecution('debug', 'pacejetUrl', JSON.stringify(pacejetUrl,null,2));
+                    //nlapiLogExecution('debug', 'request', JSON.stringify(request,null,2));
+
+                    var pacejetHeaders = {};
+                    pacejetHeaders.PacejetLocation = pacejetConfig.Location;
+                    pacejetHeaders.PacejetLicenseKey = pacejetConfig.LicenseKey;
+                    pacejetHeaders.UpsLicenseID = pacejetConfig.UpsLicenseID;
+                    pacejetHeaders['Content-Type'] = 'application/json';
+                    // nlapiLogExecution('debug', 'pacejetHeaders', JSON.stringify(pacejetHeaders,null,2));
+
+                    var ts = new Date().getTime();
+
+                    // uncomment this to test client-side failure case.
+                    // throw "test of client-side rates failure";
+
+                    var pacejetResponse = nlapiRequestURL(pacejetUrl, JSON.stringify(request), pacejetHeaders);
+                    nlapiLogExecution('debug', 'Pacejet.Rates: elapsed time in ms', new Date().getTime() - ts);
+                    // nlapiLogExecution('debug', 'pacejetResponse', pacejetResponse);
+
+                    var rates = JSON.parse( pacejetResponse.getBody() );
+                    // nlapiLogExecution('debug', 'rates', JSON.stringify(rates,null,2));
+
+                    ratingResultsList = rates.ratingResultsList;
+
+                    // _.each(ratingResultsList, function (e) {
+                    //     nlapiLogExecution('debug', 'ratingResult (before filtering and mapping', JSON.stringify(e,null,2));
+                    // });
+
+                    // filter out any rates that returned zero or are not in mapping table.
+                    // nlapiLogExecution('debug', 'ratingResultsList.length (raw)', JSON.stringify(ratingResultsList.length,null,2));
+                    ratingResultsList = _.filter(ratingResultsList, function (rate) {
+                        return !!rate.consignorFreight;
+                    });
+                    //nlapiLogExecution('debug', 'ratingResultsList.length (with rate amount)', JSON.stringify(ratingResultsList.length,null,2));
+
+                    // set rates cache here
+                    var newCache = {
+                        h: this._hashCode(JSON.stringify(request))
+                        , r: ratingResultsList
+                    };
+                    nlapiGetContext().setSessionObject('pjrcache', JSON.stringify(newCache));
+                    // nlapiLogExecution('audit', '_getRates: set cache', JSON.stringify(newCache,null,2));
+                }
+                catch (e) {
+                    nlapiLogExecution('debug', 'Pacejet.js:_getRates: exception', e);
+
+                    nlapiGetContext().setSessionObject('pjrcache', null);
+
+                    var body = 'Pacejet.js\nunexpected error: ' + e.toString() + '\nrequest = ' + JSON.stringify(request,null,2);
+                    if ( e instanceof nlobjError ) {
+                        body = 'Pacejet.js\nsystem error: \ncode = ' + e.getCode() + '\ndetails = ' + e.getDetails() + '\nrequest = ' + JSON.stringify(request,null,2);
+                    }
+                    nlapiSendEmail(-5, 'joelmcconaughy@gmail.com', 'PaceJet /rates error', body, null, null, null, null, true);
+                }
+
+                // nlapiLogExecution('debug', '_getRates returning uncached result', ratingResultsList);
+                return ratingResultsList;
             }
 
             ,	_cloneShipmethods: function (results) {
@@ -621,22 +624,22 @@ define(
             }
 
             ,	_shippingAddress: function (order, address) {
-                //nlapiLogExecution('debug', '_shippingAddress', 'start');
-                //nlapiLogExecution('debug', 'isLoggedIn2', nlapiGetWebContainer().getShoppingSession().isLoggedIn2());
-                //nlapiLogExecution('debug', 'address', JSON.stringify(address,null,2));
+                nlapiLogExecution('debug', '_shippingAddress', 'start');
+                nlapiLogExecution('debug', 'isLoggedIn2', nlapiGetWebContainer().getShoppingSession().isLoggedIn2());
+                nlapiLogExecution('debug', 'address', JSON.stringify(address,null,2));
 
                 var Destination = null;
 
                 // if we are logged in and there is shipaddress in the order, then format and return the address.
                 if (nlapiGetWebContainer().getShoppingSession().isLoggedIn2()) {
                     var shipaddress = order.getFieldValues(['shipaddress']);
-                    // nlapiLogExecution('debug', 'shipaddress (order)', JSON.stringify(shipaddress,null,2));
+                    nlapiLogExecution('debug', 'shipaddress (order)', JSON.stringify(shipaddress,null,2));
 
                     shipaddress = (shipaddress && shipaddress.shipaddress) || null;
                     //nlapiLogExecution('debug', 'shipaddress (extracted)', JSON.stringify(shipaddress,null,2));
 
                     if (shipaddress) {
-                        // nlapiLogExecution('debug', 'returning shipaddress from order');
+                        nlapiLogExecution('debug', 'returning shipaddress from order');
 
                         // map NetSuite address fields to Pacejet fields
                         Destination = { Destination: {
@@ -658,7 +661,7 @@ define(
 
                 // if address has a valid zip and country, we are estimating from cart so return minimal address passed into GET
                 if (!Destination && address && address.zip && address.country) {
-                    //nlapiLogExecution('debug', 'shipaddress (address)', JSON.stringify(address,null,2));
+                    nlapiLogExecution('debug', 'shipaddress (address)', JSON.stringify(address,null,2));
                     Destination = { Destination: {
                         "PostalCode": address.zip
                         , "CountryCode": address.country
@@ -666,7 +669,7 @@ define(
                     }};
                 }
 
-                //nlapiLogExecution('debug', '_shippingAddress: returning Destination', JSON.stringify(Destination,null,2));
+                nlapiLogExecution('debug', '_shippingAddress: returning Destination', JSON.stringify(Destination,null,2));
                 return Destination;
             }
 

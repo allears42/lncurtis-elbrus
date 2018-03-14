@@ -1144,13 +1144,13 @@ define(
 				var fieldsIdToBeExposed = CustomFieldsUtils.getCustomFieldsIdToBeExposed('salesorder');
 				
 				
-				nlapiLogExecution('debug', 'fieldsIdToBeExposed', JSON.stringify(fieldsIdToBeExposed, null, 2));
-				nlapiLogExecution('debug', 'ModelsInit.order.getCustomFieldValues()', JSON.stringify(ModelsInit.order.getCustomFieldValues(), null, 2));
+				// nlapiLogExecution('debug', 'fieldsIdToBeExposed', JSON.stringify(fieldsIdToBeExposed, null, 2));
+				// nlapiLogExecution('debug', 'ModelsInit.order.getCustomFieldValues()', JSON.stringify(ModelsInit.order.getCustomFieldValues(), null, 2));
 				
 				_.each(ModelsInit.order.getCustomFieldValues(), function (option)
 				{
 					
-					nlapiLogExecution('debug', 'fieldsIdToBeExposed', JSON.stringify(option, null, 2))
+					// nlapiLogExecution('debug', 'fieldsIdToBeExposed', JSON.stringify(option, null, 2))
 					//expose the custom field value if was configured in the backend configuration
 					if(_.find(fieldsIdToBeExposed, function (fieldIdToBeExposed){ return option.name === fieldIdToBeExposed;}))
 					{
