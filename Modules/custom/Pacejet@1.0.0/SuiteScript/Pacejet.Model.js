@@ -344,6 +344,15 @@ define(
                     // no update needed as the default shipping amount is zero
                     else {
                         nlapiLogExecution('debug', '_updateShippingRates', 'no address, skip rate update');
+                        nlapiLogExecution('debug', '_updateShippingRates', 'no address, set shipmethod to default');
+                        nlapiLogExecution('debug', 'results.shipmethods', JSON.stringify(results.shipmethods,null,2));
+
+                        var defaultMethod = this.pacejetConfiguration.defaultMethod;
+                        results.shipmethods = _.filter(results.shipmethods, function (e) {
+                            return e.internalid == defaultMethod;
+                        });
+                        results.shipmethod = (results.shipmethods.length > 0) ? defaultMethod : null;
+
                     }
                 }
                 catch (e) {
