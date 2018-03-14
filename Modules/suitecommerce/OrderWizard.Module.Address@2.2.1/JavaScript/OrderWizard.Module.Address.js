@@ -71,7 +71,8 @@ define('OrderWizard.Module.Address'
 		,	'click [data-action="remove"]': 'validateAddressRemovalHandler'
 		,	'click [data-action="edit-address"]': 'editAddress'
 		,	'change [data-action="same-as"]': 'markSameAsHandler'
-		,	'change form': 'changeForm'
+		,	'change form': 'submitAndChangeForm'
+		// ,	'change form': 'changeForm'
 		}
 
 	,	errors: ['ERR_CHK_INCOMPLETE_ADDRESS', 'ERR_CHK_INVALID_ADDRESS']
@@ -595,7 +596,16 @@ define('OrderWizard.Module.Address'
 			this.model.set('temp' +  this.manage, jQuery(e.target).closest('form').serializeObject());
 		}
 
-	,	markSameAsHandler: function (e)
+        ,	submitAndChangeForm: function (e)
+        {
+        	console.log('submitAndChangeForm');
+        	this.submit.done(function () {
+        		console.log('submit done');
+                this.changeForm();
+			})
+        }
+
+        ,	markSameAsHandler: function (e)
 		{
 			var is_checked = jQuery(e.target).prop('checked');
 			this.markSameAs(is_checked);
