@@ -1,0 +1,10 @@
+{
+    "gulp": {
+        "ssp-libraries": [
+            "SuiteScript/*.js"
+        ]
+    }
+    , "overrides": {
+        "suitecommerce/SspLibraries@4.0.0/SuiteScript/Configuration.js" : "SuiteScript/Configuration.js"
+    }
+}
