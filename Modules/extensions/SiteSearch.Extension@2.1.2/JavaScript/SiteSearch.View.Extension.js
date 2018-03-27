@@ -18,13 +18,23 @@ define(
         'use strict';
 
         _.extend( SiteSearchView.prototype, {
+            
+            events: _.extend({}, SiteSearchView.prototype.events, {
+                'blur .twitter-typeahead': 'resetHandle'
+            })
 
-            hideSiteSearch: function (ev)
+        ,   hideSiteSearch: function (ev)
             {
                 ev && ev.preventDefault();
                 jQuery('[data-type="SiteSearch"]').slideUp();
                 jQuery('[data-action="show-sitesearch"]').toggleClass('active');
                 this.showSiteSearch()
+            }
+
+        ,	resetHandle: function ()
+            {
+                this.$('[data-type="search-reset"]').hide();
+                this.itemsSearcherComponent.cleanSearch(true);
             }
 
         });

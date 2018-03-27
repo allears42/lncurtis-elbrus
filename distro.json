@@ -359,7 +359,8 @@
                     "ProductList.Copy",
                     "ProductViews.SizeChart",
 
-                    "GoogleTagManager.Extension"
+                    "GoogleTagManager.Extension",
+                    "SiteSearch.Extension"
                 ],
                 "amdclean": true,
                 "amdConfig": {
@@ -502,7 +503,8 @@
                     "SC.Configuration.Extension",
                     "Session.Extension",
 
-                    "GoogleTagManager.Extension"
+                    "GoogleTagManager.Extension",
+                    "SiteSearch.Extension"
 
                 ],
                 "amdclean": true,
@@ -640,7 +642,8 @@
                     "Session.Extension",
                     "Wizard.Extension",
 
-                    "GoogleTagManager.Extension"
+                    "GoogleTagManager.Extension",
+                    "SiteSearch.Extension"
                 ],
                 "amdclean": true,
                 "amdConfig": {
