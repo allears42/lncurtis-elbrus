@@ -137,7 +137,7 @@ define(
 						[OrderWizardModulePromocodeNotification, {exclude_on_skip_step: true}]
 						,   OrderWizardModuleMultiShipToEnableLink
 						,	OrderWizardModuleAddressShipping
-						,	[OrderWizardModuleShipmethod, mst_delivery_options]
+						// ,	[OrderWizardModuleShipmethod, mst_delivery_options]
 						,	[OrderWizardModuleCartSummary, cart_summary_options]
 						,	[OrderWizardModulePromocodeForm, cart_items_options_right]
 						,	[
@@ -224,14 +224,15 @@ define(
 				]
 			}
 		,	{
-				name: _('Payment').translate()
+				name: _('Delivery and Payment').translate()
 			,	steps: [
 					{
-						name: _('Choose Payment Method').translate()
+						name: _('Choose Delivery and Payment Method').translate()
 					,	url: 'billing'
 					,	bottomMessage: _('You will have an opportunity to review your order on the next step.').translate()
 					,	modules: [
-							[OrderWizardModulePromocodeNotification, {exclude_on_skip_step: true}]
+							[OrderWizardModuleShipmethod, mst_delivery_options]
+						,	[OrderWizardModulePromocodeNotification, {exclude_on_skip_step: true}]
 						,   OrderWizardModulePaymentMethodGiftCertificates
 						,	[OrderWizardModulePaymentMethodSelector, {record_type:'salesorder', prevent_default: true}]
 						,	OrderWizardModulePaymentMethodPurchaseNumber
