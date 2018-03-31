@@ -321,7 +321,7 @@ $sc-image-slider-max-width-mobile: 767px;
 
 .home-feature {
   @extend .container-fluid;
-  h2 {
+  h1, h2 {
     font-size: $sc-h1-font-size;
     text-transform : uppercase;
     margin: $sc-base-margin*6 0 $sc-base-margin*3;
@@ -773,7 +773,7 @@ div.home-feature-image-text {
 }
 
 .home-slide-caption  {
-  h1 {
+  h1, h2 {
     @extend .container-fluid;
     text-transform:none;
     padding: 0;
