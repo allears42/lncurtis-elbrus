@@ -225,17 +225,17 @@ define(
 			}
 		,	{
 				// name: _('Delivery and Payment').translate()
-			name: _('Payment').translate()
+				name: _('Payment').translate()
 			,	steps: [
 					{
 						// name: _('Choose Delivery and Payment Method').translate()
-						name: _('Payment Method').translate()
+						name: _('Choose Payment Method').translate()
 					,	url: 'billing'
 					,	bottomMessage: _('You will have an opportunity to review your order on the next step.').translate()
 					,	modules: [
 						// 	[OrderWizardModuleShipmethod, mst_delivery_options]
 						// ,	[OrderWizardModulePromocodeNotification, {exclude_on_skip_step: true}]
-						[OrderWizardModulePromocodeNotification, {exclude_on_skip_step: true}]
+							[OrderWizardModulePromocodeNotification, {exclude_on_skip_step: true}]
 						,   OrderWizardModulePaymentMethodGiftCertificates
 						,	[OrderWizardModulePaymentMethodSelector, {record_type:'salesorder', prevent_default: true}]
 						,	OrderWizardModulePaymentMethodPurchaseNumber
