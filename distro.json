@@ -239,6 +239,7 @@
         "extensions/Session.Extension": "2.2.1",
         "extensions/SiteSearch.Extension": "2.1.2",
         "extensions/Wizard.Extension": "2.2.0",
+        "extensions/Product.Extension": "1.0.0",
 
         "custom/CallForPricing": "1.0.0",
         "custom/CreditCard.Icon": "1.0.0",
@@ -360,7 +361,8 @@
                     "ProductViews.SizeChart",
 
                     "GoogleTagManager.Extension",
-                    "SiteSearch.Extension"
+                    "SiteSearch.Extension",
+                    "Product.Extension"
                 ],
                 "amdclean": true,
                 "amdConfig": {
@@ -504,7 +506,8 @@
                     "Session.Extension",
 
                     "GoogleTagManager.Extension",
-                    "SiteSearch.Extension"
+                    "SiteSearch.Extension",
+                    "Product.Extension"
 
                 ],
                 "amdclean": true,
@@ -643,7 +646,8 @@
                     "Wizard.Extension",
 
                     "GoogleTagManager.Extension",
-                    "SiteSearch.Extension"
+                    "SiteSearch.Extension",
+                    "Product.Extension"
                 ],
                 "amdclean": true,
                 "amdConfig": {
