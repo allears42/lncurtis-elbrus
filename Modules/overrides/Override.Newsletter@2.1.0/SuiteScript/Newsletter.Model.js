@@ -137,6 +137,8 @@ define(
             record.setFieldValue('custentity_targetmarket', defaultValues['custentity_targetmarket']);
             record.setFieldValue('custentity_salesregion', defaultValues['custentity_salesregion']);
             record.setFieldValue('custentity_department', defaultValues['custentity_department']);
+            record.setFieldValue('customform', defaultValues['customform']);
+            record.setFieldValue('entitystatus', defaultValues['entitystatus']);
 
             record.setFieldValue('custentity_internal_notes', defaultValues['custentity_internal_notes']);
             record.setFieldValue('custentity_website_source', defaultValues['custentity_website_source']);
