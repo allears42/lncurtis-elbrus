@@ -41,6 +41,7 @@ define(
 	,	'OrderWizard.Module.CartItems.Ship'
 	,	'OrderWizard.Module.CartItems.PickupInStore.List'
 	,	'Header.View'
+	,	'OrderWizard.Module.OrderComments'
 
 	]
 ,	function (
@@ -74,6 +75,7 @@ define(
 	,	OrderWizardModuleCartItemsShip
 	,	OrderWizardModuleCartItemsPickupInStoreList
 	,	HeaderView
+	,	OrderWizardModuleOrderComments
 	)
     {
 	'use strict';
@@ -346,6 +348,9 @@ define(
 									className: 'order-wizard-termsandconditions-module-default'
 								}
 							]
+
+						// ,   OrderWizardModuleOrderComments
+						
 						,	[OrderWizardModuleCartSummary, cart_summary_options]
 						,	[	//Desktop Right
 								OrderWizardModuleTermsAndConditions

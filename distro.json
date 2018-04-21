@@ -254,6 +254,7 @@
         "custom/ProductList.Copy": "1.0.0",
         "custom/ProductViews.SizeChart": "1.0.0",
         "custom/OrderWizard.Module.PromocodeNotifications": "1.0.0",
+        "custom/OrderWizard.Module.OrderComments": "1.0.0",
         "custom/Wizard.Step.Fix": "2.3.0",
 
         "themes/Firefighter": "1.0.0"
@@ -637,6 +638,7 @@
                     "ItemsSearcher.Extension",
                     "ListHeader.Extension",
                     "LoginRegister.Extension",
+                    "OrderWizard.Module.OrderComments",
                     "NavigationHelper.Extension",
                     "Newsletter.Extension",
                     "ProductViews.Extension",
@@ -1248,6 +1250,7 @@
                         "LinkHierarchy",
                         "Newsletter",
                         "Newsletter.Extension",
+                        "OrderWizard.Module.OrderComments",
                         {
                             "module": "Firefighter",
                             "include": [
