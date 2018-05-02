@@ -186,6 +186,7 @@
         "overrides/Override.GlobalViews": "1.4.0",
         "overrides/Override.Header": "1.3.0",
         "overrides/Override.Home": "2.2.0",
+        "overrides/Override.Item": "1.0.0",
         "overrides/Override.ItemRelations": "3.0.0",
         "overrides/Override.ItemsSearcher": "2.0.0",
         "overrides/Override.jQuery-bxslider": "4.1.2-custom",

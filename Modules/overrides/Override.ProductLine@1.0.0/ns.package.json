@@ -15,5 +15,6 @@
     },
     "overrides": {
         "suitecommerce/ProductLine@1.0.0/Templates/product_line_sku.tpl": "Templates/product_line_sku.tpl"
+    ,   "suitecommerce/ProductLine@1.0.0/Templates/product_line_stock.tpl": "Templates/product_line_stock.tpl"
     }
 }

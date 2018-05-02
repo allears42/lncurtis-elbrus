@@ -248,6 +248,11 @@ define('Item.KeyMapping.Extension'
 		    }
 		
 	    }
+
+	,   _showInStockMessage: function ()
+		{
+			return true;
+		}
 	
     });
 

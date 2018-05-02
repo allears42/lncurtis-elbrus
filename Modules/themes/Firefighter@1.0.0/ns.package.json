@@ -94,6 +94,8 @@
         "suitecommerce/ProductDetails@1.0.0/Sass/_product-details-quantity.scss" : "Sass/ProductDetails/_product-details-quantity.scss",
         "suitecommerce/ProductDetails@1.0.0/Sass/_product-details-quickview.scss" : "Sass/ProductDetails/_product-details-quickview.scss",
 
+        "suitecommerce/ProductLine@1.0.0/Sass/_product-line-stock.scss" : "Sass/ProductLine/_product-line-stock.scss",
+
         "suitecommerce/ProductList@3.0.0/Sass/_product-list-added-to-cart.scss" : "Sass/ProductList/_product-list-added-to-cart.scss",
         "suitecommerce/ProductList@3.0.0/Sass/_product-list-bulk-actions.scss" : "Sass/ProductList/_product-list-bulk-actions.scss",
         "suitecommerce/ProductList@3.0.0/Sass/_product-list-control.scss" : "Sass/ProductList/_product-list-control.scss",

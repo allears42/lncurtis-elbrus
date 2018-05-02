@@ -84,7 +84,7 @@
 .product-list-details-later-macro-item-stock {
   /*@extend .item-details-stock;*/
   text-align: center;
-  .product-line-stock-msg-out {
+  .product-line-stock-msg-out, .product-line-stock-msg-in {
     font-size: $sc-small-font-size;
   }
 }
