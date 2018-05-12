@@ -44,7 +44,7 @@ define('OrderWizard.Module.OrderComments'
 			},
 			
 			saveFieldValue: function (value) {
-				console.log('save');
+				// console.log('save');
 				var options = this.model.get('options'),
 					self = this;
 				

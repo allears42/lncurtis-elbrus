@@ -349,7 +349,7 @@ define(
 								}
 							]
 
-						// ,   OrderWizardModuleOrderComments
+						,   OrderWizardModuleOrderComments
 						
 						,	[OrderWizardModuleCartSummary, cart_summary_options]
 						,	[	//Desktop Right
