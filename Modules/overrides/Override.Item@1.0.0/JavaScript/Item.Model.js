@@ -499,8 +499,12 @@ define('Item.Model'
 
 				// if we have one selected child we use that - else we use the parent as default
 				var	model = selected_matrix_children.length === 1 ? selected_matrix_children[0] : this
-
 				,	parent = this.get('_matrixParent')
+				/**
+				 * Get oosBehavior from this, not model var, because if this is a matrix child item,
+				 * we want the parent's property (as this is set at the parent level).
+				 * */
+				,	oosBehavior = this.get('outofstockbehavior')
 
 				//@class Item.StockInfo
 				,	stock_info = {
@@ -520,7 +524,7 @@ define('Item.Model'
 						,	inStockMessage: model.get('_inStockMessage')
 
 							//@property {Boolean} showInStockMessage
-						,	showInStockMessage: model.get('_showInStockMessage')
+						,	showInStockMessage: model.get('_showInStockMessage') && model.get('_stock')
 
 							//@property {String} stockDescription
 						,	stockDescription: model.get('_stockDescription') || this.get('_stockDescription')
@@ -543,8 +547,10 @@ define('Item.Model'
 							//@propery {Boolean} showQuantityAvailable
 						,	showQuantityAvailable: !!model.get('_showQuantityAvailable')
 
-						,	showAnyMessage: (selected_matrix_children.length == 1 ||
-								(selected_matrix_children.length == 0 && _(options_selection).keys().length == 0))
+					,	showAnyMessage: (
+							_.showStockMessage(oosBehavior, model) &&
+							(selected_matrix_children.length == 1 ||
+							(selected_matrix_children.length == 0 && _(options_selection).keys().length == 0)))
 					}
 				//@class Item.Model
 
