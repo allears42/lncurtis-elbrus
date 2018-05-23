@@ -212,6 +212,7 @@
         "overrides/Override.Utilities": "2.2.1",
 
         "extensions/Backbone.FormView.Extension": "1.2.0",
+        "extensions/Address.Extension": "2.4.0",
         "extensions/Cart.Extension": "4.0.0",
         "extensions/Categories.Extension": "3.0.1",
         "extensions/ErrorManagement.Extension": "2.4.0",
@@ -488,6 +489,7 @@
                     "ProductList.Copy",
 
                     "Backbone.FormView.Extension",
+                    "Address.Extension",
                     "Categories.Extension",
                     "ErrorManagement.Extension",
                     "Footer.Extension",
@@ -630,6 +632,7 @@
                     "Wizard.Step.Fix",
 
                     "Backbone.FormView.Extension",
+                    "Address.Extension",
                     "Cart.Extension",
                     "ErrorManagement.Extension",
                     "Footer.Extension",
@@ -721,6 +724,7 @@
                 "Account.RegisterAsGuest.ServiceController",
                 "Account.ResetPassword.ServiceController",
                 "Address.ServiceController",
+                "AddressValidation.ServiceController",
                 "Case.Fields.ServiceController",
                 "Case.ServiceController",
                 "Categories.ServiceController",

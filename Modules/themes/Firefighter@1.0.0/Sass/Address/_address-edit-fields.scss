@@ -66,3 +66,60 @@
 
 .address-edit-fields-group-form-controls{}
 .address-edit-fields-group-big{}
+
+.address-validation-container{
+  width:100%;
+  max-width:800px;
+  display:block;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.address-validation-row{
+  background-color:#f9f9f9;
+  border:1px solid #cccccc;
+  padding-top:18px;
+  padding-bottom:27px;
+  border-radius:3px;
+}
+
+.address-validation-column{
+  border-right:1px solid #cccccc;
+}
+
+.address-validation-column:last-of-type{
+  border-right:0;
+}
+
+.address-validation-radio{
+  text-align:center;
+  margin:0;
+  display:block;
+  margin-left:auto;
+  margin-right:auto;
+  margin-bottom:11px;
+}
+
+.address-validation-text{
+  font-size:12px;
+  text-align:center;
+  display:block;
+}
+
+.address-validation-text span{
+  display:block;
+}
+
+.address-validation-alert{
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  font-style: italic;
+  font-variant: small-caps;
+  font-weight: 700;
+  line-height: 15.4px;
+  margin:0;
+  padding:0;
+  color:red;
+  margin-bottom:8px;
+  margin-top:16px;
+}
