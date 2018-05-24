@@ -201,14 +201,16 @@ define(
                 for (var n = 0; n < addressFormInputsArr.length; n++){
                     if (addressFormInputsArr[n].getAttribute('data-address-validated') == 'false'){
                         console.log('Non validated address found at index '+i+' input '+n);
-                        isValidated = false;
+                        isValidated = isValidated && false;
                     }
-                    if (addressFormInputsArr[n].value != ''){
-                        requiredFieldsFilled = true;
+                    if (addressFormInputsArr[n].value != '' || addressFormInputsArr[n].getAttribute('name') == 'addr2'){
+                        requiredFieldsFilled = requiredFieldsFilled && true;
                     }
                     else{
-                        requiredFieldsFilled = false;
+                        requiredFieldsFilled = requiredFieldsFilled && false;
                     }
+
+                    console.log('n = ' + n +', isValidated = ' + isValidated + ', requiredFieldsFilled = ' + requiredFieldsFilled);
                 }
 
                 if (isValidated == false && requiredFieldsFilled == true){
