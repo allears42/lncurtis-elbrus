@@ -118,9 +118,10 @@ define(
                             console.log(decodeURI(data));
                             data = JSON.parse(decodeURI(data));
 
+                            var addressValidationContainer = addressFormsArr[index].getElementsByClassName('address-validation-container')[0];
+
                             //check for null or no results
                             if (data && data != null && data.length > 0){
-                                var addressValidationContainer = addressFormsArr[index].getElementsByClassName('address-validation-container')[0];
                                 addressValidationContainer.style.display = 'block';
                                 //loop through and decode addresses
                                 for (var i = 0; i < data.length; i++){
@@ -132,6 +133,7 @@ define(
                             }
                             //if there are no results
                             else if (data && data != null && data.length == 0){
+                                addressValidationContainer.style.display = 'block';
                                 console.log('No matches!');
                                 //send array containing entry data to be added to dom
                                 buildDomElements(index, addressesArr);
@@ -172,6 +174,14 @@ define(
                 //select all verification input elements
                 var addressFormInputsArr = addressFormsArr[index].getElementsByClassName('addressValidationField');
                 //loop through results and create + append elements to options row
+
+                if (addressesArr.length == 1) {
+                    var validationColumn = document.createElement('div');
+                    validationColumn.className += 'col-md-4 col-sm-12 col-xs-12 address-validation-column';
+                    validationColumn.innerHTML = '<p>Unable to locate this address.  Are you sure this is correct?</p>';
+                    addressValidationRow.appendChild(validationColumn);
+                }
+
                 for (var i = 0; i < addressesArr.length; i++){
                     var validationColumn = document.createElement('div');
                     validationColumn.className += 'col-md-4 col-sm-12 col-xs-12 address-validation-column';
