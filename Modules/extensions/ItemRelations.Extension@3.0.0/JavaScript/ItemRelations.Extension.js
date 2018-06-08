@@ -8,11 +8,13 @@ define(
         'ItemRelations.Correlated.View.Extension'
     ,   'ItemRelations.RelatedItem.View.Extension'
     ,   'ItemRelations.Related.View.Extension'
+    ,   'ItemRelations.Related.Collection.Extension'
     ]
     ,	function(
         ItemRelationsCorrelatedViewExtension
     ,   ItemRelationsRelatedItemViewExtension
     ,   ItemRelationsRelatedViewExtension
+    ,   ItemRelationsRelatedCollectionExtension
     )
     {
         'use strict';
@@ -21,6 +23,7 @@ define(
             ItemRelationsCorrelatedViewExtension: ItemRelationsCorrelatedViewExtension
         ,   ItemRelationsRelatedItemViewExtension: ItemRelationsRelatedItemViewExtension
         ,   ItemRelationsRelatedViewExtension: ItemRelationsRelatedViewExtension
+        ,   ItemRelationsRelatedCollectionExtension: ItemRelationsRelatedCollectionExtension
         }
 
     });
