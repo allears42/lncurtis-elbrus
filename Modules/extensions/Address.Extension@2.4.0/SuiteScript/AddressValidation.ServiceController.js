@@ -71,6 +71,7 @@ define(
                         if (resp[i].hasOwnProperty('delivery_line_2') == true){
                         	responseObject.addr2 = resp[i].delivery_line_2;
                         }
+                        responseObject.isresidential = resp[i].hasOwnProperty('metadata') && resp[i].metadata.hasOwnProperty('rdi') && resp[i].metadata.rdi == 'Residential';
 
                         responseArr.push(responseObject);
                     }

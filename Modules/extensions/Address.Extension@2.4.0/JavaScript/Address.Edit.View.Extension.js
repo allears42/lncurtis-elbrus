@@ -51,7 +51,7 @@ define(
         })
 	,
         validateAddresses: function(){
-            console.log('Main Function Triggered!');
+                // console.log('Main Function Triggered!');
             //var for the generated url for the service
             var addressValidationServiceURL = 'services/AddressValidation.Service.ss';
             //arr to hold all address fields
@@ -64,7 +64,7 @@ define(
 
             //queries the suitescript service and builds array of results for a given form
             function queryValidationApi(index){
-                console.log('queryValidationApi called with index '+index+'!');
+                    // console.log('queryValidationApi called with index '+index+'!');
                 //select the form we want
                 var addressForm = addressFormsArr[index];
                 //create the array of addresses and populate it with the inputted data
@@ -73,7 +73,8 @@ define(
                     addr2	:	addressForm.getElementsByClassName('address-validation-addr2')[0].value,
                     state	:	addressForm.getElementsByClassName('address-validation-state')[0].getElementsByTagName('select')[0].value,
                     city	:	addressForm.getElementsByClassName('address-validation-city')[0].value,
-                    zip		:	addressForm.getElementsByClassName('address-validation-zip')[0].value
+                        zip		:	addressForm.getElementsByClassName('address-validation-zip')[0].value,
+                        isresidential: jQuery(addressForm).find('input[name="isresidential"]').is(':checked')
                 }];
                 //create a url encoded object to send to the server
                 var addressObj = {
@@ -115,7 +116,7 @@ define(
                 //make ajax request to service
                 $.get(addressValidationServiceURL, addressObj)
                     .done(function(data) {
-                            console.log(decodeURI(data));
+                                // console.log(decodeURI(data));
                             data = JSON.parse(decodeURI(data));
 
                             var addressValidationContainer = addressFormsArr[index].getElementsByClassName('address-validation-container')[0];
@@ -127,14 +128,14 @@ define(
                                 for (var i = 0; i < data.length; i++){
                                     addressesArr.push(data[i]);
                                 }
-                                console.log(data);
+                                    // console.log(data);
                                 //send array of decoded objects to be added to dom
                                 buildDomElements(index, addressesArr);
                             }
                             //if there are no results
                             else if (data && data != null && data.length == 0){
                                 addressValidationContainer.style.display = 'block';
-                                console.log('No matches!');
+                                    // console.log('No matches!');
                                 //send array containing entry data to be added to dom
                                 buildDomElements(index, addressesArr);
                             }
@@ -145,7 +146,7 @@ define(
 
             //update a given form with values from a given option after selection
             function updateAddressForm(index){
-                console.log('updateAddressForm called with index '+index+'!');
+                    // console.log('updateAddressForm called with index '+index+'!');
                 //select options row
                 var addressValidationRow = addressFormsArr[index].getElementsByClassName('address-validation-row')[0];
                 //select input element that holds data attributes
@@ -160,13 +161,14 @@ define(
                         addressFormsArr[index].getElementsByClassName('address-validation-state')[0].getElementsByTagName('select')[0].value = addressValidationInputs[i].getAttribute('data-state');
                         addressFormsArr[index].getElementsByClassName('address-validation-city')[0].value = addressValidationInputs[i].getAttribute('data-city');
                         addressFormsArr[index].getElementsByClassName('address-validation-zip')[0].value = addressValidationInputs[i].getAttribute('data-zip');
+                            jQuery(addressFormsArr[index]).find('input[name="isresidential"]').prop('checked', addressValidationInputs[i].getAttribute('data-isresidential') == 'true');
                     }
                 }
             }
 
             //create html objects for address validation options and add to selected form
             function buildDomElements(index, addressesArr){
-                console.log('buildDomElements called with index '+index+' and an addressesArr of '+JSON.stringify(addressesArr)+'!');
+                    // console.log('buildDomElements called with index '+index+' and an addressesArr of '+JSON.stringify(addressesArr)+'!');
                 //clear any old options
                 clearValidationResults(index);
                 //select the form and row for options
@@ -185,7 +187,7 @@ define(
                 for (var i = 0; i < addressesArr.length; i++){
                     var validationColumn = document.createElement('div');
                     validationColumn.className += 'col-md-4 col-sm-12 col-xs-12 address-validation-column';
-                    validationColumn.innerHTML = '<label><div class="col-12"><input type="radio" id="form'+index+'Option'+i+'" class="address-validation-radio" name="validatedAddress" data-addr1="'+addressesArr[i].addr1+'" data-addr2="'+addressesArr[i].addr2+'" data-state="'+addressesArr[i].state+'" data-city="'+addressesArr[i].city+'" data-zip="'+addressesArr[i].zip+'" /></div><div class="col-12"><p class="address-validation-text"><span>'+addressesArr[i].addr1+'</span><span>'+addressesArr[i].addr2+'</span><span>'+addressesArr[i].city+', '+addressesArr[i].state+' '+addressesArr[i].zip+'</span></p></div></label>';
+                        validationColumn.innerHTML = '<label><div class="col-12"><input type="radio" id="form'+index+'Option'+i+'" class="address-validation-radio" name="validatedAddress" data-addr1="'+addressesArr[i].addr1+'" data-addr2="'+addressesArr[i].addr2+'" data-state="'+addressesArr[i].state+'" data-city="'+addressesArr[i].city+'" data-zip="'+addressesArr[i].zip+'" data-isresidential="'+addressesArr[i].isresidential+'" /></div><div class="col-12"><p class="address-validation-text"><span>'+addressesArr[i].addr1+'</span><span>'+addressesArr[i].addr2+'</span><span>'+addressesArr[i].city+', '+addressesArr[i].state+' '+addressesArr[i].zip+'</span></p></div></label>';
                     addressValidationRow.appendChild(validationColumn);
                 }
                 //loop through verification inputs and set data-address-validated attribute to true
@@ -210,7 +212,7 @@ define(
 
                 for (var n = 0; n < addressFormInputsArr.length; n++){
                     if (addressFormInputsArr[n].getAttribute('data-address-validated') == 'false'){
-                        console.log('Non validated address found at index '+i+' input '+n);
+                            // console.log('Non validated address found at index '+i+' input '+n);
                         isValidated = isValidated && false;
                     }
                     if (addressFormInputsArr[n].value != '' || addressFormInputsArr[n].getAttribute('name') == 'addr2'){
@@ -220,11 +222,11 @@ define(
                         requiredFieldsFilled = requiredFieldsFilled && false;
                     }
 
-                    console.log('n = ' + n +', isValidated = ' + isValidated + ', requiredFieldsFilled = ' + requiredFieldsFilled);
+                        // console.log('n = ' + n +', isValidated = ' + isValidated + ', requiredFieldsFilled = ' + requiredFieldsFilled);
                 }
 
                 if (isValidated == false && requiredFieldsFilled == true){
-                    console.log('Querying index '+i);
+                        // console.log('Querying index '+i);
                     queryValidationApi(i);
                 }
             }
