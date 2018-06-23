@@ -59,7 +59,7 @@ define('QuickAdd.Extension'
                 ,	componentName: 'quickaddSearch'
                 ,	showMenuOnClick: true
                 ,	showSeeAll: false
-                // ,   additionalSearchParamsObj: {custitem_sc_call_for_pricing: false}
+                ,   additionalSearchParamsObj: {custitem_sc_call_for_pricing: false}
                 ,	collectionOptions:
                 {
                     searcherAPIConfiguration: 'searchApiMasterOptions.itemsSearcher'
