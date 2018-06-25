@@ -17,6 +17,8 @@
         ]
     },
     "overrides": {
+        "suitecommerce/ProductList@3.0.0/SuiteScript/ProductList.Item.Search.js": "SuiteScript/ProductList.Item.Search.js",
+
         "suitecommerce/ProductList@3.0.0/Templates/product_list_bulk_actions.tpl": "Templates/product_list_bulk_actions.tpl",
         "suitecommerce/ProductList@3.0.0/Templates/product_list_control.tpl": "Templates/product_list_control.tpl",
         "suitecommerce/ProductList@3.0.0/Templates/product_list_details.tpl": "Templates/product_list_details.tpl",

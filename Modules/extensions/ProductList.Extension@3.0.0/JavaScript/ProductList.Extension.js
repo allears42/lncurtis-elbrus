@@ -13,6 +13,7 @@ define(
 	,   'ProductList.Item.Edit.View.Extension'
 	,   'ProductList.Router.Extension'
 	,   'ProductList.DetailsLater.View.NoLoadShopping'
+	,	'ProductList.ListDetails.View.Extension'
 	]
 	,	function (
 		ProductListBulkActionsViewExtension
@@ -21,6 +22,7 @@ define(
 	,   ProductListItemEditViewExtension
 	,   ProductListRouterExtension
 	,   ProductListDetailsLaterViewNoLoadShopping
+	,	ProductListListDetailsViewExtension
 	
 	)
 	{
@@ -33,6 +35,7 @@ define(
 		,   ProductListItemEditViewExtension: ProductListItemEditViewExtension
 		,   ProductListRouterExtension: ProductListRouterExtension
 		,   ProductListDetailsLaterViewNoLoadShopping: ProductListDetailsLaterViewNoLoadShopping
+		,	ProductListListDetailsViewExtension: ProductListListDetailsViewExtension
 		}
 		
 	});
