@@ -244,6 +244,7 @@
         "extensions/SiteSearch.Extension": "2.1.2",
         "extensions/Wizard.Extension": "2.2.0",
         "extensions/Product.Extension": "1.0.0",
+        "extensions/Address.Extension": "2.4.0",
 
         "custom/CallForPricing": "1.0.0",
         "custom/CreditCard.Icon": "1.0.0",

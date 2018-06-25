@@ -45,13 +45,16 @@ define(
 				});
 			}
 		}
-	,
-        events: _.extend({}, AddressEditView.prototype.events, {
+	,   events: _.extend({}, AddressEditView.prototype.events, {
             'change .addressValidationField':'validateAddresses'
         })
-	,
-        validateAddresses: function(){
-                // console.log('Main Function Triggered!');
+
+    ,   bindings: _.extend(AddressEditView.prototype.bindings, {
+            '[name="attention"]': 'attention'
+        })
+
+	,   validateAddresses: function(){
+            // console.log('Main Function Triggered!');
             //var for the generated url for the service
             var addressValidationServiceURL = 'services/AddressValidation.Service.ss';
             //arr to hold all address fields

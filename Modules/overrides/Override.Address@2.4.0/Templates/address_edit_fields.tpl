@@ -17,20 +17,30 @@
 			<input type="text" class="address-edit-fields-group-input" id="{{manage}}fullname" name="fullname" value="{{fullName}}">
 		</div>
 	</div>
+
 	{{#if showCompanyField}}
-	<div class="address-edit-fields-group" {{#if isCompanyFieldMandatory}} data-input="company" data-validation="control-group" {{/if}}>
-		<label class="address-edit-fields-group-label" for="{{manage}}company">
-			{{translate 'Company'}}
-			{{#if isCompanyFieldMandatory}}
-				 <span class="address-edit-fields-group-label-required">*</span>
-			{{else}}
-				<p class="address-edit-fields-company-optional-label">{{translate '(optional)'}}</p>
-			{{/if}}
-		</label>
-		<div  class="address-edit-fields-group-form-controls" {{#if isCompanyFieldMandatory}} data-validation="control" {{/if}}>
-			<input type="text" class="address-edit-fields-group-input" id="{{manage}}company" name="company" value="{{company}}" >
-		</div>
+		<div class="address-edit-fields-group" {{#if isCompanyFieldMandatory}} data-input="company" data-validation="control-group" {{/if}}>
+<label class="address-edit-fields-group-label" for="{{manage}}company">
+	{{translate 'Company'}}
+	{{#if isCompanyFieldMandatory}}
+	<span class="address-edit-fields-group-label-required">*</span>
+	{{else}}
+	<p class="address-edit-fields-company-optional-label">{{translate '(optional)'}}</p>
+	{{/if}}
+</label>
+<div  class="address-edit-fields-group-form-controls" {{#if isCompanyFieldMandatory}} data-validation="control" {{/if}}>
+<input type="text" class="address-edit-fields-group-input" id="{{manage}}company" name="company" value="{{company}}" >
+</div>
+</div>
+{{else}}
+<div class="address-edit-fields-group" data-input="attention" data-validation="control-group">
+	<label class="address-edit-fields-group-label" for="{{manage}}attention">
+		{{translate 'Attention'}} <p class="address-edit-fields-company-optional-label">{{translate '(optional)'}}</p>
+	</label>
+	<div  class="address-edit-fields-group-form-controls" data-validation="control">
+		<input type="text" class="address-edit-fields-group-input" id="{{manage}}attention" name="attention" value="{{attention}}">
 	</div>
+</div>
 	{{/if}}
 
 	<div class="row">
