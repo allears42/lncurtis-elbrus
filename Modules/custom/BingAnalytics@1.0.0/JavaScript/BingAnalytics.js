@@ -68,6 +68,7 @@
 					// win[name].push({'ea': 'page_view'}); // Custom event, fires but empty params, whyyyyyyyyyyyyy
 					// win[name].push({'evt': 'pageLoad'}); // Invalid data
 					// win[name].push({'ea': 'pageLoad', 'gv': '1'}); // Still custom event, still empty URL params
+					win[name].push({'ea': 'page_view', 'el': url});
 				}
 
 				return this;
@@ -76,46 +77,48 @@
 			//@method trackEvent
 			//@param {TrackEvent} event
 			//@return {BingAnalytics}
-		// ,	trackEvent: function (event)
-		// 	{
-		// 		console.log('TRACK EVENT ----------------------');
-		// 		if (event && event.category && event.action)
-		// 		{
-		// 			win[name].push({'ea': event.action, 'ev': parseFloat(event.value)});
-		// 		}
-        //
-		// 		return this;
-		// 	}
+		,	trackEvent: function (event)
+			{
+				console.log('TRACK EVENT ----------------------');
+				if (event && event.category && event.action)
+				{
+					win[name] = win[name] || [];
+					win[name].push({'ea': event.action, 'el': event.category});
+				}
+
+				return this;
+			}
 
 			//@method addItem
 			//@param {Object<String:id,String:name>} item
 			//@return {BingAnalytics}
-		// ,	addItem: function (item)
-		// 	{
-		// 		console.log('TRACK ADD ITEM ----------------------');
-		// 		if (item && item.id && item.name)
-		// 		{
-		// 			// [Adding Items](https://developers.google.com/analytics/devguides/collection/analyticsjs/ecommerce#addItem)
-		// 			// win[name]('ecommerce:addItem', item);
-		// 		}
-        //
-		// 		return this;
-		// 	}
+		,	addItem: function (item)
+			{
+				console.log('TRACK ADD ITEM ----------------------');
+				if (item && item.id && item.name)
+				{
+					win[name] = win[name] || [];
+					win[name].push({'ea': 'add_item', 'el': item.id});
+
+				}
+
+				return this;
+			}
 
 			//@method addTrans
 			//@param {Object} transaction
 			//@return {BingAnalytics}
-		// ,	addTrans: function (transaction)
-		// 	{
-		// 		console.log('TRACK ADD TRANS ----------------------');
-		// 		if (transaction && transaction.id)
-		// 		{
-		// 			// [Adding a Transaction](https://developers.google.com/analytics/devguides/collection/analyticsjs/ecommerce#addTrans)
-		// 			// win[name]('ecommerce:addTransaction', transaction);
-		// 		}
-        //
-		// 		return this;
-		// 	}
+		,	addTrans: function (transaction)
+			{
+				console.log('TRACK ADD TRANS ----------------------');
+				if (transaction && transaction.id)
+				{
+					win[name] = win[name] || [];
+					win[name].push({'ea': 'add_transaction', 'el': transaction.id});
+				}
+
+				return this;
+			}
 
 			//@method trackTrans
 			//@return {BingAnalytics}
@@ -164,39 +167,30 @@
 		// 		return BingAnalytics.trackTrans();
 		// 	}
 
-		// ,	trackTransaction: function(transaction)
-		// 	{
-		// 		console.log('ENTER TRACK TRANSACTION ---------------');
-		// 		var orderSummary = transaction.get('summary')
-		// 		,	gv =  parseFloat(orderSummary.subtotal);
-        //
-		// 		win[name] = win[name] || [];
-        //
-			// TODO: Don't know if this works or not because of 'invocation error'...
-		// 		win[name].push({'gv': gv, 'ec' : 'button', 'ea': 'click', 'el' : 'placed order', 'ev' : gv});
-		// 	}
+		,	trackTransaction: function(transaction)
+			{
+				// console.log('ENTER TRACK TRANSACTION ---------------');
+				// console.log('TRANSACTION: ', transaction);
+
+				var subtotal = transaction.get('total');
+
+				win[name] = win[name] || [];
+				win[name].push({'gv': subtotal, 'ec' : 'button', 'ea': 'click', 'el' : 'placed order', 'ev' : subtotal});
+			}
 
 			//@method setAccount
 			//@param {SC.Configuration} config
 			//@return {Void}
 		,	setAccount: function (config)
 			{
-				console.log('CHECKPOINT 3 ---------------------');
 				if(!config)
 				{
-					console.log('CHECKPOINT 4a ---------------------');
 					return this;
 				}
-				console.log('CHECKPOINT 4b ---------------------');
 				var domainName = Utils.isCheckoutDomain() ? config.domainNameSecure : config.domainName;
-				console.log('IS PROP ID STRING: ', _.isString(config.propertyID));
-				console.log('IS DOMAIN NAME STRING: ', _.isString(domainName));
-				console.log('PROP ID: ', config.propertyID);
-				console.log('DOMAIN NAME: ', domainName);
 
 				if (_.isString(config.propertyID) && _.isString(domainName))
 				{
-					console.log('CHECKPOINT 5 ---------------------');
 					this.propertyID = config.propertyID;
 					this.ti = config.propertyID;
 					this.domainName = domainName;
@@ -262,12 +256,12 @@
 		,	mountToApp: function (application)
 			{
 				// we get the account and domain name from the configuration file
-				var tracking = application.getConfig('tracking.bingAnalytics');
+				// var tracking = application.getConfig('tracking.bingAnalytics');
 				// TODO: Test only
-				// var tracking = {
-				// 	propertyID: '13000038'
-				// ,	domainName: 'http://sb-lncurtis.jhmservices.net/'
-				// };
+				var tracking = {
+					propertyID: '13000038'
+				,	domainName: 'http://sb-lncurtis.jhmservices.net/'
+				};
 
 				// if track page view needs to be tracked
 				if (tracking && tracking.propertyID)
