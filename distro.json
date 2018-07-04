@@ -261,7 +261,6 @@
         "custom/OrderWizard.Module.PromocodeNotifications": "1.0.0",
         "custom/OrderWizard.Module.OrderComments": "1.0.0",
         "custom/Wizard.Step.Fix": "2.3.0",
-        "custom/BingAnalytics": "1.0.0",
 
         "themes/Firefighter": "1.0.0"
     },
@@ -371,8 +370,7 @@
 
                     "GoogleTagManager.Extension",
                     "SiteSearch.Extension",
-                    "Product.Extension",
-                    "BingAnalytics"
+                    "Product.Extension"
                 ],
                 "amdclean": true,
                 "amdConfig": {
@@ -520,8 +518,7 @@
 
                     "GoogleTagManager.Extension",
                     "SiteSearch.Extension",
-                    "Product.Extension",
-                    "BingAnalytics"
+                    "Product.Extension"
 
                 ],
                 "amdclean": true,
@@ -664,8 +661,7 @@
 
                     "GoogleTagManager.Extension",
                     "SiteSearch.Extension",
-                    "Product.Extension",
-                    "BingAnalytics"
+                    "Product.Extension"
                 ],
                 "amdclean": true,
                 "amdConfig": {
