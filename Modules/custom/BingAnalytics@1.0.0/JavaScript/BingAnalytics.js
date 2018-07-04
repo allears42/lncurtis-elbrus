@@ -55,19 +55,9 @@
 			//@return {BingAnalytics}
 			trackPageview: function (url)
 			{
-				console.log('TRACK PAGEVIEW - URL: ', url);
 				if (_.isString(url))
 				{
 					win[name] = win[name] || [];
-
-					console.log('SHOULD CALL BING PAGEVIEW --------------');
-					// win[name].push('pageLoad'); // Nothing
-					// win[name].push({'ea': 'pageLoad'}); // Custom event, fires but empty params, not what we want
-					// win[name].push('page_view'); // Nothing
-					// win[name].push({'ea': 'page_view', 'ev': url}); // Error, ev must be numeric
-					// win[name].push({'ea': 'page_view'}); // Custom event, fires but empty params, whyyyyyyyyyyyyy
-					// win[name].push({'evt': 'pageLoad'}); // Invalid data
-					// win[name].push({'ea': 'pageLoad', 'gv': '1'}); // Still custom event, still empty URL params
 					win[name].push({'ea': 'page_view', 'el': url});
 				}
 
@@ -79,7 +69,7 @@
 			//@return {BingAnalytics}
 		,	trackEvent: function (event)
 			{
-				console.log('TRACK EVENT ----------------------');
+				// console.log('TRACK EVENT ----------------------');
 				if (event && event.category && event.action)
 				{
 					win[name] = win[name] || [];
@@ -94,11 +84,11 @@
 			//@return {BingAnalytics}
 		,	addItem: function (item)
 			{
-				console.log('TRACK ADD ITEM ----------------------');
-				if (item && item.id && item.name)
+				// console.log('TRACK ADD ITEM ----------------------');
+				if (item && item.id)
 				{
 					win[name] = win[name] || [];
-					win[name].push({'ea': 'add_item', 'el': item.id});
+					win[name].push({'ea': 'add_to_cart', 'el': item.id});
 
 				}
 
@@ -108,25 +98,30 @@
 			//@method addTrans
 			//@param {Object} transaction
 			//@return {BingAnalytics}
-		,	addTrans: function (transaction)
-			{
-				console.log('TRACK ADD TRANS ----------------------');
-				if (transaction && transaction.id)
-				{
-					win[name] = win[name] || [];
-					win[name].push({'ea': 'add_transaction', 'el': transaction.id});
-				}
-
-				return this;
-			}
+		// ,	addTrans: function (transaction)
+		// 	{
+		// 		console.log('TRACK ADD TRANS ----------------------');
+		// 		if (transaction && transaction.id)
+		// 		{
+		// 			win[name] = win[name] || [];
+		// 			win[name].push({'ea': 'add_transaction', 'el': transaction.id});
+		// 		}
+        //
+		// 		return this;
+		// 	}
 
 			//@method trackTrans
 			//@return {BingAnalytics}
-		// ,	trackTrans: function ()
+		// ,	trackTrans: function (transaction)
 		// 	{
 		// 		console.log('TRACK TRACK TRANS ----------------------');
-		// 		// [Sending Data](https://developers.google.com/analytics/devguides/collection/analyticsjs/ecommerce#sendingData)
-		// 		// win[name]('ecommerce:send');
+        //
+		// 		if(transaction && transaction.id) {
+		// 			win[name] = win[name] || [];
+		// 			win[name].push({'ea': 'add_transaction', 'el': transaction.id});
+		// 		}
+        //
+        //
 		// 		return this;
 		// 	}
 
@@ -170,12 +165,12 @@
 		,	trackTransaction: function(transaction)
 			{
 				// console.log('ENTER TRACK TRANSACTION ---------------');
-				// console.log('TRANSACTION: ', transaction);
 
 				var subtotal = transaction.get('total');
 
 				win[name] = win[name] || [];
-				win[name].push({'gv': subtotal, 'ec' : 'button', 'ea': 'click', 'el' : 'placed order', 'ev' : subtotal});
+				win[name].push({'gv': subtotal, 'ea': 'purchase', 'el' : 'purchase', 'ev' : subtotal, 'gc': 'USD'});
+				// console.log('UETQ: ', win[name]);
 			}
 
 			//@method setAccount
@@ -210,38 +205,11 @@
 				return this;
 			}
 
-			//@method addCrossDomainParameters
-			// [Decorating HTML Links](https://developers.google.com/analytics/devguides/collection/analyticsjs/cross-domain#decoratelinks)
-			//@param {string} url
-			//@return {String} url
-		// ,	addCrossDomainParameters: function (url)
-		// 	{
-		// 		// We only need to add the parameters if the URL we are trying to go
-		// 		// is not a sub domain of the tracking domain
-		// 		if (_.isString(url) && !~url.indexOf(this.domainName))
-		// 		{
-		// 			win[name](function (tracker)
-		// 			{
-		// 				win.linker = win.linker || new win.gaplugins.Linker(tracker);
-         //
-		// 				var track_url = win.linker.decorate(url);
-         //
-		// 				// This validation is due to Tracking Blockers overriding the default analytics methods
-		// 				if (typeof track_url === 'string')
-		// 				{
-		// 					url = track_url;
-		// 				}
-		// 			});
-		// 		}
-        //
-		// 		return url;
-		// 	}
-
 			//@method loadScript
 			//@return {jQuery.Promise|Void}
 		,	loadScript: function (config)
 			{
-				console.log('CHECKPOINT 1 ---------------------');
+				// console.log('CHECKPOINT 1 ---------------------');
 				return !SC.isPageGenerator() && jQuery.getScript('//bat.bing.com/bat.js');
 				// if(SC.ENVIRONMENT.jsEnvironment === 'browser') {
 				// 	console.log('CHECKPOINT 2 ---------------------');
@@ -261,12 +229,12 @@
 				var tracking = {
 					propertyID: '13000038'
 				,	domainName: 'http://sb-lncurtis.jhmservices.net/'
+				,	domainNameSecure: 'https://checkout.sandbox.netsuite.com/c.3880230_SB2/lncurtis-dev-elbrus/checkout.ssp'
 				};
 
 				// if track page view needs to be tracked
 				if (tracking && tracking.propertyID)
 				{
-
 					BingAnalytics.setAccount(tracking);
 
 					Tracker.getInstance().trackers.push(BingAnalytics);
