@@ -8,6 +8,8 @@ define(
 		'ProductList.Details.View'
 		, 'ProductList.Item.Edit.View'
 		, 'ProductList.Item.Collection'
+		, 'ProductList.Item.Model'
+		, 'MenuTree.View'
 		
 		, 'underscore'
 		, 'jQuery'
@@ -17,6 +19,9 @@ define(
 		ProductListDetailsView
 		, ProductListItemEditView
 		, ProductListItemCollection
+		, ProductListItemModel
+		, MenuTreeView
+
 		, _
 		, jQuery) {
 		'use strict';
@@ -54,11 +59,10 @@ define(
 				
 			}
 			
-			, _getSelection: function () {
+			, _getSelection: function (isDeleteItemsFromList) {
 				var items = []
-					, button_selector = [];
-				
-				
+				, 	button_selector = [];
+
 				//Filter items for bulk operation to remove call for pricing
 				_.each(this.collection.models, function (pli) {
 					//irrelevant items: no-op
@@ -69,8 +73,8 @@ define(
 					var item = pli.get('item')
 					, item_internal_id = pli.getItemId()
 					, isCallForPricing = item.get('custitem_sc_call_for_pricing') || false;
-					
-					if (!isCallForPricing) {
+
+					if ((!_.isUndefined(isDeleteItemsFromList) && isDeleteItemsFromList) || (!isCallForPricing)) {
 						items.push(pli);
 						button_selector.push('article[data-item-id="' + item_internal_id + '"] a, article[data-item-id="' + item_internal_id + '"] button');
 					}
@@ -81,6 +85,38 @@ define(
 					items: new ProductListItemCollection(items)
 					, button_selector: button_selector
 				};
+			}
+
+			, deleteItemsHandler: function (e) {
+				e.preventDefault();
+
+				var self = this
+				, 	selected_models = this._getSelection(true)
+				, 	delete_promises = [];
+
+				if (selected_models.items.length < 1) {
+					return;
+				}
+
+				//there are two collections with the same information this.model and the one on application
+				//should remove the item on both
+				var app_item_list = _.findWhere(self.application.ProductListModule.Utils.getProductLists().models, {id: self.model.id});
+
+				_.each([].concat(selected_models.items.models), function (item) {
+					//fix already used in "deleteListItem"
+					item.url = ProductListItemModel.prototype.url;
+
+					app_item_list && app_item_list.get('items').remove(item);
+
+					delete_promises.push(item.destroy().promise());
+				});
+
+				jQuery.when.apply(jQuery, delete_promises).then(function () {
+					self.render();
+					MenuTreeView.getInstance().updateMenuItemsUI();
+
+					self.showConfirmationMessage(_('The selected items were removed from your product list').translate());
+				});
 			}
 			
 			, addItemsToCartBulkHandler: function (e) {
