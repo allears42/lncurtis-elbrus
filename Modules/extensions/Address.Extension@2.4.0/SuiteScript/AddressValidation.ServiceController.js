@@ -53,33 +53,50 @@ define(
                 var API_URL = 'https://us-street.api.smartystreets.com/street-address?'+qStr;
                 var resp = nlapiRequestURL(API_URL);
                 resp = resp.getBody();
+				
+				nlapiLogExecution('DEBUG', 'SmartyStreets API_URL:', API_URL);
+				nlapiLogExecution('DEBUG', 'SmartyStreets Reply:', resp);
                 resp = decodeURI(resp);
-				resp = JSON.parse(resp);
-                nlapiLogExecution('DEBUG', 'SmartyStreets Reply:', resp);
-
-                var responseArr = [];
-
-                if (resp && resp != null && resp.length > 0){
-                    for (var i = 0; i < resp.length; i++){
-                        var responseObject = {
-                        	'addr1':resp[i].delivery_line_1,
-							'addr2':'',
-							'state':resp[i].components.state_abbreviation,
-							'city':resp[i].components.city_name,
-							'zip':resp[i].components.zipcode
-                        };
-                        if (resp[i].hasOwnProperty('delivery_line_2') == true){
-                        	responseObject.addr2 = resp[i].delivery_line_2;
-                        }
-                        responseObject.isresidential = resp[i].hasOwnProperty('metadata') && resp[i].metadata.hasOwnProperty('rdi') && resp[i].metadata.rdi == 'Residential';
-
-                        responseArr.push(responseObject);
-                    }
+				
+				
+                try {
+	                resp = JSON.parse(resp);
+	
+	                var responseArr = [];
+	
+	                if (resp && resp != null && resp.length > 0) {
+		                for (var i = 0; i < resp.length; i++) {
+			                var responseObject = {
+				                'addr1': resp[i].delivery_line_1,
+				                'addr2': '',
+				                'state': resp[i].components.state_abbreviation,
+				                'city': resp[i].components.city_name,
+				                'zip': resp[i].components.zipcode
+			                };
+			                if (resp[i].hasOwnProperty('delivery_line_2') == true) {
+				                responseObject.addr2 = resp[i].delivery_line_2;
+			                }
+			                responseObject.isresidential = resp[i].hasOwnProperty('metadata') && resp[i].metadata.hasOwnProperty('rdi') && resp[i].metadata.rdi == 'Residential';
+			
+			                responseArr.push(responseObject);
+		                }
+	                }
+	
+	                nlapiLogExecution('DEBUG', 'Response:', JSON.stringify(responseArr));
+	
+	                return (encodeURI(JSON.stringify(responseArr)));
                 }
-
-                nlapiLogExecution('DEBUG', 'Response:', JSON.stringify(responseArr));
-
-                return(encodeURI(JSON.stringify(responseArr)));
+                catch(e) {
+	                nlapiLogExecution('ERROR', 'Error with SmartyStreets Address Validation', JSON.stringify(e));
+	                nlapiLogExecution('ERROR', 'API Response', JSON.stringify(resp));
+	                
+	                return {
+		
+		                errorCode:"ERR_ADDRESS_VALIDATION"
+	                ,   errorMessage: 'SmartyStreets Error: ' + resp
+	                ,   errorStatusCode: "400"
+	                }
+                }
 			}
 		});
 	}

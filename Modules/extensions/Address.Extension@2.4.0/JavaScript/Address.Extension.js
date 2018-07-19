@@ -9,12 +9,10 @@ define(
 ,	[
         'Address.Edit.View.Extension'
     ,   'Address.Edit.Fields.View.Extension'
-	,	'Address.Details.View.Extension'
 	]
 ,	function (
 		AddressEditViewExtension
 	,   AddressEditFieldsViewExtension
-	,	AddressDetailsViewExtension
 
 	)
 {
@@ -23,6 +21,6 @@ define(
     return {
 	    AddressEditViewExtension: AddressEditViewExtension
     ,   AddressEditFieldsViewExtension: AddressEditFieldsViewExtension
-	,	AddressDetailsViewExtension: AddressDetailsViewExtension
     }
+
 });

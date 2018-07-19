@@ -1,0 +1,91 @@
+
+.address-validation-container {
+  width: 100%;
+  max-width: 800px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.address-validation-row {
+  @include clearfix();
+
+  display: inline-block;
+  background-color: white;
+  border: 1px solid $sc-color-theme-border;
+  padding-top: $sc-base-padding*3;
+  padding-bottom: $sc-base-padding*3;
+
+  label {
+    display: block;
+    min-width: 175px;
+    margin: 0 $sc-base-margin*3;
+  }
+
+  .suggested {
+    background: $sc-color-theme-light;
+    padding: $sc-base-padding*3 0;
+  }
+  .original {
+    padding: $sc-base-padding*7 + 3 0 $sc-base-padding*3;
+  }
+}
+
+.address-validation-suggested {
+  display: block;
+  padding-bottom: $sc-base-padding*2;
+  color: $sc-color-theme-light;
+}
+
+.address-validation-column {
+  border-right: 1px solid $sc-color-theme-border;
+  text-align: center;
+  display: inline-block;
+
+  &:last-of-type {
+    border-right: 0;
+  }
+
+}
+
+.address-validation-column-missing {
+  max-width: 185px;
+  padding: $sc-base-padding*2;
+  display: block;
+  text-align: center;
+  background: $sc-color-error-background;
+  margin: 0 auto;
+  p {
+
+    color: $sc-color-error;
+  }
+
+}
+
+.address-validation-radio {
+  text-align: center;
+  margin: 0;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 11px;
+}
+
+.address-validation-text {
+  font-size: 12px;
+  text-align: center;
+  display: block;
+}
+
+.address-validation-text span {
+  display: block;
+}
+
+.address-validation-alert {
+  font-size: $sc-base-font-size;
+  font-weight: $sc-font-weight-bold;
+  text-transform: uppercase;
+  margin: $sc-base-margin * 4 0 $sc-base-margin*2;
+  padding: 0;
+  color: $sc-color-primary;
+}
