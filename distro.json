@@ -235,6 +235,7 @@
         "extensions/Overview.Extension": "1.1.2",
         "extensions/ProductViews.Extension": "1.0.0",
         "extensions/ProductDetails.Extension": "1.1.0",
+        "extensions/ProductLine.Extension": "1.0.0",
         "extensions/ProductList.Extension": "3.0.0",
         "extensions/Profile.Extension": "3.0.0",
         "extensions/QuickAdd.Extension": "2.2.0",
@@ -242,6 +243,7 @@
         "extensions/SC.Configuration.Extension": "4.0.0",
         "extensions/Session.Extension": "2.2.1",
         "extensions/SiteSearch.Extension": "2.1.2",
+        "extensions/Transaction.Line.Views.Extension": "1.0.0",
         "extensions/Wizard.Extension": "2.2.0",
         "extensions/Product.Extension": "1.0.0",
 
@@ -371,7 +373,8 @@
 
                     "GoogleTagManager.Extension",
                     "SiteSearch.Extension",
-                    "Product.Extension"
+                    "Product.Extension",
+                    "ProductLine.Extension"
                 ],
                 "amdclean": true,
                 "amdConfig": {
@@ -664,7 +667,8 @@
 
                     "GoogleTagManager.Extension",
                     "SiteSearch.Extension",
-                    "Product.Extension"
+                    "Product.Extension",
+                    "Transaction.Line.Views.Extension"
                 ],
                 "amdclean": true,
                 "amdConfig": {

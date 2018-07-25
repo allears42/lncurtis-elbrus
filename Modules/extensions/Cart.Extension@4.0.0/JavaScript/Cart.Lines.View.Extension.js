@@ -7,10 +7,13 @@ define('Cart.Lines.View.Extension'
 ,	[
 		'Cart.Lines.View'
 	,	'underscore'
+	,	'ProductLine.Stock.Cart.View'
+		
 	]
 ,	function (
 		CartLinesView
 	,	_
+	,	ProductLineStockCartView
 	)
 {
 	'use strict';
@@ -24,6 +27,13 @@ define('Cart.Lines.View.Extension'
 					model: this.model
 					,	application: this.options.application
 				}, this.options.summaryOptions || {}));
+			}
+
+		,	'Product.Stock.Info': function ()
+			{
+				return new ProductLineStockCartView({
+					model: this.model
+				});
 			}
 		})
 	,   getContext: _.wrap(CartLinesView.prototype.getContext, function (fn) {
