@@ -245,6 +245,7 @@
         "extensions/Wizard.Extension": "2.2.0",
         "extensions/Product.Extension": "1.0.0",
 
+        "custom/BingAnalytics": "1.0.0",
         "custom/CallForPricing": "1.0.0",
         "custom/CreditCard.Icon": "1.0.0",
         "custom/CustomerServiceForm": "1.0.0",
@@ -355,6 +356,7 @@
                     "ProductDetailToQuote",
                     "StoreLocator",
 
+                    "BingAnalytics",
                     "CallForPricing",
                     "CreditCard.Icon",
                     "CustomerServiceForm",
@@ -485,6 +487,7 @@
                     "GoogleMap.Configuration",
                     "StoreLocatorAccessPoints",
 
+                    "BingAnalytics",
                     "CallForPricing",
                     "CreditCard.Icon",
                     "LinkHierarchy",
@@ -631,6 +634,7 @@
                     "StoreLocatorAccessPoints",
                     "StoreLocator",
 
+                    "BingAnalytics",
                     "CallForPricing",
                     "CreditCard.Icon",
                     "LinkHierarchy",

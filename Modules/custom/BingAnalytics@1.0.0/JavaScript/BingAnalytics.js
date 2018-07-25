@@ -7,16 +7,6 @@
 {
 	'use strict';
 
-	console.log('IN BING ANALYTICS MODULE --------------');
-	// win.GoogleAnalyticsObject = name;
-	// win[name] = win[name] || function ()
-	// {
-	// 	(win[name].q = win[name].q || []).push(arguments);
-	// };
-	// win[name].l = 1 * new Date();
-
-
-
 	//@class BingAnalytics @extends ApplicationModule
 	// ------------------
 	// Loads google analytics script and extends application with methods:
@@ -95,73 +85,6 @@
 				return this;
 			}
 
-			//@method addTrans
-			//@param {Object} transaction
-			//@return {BingAnalytics}
-		// ,	addTrans: function (transaction)
-		// 	{
-		// 		console.log('TRACK ADD TRANS ----------------------');
-		// 		if (transaction && transaction.id)
-		// 		{
-		// 			win[name] = win[name] || [];
-		// 			win[name].push({'ea': 'add_transaction', 'el': transaction.id});
-		// 		}
-        //
-		// 		return this;
-		// 	}
-
-			//@method trackTrans
-			//@return {BingAnalytics}
-		// ,	trackTrans: function (transaction)
-		// 	{
-		// 		console.log('TRACK TRACK TRANS ----------------------');
-        //
-		// 		if(transaction && transaction.id) {
-		// 			win[name] = win[name] || [];
-		// 			win[name].push({'ea': 'add_transaction', 'el': transaction.id});
-		// 		}
-        //
-        //
-		// 		return this;
-		// 	}
-
-			//@method trackTransaction
-			// Based on the created SalesOrder we trigger each of the analytics
-			// ecommerce methods passing the required information
-			// [Ecommerce Tracking](https://developers.google.com/analytics/devguides/collection/analyticsjs/ecommerce)
-			//@param {Tracker.Transaction.Model} @extends Backbone.Model transaction
-			//@return {BingAnalytics|Void}
-		// ,	trackTransaction: function (transaction)
-		// 	{
-		// 		console.log('TRACK TRACK TRANSACTION ----------------------');
-		// 		var transaction_id = transaction.get('confirmationNumber');
-        //
-		// 		BingAnalytics.addTrans({
-		// 			id: transaction_id
-		// 		,	revenue: transaction.get('subTotal')
-		// 		,	shipping: transaction.get('shippingCost') + transaction.get('handlingCost')
-		// 		,	tax: transaction.get('taxTotal')
-		// 		,	currency: SC.ENVIRONMENT.currentCurrency && SC.ENVIRONMENT.currentCurrency.code || ''
-        //
-		// 		,	page: '/' + Backbone.history.fragment
-		// 		});
-        //
-		// 		transaction.get('products').each(function (product)
-		// 		{
-		// 			BingAnalytics.addItem({
-		// 				id: transaction_id
-		// 			,	affiliation: Configuration.get('siteSettings.displayname')
-		// 			,	sku: product.get('sku')
-		// 			,	name: product.get('name')
-		// 			,	category: product.get('category') || ''
-		// 			,	price: product.get('rate')
-		// 			,	quantity: product.get('quantity')
-		// 			});
-		// 		});
-        //
-		// 		return BingAnalytics.trackTrans();
-		// 	}
-
 		,	trackTransaction: function(transaction)
 			{
 				// console.log('ENTER TRACK TRANSACTION ---------------');
@@ -211,11 +134,6 @@
 			{
 				// console.log('CHECKPOINT 1 ---------------------');
 				return !SC.isPageGenerator() && jQuery.getScript('//bat.bing.com/bat.js');
-				// if(SC.ENVIRONMENT.jsEnvironment === 'browser') {
-				// 	console.log('CHECKPOINT 2 ---------------------');
-				// 	jQuery.getScript('//bat.bing.com/bat.js');
-				// 	this.setAccount(config);
-				// }
 			}
 
 			//@method mountToApp
@@ -224,13 +142,13 @@
 		,	mountToApp: function (application)
 			{
 				// we get the account and domain name from the configuration file
-				// var tracking = application.getConfig('tracking.bingAnalytics');
+				var tracking = application.getConfig('tracking.bingAnalytics');
 				// TODO: Test only
-				var tracking = {
-					propertyID: '13000038'
-				,	domainName: 'http://sb-lncurtis.jhmservices.net/'
-				,	domainNameSecure: 'https://checkout.sandbox.netsuite.com/c.3880230_SB2/lncurtis-dev-elbrus/checkout.ssp'
-				};
+				// var tracking = {
+				// 	propertyID: '13000038'
+				// ,	domainName: 'http://sb-lncurtis.jhmservices.net/'
+				// ,	domainNameSecure: 'https://checkout.sandbox.netsuite.com/c.3880230_SB2/lncurtis-dev-elbrus/checkout.ssp'
+				// };
 
 				// if track page view needs to be tracked
 				if (tracking && tracking.propertyID)
