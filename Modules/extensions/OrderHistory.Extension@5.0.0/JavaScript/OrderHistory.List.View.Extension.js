@@ -40,39 +40,52 @@ define(
                     var self = this
                     ,	records_collection = new Backbone.Collection(this.collection.map(function (order)
                     {
-                        var dynamic_column;
+                        var dynamic_column
+                        ,   status
+                        ,   tooltipString = 'orderStatusTooltips.'
+                        ,   statusValue;
 
                         if (self.isSCISIntegrationEnabled)
                         {
                             dynamic_column = {
                                 label: _('Origin:').translate()
-                                ,	type: 'origin'
-                                ,	name: 'origin'
-                                ,	value: _.findWhere(Configuration.get('transactionRecordOriginMapping'), { origin: order.get('origin') || null }).name
+                            ,	type: 'origin'
+                            ,	name: 'origin'
+                            ,	value: _.findWhere(Configuration.get('transactionRecordOriginMapping'), { origin: order.get('origin') || null }).name
                             };
                         }
                         else
                         {
+                            status = order.get('status');
+                            if(status.name === 'Pending Approval') {
+                                statusValue = 'Pending Fulfillment';
+                                tooltipString += 'pendingFulfillment';
+                            } else {
+                                statusValue = status.name;
+                                tooltipString += status.internalid;
+                            }
+
                             dynamic_column = {
                                 label: _('Status:').translate()
-                                ,	type: 'status'
-                                ,	name: 'status'
-                                ,	value: order.get('status').name === "Pending Approval" ? "Pending Fufillment" : order.get('status').name
+                            ,	type: 'status'
+                            ,	name: 'status'
+                            ,   value: statusValue
+                            ,   tooltip: Configuration.get(tooltipString)
                             };
                         }
 
                         var columns = [
                             {
                                 label: _('Date:').translate()
-                                ,	type: 'date'
-                                ,	name: 'date'
-                                ,	value: order.get('trandate')
+                            ,	type: 'date'
+                            ,	name: 'date'
+                            ,	value: order.get('trandate')
                             }
                             ,	{
                                 label: _('Amount:').translate()
-                                ,	type: 'currency'
-                                ,	name: 'amount'
-                                ,	value: order.get('amount_formatted')
+                            ,	type: 'currency'
+                            ,	name: 'amount'
+                            ,	value: order.get('amount_formatted')
                             }];
 
                         if (!_.isUndefined(dynamic_column))

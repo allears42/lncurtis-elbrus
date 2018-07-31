@@ -203,6 +203,7 @@
         "overrides/Override.ProductList": "3.0.0",
         "overrides/Override.ProductViews": "1.0.0",
         "overrides/Override.Profile": "3.0.0",
+        "overrides/Override.RecordViews": "2.0.0",
         "overrides/Override.RecentlyViewedItems": "2.3.0",
         "overrides/Override.ShoppingApplication": "4.0.0",
         "overrides/Override.SiteSearch": "2.1.2",

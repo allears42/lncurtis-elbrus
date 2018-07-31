@@ -7,6 +7,11 @@ define(
     ,	[
         'Overview.Home.View'
 	,	'Backbone'
+    ,	'Backbone.CollectionView'
+    ,	'OrderHistory.List.Tracking.Number.View'
+    ,	'Handlebars'
+    ,   'SC.Configuration'
+    ,	'RecordViews.View'
 
 	,	'underscore'
 
@@ -14,6 +19,13 @@ define(
     ,	function(
         OverviewHomeView
 	,	Backbone
+    ,	BackboneCollectionView
+    ,	OrderHistoryListTrackingNumberView
+    ,	Handlebars
+    ,   Configuration
+    ,	RecordViewsView
+
+
 	, 	_
 
     )
@@ -31,7 +43,10 @@ define(
                     var self = this
                         ,	records_collection = new Backbone.Collection(this.collection.map(function (order)
                     {
-                        var dynamic_column;
+                        var dynamic_column
+                        ,   status
+                        ,   tooltipString = 'orderStatusTooltips.'
+                        ,   statusValue;
 
                         if (self.isSCISIntegrationEnabled)
                         {
@@ -44,11 +59,22 @@ define(
                         }
                         else
                         {
+                
+                            status = order.get('status');
+                            if(status.name === 'Pending Approval') {
+                                statusValue = 'Pending Fulfillment';
+                                tooltipString += 'pendingFulfillment';
+                            } else {
+                                statusValue = status.name;
+                                tooltipString += status.internalid;
+                            }
+
                             dynamic_column = {
                                 label: _('Status:').translate()
                                 ,	type: 'status'
                                 ,	name: 'status'
-                                ,	value: order.get('status').name == "Pending Approval" ? "Pending Fulfillment" : order.get('status').name
+                                ,   value: statusValue
+                                ,   tooltip: Configuration.get(tooltipString)
                             };
                         }
 

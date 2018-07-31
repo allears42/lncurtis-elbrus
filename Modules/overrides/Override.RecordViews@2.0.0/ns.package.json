@@ -1,0 +1,22 @@
+{
+    "gulp": {
+        "javascript": [
+            "JavaScript/*"
+        ],
+        "templates": [
+            "Templates/*.tpl"
+        ],
+        "sass": [
+            "Sass/*.scss"
+        ],
+        "configuration": [
+            "Configuration/*.json"
+        ]
+    }
+
+    , "overrides": {
+        "suitecommerce/RecordViews@2.0.0/Templates/recordviews_actionable.tpl" : "Templates/recordviews_actionable.tpl",
+        "suitecommerce/RecordViews@2.0.0/Templates/recordviews.tpl" : "Templates/recordviews.tpl"
+    }
+
+}

@@ -193,10 +193,12 @@ define(
 
 	,	getStatus: function ()
 		{
+			var internalId = nlapiLookupField(this.result.recordtype, this.result.internalid, 'status');
 			this.result.status =
 			{
-				internalid: nlapiLookupField(this.result.recordtype, this.result.internalid, 'status')
+				internalid: internalId
 			,	name: nlapiLookupField(this.result.recordtype, this.result.internalid, 'status', true)
+			,	tooltip: SC.Configuration.orderStatusTooltips[internalId]
 			};
 		}
 	,	getLinesGroups: function ()

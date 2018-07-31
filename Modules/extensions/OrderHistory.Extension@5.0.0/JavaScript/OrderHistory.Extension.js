@@ -7,10 +7,12 @@ define(
     ,	[
         'OrderHistory.List.View.Extension'
     ,   'OrderHistory.Summary.View.Extension'
+    ,   'OrderHistory.Details.View.Extension'
     ]
     ,	function(
         OrderHistoryListViewExtension
     ,   OrderHistorySummaryViewExtension
+    ,   OrderHistoryDetailsViewExtension
     )
     {
         'use strict';
@@ -18,6 +20,7 @@ define(
         return {
             OrderHistoryListViewExtension: OrderHistoryListViewExtension
         ,   OrderHistorySummaryViewExtension: OrderHistorySummaryViewExtension
+        ,   OrderHistoryDetailsViewExtension: OrderHistoryDetailsViewExtension
         }
 
     });
