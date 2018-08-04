@@ -1,0 +1,41 @@
+{
+  "type": "object",
+  "subtab": {
+      "id": "homepageBestsellers",
+      "title": "Homepage Bestsellers",
+      "description": "Internal IDs of Bestseller items on homepage",
+      "group": "layout"
+  },
+
+  "properties": {
+
+      "homepageBestsellers.itemOne": {
+          "group": "layout",
+          "subtab": "homepageBestsellers",
+          "type": "integer",
+          "title": "Bestsellers item 1",
+          "mandatory": true
+      },
+      "homepageBestsellers.itemTwo": {
+          "group": "layout",
+          "subtab": "homepageBestsellers",
+          "type": "integer",
+          "title": "Bestsellers item 2",
+          "mandatory": true
+        },
+      "homepageBestsellers.itemThree": {
+          "group": "layout",
+          "subtab": "homepageBestsellers",
+          "type": "integer",
+          "title": "Bestsellers item 3",
+          "mandatory": true
+      },
+      "homepageBestsellers.itemFour": {
+          "group": "layout",
+          "subtab": "homepageBestsellers",
+          "type": "integer",
+          "title": "Bestsellers item 4",
+          "mandatory": true
+      }
+  }
+}

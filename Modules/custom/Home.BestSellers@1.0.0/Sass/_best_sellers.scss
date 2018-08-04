@@ -1,0 +1,38 @@
+.bestsellers {
+
+  h2 {
+    margin-bottom: $sc-base-padding * 4;
+  }
+
+  .bestseller {
+
+    .bestseller-price {
+      padding: $sc-base-padding 0;
+      border-top: 1px solid $sc-color-theme-light;
+      border-bottom: 1px solid $sc-color-theme-light;
+
+      .product-views-price-lead {
+        font-size: $sc-small-font-size;
+      }
+    }
+
+    .view-more-button {
+
+      @extend .button-primary;
+      @extend .button-medium;
+      margin-top: 0;
+      width: 100%;
+      color: $sc-color-primary;
+      background: $sc-color-tertiary;
+      border: 2px solid $sc-color-primary;
+
+      padding-left: $sc-base-padding;
+      padding-right: $sc-base-padding;
+
+      &:focus {
+        color: $sc-color-primary;
+      }
+    }
+  }
+}
+

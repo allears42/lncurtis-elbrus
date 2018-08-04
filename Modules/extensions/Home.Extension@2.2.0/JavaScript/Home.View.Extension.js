@@ -7,6 +7,8 @@ define(
     ,	[
         'Home.View'
     ,   'SC.Configuration'
+    ,   'Home.BestSellers.View'
+    ,   'Home.BestSellers.Items.Model'
 
 	,	'underscore'
 	,	'Utils'
@@ -15,6 +17,8 @@ define(
     ,	function(
         HomeView
     ,   Configuration
+    ,   HomeBestSellersView
+    ,   HomeBestSellersItemsModel
 
 	, 	_
 	,	Utils
@@ -58,6 +62,20 @@ define(
 
                 jQuery(window).on('resize', this._windowResizeHandler);
             }
+
+        ,   childViews: _.extend({}, HomeView.prototype.childViews, {
+
+                'BestSellers': function() {
+                    
+                    var homeBestSellersItemsModel = new HomeBestSellersItemsModel()
+                    ,   homeBestSellersItemsPromise = homeBestSellersItemsModel.fetch();
+                    
+                    return new HomeBestSellersView({
+                        homeBestSellersItemsModel: homeBestSellersItemsModel
+                    ,   homeBestSellersItemsPromise: homeBestSellersItemsPromise
+                    });
+                }
+            })
 
 		,	getContext: _.wrap( HomeView.prototype.getContext, function(fn)
 			{

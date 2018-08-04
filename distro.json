@@ -253,6 +253,7 @@
         "custom/CreditCard.Icon": "1.0.0",
         "custom/CustomerServiceForm": "1.0.0",
         "custom/FacetContent": "1.0.0",
+        "custom/Home.BestSellers": "1.0.0",
         "custom/LinkHierarchy": "1.0.0",
         "custom/Pacejet": "1.0.0",
         "custom/Product.BackOrders": "1.0.0",
@@ -364,6 +365,7 @@
                     "CreditCard.Icon",
                     "CustomerServiceForm",
                     "FacetContent",
+                    "Home.BestSellers",
                     "LinkHierarchy",
                     "Product.BackOrders",
                     "Product.Configurator",
@@ -951,6 +953,7 @@
                             ]
                         },
                         "Home",
+                        "Home.BestSellers",
                         "ProductDetails",
                         "ProductViews",
                         "ProductLine",

@@ -46,7 +46,7 @@ define(
 				{
 					var product = new ProductModel({
 						item: this.model
-						,	quantity: this.model.get('_minimumQuantity', true)
+                    ,	quantity: this.model.get('_minimumQuantity', true)
 					});
 					
 					return new CartQuickAddToCartView({
@@ -55,6 +55,14 @@ define(
 					,   hideComparePrice: true
 					});
 				}
+
+            ,   'ItemViews.Price': function ()
+                {
+                    return new ProductViewsPriceView({
+                        model: this.model
+                    ,	origin: 'ITEMCELL_SEARCH'
+                    });
+                }
 
             })
 
