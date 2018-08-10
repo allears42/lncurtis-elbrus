@@ -29,7 +29,25 @@ define(
 
         _.extend( HeaderView.prototype, {
 
-        	verifyShowSiteSearch: function ()
+			initialize: _.wrap(HeaderView.prototype.initialize, function(fn, options) {
+
+				var self = this;
+				fn.apply(this, _.toArray(arguments).slice(1));
+				this.application = options.application;
+
+				this.application.getLayout().on('afterAppendToDom afterAppendView', function() {
+					self.addAffixBehavior();
+				});
+
+				_.bindAll(this, 'addAffixBehavior');
+				_.bindAll(this, 'clearAffixRelatedStyles');
+				jQuery(window).resize(function() {
+					self.clearAffixRelatedStyles();
+					self.addAffixBehavior();
+				})
+			})
+
+		,	verifyShowSiteSearch: function ()
             {
                 /*
                 var hash = Backbone.history.getFragment() || '';
@@ -84,6 +102,38 @@ define(
 			}
 
 			})
+
+		,	addAffixBehavior: function()
+			{
+				var $headerAffixElement = this.$('#header-affix-element')
+				,	$paddingElement = this.$('#main')
+				// ,	screenWidth = Utils.getViewportWidth()
+				,	self = this;
+
+				// if (screenWidth > 767) {
+
+					// Adds Twitter affix behavior to nav bar
+					$headerAffixElement.affix({
+						offset: {
+							top: function() {return self.$('.header-content').outerHeight(true)}
+						}
+					// Add margin to top of body content to prevent it from bouncing up behind affixed navbar
+					}).on('affix.bs.affix', function() {
+						$paddingElement.css('margin-top', $headerAffixElement.outerHeight(true) + 'px');
+
+					// Remove margin from top of body content when navbar is unaffixed
+					}).on('affix-top.bs.affix', function() {
+						$paddingElement.css('margin-top', '0');
+					});
+				// }
+
+			}
+
+		,	clearAffixRelatedStyles: function()
+			{
+				jQuery('#breadcrumb-affix-element').css('margin-top', '0');
+
+			}
 
 		,	getContext: _.wrap( HeaderView.prototype.getContext, function(fn)
 			{
