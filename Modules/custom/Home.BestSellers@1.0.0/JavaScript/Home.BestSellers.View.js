@@ -52,7 +52,7 @@ define('Home.BestSellers.View'
             'BestSellersItemsView': function() {
 
                 var self = this
-                    ,   collection = new ItemCollection(self.homeBestSellersItemsModel.get('items'));
+                ,   collection = new ItemCollection(self.homeBestSellersItemsModel.get('items'));
 
                 collection.comparator = function(model) {return model.get('bestsellerSort')};
                 collection.sort();
@@ -60,13 +60,11 @@ define('Home.BestSellers.View'
                 return new BackboneCollectionView({
                     childView: FacetsItemCellView
                 ,   childTemplate: best_sellers_item_tpl
-                // ,   collection: new ItemCollection(self.homeBestSellersItemsModel.get('items'))
-                    ,   collection: collection
+                ,   collection: collection
                 ,   viewsPerRow: 4
                 ,   cellTemplate: facets_items_collection_view_cell_tpl
                 ,   rowTemplate: facets_items_collection_view_row_tpl
                 ,   template: facets_items_collection_tpl
-                // ,   comparator: function(model) {return model.get('bestsellerSort')}
                 });
             }
         }
