@@ -56,7 +56,7 @@ define(
 					});
 				}
 
-            ,   'ItemViews.Price': function ()
+            ,   'Bestseller.Price': function ()
                 {
                     return new ProductViewsPriceView({
                         model: this.model

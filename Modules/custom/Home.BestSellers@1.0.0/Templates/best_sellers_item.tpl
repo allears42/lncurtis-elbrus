@@ -20,7 +20,7 @@
             <span itemprop="name">{{name}}</span>
         </a>
 
-        <div class="facets-item-cell-grid-price bestseller-price" data-view="ItemViews.Price"></div>
+        <div class="facets-item-cell-grid-price bestseller-price" data-view="Bestseller.Price"></div>
         <a href="{{url}}" class="view-more-button">{{translate 'View More'}}</a>
     </div>
 </div>
