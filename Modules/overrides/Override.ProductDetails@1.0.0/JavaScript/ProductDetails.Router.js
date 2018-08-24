@@ -189,7 +189,8 @@ define(
 						application.getLayout().internalError();
 					}
 					// FIX - this consistently throws an error
-					else if (jqXhr.responseJSON && jqXhr.responseJSON.errorCode && jqXhr.responseJSON.errorCode !== 'ERR_USER_SESSION_TIMED_OUT')
+					else if (jqXhr.responseJSON && (jqXhr.responseJSON.code == 404 ||
+							jqXhr.responseJSON.errorCode && jqXhr.responseJSON.errorCode !== 'ERR_USER_SESSION_TIMED_OUT'))
 					{
 						// We just show the 404 page
 						application.getLayout().notFound();
