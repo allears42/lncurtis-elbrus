@@ -11,6 +11,16 @@
 	.bx-wrapper img {
 		margin: auto;
 	}
+
+	.bx-wrapper iframe {
+
+		@media(min-width: 1024px) and (max-width: $screen-md-max) {
+			width: inherit !important;
+		}
+		@media(max-width: $screen-xs-min) {
+			width: inherit !important;
+		}
+	}
 }
 
 .product-details-image-gallery-container {

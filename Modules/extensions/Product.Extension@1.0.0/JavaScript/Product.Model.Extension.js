@@ -32,19 +32,21 @@ define('Product.Model.Extension'
 	'use strict';
 
 	_.extend(ProductModel.prototype, {
-		getImages: function getImages ()
+
+        getVideos: function () {
+            return this.get('item').get('_videos') || [];
+        }
+
+	,	getImages: function getImages ()
 		{
-			//console.log('product model');
 			var self = this
 			,   item = this.get('item')
-			,	item_images_detail = item.get('itemimages_detail') || {};
-			
-			//item_images_detail = item_images_detail.media || item_images_detail;
-			
-			var image_filters = Configuration.get('productline.multiImageOption', [])
+			,	item_images_detail = item.get('itemimages_detail') || {}
+			,	image_filters = Configuration.get('productline.multiImageOption', [])
 			,	images_container = this.filterImages(item_images_detail, image_filters)
 			,	result = Utils.imageFlatten(images_container)
-			,   filterFound = false;
+			,   filterFound = false
+			,   videos = this.getVideos();
 			
 			// look to see if the filter (option) is found and if it has a value set.
 			_.each(image_filters, function (image_filter) {
@@ -62,13 +64,16 @@ define('Product.Model.Extension'
 				images_container = this.filterImages(item_images_detail.media, image_filters);
 				result = Utils.imageFlatten(images_container) ;
 			}
-			
-			//console.log('getImages', image_filters, images_container, filterFound, result);
 
-			return result.length ? result : [{
-				url: Utils.getAbsoluteUrlOfNonManagedResources(Configuration.get('imageNotAvailable', 'img/no_image_available.jpeg'))
+			if(!result.length) {
+				result = [{
+                    url: Utils.getAbsoluteUrlOfNonManagedResources(Configuration.get('imageNotAvailable', 'img/no_image_available.jpeg'))
 				,	altimagetext: item.get('_name')
-			}];
+                }];
+			}
+
+			return result.concat(videos);
+
 		}
 	});
 	

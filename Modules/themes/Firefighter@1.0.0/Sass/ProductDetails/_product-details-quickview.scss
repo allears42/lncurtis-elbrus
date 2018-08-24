@@ -28,6 +28,14 @@
 		display: inline-block;
 		height: 340px;
 	}
+
+	.bx-pager-item a {
+		width: 65px !important;
+	}
+
+	iframe {
+		width: inherit !important;
+	}
 }
 .product-details-quickview-details {
 	@extend .col-sm-7;
