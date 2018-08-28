@@ -265,6 +265,7 @@
         "custom/OrderWizard.Module.PromocodeNotifications": "1.0.0",
         "custom/OrderWizard.Module.OrderComments": "1.0.0",
         "custom/Wizard.Step.Fix": "2.3.0",
+        "custom/StateComplianceWarnings": "1.0.0",
 
         "themes/Firefighter": "1.0.0"
     },
@@ -377,7 +378,8 @@
                     "GoogleTagManager.Extension",
                     "SiteSearch.Extension",
                     "Product.Extension",
-                    "ProductLine.Extension"
+                    "ProductLine.Extension",
+                    "StateComplianceWarnings"
                 ],
                 "amdclean": true,
                 "amdConfig": {
@@ -526,7 +528,9 @@
 
                     "GoogleTagManager.Extension",
                     "SiteSearch.Extension",
-                    "Product.Extension"
+                    "Product.Extension",
+                    "StateComplianceWarnings",
+                    "Transaction.Line.Views.Extension"
 
                 ],
                 "amdclean": true,
@@ -671,7 +675,8 @@
                     "GoogleTagManager.Extension",
                     "SiteSearch.Extension",
                     "Product.Extension",
-                    "Transaction.Line.Views.Extension"
+                    "Transaction.Line.Views.Extension",
+                    "StateComplianceWarnings"
                 ],
                 "amdclean": true,
                 "amdConfig": {
@@ -1001,7 +1006,8 @@
                             "include": [
                                 "shopping"
                             ]
-                        }
+                        },
+                        "StateComplianceWarnings"
                     ]
                 },
                 {
@@ -1165,7 +1171,8 @@
                             "include": [
                                 "myaccount"
                             ]
-                        }
+                        },
+                        "StateComplianceWarnings"
                     ]
                 },
                 {
@@ -1282,7 +1289,8 @@
                             "include": [
                                 "checkout"
                             ]
-                        }
+                        },
+                        "StateComplianceWarnings"
                     ]
                 }
             ]

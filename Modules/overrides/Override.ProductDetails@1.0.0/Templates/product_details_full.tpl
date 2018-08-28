@@ -36,6 +36,7 @@
 				<div class="product-details-upper-info-outer">
 					<div data-view="Product.Price"></div>
 					<div data-view="Product.Sku" class="product-details-sku-container"></div>
+					<div data-view="StateWarnings.Icons" class="warning-icon-container"></div>
 				</div>
 				<div class="product-details-full-divider"></div>
 
@@ -134,6 +135,7 @@
 		</section>
 
 		<section data-view="Product.Information"></section>
+		<div data-view="StateWarnings.Messages"></div>
 
 		<div class="product-details-full-divider-desktop"></div>
 

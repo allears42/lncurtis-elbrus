@@ -10,6 +10,8 @@ define(
 	,   'ProductViews.SizeChart'
 	,	'SC.Configuration'
 	,	'underscore'
+	,	'StateComplianceWarnings.View'
+	,	'state_warning_messages.tpl'
 
 	]
 ,	function (
@@ -17,6 +19,8 @@ define(
 	,   ProductViewsSizeChartView
 	,	Configuration
 	,	_
+	,	StateComplianceWarningsView
+	,	state_warning_messages_tpl
 	)
 {
 	'use strict';
@@ -37,6 +41,24 @@ define(
 			,   'click [data-action="show-size-chart"]': 'showSizeChart'
 			,   'contextmenu img': 'preventContextMenu'
 		})
+
+	,	childViews: _.extend({}, ProductDetailsFullView.prototype.childViews, {
+
+            'StateWarnings.Icons': function()
+            {
+                return new StateComplianceWarningsView({
+                    model: this.model
+                })
+            }
+
+		,	'StateWarnings.Messages': function()
+            {
+                return new StateComplianceWarningsView({
+                    model: this.model
+				,	template: state_warning_messages_tpl
+                })
+            }
+        })
 		
 		
 	,   preventContextMenu: function (e)

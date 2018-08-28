@@ -8,12 +8,14 @@ define('Cart.Lines.View.Extension'
 		'Cart.Lines.View'
 	,	'underscore'
 	,	'ProductLine.Stock.Cart.View'
+	,	'StateComplianceWarnings.View'
 		
 	]
 ,	function (
 		CartLinesView
 	,	_
 	,	ProductLineStockCartView
+	,	StateComplianceWarningsView
 	)
 {
 	'use strict';
@@ -35,6 +37,13 @@ define('Cart.Lines.View.Extension'
 					model: this.model
 				});
 			}
+
+		,	'StateWarnings.Icons': function()
+            {
+                return new StateComplianceWarningsView({
+                    model: this.model
+                })
+            }
 		})
 	,   getContext: _.wrap(CartLinesView.prototype.getContext, function (fn) {
 		

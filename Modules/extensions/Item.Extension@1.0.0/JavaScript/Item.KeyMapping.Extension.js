@@ -17,6 +17,27 @@ define('Item.KeyMapping.Extension'
     
     _.extend(Configuration.itemKeyMapping, {
 	    _defaultCategory: 'defaultcategory_detail'
+
+        // State warning icon display booleans
+	,	_show_ca_prop_65_warning: 'custitem_jhm_webstore_show_ca_65'
+	,	_show_wa_sb_6413_warning: 'custitem_jhm_webstore_show_wa_6413'
+
+        // State warning text fields
+	,	_ca_prop_65_warning_text: 'custitem_jhm_webstore_warn_text_ca_65'
+	,	_wa_sb_6413_warning_text: 'custitem_jhm_webstore_warn_text_wa6413'
+
+	,	_showWarningIcons: function(item)
+        {
+            var returnFlag = false
+                ,	showCaliforniaProp65Warning = item.get('_show_ca_prop_65_warning')
+                ,	showWashingtonSB6413Warning = item.get('_show_wa_sb_6413_warning');
+
+            if(showCaliforniaProp65Warning || showWashingtonSB6413Warning) {
+                returnFlag = true;
+            }
+
+            return returnFlag;
+        }
 	   
 	    // use default category to build bread crumbs
     ,   _breadcrumb: function (item)

@@ -5,93 +5,56 @@
 	may use this code subject to the terms that govern your access and use.
 }}
 
-<tr id="{{lineId}}" data-item-id="{{itemId}}" data-type="order-item" class="{{#if showGeneralClass}} {{generalClass}} {{/if}} cart-lines-row">
-	<td colspan="4" class="cart-lines-row-seondary">
-		<table>
-			<tr>
-				<td class="cart-lines-table-first" rowspan="2">
-					<div class="cart-lines-thumbnail">
-						{{#if isNavigable}}
-							<a {{{linkAttributes}}}>
-								<img src="{{resizeImage thumbnail.url 'item_small'}}" alt="{{thumbnail.altimagetext}}">
-							</a>
-						{{else}}
-							<img src="{{resizeImage thumbnail.url 'item_small'}}" alt="{{thumbnail.altimagetext}}">
-						{{/if}}
-					</div>
-				</td>
+<tr id="{{lineId}}" data-item-id="{{itemId}}" data-type="order-item" {{#if showGeneralClass}} class="{{generalClass}}" {{/if}} >
+	<td class="transaction-line-views-cell-actionable-table-first">
+		<div class="transaction-line-views-cell-actionable-thumbnail">
+			{{#if isNavigable}}
+				<a {{{linkAttributes}}}>
+					<img src="{{resizeImage thumbnail.url 'thumbnail'}}" alt="{{thumbnail.altimagetext}}">
+				</a>
+			{{else}}
+				<img src="{{resizeImage thumbnail.url 'thumbnail'}}" alt="{{thumbnail.altimagetext}}">
+			{{/if}}
+		</div>
+	</td>
+	<td class="transaction-line-views-cell-actionable-table-middle">
+		<div class="transaction-line-views-cell-actionable-name">
+		{{#if isNavigable}}
+			<a {{{linkAttributes}}} class="transaction-line-views-cell-actionable-name-link">
+				{{item._name}}
+			</a>
+		{{else}}
+				<span class="transaction-line-views-cell-actionable-name-viewonly">{{item._name}}</span>
+		{{/if}}
+		</div>
+		<div class="transaction-line-views-cell-actionable-price">
+			<div data-view="Item.Price"></div>
+		</div>
+		<div data-view="Item.Sku"></div>
+		<div class="transaction-line-views-cell-actionable-options">
+			<div data-view="Item.SelectedOptions"></div>
+		</div>
+		{{#if showSummaryView}}
+			<div class="transaction-line-views-cell-actionable-summary" data-view="Item.Summary.View"></div>
+		{{/if}}
+		<div data-view="StateWarnings.Icons"></div>
+		<div class="transaction-line-views-cell-actionable-stock" data-view="ItemViews.Stock.View">
+		</div>
 
-				<td class="cart-lines-table-middle">
-					<div class="cart-lines-name">
-						{{#if isNavigable}}
-							<a {{{linkAttributes}}} class="cart-lines-name-link">
-								{{item._name}}
-							</a>
-						{{else}}
-							<span class="cart-lines-name-viewonly">{{item._name}}</span>
-						{{/if}}
-					</div>
-					<div data-view="Item.Sku"></div>
-					<div data-view="StateWarnings.Icons"></div>
-				</td>
-				<td class="cart-lines-table-middle cart-lines-table-middle-price">
-					<div class="cart-lines-price">
-						<div data-view="Item.Price"></div>
-					</div>
-				</td>
-				<td class="cart-lines-table-middle cart-lines-table-middle-quantity">
-					{{#if showSummaryView}}
-						<div class="cart-lines-summary" data-view="Item.Summary.View"></div>
-					{{/if}}
-				</td>
-				<td class="cart-lines-table-last">
-					{{#if showSummaryView}}
-						<div class="cart-lines-summary" data-view="Item.Total.View"></div>
-					{{/if}}
+		<div data-view="StockDescription"></div>
+	</td>
+	<td class="transaction-line-views-cell-actionable-table-last">
+		<div data-view="Item.Actions.View"></div>
 
-				</td>
-			</tr>
-			<tr>
-				<td  class="cart-lines-table-middle cart-lines-table-middle-secondary" colspan="4">
-					<div data-type="alert-placeholder"></div>
-					{{#if showOverQuantityMessage}}
-						<div class="global-views-message global-views-message-error alert"><span>{{{overQuantityMessage}}}</span></div>
-					{{else}}
-						{{#if showBackorderMessage}}
-							<div class="global-views-message global-views-message-error alert"><span>{{{backOrderMessage}}}</span></div>
-						{{/if}}
-					{{/if}}
+		{{#if showAlert}}
+			<div class="transaction-line-views-cell-actionable-alert-placeholder" data-type="alert-placeholder"></div>
+		{{/if}}
 
-
-					<div class="cart-lines-options">
-						<div data-view="Item.SelectedOptions"></div>
-					</div>
-
-					<div class="cart-lines-stock" data-view="Product.Stock.Info"></div>
-					<div data-view="StockDescription"></div>
-
-					{{#if freeGroundShipping}}
-						<p  class="cart-lines-free-shipping-message"><i class="fa fa-truck" aria-hidden="true"></i>Free Ground Shipping</p>
-					{{/if}}
-
-					<div class="cart-lines-item-actions-desktop" data-view="Item.Actions.View"></div>
-					<div class="cart-lines-item-actions-mobile" data-view="Item.Actions.View"></div>
-
-					<div class="cart-lines-shipping-method" data-view="CartLines.PickupInStore"></div>
-
-					{{#if showAlert}}
-						<div class="cart-lines-alert-placeholder" data-type="alert-placeholder"></div>
-					{{/if}}
-
-					{{#if showCustomAlert}}
-						<div class="alert alert-{{customAlertType}}">
-							{{item._cartCustomAlert}}
-						</div>
-					{{/if}}
-				</td>
-
-			</tr>
-		</table>
+		{{#if showCustomAlert}}
+			<div class="alert alert-{{customAlertType}}">
+				{{item._cartCustomAlert}}
+			</div>
+		{{/if}}
 	</td>
 </tr>
 
@@ -108,8 +71,35 @@ Use the following context variables when customizing this template:
 	line.quantity (Number)
 	line.internalid (String)
 	line.options (Array)
+	line.options.0 (Object)
+	line.options.0.cartOptionId (String)
+	line.options.0.itemOptionId (String)
+	line.options.0.label (String)
+	line.options.0.type (String)
+	line.options.0.value (Object)
+	line.options.0.value.internalid (String)
+	line.shipaddress (undefined)
+	line.shipmethod (undefined)
 	line.location (String)
 	line.fulfillmentChoice (String)
+	model (Object)
+	model.item (Object)
+	model.item.internalid (Number)
+	model.item.type (String)
+	model.quantity (Number)
+	model.internalid (String)
+	model.options (Array)
+	model.options.0 (Object)
+	model.options.0.cartOptionId (String)
+	model.options.0.itemOptionId (String)
+	model.options.0.label (String)
+	model.options.0.type (String)
+	model.options.0.value (Object)
+	model.options.0.value.internalid (String)
+	model.shipaddress (undefined)
+	model.shipmethod (undefined)
+	model.location (String)
+	model.fulfillmentChoice (String)
 	lineId (String)
 	item (Object)
 	item.isinactive (Boolean)
@@ -154,8 +144,8 @@ Use the following context variables when customizing this template:
 	item.options.0.itemOptionId (String)
 	item.options.0.label (String)
 	item.options.0.type (String)
-	item._url (String)
 	item._isPurchasable (Boolean)
+	item._url (String)
 	item._name (String)
 	item._priceDetails (Object)
 	item._priceDetails.onlinecustomerprice_formatted (String)
@@ -173,8 +163,8 @@ Use the following context variables when customizing this template:
 	item._quantityavailableforstorepickup_detail (Array)
 	item._showQuantityAvailable (Boolean)
 	item._sku (String)
-	item._minimumQuantity (Number)
 	item._itemType (String)
+	item._id (Number)
 	itemId (Number)
 	linkAttributes (String)
 	isNavigable (Boolean)

@@ -4,6 +4,7 @@ define('Transaction.Line.Views.Cell.Navigable.View.Extension'
     ,	'ProductLine.Stock.Cart.View'
         
     ,   'underscore'
+    ,	'StateComplianceWarnings.View'
     ]
 ,   function
     (
@@ -11,6 +12,7 @@ define('Transaction.Line.Views.Cell.Navigable.View.Extension'
     ,	ProductLineStockCartView
         
     ,   _
+    ,	StateComplianceWarningsView
     ) 
 {
     'use strict';
@@ -24,6 +26,13 @@ define('Transaction.Line.Views.Cell.Navigable.View.Extension'
                 return new ProductLineStockCartView({
                     model: this.model
                 });
+            }
+
+        ,   'StateWarnings.Icons': function()
+            {
+                return new StateComplianceWarningsView({
+                    model: this.model
+                })
             }
         })
     })
