@@ -1071,6 +1071,36 @@ define('Utils'
 			});
 		}
 		
+		function showStockMessage(oosBehavior, item)
+		{
+			var showMessage = false
+			,	parent = item.get('_matrixParent')
+			,	showMessageArr =
+				[
+					'Allow back orders but display out-of-stock message'
+				,	'Disallow back orders but display out-of-stock message'
+				,	'- Default -'
+				];
+
+			/**
+			 * Parent property will be populated if this is a matrix child AND the execution context is My Acct or 
+			 * Checkout. Matrix child items will not have this property populated in ShopFlow. (See server side 
+			 * StoreItem.Model to see where/how this property gets populated from NS.)
+			 * 
+			 * Here we are defaulting to the matrix parent's version of this property if present. 
+			 * See Item.Model override getStockInfo() to see where/how this method is used.
+			 */
+			if(parent && parent.get('outofstockbehavior')) {
+				oosBehavior = parent.get('outofstockbehavior');
+			}
+
+			if(showMessageArr.indexOf(oosBehavior) > -1) {
+				showMessage = true;
+			}
+
+			return showMessage;
+		}
+		
 		var Utils = SC.Utils = {
 			translate: translate
 			, formatPhone: formatPhone
@@ -1129,6 +1159,7 @@ define('Utils'
 			, imageFlatten: imageFlatten
 			, deepCopy: deepCopy
 			, findItemInCart: findItemInCart
+			, showStockMessage: showStockMessage
 		};
 		
 		// We extend underscore with our utility methods

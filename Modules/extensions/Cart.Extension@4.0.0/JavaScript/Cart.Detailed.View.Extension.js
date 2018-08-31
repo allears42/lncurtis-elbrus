@@ -176,26 +176,26 @@ define(
 							, showAlert: false
 						}
 					});
-            }
+            	}
             
             
-            // auto-apply promotions patch
-            ,   'Promocode.Notifications': function ()
-            {
-	
-	            var promotions = _.filter(this.model.get('promocodes') || [], function (promocode) { return promocode.notification === true; });
-	
-	            if(promotions.length){
-		            return new BackboneCollectionView({
-			            collection: promotions
-			            , viewsPerRow: 1
-			            , childView: CartPromocodeNotificationsView
-			            , childViewOptions: {
-				            parentModel: this.model
-			            }
-		            });
-	            }
-            }
+				// auto-apply promotions patch
+				,   'Promocode.Notifications': function ()
+				{
+
+					var promotions = _.filter(this.model.get('promocodes') || [], function (promocode) { return promocode.notification === true; });
+
+					if(promotions.length){
+						return new BackboneCollectionView({
+							collection: promotions
+							, viewsPerRow: 1
+							, childView: CartPromocodeNotificationsView
+							, childViewOptions: {
+								parentModel: this.model
+							}
+						});
+					}
+				}
             
 			})
 			

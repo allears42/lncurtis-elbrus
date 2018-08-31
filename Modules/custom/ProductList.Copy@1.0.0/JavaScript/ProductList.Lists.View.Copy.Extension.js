@@ -80,7 +80,7 @@ define('ProductList.Lists.View.Copy.Extension'
 					
 					if (list.get('items').length > 1)
 					{
-						confirmMessage =  _(Configuration.get('productList.itemsAddedToCartConfirmationText', '')).translate(add_items.length, list.get('internalid'), list.get('name'));
+						confirmMessage =  _(Configuration.get('productList.itemsAddedToCartConfirmationText', '')).translate(lines_to_add.length, list.get('internalid'), list.get('name'));
 					}
 					else
 					{

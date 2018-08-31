@@ -10,19 +10,19 @@
 		{{#if showHeading}}
 			{{#if isUncollapsible}}
 				<div class="facets-faceted-navigation-item-facet-group-expander">
-					<h4 class="facets-faceted-navigation-item-facet-group-title">
+					<span class="h4-proxy facets-faceted-navigation-item-facet-group-title">
 						{{facetDisplayName}}
 						{{#if showRemoveLink}}
 						<a class="facets-faceted-navigation-item-filter-delete" href="{{removeLink}}">
 							<i class="facets-faceted-navigation-item-filter-delete-icon"></i>
 						</a>
 						{{/if}}
-					</h4>
+					</span>
 				</div>
 			{{else}}
 				<a href="#" class="facets-faceted-navigation-item-facet-group-expander {{#if isCollapsed}}collapsed{{/if}}" data-toggle="collapse" data-target="#{{htmlId}} .facets-faceted-navigation-item-facet-group-wrapper" data-type="collapse" title="{{facetDisplayName}}">
 					<i class="facets-faceted-navigation-item-facet-group-expander-icon"></i>
-					<h4 class="facets-faceted-navigation-item-facet-group-title">{{facetDisplayName}}</h4>
+					<span class="h4-proxy facets-faceted-navigation-item-facet-group-title">{{facetDisplayName}}</span>
 					{{#if showRemoveLink}}
 						<a class="facets-faceted-navigation-item-filter-delete" href="{{removeLink}}">
 							<i class="facets-faceted-navigation-item-filter-delete-icon"></i>

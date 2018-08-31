@@ -1,6 +1,6 @@
 
 .header-mini-cart-item-cell-product-stock{
-  .product-line-stock-msg-out {
+  .product-line-stock-msg-out, .product-line-stock-msg-in {
     margin-bottom: 0;
     margin-top: $sc-base-margin;
     line-height:1.2;
@@ -151,9 +151,9 @@ div.cart-detailed-print-page {
     }
   }
 
-  .product-line-stock-msg-out {
+  .product-line-stock-msg-out, .product-line-stock-msg-in {
     padding-left: 0;
-    .product-line-stock-icon-out {
+    .product-line-stock-icon-out, .product-line-stock-icon-in {
       display: none;
     }
   }

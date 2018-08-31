@@ -1,0 +1,26 @@
+{
+  "type": "object",
+
+  "subtab": {
+      "id": "stateWarnings",
+      "title": "State Product Compliance Warnings",
+      "group": "layout"
+  },
+
+  "properties": {
+      "stateWarnings.californiaIcon": {
+          "group": "layout",
+          "subtab": "stateWarnings",
+          "type": "string",
+          "title": "Icon for CA Prop 65 warning",
+          "mandatory": true
+      },
+    "stateWarnings.washingtonIcon": {
+        "group": "layout",
+        "subtab": "stateWarnings",
+        "type": "string",
+        "title": "Icon for WA SB 6413 warning",
+        "mandatory": true
+    }
+  }
+}

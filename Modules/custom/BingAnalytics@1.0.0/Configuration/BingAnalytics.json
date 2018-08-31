@@ -1,0 +1,36 @@
+{
+	"type": "object",
+    "subtab": {
+        "id": "binganalytics",
+        "title": "Bing Analytics",
+        "docRef": "bridgehead_4667032443",
+        "description": "Bing Analytics",
+        "group": "integrations"
+    }
+,	"properties": {
+		"tracking.bingAnalytics.propertyID": {
+			"group": "integrations"
+		,	"subtab": "binganalytics"
+		,	"type": "string"
+		,	"title": "Bing Analytics ID"
+		,	"description": "Enter the Bing Analytics Tracking ID. SuiteCommerce Advanced inserts this property into each page of the application. To locate the tracking ID, login to your Google Analytics account and go to Admin > Property > Property Settings."
+		,	"default": ""
+		}
+	,	"tracking.bingAnalytics.domainName": {
+			"group": "integrations"
+		,	"subtab": "binganalytics"
+		,	"type": "string"
+		,	"title": "Bing Analytics domain"
+		,	"description": "Enter the domain used for Bing Analytics. The value you enter depends on which application you want to use Bing Analytics"
+		,	"default": ""
+		}
+	,	"tracking.bingAnalytics.domainNameSecure": {
+			"group": "integrations"
+		,	"subtab": "binganalytics"
+		,	"type": "string"
+		,	"title": "Bing Analytics secure domain"
+		,	"description": "Enter the secure domain used for Bing Analytics. Possible values are the same as the Universal Analytics Domain property."
+		,	"default": ""
+		}
+	}
+}

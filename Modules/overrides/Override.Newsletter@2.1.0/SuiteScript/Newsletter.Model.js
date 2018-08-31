@@ -93,7 +93,12 @@ define(
 		// @returns {subscriptionDone} Custom object with confirmation of lead record creation
 	,	createSubscription: function createSubscription (data)
 		{
-            //nlapiLogExecution('DEBUG', 'createSubscription - data', JSON.stringify(data, null, 2));
+            // nlapiLogExecution('DEBUG', 'createSubscription - data', JSON.stringify(data, null, 2));
+
+            var site_id = ModelsInit.session.getSiteSettings(['siteid']).siteid;
+            var isLNCurtisSite = (site_id == 2);
+            // nlapiLogExecution('DEBUG', 'createSubscription - isLNCurtisSite', JSON.stringify(isLNCurtisSite, null, 2));
+
             //default values for all customers
             var defaultValues = {
                 // default lead attributes
@@ -104,12 +109,16 @@ define(
                 , custentity_accountclass: 3 	// C
                 , custentity_targetmarket: 1 	// Fire
                 , custentity_salesregion: 1 	// Pacific North
-                , custentity_internal_notes: 'Lead created from LNCurtis.com Newsletter Signup form'
+                , custentity_internal_notes: (isLNCurtisSite)
+					? 'Lead created from LNCurtis.com Newsletter Signup form'
+					: 'Lead created from CurtisBlueLine.com Newsletter Signup form'
+				, custentity_website_source: site_id
                 , subsidiary: 1 	// LN Curtis & sons
                 , custentity_department: 36 	// 001 - LNCS Oakland
                 , entitystatus: 6 	// LEAD-Unqualified
                 , customform: 67    // LNCS CUSTOMER - CS
                 , accessrole: 1085  // WEB B2C CUSTOMER CENTER
+				, weblead: 'T'
 
             };
 
@@ -128,9 +137,14 @@ define(
             record.setFieldValue('custentity_targetmarket', defaultValues['custentity_targetmarket']);
             record.setFieldValue('custentity_salesregion', defaultValues['custentity_salesregion']);
             record.setFieldValue('custentity_department', defaultValues['custentity_department']);
+            record.setFieldValue('customform', defaultValues['customform']);
+            record.setFieldValue('entitystatus', defaultValues['entitystatus']);
 
+            record.setFieldValue('custentity_internal_notes', defaultValues['custentity_internal_notes']);
+            record.setFieldValue('custentity_website_source', defaultValues['custentity_website_source']);
+            record.setFieldValue('weblead', defaultValues['weblead']);
 
-			nlapiSubmitRecord(record);
+            nlapiSubmitRecord(record);
    
 			return this.subscriptionDone;
 		}

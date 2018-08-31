@@ -8,10 +8,11 @@ define(
 	'Session.Extension'
 ,	[
         'Session'
+    ,   'underscore'
 	]
 ,	function (
         Session
-
+    ,   _
 	)
 {
 	'use strict';

@@ -180,6 +180,7 @@
   -webkit-box-shadow: 0 8px 12px transparentize($sc-color-overlay, 1-0.105);
     box-shadow: 0 3px 6px transparentize($sc-color-overlay, 1-0.105);
     overflow:hidden;
+    z-index: 1004 !important;
 
     @media (min-width: $screen-md-min){
         margin-top: 3px;

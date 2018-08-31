@@ -8,11 +8,13 @@ define('ProductDetails.QuickView.View.Extension'
 		'ProductDetails.QuickView.View'
 
 	,	'underscore'
+	,	'StateComplianceWarnings.View'
 	]
 ,	function (
 		ProductDetailsQuickViewView
 
 	,	_
+	,	StateComplianceWarningsView
 	)
 {
 	'use strict';
@@ -47,6 +49,16 @@ define('ProductDetails.QuickView.View.Extension'
 				
 			}, self);
 		})
+
+	,	childViews: _.extend({}, ProductDetailsQuickViewView.prototype.childViews, {
+
+            'StateWarnings.Icons': function()
+            {
+                return new StateComplianceWarningsView({
+                    model: this.model
+                })
+            }
+        })
 		
 		, attributes: _.extend({}, ProductDetailsQuickViewView.prototype.attributes, {
 			id: "product-details-quickview-modal"

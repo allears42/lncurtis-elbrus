@@ -1,0 +1,40 @@
+/*
+	© 2017 NetSuite Inc.
+	User may not copy, modify, distribute, or re-bundle or otherwise make available this code;
+	provided, however, if you are an authorized user with a NetSuite account or log-in, you
+	may use this code subject to the terms that govern your access and use.
+*/
+
+.error-management-page-not-found {
+	@extend .container;
+
+	.bestsellers {
+		border-bottom: none;
+	}
+}
+
+.error-management-page-not-found-header {
+	h1 {
+		margin-bottom: $sc-base-margin * 4;
+	}
+}
+
+.error-management-page-not-found-main-banner {}
+
+.error-management-page-not-found-content {}
+
+#page-not-found-content {
+
+	margin-bottom: $sc-base-margin * 4;
+	padding-bottom: $sc-base-padding * 12;
+	border-bottom: 2px solid $sc-color-dark-copy;
+
+	ul {
+		padding-left: $sc-base-padding * 10;
+
+		li {
+			list-style-type: disc;
+		}
+	}
+
+}

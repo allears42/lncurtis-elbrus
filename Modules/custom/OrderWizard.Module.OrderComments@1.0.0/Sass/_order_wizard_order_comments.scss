@@ -1,0 +1,37 @@
+.order-wizard-order-comments-module {
+  @extend .box-column;
+  background: white;
+  margin-bottom: $sc-base-margin*1.4;
+  padding-left: 0;
+
+  label {
+    display: block;
+    margin-bottom: $sc-base-margin*3;
+  }
+
+  h4 {
+    margin-bottom: $sc-base-margin*4;
+  }
+}
+
+.order-wizard-order-comments-label {
+  span {
+    display: inline-block;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+}
+
+.order-comments-form-input {
+  @extend .input-base;
+  @extend .input-large;
+  width: 100%;
+  max-width: none;
+}
+
+.order-wizard-order-comments-module-optional {
+  color: $sc-color-light-copy;
+  font-size: $sc-base-font-size;
+  font-weight: $sc-font-weight-normal;
+  margin-left: $sc-base-margin*2;
+}

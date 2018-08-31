@@ -32,6 +32,7 @@
 						{{/if}}
 					</div>
 					<div data-view="Item.Sku"></div>
+					<div data-view="StateWarnings.Icons"></div>
 				</td>
 				<td class="cart-lines-table-middle cart-lines-table-middle-price">
 					<div class="cart-lines-price">

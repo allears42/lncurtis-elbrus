@@ -28,6 +28,7 @@
     "suitecommerce/Facets@2.4.0/Templates/facets_facet_browse.tpl" : "Templates/facets_facet_browse.tpl",
     "suitecommerce/Facets@2.4.0/Templates/facets_faceted_navigation.tpl" : "Templates/facets_faceted_navigation.tpl",
     "suitecommerce/Facets@2.4.0/Templates/facets_faceted_navigation_item_category.tpl" : "Templates/facets_faceted_navigation_item_category.tpl",
+    "suitecommerce/Facets@2.4.0/Templates/facets_faceted_navigation_item_range.tpl" : "Templates/facets_faceted_navigation_item_range.tpl",
     "suitecommerce/Facets@2.4.0/Templates/facets_faceted_navigation_item.tpl" : "Templates/facets_faceted_navigation_item.tpl",
     "suitecommerce/Facets@2.4.0/Templates/facets_item_cell_grid.tpl" : "Templates/facets_item_cell_grid.tpl",
     "suitecommerce/Facets@2.4.0/Templates/facets_item_cell_list.tpl" : "Templates/facets_item_cell_list.tpl",

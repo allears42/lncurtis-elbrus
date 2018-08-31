@@ -17,20 +17,30 @@
 			<input type="text" class="address-edit-fields-group-input" id="{{manage}}fullname" name="fullname" value="{{fullName}}">
 		</div>
 	</div>
+
 	{{#if showCompanyField}}
-	<div class="address-edit-fields-group" {{#if isCompanyFieldMandatory}} data-input="company" data-validation="control-group" {{/if}}>
-		<label class="address-edit-fields-group-label" for="{{manage}}company">
-			{{translate 'Company'}}
-			{{#if isCompanyFieldMandatory}}
-				 <span class="address-edit-fields-group-label-required">*</span>
-			{{else}}
-				<p class="address-edit-fields-company-optional-label">{{translate '(optional)'}}</p>
-			{{/if}}
-		</label>
-		<div  class="address-edit-fields-group-form-controls" {{#if isCompanyFieldMandatory}} data-validation="control" {{/if}}>
-			<input type="text" class="address-edit-fields-group-input" id="{{manage}}company" name="company" value="{{company}}" >
-		</div>
+		<div class="address-edit-fields-group" {{#if isCompanyFieldMandatory}} data-input="company" data-validation="control-group" {{/if}}>
+<label class="address-edit-fields-group-label" for="{{manage}}company">
+	{{translate 'Company'}}
+	{{#if isCompanyFieldMandatory}}
+	<span class="address-edit-fields-group-label-required">*</span>
+	{{else}}
+	<p class="address-edit-fields-company-optional-label">{{translate '(optional)'}}</p>
+	{{/if}}
+</label>
+<div  class="address-edit-fields-group-form-controls" {{#if isCompanyFieldMandatory}} data-validation="control" {{/if}}>
+<input type="text" class="address-edit-fields-group-input" id="{{manage}}company" name="company" value="{{company}}" >
+</div>
+</div>
+{{else}}
+<div class="address-edit-fields-group" data-input="attention" data-validation="control-group">
+	<label class="address-edit-fields-group-label" for="{{manage}}attention">
+		{{translate 'Attention'}} <p class="address-edit-fields-company-optional-label">{{translate '(optional)'}}</p>
+	</label>
+	<div  class="address-edit-fields-group-form-controls" data-validation="control">
+		<input type="text" class="address-edit-fields-group-input" id="{{manage}}attention" name="attention" value="{{attention}}">
 	</div>
+</div>
 	{{/if}}
 
 	<div class="row">
@@ -40,7 +50,7 @@
 					{{translate 'Address'}} <span class="address-edit-fields-input-required">*</span>
 				</label>
 				<div class="address-edit-fields-group-form-controls" data-validation="control">
-					<input type="text" class="address-edit-fields-group-input" id="{{manage}}addr1" name="addr1" value="{{addressLine1}}">
+					<input type="text" onchange="this.setAttribute('data-address-validated','false');" class="address-validation-addr1 addressValidationField address-edit-fields-group-input" id="{{manage}}addr1" name="addr1" data-address-validated="false" value="{{addressLine1}}" placeholder="Example: 1234 Main Street">
 					<p class="address-edit-fields-input-help">{{translate 'Example: 1234 Main Street'}}</p>
 				</div>
 			</div>
@@ -52,8 +62,8 @@
 					{{translate 'Address 2'}}
 				</label>
 				<div>
-					<input type="text" class="address-edit-fields-group-input" id="{{manage}}addr2" name="addr2" value="{{addressLine2}}" placeholder="(optional)">
-					<p class="address-edit-fields-input-help">{{translate 'Apt or Suite'}}</p>
+						<input type="text" onchange="this.setAttribute('data-address-validated','false');" data-address-validated="false" class="address-validation-addr2 addressValidationField address-edit-fields-group-input" id="{{manage}}addr2" name="addr2" value="{{addressLine2}}" placeholder="Apt or Suite (optional)">
+						<p class="address-edit-fields-input-help">{{translate 'Apt or Suite'}}</p>
 				</div>
 			</div>
 			{{/if}}
@@ -69,21 +79,24 @@
 					{{translate 'City'}} <span class="address-edit-fields-input-required">*</span>
 				</label>
 				<div  class="address-edit-fields-group-form-controls" data-validation="control">
-					<input type="text" class="address-edit-fields-group-input" id="{{manage}}city" name="city" value="{{city}}">
+					<input type="text" onchange="this.setAttribute('data-address-validated','false');" data-address-validated="false" class="address-validation-city addressValidationField address-edit-fields-group-input" id="{{manage}}city" name="city" value="{{city}}">
 				</div>
 			</div>
 		</div>
-		<div class="col-md-4 col-xs-12 col-sm-4 col-md-no-padding">
-			<div class="address-edit-fields-group" data-input="state" data-view="StatesView" data-validation="control-group">
+		<div class="col-md-4 col-xs-12 col-sm-4 address-edit-fields-address">
+			<div class="address-validation-state addressValidationField address-edit-fields-group" data-address-validated="false" data-input="state" data-view="StatesView" data-validation="control-group">
 			</div>
+			{{#if showShippingMessage}}
+				<a data-action="show-shipping-info" class="order-wizard-address-module-shipping-restriction-link">States that we can't ship to</a>
+			{{/if}}
 		</div>
-		<div class="col-md-3 col-xs-12 col-sm-3">
+		<div class="col-md-3 col-xs-12 col-sm-3 address-edit-fields-zip">
 			<div class="address-edit-fields-group" data-input="zip" {{#if isZipOptional}} style="display: none;" {{/if}} data-validation="control-group">
 				<label class="address-edit-fields-group-label" for="{{manage}}zip">
 					{{translate 'Zip Code'}} <span class="address-edit-fields-input-required">*</span>
 				</label>
 				<div  class="address-edit-fields-group-form-controls" data-validation="control">
-					<input type="text" class="address-edit-fields-group-input-zip" id="{{manage}}zip" name="zip" value="{{zip}}" data-type="zip">
+					<input type="text" onchange="this.setAttribute('data-address-validated','false');" data-address-validated="false" class="address-validation-zip addressValidationField address-edit-fields-group-input-zip" id="{{manage}}zip" name="zip" value="{{zip}}" data-type="zip" placeholder="Example: 94117">
 					<p class="address-edit-fields-input-help">{{translate 'Example: 94117'}}</p>
 				</div>
 			</div>
@@ -99,6 +112,12 @@
 			<p class="address-edit-fields-input-help">{{translate 'Example: 555-123-1234'}}</p>
 		</div>
 	</div>
+
+	<!-- Anchor for address validation controls -->
+    <div class="container-fluid address-validation-container" style="display:none;">
+        <h3 class="address-validation-alert">PLEASE VERIFY YOUR ADDRESS...</h3>
+        <div class="row address-validation-row"></div>
+    </div>
 
 	<div class="address-edit-fields-group" data-input="isresidential">
 		<label class="address-edit-fields-group-input-checkbox">

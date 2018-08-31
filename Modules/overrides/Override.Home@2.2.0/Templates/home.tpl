@@ -99,6 +99,8 @@
 	<div class="row home-feature-outer">
 		<div class="home-banner col-xs-12" data-cms-area="home_full_banner_1" data-cms-area-filters="path"></div>
 	</div>
+	<div data-view="BestSellers"></div>
+
 	<!--<div class="row home-feature-outer">
 		{{#if isTablet}}
 			<table class="home-feature-images">

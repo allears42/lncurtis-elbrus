@@ -1,0 +1,55 @@
+{
+  "type": "object",
+  "subtab": {
+    "id": "orderStatusTooltips",
+    "title": "Order Status Tooltips",
+    "description": "Order status tooltip text",
+    "group": "myAccountApp"
+  },
+  "properties": {
+
+    "orderStatusTooltips.closed": {
+      "group": "myAccountApp",
+      "subtab": "orderStatusTooltips",
+      "type": "string",
+      "title": "Closed"
+    },
+    "orderStatusTooltips.pendingApproval": {
+      "group": "myAccountApp",
+      "subtab": "orderStatusTooltips",
+      "type": "string",
+      "title": "Pending Approval"
+    },
+    "orderStatusTooltips.pendingFulfillment": {
+      "group": "myAccountApp",
+      "subtab": "orderStatusTooltips",
+      "type": "string",
+      "title": "Pending Fulfillment"
+    },
+    "orderStatusTooltips.partiallyFulfilled": {
+      "group": "myAccountApp",
+      "subtab": "orderStatusTooltips",
+      "type": "string",
+      "title": "Partially Fulfilled"
+    },
+    "orderStatusTooltips.pendingBilling": {
+      "group": "myAccountApp",
+      "subtab": "orderStatusTooltips",
+      "type": "string",
+      "title": "Pending Billing"
+    },
+    "orderStatusTooltips.billed": {
+      "group": "myAccountApp",
+      "subtab": "orderStatusTooltips",
+      "type": "string",
+      "title": "Billed"
+    },
+    "orderStatusTooltips.cancelled": {
+      "group": "myAccountApp",
+      "subtab": "orderStatusTooltips",
+      "type": "string",
+      "title": "Cancelled"
+    }
+
+  }
+}

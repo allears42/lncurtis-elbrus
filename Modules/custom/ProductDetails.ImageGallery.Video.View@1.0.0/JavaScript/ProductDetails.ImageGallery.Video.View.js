@@ -68,7 +68,7 @@ define(
 	return {
         ItemKeyMappingVideos: ItemKeyMappingVideos
     ,   ItemModelExtension: ItemModelExtension
-	,   ProductModelVideoExtension: ProductModelVideoExtension
+	// ,   ProductModelVideoExtension: ProductModelVideoExtension
     }
 
 });

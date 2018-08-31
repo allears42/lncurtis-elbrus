@@ -1,0 +1,7 @@
+define('StateComplianceWarnings'
+,   []
+,   function
+    ()
+{
+
+});

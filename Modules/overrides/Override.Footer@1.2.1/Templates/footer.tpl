@@ -44,6 +44,9 @@
 			<div class="footer-content-right">
 				<!--<div data-view="FooterContent"></div>-->
 				<div data-view="Footer.Seals"></div>
+				<span id="siteseal">
+					<script async type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=4GDITYYsVCybna4J42iELPFj6wxaQwwl9nZPPlX2ulkcgyy8fbocQLgYKJ2L"></script>
+				</span>
 				<div class="footer-social">
 					<h3>Connect</h3>
 					<a href="#newsletter" data-toggle="show-in-modal" class="newsletter-modal-trigger"><i class="fa fa-envelope"></i> {{subscribeButtonText}}</a>

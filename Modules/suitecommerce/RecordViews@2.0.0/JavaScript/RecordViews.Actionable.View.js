@@ -58,6 +58,8 @@ define(
 		//@method getContext @return {RecordViews.Actionable.View.Context}
 	,	getContext: function ()
 		{
+			// console.log('NORMALIZED COLUMNS: ', this.normalizeColumns());
+			// console.log('THIS IN ACTIONABLE VIEW: ', this);
 			//@class RecordViews.Actionable.View.Context			
 			return {				
 				//@property {RecordViews.Actionable.View.Initialize.Model} model

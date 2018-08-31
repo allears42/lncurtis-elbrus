@@ -39,7 +39,8 @@ define(
 								, customSortOrder = Configuration.get("itemOptionsSort");
 							
 							options_to_render = _.filter(options_to_render, function (option) {
-								return option.get('values') && option.get('values').length > 2
+								if(option.get('type') === "select") return option.get('values') && option.get('values').length > 2;
+								else return true;
 							});
 							options_to_render = _.sortBy(options_to_render, function (option) {
 								var sort = _.find(customSortOrder, {itemOptionId: option.itemOptionId}) || '1000';

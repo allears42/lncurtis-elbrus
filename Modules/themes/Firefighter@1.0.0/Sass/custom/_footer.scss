@@ -85,7 +85,7 @@ footer {
 
 .footer-content-right {
 
-  [data-view="Footer.Seals"] {
+  [data-view="Footer.Seals"], #siteseal {
     @extend .col-md-12;
     @extend .col-sm-6;
     @extend .col-xs-12;

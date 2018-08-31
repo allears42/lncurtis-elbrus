@@ -10,12 +10,12 @@
 <div class="facets-faceted-navigation-item-category">
 	{{#if isUncollapsible}}
 		<div class="facets-faceted-navigation-item-category-facet-group-expander">
-			<h3 class="facets-faceted-navigation-item-category-title">{{#if showParentName}}{{#if showQuantifier}}Category: {{/if}}{{parentName}}{{else}}Category{{/if}}</h3>
+			<span class="h3-proxy facets-faceted-navigation-item-category-title">{{#if showParentName}}{{#if showQuantifier}}Category: {{/if}}{{parentName}}{{else}}Category{{/if}}</span>
 		</div>
 	{{else}}
 		<a href="#" class="facets-faceted-navigation-item-category-facet-group-expander" data-toggle="collapse" data-target="#{{htmlId}} .facets-faceted-navigation-item-category-facet-group-wrapper" data-type="collapse" title="{{translate 'Category'}}">
 			<i class="facets-faceted-navigation-item-category-facet-group-expander-icon"></i>
-			<h3 class="facets-faceted-navigation-item-category-title">{{#if showParentName}}{{#if showQuantifier}}Category: {{/if}}{{parentName}}{{else}}Category{{/if}}</h3>
+			<span class="h3-proxy facets-faceted-navigation-item-category-title">{{#if showParentName}}{{#if showQuantifier}}Category: {{/if}}{{parentName}}{{else}}Category{{/if}}</span>
 		</a>
 	{{/if}}
 

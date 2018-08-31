@@ -472,3 +472,18 @@ $sc-top-nav-height: $sc-target-size - 20;
 		display: none;
 	}
 }
+
+// Sticky navigation styles
+#breadcrumb-affix-element {
+	position: relative;
+	display: block;
+	width: 1px;
+	height: 1px;
+}
+#header-affix-element.affix {
+	top: 0;
+	position: fixed;
+	z-index: 1000;
+	width: 100%;
+	background-color: #fff;
+}

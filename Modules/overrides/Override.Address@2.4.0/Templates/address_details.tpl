@@ -1,5 +1,5 @@
 {{!
-	© 2016 NetSuite Inc.
+	© 2017 NetSuite Inc.
 	User may not copy, modify, distribute, or re-bundle or otherwise make available this code;
 	provided, however, if you are an authorized user with a NetSuite account or log-in, you
 	may use this code subject to the terms that govern your access and use.
@@ -33,6 +33,11 @@
 							{{fullname}}
 						</span>
 					{{/if}}
+					{{#if hasAttention}}
+						<span class="address-details-address-name" data-name="attention">
+							{{attention}}
+						</span>
+					{{/if}}
 				{{/if}}
 				<p class="address-details-container-multiselect-address-details-addr1" data-name="addr1">
 					{{addressLine1}}
@@ -59,7 +64,7 @@
 					{{country}}
 				</p>
 				<p class="address-details-phone" data-name="phone">
-					{{phone}}
+					<a href="tel:{{phone}}">{{phone}}</a>
 				</p>
 			</div>
 		</address>
@@ -126,3 +131,55 @@
 		{{/if}}
 	</div>
 </div>
+
+
+
+
+{{!----
+Use the following context variables when customizing this template: 
+	
+	model (Object)
+	model.internalid (String)
+	model.country (String)
+	model.state (String)
+	model.city (String)
+	model.zip (String)
+	model.addr1 (String)
+	model.addr2 (String)
+	model.phone (String)
+	model.fullname (String)
+	model.company (String)
+	model.isvalid (String)
+	internalid (String)
+	isManageOptionsSpecified (Boolean)
+	isAddressCheck (Boolean)
+	title (String)
+	showCompanyAndFullName (Boolean)
+	company (String)
+	fullname (String)
+	showFullNameOnly (Boolean)
+	addressLine1 (String)
+	showAddressLine1 (Boolean)
+	addressLine2 (String)
+	city (String)
+	showState (Boolean)
+	state (String)
+	zip (String)
+	country (String)
+	phone (String)
+	showDefaultLabels (Boolean)
+	isDefaultShippingAddress (Boolean)
+	isDefaultBillingAddress (Boolean)
+	showSelectionButton (Boolean)
+	isASelectMessageSpecified (Boolean)
+	showActionButtons (Boolean)
+	showChangeButton (Boolean)
+	showRemoveButton (Boolean)
+	invalidAttributes (Array)
+	isInvalidAddressToRemove (Boolean)
+	manageOption (String)
+	showError (Boolean)
+	showMultiSelect (Boolean)
+	selectMessage (String)
+
+----}}

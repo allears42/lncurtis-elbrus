@@ -6,8 +6,8 @@
 }}
 
 {{#if hasFacetsOrAppliedFacets}}
-<h3 class="facets-faceted-navigation-title facets-faceted-navigation-title-main">{{translate 'Narrow By'}}</h3>
-<h4 class="facets-faceted-navigation-results">
+<span class="h3-proxy facets-faceted-navigation-title facets-faceted-navigation-title-main">{{translate 'Narrow By'}}</span>
+<span class="h4-proxy facets-faceted-navigation-results">
 	{{#if keywords}}
 		{{#if isTotalProductsOne}}
 			{{translate '1 Result for <span class="facets-faceted-navigation-title-alt">$(0)</span>' keywords}}
@@ -21,7 +21,7 @@
 			{{translate '$(0) Products' totalProducts}}
 		{{/if}}
 	{{/if}}
-</h4>
+</span>
 
 	{{#if hasAppliedFacets}}
 		<a href="{{clearAllFacetsLink}}" class="facets-faceted-navigation-facets-clear">

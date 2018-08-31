@@ -41,7 +41,8 @@ define('ProductDetails.Options.Selector.Singles.View'
 						,   customSortOrder = Configuration.get("itemOptionsSort");
 					
 					options_to_render = _.filter(options_to_render, function (option) {
-						return option.get('values') && option.get('values').length <= 2
+						return option.get('type') === "select" && option.get('values') && option.get('values').length <= 2;
+						
 					});
 					options_to_render = _.sortBy(options_to_render, function (option) {
 						var sort = _.find(customSortOrder, {itemOptionId: option.itemOptionId}) || '1000';

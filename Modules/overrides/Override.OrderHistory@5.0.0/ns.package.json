@@ -17,6 +17,7 @@
         ]
     },
     "overrides": {
-        "suitecommerce/OrderHistory@5.0.0/SuiteScript/OrderHistory.Model.js": "SuiteScript/OrderHistory.Model.js"
+        "suitecommerce/OrderHistory@5.0.0/SuiteScript/OrderHistory.Model.js": "SuiteScript/OrderHistory.Model.js",
+        "suitecommerce/OrderHistory@5.0.0/Templates/order_history_details.tpl": "Templates/order_history_details.tpl"
     }
 }

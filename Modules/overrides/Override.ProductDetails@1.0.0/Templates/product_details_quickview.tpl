@@ -24,6 +24,8 @@
 			{{translate 'View full details'}}
 		</a>
 
+		<div data-view="StateWarnings.Icons"></div>
+
 		<div class="product-details-quickview-main">
 			{{#if isItemProperlyConfigured}}
 				<form id="product-details-quickview-form" data-action="submit-form" method="POST">
