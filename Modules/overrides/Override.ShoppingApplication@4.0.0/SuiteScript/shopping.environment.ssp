@@ -185,3 +185,26 @@ SC.ENVIRONMENT.published = {};
 %>
 	SC.ENVIRONMENT.published.<%= i.key %> = <%= JSON.stringify(res) %>;
 <% });%>
+
+document.write('<script type="application/ld+json">');
+document.write('{');
+document.write('"@context": "http://schema.org",');
+document.write('"@type": "Corporation",');
+document.write('"name": "LN Curtis & Sons",');
+document.write('"url": "https://www.lncurtis.com/",');
+document.write('"logo": "https://www.lncurtis.com/c.3880230/lncurtis/img/logo.png",');
+document.write('"contactPoint": {');
+document.write('"@type": "ContactPoint",');
+document.write('"telephone": "+1-877-488-0469",');
+document.write('"contactType": "customer service",');
+document.write('"contactOption": "TollFree",');
+document.write('"availableLanguage": "English"');
+document.write('},');
+document.write('"sameAs": [');
+document.write('"https://www.facebook.com/toolsforheroes",');
+document.write('"https://twitter.com/toolsforheroes",');
+document.write('"https://plus.google.com/+lncurtis",');
+document.write('"https://www.linkedin.com/company/l.n.-curtis-&-sons/"');
+document.write(' ]');
+document.write('}');
+document.write('</script>');
