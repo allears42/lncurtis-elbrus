@@ -86,6 +86,19 @@ define('Pacejet.Model'
                 this.setSummary(pacejetRates.totalShipping, prechangeShipping);
 
 
+                if (Utils.isCheckoutDomain(request) && nlapiGetWebContainer().getShoppingSession().isLoggedIn2() ) {
+                    order.setCustomFieldValues({
+                        'custbody_pacejet_shipping_price_hidden': String(pacejetRates.totalShipping)
+                    });
+                    var summary = order.getFieldValues(['summary']);
+                    nlapiLogExecution('debug', 'Pacejet#summary post CS', JSON.stringify(summary));
+
+                    if (summary) {
+                        this.setSummaryFromOrder(results, summary.summary.taxtotal, summary.summary.total, summary.summary.shippingcost);
+                    }
+                }
+
+
                 //nlapiLogExecution('debug', 'totalShipping', pacejetRates.totalShipping);
                 //nlapiLogExecution('debug', 'sessionMethods', JSON.stringify(pacejetRates.sessionMethods));
 
@@ -101,7 +114,18 @@ define('Pacejet.Model'
 
                 return this.results;
             }
+            , setSummaryFromOrder: function(results, newTax, newTotal, newShipping) {
+                this.results.summary.taxtotal = newTax;
+                this.results.summary.taxtotal_formatted = Utils.formatCurrency(newTax);
 
+                this.results.summary.shippingcost = newShipping;
+                this.results.summary.shippingcost_formatted = Utils.formatCurrency(newShipping);
+
+                this.results.summary.total = newTotal;
+                this.results.summary.total_formatted = Utils.formatCurrency(newTotal);
+
+                // nlapiLogExecution('debug', 'this.results.summary.total - after tax', this.results.summary.total);
+            }
             , setSummary: function (pacejetShipping, prechangeShipping) {
                 this.results.summary.shippingcost = pacejetShipping;
                 this.results.summary.shippingcost_formatted = Utils.formatCurrency(pacejetShipping);
@@ -424,19 +448,14 @@ define('Pacejet.Model'
                 this.cloneShipmethods(results);
 
                 //filter methods
-                /*               rates = _.map(rates, function (e) {
-                                   nlapiLogExecution('debug', 'Pacjetconfig', pacejetConfig);
-                                   nlapiLogExecution('debug', 'Pacjetconfig map', pacejetConfig.PJtoNSMethodsMap);
-                                   nlapiLogExecution('debug', 'Pacjetconfig xref', e.shipCodeXRef);
-
-
+                               rates = _.map(rates, function (e) {
                                    if (pacejetConfig.PJtoNSMethodsMap[e.shipCodeXRef]) {
                                        e.shipCodeXRef = pacejetConfig.PJtoNSMethodsMap[e.shipCodeXRef];
                                    }
                                    return e;
                                });
                                nlapiLogExecution('debug', 'Pacjetconfig after', "after map");
-               */
+
                 if (filterToGroundMethods) {
                     rates = _.filter(rates, function (e) {
                         return _.contains(groundMethods, e.shipCodeXRef);
