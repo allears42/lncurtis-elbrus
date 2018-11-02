@@ -51,13 +51,13 @@ define('Pacejet.Model'
                 }
 
                 var options = this.results.options;
-                nlapiLogExecution('debug', 'PacejetModel#options', JSON.stringify(options));
-                if (options && options['custbody_pick_up_in_store'] && options['custbody_pick_up_in_store'] === 'T') {
-                    nlapiLogExecution('debug', 'PacejetModel#updateOrder: skipping Pacejet lookup because customer pickup');
-                    nlapiGetContext().setSessionObject('packageMethods', null);
-
-                    return this.results
-                }
+                // nlapiLogExecution('debug', 'PacejetModel#options', JSON.stringify(options));
+                // if (options && options['custbody_pick_up_in_store'] && options['custbody_pick_up_in_store'] === 'T') {
+                //     nlapiLogExecution('debug', 'PacejetModel#updateOrder: skipping Pacejet lookup because customer pickup');
+                //     nlapiGetContext().setSessionObject('packageMethods', null);
+                //
+                //     return this.results
+                // }
 
                 //nlapiLogExecution('debug', 'pacejet config', JSON.stringify(this.pacejetConfiguration()));
                 // nlapiLogExecution('debug', 'pacejet results.ismultishipto', results.ismultishipto);
