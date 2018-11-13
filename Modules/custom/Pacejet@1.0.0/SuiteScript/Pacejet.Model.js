@@ -432,7 +432,7 @@ define('Pacejet.Model'
                 // build request object
                 var request = {};
                 var pacejetConfig = this.pacejetConfiguration();
-                nlapiLogExecution('debug', 'Pacjetconfig', pacejetConfig);
+                nlapiLogExecution('debug', 'Pacjetconfig', JSON.stringify(pacejetConfig));
 
                 _.extend(request, shipaddress, packageDetailsList(itemsArray, results, shipListX), pacejetConfig.production);
 
@@ -442,8 +442,9 @@ define('Pacejet.Model'
                     return rates;
                 }
 
-                var groundMethods = this.pacejetConfiguration.groundMethods;
+                var groundMethods = pacejetConfig.groundMethods;
                 var filterToGroundMethods = results.hasFreeShipItems || results.allFreeShipItems;
+                nlapiLogExecution('debug', 'Pacjetconfig ground', groundMethods);
 
                 this.cloneShipmethods(results);
 
@@ -629,7 +630,7 @@ define('Pacejet.Model'
                     //defaultMethod: '477143',  //sandbox pre-refresh
                     defaultMethod: '484045',  //production
 
-                    groundMethods: ['4'],
+                    groundMethods: ['4','U04'],
                     groundMethodsPacejet: ['U04'],
 
                     PJtoNSMethodsMap: {
