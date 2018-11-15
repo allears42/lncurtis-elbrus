@@ -414,10 +414,15 @@ define('Pacejet.Model'
 
                     nlapiGetContext().setSessionObject(sessionCache, null);
 
-                    var body = 'Pacejet.js\nunexpected error: ' + e.toString() + '\nrequest = ' + JSON.stringify(request, null, 2);
-                    if (e instanceof nlobjError) {
-                        body = 'Pacejet.js\nsystem error: \ncode = ' + e.getCode() + '\ndetails = ' + e.getDetails() + '\nrequest = ' + JSON.stringify(request, null, 2);
-                    }
+                    var body = 'Pacejet.js\nunexpected error: '
+                        + e.toString()
+                        + '\nrequest = '
+                        + JSON.stringify(request,null,2)
+                        + '\npacejetResponse = '
+                        + JSON.stringify(pacejetResponse,null,2);
+                    // if ( e instanceof nlobjError ) {
+                    //     body = 'Pacejet.js\nsystem error: \ncode = ' + e.getCode() + '\ndetails = ' + e.getDetails() + '\nrequest = ' + JSON.stringify(request,null,2);
+                    // }
                     nlapiSendEmail(-5, 'joelmcconaughy@gmail.com', 'PaceJet /rates error', body, null, null, null, null, true);
                 }
 
