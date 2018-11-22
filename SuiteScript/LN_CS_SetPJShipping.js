@@ -1,20 +1,8 @@
 IS_PROCESSING = false;
 
-function FieldChanged(type, name)
+function SetPJShipping(type, name)
 {
-//TODO
-    /*
-        Create custom body field to trigger this
-        Set body field with order.setCustomBodyField() in PJ module
 
-        Check login - nlapiGetUser (userID or -4 )
-        Confirm CS is running
-        Update order.shippintotal from session.pacejettotal in CS
-
-
-        test guest checkout (userID == 0)
-        Confirm shipping total available before paypal call
-    */
     try {
 
         if (nlapiGetContext().getExecutionContext() !== 'webstore') {
@@ -32,40 +20,62 @@ function FieldChanged(type, name)
                 IS_PROCESSING = true;
 
                 var pjPrice = nlapiGetFieldValue('custbody_pacejet_shipping_price_hidden');
-                nlapiLogExecution('debug', "setting shipping pj total", pjPrice);
+                nlapiSetFieldValue('shippingcost', pjPrice);
+                nlapiLogExecution('debug', "set ship cost", pjPrice);
 
-                if (pjPrice) {
-                    /*var preChangeShipping = nlapiGetFieldValue('shippingcost'),
-                        preChangeTax = nlapiGetFieldValue('taxtotal'),
-                        preChangeTotal = nlapiGetFieldValue('total');
+                var packageMethods = JSON.parse(nlapiGetContext().getSessionObject('packageMethods'));
+                var totalShipping = 0, totalCost = 0;
 
-                    nlapiLogExecution('debug', "prechange shipping", preChangeShipping);
-                    nlapiLogExecution('debug', "prechange tax ", preChangeTax);
-                    nlapiLogExecution('debug', "prechange total", preChangeTotal);
+                nlapiLogExecution('debug', "package methods", JSON.stringify(packageMethods));
+                if (packageMethods && packageMethods[0] && packageMethods[0].method) {
+                    nlapiLogExecution('debug', "inside if");
 
-*/
-                    nlapiSetFieldValue('shippingcost', pjPrice);
+                    if (packageMethods[0].method.internalid) nlapiSetFieldValue('shipmethod', packageMethods[0].method.internalid);
+                    nlapiSetFieldValue('custbody_pacejet_freight_cost', packageMethods[0].method.cost);
+                    nlapiSetFieldValue('custbody_pacejet_freight_costcurrency', packageMethods[0].method.cost);
+                    nlapiSetFieldValue('custbody_pacejet_freight_price', packageMethods[0].method.rate);
+                    nlapiSetFieldValue('custbody_pacejet_freight_pricecurrency', packageMethods[0].method.rate);
 
-                    /*var midChangeTax = nlapiGetFieldValue('taxtotal')
-                    var midChangeTotal = nlapiGetFieldValue('total')
-                    nlapiLogExecution('debug', "midchange total ", midChangeTotal);
-                    nlapiLogExecution('debug', "midchange tax ", midChangeTax);
-
-                    //nlapiSetFieldValue('total', preChangeTotal - parseFloat(preChangeShipping - pjPrice) - parseFloat(preChangeTax - midChangeTax) );
-
-                    var postChangeShipping = nlapiGetFieldValue('shippingcost'),
-                        postChangeTax = nlapiGetFieldValue('taxtotal'),
-                        postChangeTotal = nlapiGetFieldValue('total');
-                    nlapiLogExecution('debug', "postchange shipping", postChangeShipping);
-                    nlapiLogExecution('debug', "postchange tax ", postChangeTax);
-                    nlapiLogExecution('debug', "postchange total", postChangeTotal);*/
                 }
+                nlapiLogExecution('debug', "finished setting fields" );
+
+                /*
+                    if (packageMethods && packageMethods.length === 1) {
+                        newRecord.setValue({
+                            fieldId: "shipmethod",
+                            value: packageMethods[0].method.internalid
+                        });
+                    }
+                    newRecord.setValue({
+                        fieldId: "custbody_pacejet_freight_cost",
+                        value: totalCost
+                    });
+                    newRecord.setValue({
+                        fieldId: "custbody_pacejet_freight_price",
+                        value: totalShipping
+                    });
+                    newRecord.setValue({
+                        fieldId: "custbody_pacejet_freight_costcurrency",
+                        value: totalCost
+                    });
+                    newRecord.setValue({
+                        fieldId: "custbody_pacejet_freight_pricecurrency",
+                        value: totalShipping
+                    });
+                */
+
+                /*if (pjPrice) {
+                    nlapiSetFieldValue('shippingcost', pjPrice);
+                    nlapiSetFieldValue('shipmethod', 4);
+
+
+                }*/
                 IS_PROCESSING = false;
 
             }
         }
         else {
-            nlapiLogExecution('debug', "user not logged in");
+            //nlapiLogExecution('debug', "user not logged in");
         }
     }
     catch (err) {

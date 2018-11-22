@@ -85,6 +85,7 @@ define('Pacejet.Model'
                 var prechangeShipping = this.results.summary.shippingcost;
                 this.setSummary(pacejetRates.totalShipping, prechangeShipping);
 
+                nlapiGetContext().setSessionObject('packageMethods', JSON.stringify(pacejetRates.sessionMethods));
 
                 if (Utils.isCheckoutDomain(request) && nlapiGetWebContainer().getShoppingSession().isLoggedIn2() ) {
                     order.setCustomFieldValues({
@@ -103,7 +104,6 @@ define('Pacejet.Model'
                 //nlapiLogExecution('debug', 'sessionMethods', JSON.stringify(pacejetRates.sessionMethods));
 
                 //store sessionmethods in session
-                nlapiGetContext().setSessionObject('packageMethods', JSON.stringify(pacejetRates.sessionMethods));
 
                 //nlapiLogExecution('debug', 'Pacejet#updateResult', 'end');
                 //nlapiLogExecution('debug', 'Pacejet#results.shipmethod', JSON.stringify(this.results.shipmethod));
