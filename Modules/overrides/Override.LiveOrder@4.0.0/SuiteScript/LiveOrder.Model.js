@@ -238,11 +238,49 @@ define(
 		// @method submit will call ModelsInit.order.submit() taking in account paypal payment
 	,	submit: function submit ()
 		{
+            /************** START ZERO SHIP LOG ********************/
+
+			try {
+
+                var orderSummary = ModelsInit.order.getOrderSummary(['itemcount', 'shippingcost'])
+				,	shipCost
+				,	sendZeroShippingEmail = false
+				,	content = ''
+				,	author = 82453;
+
+                shipCost = orderSummary.shippingcost;
+                if(!shipCost) {
+                    sendZeroShippingEmail = true;
+                }
+
+			} catch(e) {
+				nlapiLogExecution('DEBUG', 'ERROR GETTING SHIPPING COST', e);
+			}
+
+            /************** END ZERO SHIP LOG ********************/
+
 			var	paypal_address = _.find(ModelsInit.customer.getAddressBook(), function (address)
 				{
 					return !address.phone && address.isvalid === 'T';
 				})
 			,	confirmation = ModelsInit.order.submit();
+
+            /************** START ZERO SHIP LOG ********************/
+			if(sendZeroShippingEmail) {
+
+				try {
+
+                    content = 'Zero-shipping order detected. Details: \r\n';
+                    content += 'Confirmation: ' + JSON.stringify(confirmation) + '\r\n';
+                    content += 'User: ' + nlapiGetUser() + '\r\n';
+                    nlapiSendEmail(author, ['nkkwik@gmail.com', 'rcurtis@lncurtis.com'], 'Zero shipping order detected', content);
+
+				} catch(e) {
+                    nlapiLogExecution('DEBUG', 'ERROR SENDING ZERO SHIP EMAIL', e);
+				}
+			}
+            /************** END ZERO SHIP LOG ********************/
+
 			// We need remove the paypal's address because after order submit the address is invalid for the next time.
 			this.removePaypalAddress(paypal_address);
 
