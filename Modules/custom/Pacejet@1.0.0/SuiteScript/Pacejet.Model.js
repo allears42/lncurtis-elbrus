@@ -15,13 +15,6 @@ define('Pacejet.Model'
         return {
             updateOrder: function (order_fields, results, order, data) {
 
-                //config options - will implement these to turn on/off optional behaviors in the module
-                /*
-                                this.filterFreeItems = true;
-                                this.filterNonPacejetMethods = true;
-                                this.cartEstimate;
-                                this.enablePacejet = config.getEnablePacejet()
-                */
                 this.results = results;
                 nlapiLogExecution('debug', 'Pacejet#updateResult', 'start');
                 nlapiLogExecution('debug', 'Pacejet#updateResult - shipAddress', this.results.shipaddress);
@@ -30,15 +23,6 @@ define('Pacejet.Model'
                     nlapiLogExecution('debug', 'PacejetModel#updateOrder: skipping Pacejet lookup because no lines');
                     return this.results;
                 }
-
-                /*if (!Utils.isInCheckout()) {
-                    nlapiLogExecution('debug', 'PacejetModel#updateOrder: skipping Pacejet lookup, not in checkout', this.results.shipaddress);
-                    if (!this.results.summary.shippingcost) return this.results;
-
-					this.setSummary(0, this.results.summary.shippingcost);
-
-                    return this.results;
-                }*/
 
                 if (!(this.results.ismultishipto) && (this.results.shipaddress == null || this.results.shipaddress.match(/[-]+null$/))) {
                     if (!this.results.shipaddress.match(/^[a-z]{2}[-]+[a-z0-9]+[-]+null$/gi)) {
@@ -51,25 +35,13 @@ define('Pacejet.Model'
                 }
 
                 var options = this.results.options;
-                // nlapiLogExecution('debug', 'PacejetModel#options', JSON.stringify(options));
-                // if (options && options['custbody_pick_up_in_store'] && options['custbody_pick_up_in_store'] === 'T') {
-                //     nlapiLogExecution('debug', 'PacejetModel#updateOrder: skipping Pacejet lookup because customer pickup');
-                //     nlapiGetContext().setSessionObject('packageMethods', null);
-                //
-                //     return this.results
-                // }
 
-                //nlapiLogExecution('debug', 'pacejet config', JSON.stringify(this.pacejetConfiguration()));
-                // nlapiLogExecution('debug', 'pacejet results.ismultishipto', results.ismultishipto);
-                // nlapiLogExecution('debug', 'pacejet results.shipaddress', results.shipaddress);
-
-                //TODO: implement rate look up here
-                // Sort items by address, then by ship method
-                //   result.lines[x].shipaddress
-                // Make Pacejet request for each address/shipmethod pair
-                // 	* Send item list with ship to and item dimensions
-                // Find pricing for the item's ship method in Pacjet reqponse using NS ship Method map to Pacejet ship method
-                // Update itemlist with new Pacejet shipping prices
+                /**
+                 * Sort items by address, then by ship method: result.lines[x].shipaddress
+                 * Make Pacejet request for each address/shipmethod pair. Send item list with ship to and item dimensions
+                 * Find pricing for the item's ship method in Pacjet reqponse using NS ship Method map to Pacejet ship method
+                 * Update itemlist with new Pacejet shipping prices
+                 */
 
                 var shipList = this.buildPackingList();
                 nlapiLogExecution('debug', 'shiplist', JSON.stringify(shipList));
@@ -99,15 +71,7 @@ define('Pacejet.Model'
                     }
                 }
 
-
-                //nlapiLogExecution('debug', 'totalShipping', pacejetRates.totalShipping);
-                //nlapiLogExecution('debug', 'sessionMethods', JSON.stringify(pacejetRates.sessionMethods));
-
                 //store sessionmethods in session
-
-                //nlapiLogExecution('debug', 'Pacejet#updateResult', 'end');
-                //nlapiLogExecution('debug', 'Pacejet#results.shipmethod', JSON.stringify(this.results.shipmethod));
-
                 this.results.pacejet = {
                     status: 'Prices updated'
                 };
@@ -123,26 +87,18 @@ define('Pacejet.Model'
 
                 this.results.summary.total = newTotal;
                 this.results.summary.total_formatted = Utils.formatCurrency(newTotal);
-
-                // nlapiLogExecution('debug', 'this.results.summary.total - after tax', this.results.summary.total);
             }
             , setSummary: function (pacejetShipping, prechangeShipping) {
                 this.results.summary.shippingcost = pacejetShipping;
                 this.results.summary.shippingcost_formatted = Utils.formatCurrency(pacejetShipping);
-                //nlapiLogExecution('debug', 'this.results.summary.total', this.results.summary.total);
-                //nlapiLogExecution('debug', 'total', prechangeShipping);
 
                 this.results.summary.total = this.results.summary.total - prechangeShipping + pacejetShipping;
                 this.results.summary.total_formatted = Utils.formatCurrency(this.results.summary.total);
-
-                //nlapiLogExecution('debug', 'this.results.summary.total - after', this.results.summary.total);
             }
 
             , getShippingObj: function (shipList, itemsArray, results, sessionCache) {
                 var totalShipping = 0;
                 var sessionMethods = [];
-
-                //nlapiLogExecution('DEBUG', 'Pacejet.getShippingObj#shipList', JSON.stringify(shipList));
 
                 if (!_.isEmpty(shipList)) {
                     for (var x = 0; x < shipList.length; x++) {
@@ -173,7 +129,6 @@ define('Pacejet.Model'
                     }
 
                     if (!this.results.ismultishipto) {
-                        //nlapiLogExecution('debug', 'results line ' + i + ' item', this.results.lines[i].internalid);
 
                         var addrIndex = this.findAddrIndex(shipList, this.results.shipaddress);
                         if (addrIndex != null) {
@@ -189,9 +144,6 @@ define('Pacejet.Model'
                         }
                     }
                     else {
-                        //nlapiLogExecution('debug', 'results line ' + i + ' item', results.lines[i].internalid);
-                        //nlapiLogExecution('debug', 'results line ' + i + ' ship address', JSON.stringify(results.lines[i].shipaddress));
-                        //nlapiLogExecution('debug', 'results line ' + i + ' ship method', JSON.stringify(results.lines[i].shipmethod));
 
                         var addrIndex = this.findAddrIndex(shipList, this.results.lines[i].shipaddress);
                         if (addrIndex != null) {
@@ -227,12 +179,11 @@ define('Pacejet.Model'
                 if (results.shipaddress.match(/^[a-z]+[-]+[0-9]+[-]+null$/gi)) {
                     nlapiLogExecution('debug', 'address in cart', results.shipaddress);
 
-                    //stripping out the dashes to obtain the country and zip
+                    // Stripping out the dashes to obtain the country and zip
                     var addrStr = results.shipaddress.replace(/[-]+/g, ' ');
-                    //nlapiLogExecution('debug', 'address in cart str', addrStr);
+
                     var addrParts = addrStr.split(' ');
 
-                    //nlapiLogExecution('debug', 'address in cart split', addrParts);
                     Destination = {
                         Destination: {
                             "PostalCode": addrParts[1]
@@ -243,14 +194,13 @@ define('Pacejet.Model'
                     return Destination
                 }
 
-                // if we are logged in and there is shipaddress in the order, then format and return the address.
+                // If we are logged in and there is shipaddress in the order, then format and return the address.
                 if (nlapiGetWebContainer().getShoppingSession().isLoggedIn2()) {
                     var shipaddress = nlapiGetWebContainer().getShoppingSession().getCustomer().getAddress(data.address);
 
                     if (shipaddress) {
-                        //nlapiLogExecution('debug', 'returning shipaddress from order');
 
-                        // map NetSuite address fields to Pacejet fields
+                        // Map NetSuite address fields to Pacejet fields
                         Destination = {
                             Destination: {
                                 "CompanyName": ''
@@ -270,7 +220,7 @@ define('Pacejet.Model'
                 }
                 // if address has a valid zip and country, we are estimating from cart so return minimal address passed into GET
                 if (!Destination && data.address && data.address.zip && data.address.country) {
-                    //nlapiLogExecution('debug', 'shipaddress (address)', JSON.stringify(address,null,2));
+
                     Destination = {
                         Destination: {
                             "PostalCode": data.address.zip
@@ -280,27 +230,25 @@ define('Pacejet.Model'
                     };
                 }
 
-                //nlapiLogExecution('debug', '_shippingAddress: returning Destination', JSON.stringify(Destination,null,2));
                 return Destination;
             }
 
             // modifed by ss 7/16 - pass request object since quote lines are different than order lines
             , getRates: function (results, shipListX, itemsArray, shipaddress, request, sessionCache) {
                 var ratingResultsList = [];
-                //var request = {};
 
                 try {
                     var pacejetConfig = this.pacejetConfiguration().production;
 
                     nlapiLogExecution('debug', 'rates request', JSON.stringify(request, null, 2));
 
-                    // cache requests since LiveOver.Model#get is called repeatedly through the checkout process
+                    // Cache requests since LiveOver.Model#get is called repeatedly through the checkout process
                     var cache = [];
                     try {
                         cache = JSON.parse(nlapiGetContext().getSessionObject(sessionCache));
                     } catch (ignore) {
                     }
-                    //nlapiLogExecution('audit', '_getRates: get cache', JSON.stringify(cache,null,2));
+
                     if (cache && cache.length > 0) {
                         var cacheObj = _.findWhere(cache, {h: hashCode(JSON.stringify(request))});
 
@@ -311,15 +259,12 @@ define('Pacejet.Model'
                     }
 
                     var pacejetUrl = 'https://api.pacejet.cc/Rates';
-                    //nlapiLogExecution('debug', 'pacejetUrl', JSON.stringify(pacejetUrl,null,2));
-                    //nlapiLogExecution('debug', 'request', JSON.stringify(request,null,2));
 
                     var pacejetHeaders = {};
                     pacejetHeaders.PacejetLocation = pacejetConfig.Location;
                     pacejetHeaders.PacejetLicenseKey = pacejetConfig.LicenseKey;
                     pacejetHeaders.UpsLicenseID = pacejetConfig.UpsLicenseID;
                     pacejetHeaders['Content-Type'] = 'application/json';
-                    // nlapiLogExecution('debug', 'pacejetHeaders', JSON.stringify(pacejetHeaders,null,2));
 
                     var maxTries = 3;
                     var countTries = 0;
@@ -329,14 +274,11 @@ define('Pacejet.Model'
                         try {
                             var ts = new Date().getTime();
                             pacejetResponse = nlapiRequestURL(pacejetUrl, JSON.stringify(request), pacejetHeaders);
-                            //nlapiLogExecution('debug', 'Pacejet.Rates: elapsed time in ms', new Date().getTime() - ts);
-                            //nlapiLogExecution('debug', 'pacejetResponse', pacejetResponse);
 
                             var code = parseInt(pacejetResponse.getCode(), 10) || 500;
                             nlapiLogExecution('debug', 'code', code);
 
                             if (code >= 200 && code <= 299) {
-                                //nlapiLogExecution('debug', 'Breaking on success response', '');
                                 break;
                             }
                             else {
@@ -367,7 +309,6 @@ define('Pacejet.Model'
                     }
 
                     nlapiLogExecution('debug', 'Pacejet.Rates: elapsed time in ms', new Date().getTime() - ts);
-                    //nlapiLogExecution('debug', 'pacejetResponse', pacejetResponse);
 
                     var rates = JSON.parse(pacejetResponse.getBody());
 
@@ -377,7 +318,6 @@ define('Pacejet.Model'
                         nlapiLogExecution('debug', 'Pacejet.getRates rates', ratesStr.slice(x, x + 3900));
                     }
 
-                    //nlapiLogExecution('debug', 'Pacejet.Rates ship address in cart', results.shipaddress);
                     if (results.shipaddress.match(/[-]+null$/gi)) {
                         ratingResultsList = rates.serviceRecommendationList
                         nlapiLogExecution('debug', 'Pacejet.Rates ship results in cart', JSON.stringify(ratingResultsList));
@@ -388,15 +328,6 @@ define('Pacejet.Model'
                             return !!rate.consignorFreight;
                         });
                     }
-                    // _.each(ratingResultsList, function (e) {
-                    //     nlapiLogExecution('debug', 'ratingResult (before filtering and mapping', JSON.stringify(e,null,2));
-                    // });
-
-                    // filter out any rates that returned zero or are not in mapping table.
-                    // nlapiLogExecution('debug', 'ratingResultsList.length (raw)', JSON.stringify(ratingResultsList.length,null,2));
-
-                    //nlapiLogExecution('debug', 'ratingResultsList.length (with rate amount)', JSON.stringify(ratingResultsList.length,null,2));
-
 
                     // set rates cache here
                     var newCache = {
@@ -404,10 +335,10 @@ define('Pacejet.Model'
                         , r: ratingResultsList
                     };
                     cache = cache || [];
-                    //if(results.ismultishipto) cache = [];
+
                     cache.push(newCache);
                     nlapiGetContext().setSessionObject(sessionCache, JSON.stringify(cache));
-                    // nlapiLogExecution('audit', '_getRates: set cache', JSON.stringify(newCache,null,2));
+
                 }
                 catch (e) {
                     nlapiLogExecution('ERROR', 'Pacejet.js:_getRates: exception', e);
@@ -420,13 +351,10 @@ define('Pacejet.Model'
                         + JSON.stringify(request,null,2)
                         + '\npacejetResponse = '
                         + JSON.stringify(pacejetResponse,null,2);
-                    // if ( e instanceof nlobjError ) {
-                    //     body = 'Pacejet.js\nsystem error: \ncode = ' + e.getCode() + '\ndetails = ' + e.getDetails() + '\nrequest = ' + JSON.stringify(request,null,2);
-                    // }
+
                     nlapiSendEmail(-5, 'joelmcconaughy@gmail.com', 'PaceJet /rates error', body, null, null, null, null, true);
                 }
 
-                // nlapiLogExecution('debug', '_getRates returning uncached result', ratingResultsList);
                 return ratingResultsList;
             }
 
@@ -453,7 +381,7 @@ define('Pacejet.Model'
 
                 this.cloneShipmethods(results);
 
-                //filter methods
+                // Filter methods
                                rates = _.map(rates, function (e) {
                                    if (pacejetConfig.PJtoNSMethodsMap[e.shipCodeXRef]) {
                                        e.shipCodeXRef = pacejetConfig.PJtoNSMethodsMap[e.shipCodeXRef];
@@ -466,7 +394,6 @@ define('Pacejet.Model'
                     rates = _.filter(rates, function (e) {
                         return _.contains(groundMethods, e.shipCodeXRef);
                     });
-                    // nlapiLogExecution('debug', 'rates (after ground filter)', JSON.stringify(rates,null,2));
                 }
 
                 if (results.allFreeShipItems) {
@@ -474,7 +401,6 @@ define('Pacejet.Model'
                         e.consigneeFreight = 0.0;
                         return e;
                     });
-                    //nlapiLogExecution('debug', 'rates (after free shipping map)', JSON.stringify(rates,null,2));
                 }
 
                 var methodsArr;
@@ -485,23 +411,22 @@ define('Pacejet.Model'
                     methodsArr = results.shipmethods
                 }
 
-                //nlapiLogExecution('debug', 'methods before set rate', JSON.stringify(methodsArr));
-                //nlapiLogExecution('debug', 'rates', JSON.stringify(rates));
-
-
                 var packageMethod = {};
                 var newShipmethods = [];
                 _.each(methodsArr, function (method) {
                     var rate = _.findWhere(rates, {shipCodeXRef: method.internalid});
                     if (rate) {
-                        //nlapiLogExecution('debug', 'setting method '+method.internalid, rate.consigneeFreight);
+
                         method.rate = rate.consigneeFreight;
                         method.rate_formatted = Utils.formatCurrency(rate.consigneeFreight);
                         method.cost = rate.consignorFreight;
                         newShipmethods.push(method);
                         if (shipListX.method && method.internalid == shipListX.method) {
-                            //found the method for the current shipment
-                            //set the rate to the first line and zero any other lines
+
+                            /**
+                             * Found the method for the current shipment
+                             * Set the rate to the first line and zero any other lines
+                             */
                             packageMethod = method;
                             nlapiLogExecution('debug', 'found package method ' + method.internalid, JSON.stringify(packageMethod));
                         }
@@ -515,29 +440,24 @@ define('Pacejet.Model'
 
                 newShipmethods = _.sortBy(newShipmethods, 'rate');
                 if (!newShipmethods.length) {
-                    //nlapiLogExecution('debug', '_filterShippingMethods', 'all shipmethods have been filtered out');
                     results.shipmethod = null;
                 }
 
-                // if shipmethod is not set or if shipmethod has been filtered out of the list, set shipmethod to the lowest cost.
+                // If shipmethod is not set or if shipmethod has been filtered out of the list, set shipmethod to the lowest cost.
                 else if (!results.shipmethod || !_.find(newShipmethods, function (e) {
                     return e.internalid == results.shipmethod;
                 })) {
-                    //nlapiLogExecution('debug', '_filterShippingMethods', 'invalid shipmethod found, setting to lowest rate');
                     results.shipmethod = _.first(newShipmethods).internalid;
                 }
 
-                //nlapiLogExecution('debug', 'results.shipmethod (after)', JSON.stringify(results.shipmethod,null,2));
-
                 results.shipmethods = newShipmethods;
 
-                //nlapiLogExecution('debug', 'methods after set rate', JSON.stringify(methodsArr));
                 return packageMethod;
 
             }
 
             , _hasFreeShipItems: function (itemsArray) {
-                // nlapiLogExecution('debug', '_hasFreeShipItems', 'start');
+
                 try {
                     return _.reduce(itemsArray, function (memo, e) {
                         return memo || !!e.custitem_web_free_ship;
@@ -550,7 +470,7 @@ define('Pacejet.Model'
             }
 
             , _allFreeShipItems: function (itemsArray) {
-                // nlapiLogExecution('debug', '_allFreeShipItems', 'start');
+
                 try {
                     return _.reduce(itemsArray, function (memo, e) {
                         return memo && !!e.custitem_web_free_ship;
@@ -563,8 +483,6 @@ define('Pacejet.Model'
             }
 
             , cloneShipmethods: function (results) {
-                //nlapiLogExecution('debug', '_cloneShipmethods', 'start');
-                //nlapiLogExecution('debug', 'results.shipmethods', JSON.stringify(results.shipmethods,null,2));
 
                 var shipmethods_orig = new Array;
                 _.each(results.shipmethods, function (e) {
@@ -572,7 +490,6 @@ define('Pacejet.Model'
                 });
 
                 results.shipmethods_orig = shipmethods_orig;
-                //nlapiLogExecution('debug', 'results.shipmethods_orig', JSON.stringify(results.shipmethods_orig,null,2));
             }
 
             , pacejetConfiguration: function () {
@@ -648,7 +565,6 @@ define('Pacejet.Model'
                     }
 
                 }
-                //console.log('PaceJet.Configuration: config = ' + JSON.stringify(config,null,2));
 
                 return pacejetConfiguration;
             }
@@ -660,7 +576,6 @@ define('Pacejet.Model'
 
             for (var i = 0; i < itemsArray.length; i++) {
                 var item = itemsArray[i];
-                //nlapiLogExecution('AUDIT', 'PaceJet#getShippingObj#getShippingRates#packageDetailsList#item', JSON.stringify(item));
 
                 if (shipListX.lines.indexOf(item.orderitemid) < 0) continue;
                 if (skipFreeShipItems && item.custitem_web_free_ship) continue;
