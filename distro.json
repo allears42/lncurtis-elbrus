@@ -676,7 +676,8 @@
                     "SiteSearch.Extension",
                     "Product.Extension",
                     "Transaction.Line.Views.Extension",
-                    "StateComplianceWarnings"
+                    "StateComplianceWarnings",
+                    "Pacejet"
                 ],
                 "amdclean": true,
                 "amdConfig": {
