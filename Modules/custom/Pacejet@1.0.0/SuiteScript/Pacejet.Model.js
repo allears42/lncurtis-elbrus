@@ -425,7 +425,10 @@ define('Pacejet.Model'
                 ,   methodsArr
                 ,   packageMethod
                 ,   newShipmethods
-                ,   rate;
+                ,   rate
+                ,   defaultShipMethodId = SC.Configuration.get('pacejet.defaultWebShippingId')
+                ,   defaultShipMethod;
+                nlapiLogExecution('DEBUG', 'DEFAULT WEB SHIP METHOD', defaultShipMethod);
 
                 _.extend(request, shipaddress, packageDetailsList(itemsArray, results, shipListX), pacejetConfig.production);
 
@@ -477,8 +480,14 @@ define('Pacejet.Model'
                 // Iterate over NS ship methods and generate new shipmethod array
                 _.each(methodsArr, function (method) {
 
+                    // If this is the default ship method, store it in var for reference
+                    if (method.internalid == defaultShipMethodId) {
+                        defaultShipMethod = method;
+                    }
+
                     // Find PJ ship method where NS ship method's internal ID is PJ ship method's shipCodeXRef
                     rate = _.findWhere(rates, {shipCodeXRef: method.internalid});
+
                     if (rate) {
 
                         method.rate = rate.consigneeFreight;
@@ -506,10 +515,21 @@ define('Pacejet.Model'
                 newShipmethods = _.sortBy(newShipmethods, 'rate');
                 if (!newShipmethods.length) {
                     results.shipmethod = null;
-                }
+
+                    if (defaultShipMethod && Utils.isCheckoutDomain() && nlapiGetWebContainer().getShoppingSession().isLoggedIn2()) {
+
+                        // Add this to checkout's ship method display
+                        newShipmethods.push(defaultShipMethod);
+
+                        // Set this as selected ship method
+                        results.shipmethod = defaultShipMethodId;
+
+                        // Pass this back so we have data for the client script that sets the shipping price on the transaction
+                        packageMethod = defaultShipMethod;
+                    }
 
                 // If shipmethod is not set or if shipmethod has been filtered out of the list, set shipmethod to the lowest cost.
-                else if (!results.shipmethod || !_.find(newShipmethods, function (e) {
+                } else if (!results.shipmethod || !_.find(newShipmethods, function (e) {
                     return e.internalid == results.shipmethod;
                 })) {
                     results.shipmethod = _.first(newShipmethods).internalid;
