@@ -2,39 +2,51 @@
 define('Pacejet.Model'
     , [
         'Application'
-        , 'Utils'
-        , 'underscore'
+    ,   'Utils'
+    ,   'underscore'
     ]
     , function (
         Application
-        , Utils
-        , _
+    ,   Utils
+    ,   _
     ) {
         'use strict';
 
         return {
+
             updateOrder: function (order_fields, results, order, data) {
+
+                var shipList
+                ,   order
+                ,   itemsArray
+                ,   pacejetRates
+                ,   prechangeShipping
+                ,   summary;
 
                 this.results = results;
                 nlapiLogExecution('debug', 'Pacejet#updateResult', 'start');
-                nlapiLogExecution('debug', 'Pacejet#updateResult - shipAddress', this.results.shipaddress);
 
+                // If no lines, return - no PJ lookup
                 if (this.results.lines.length === 0) {
-                    nlapiLogExecution('debug', 'PacejetModel#updateOrder: skipping Pacejet lookup because no lines');
                     return this.results;
                 }
 
-                if (!(this.results.ismultishipto) && (this.results.shipaddress == null || this.results.shipaddress.match(/[-]+null$/))) {
+                // If not multi-ship AND shipaddress is null or '-null', proceed
+                if (!(this.results.ismultishipto) &&
+                        (this.results.shipaddress == null || this.results.shipaddress.match(/[-]+null$/))
+                    ) {
+
+                    // TODO: Not sure what this is - matches something like AZ-87354-null - partial address?
                     if (!this.results.shipaddress.match(/^[a-z]{2}[-]+[a-z0-9]+[-]+null$/gi)) {
-                        nlapiLogExecution('debug', 'PacejetModel#updateOrder: skipping Pacejet lookup because no ship address', this.results.shipaddress);
+
+                        // nlapiLogExecution('debug', 'PacejetModel#updateOrder: skipping Pacejet lookup because no ship address', this.results.shipaddress);
+                        nlapiLogExecution('DEBUG', 'SETTING SUMMARY TO ZERO - PARTIAL ADDY?', this.results.shipaddress);
 
                         this.setSummary(0, this.results.summary.shippingcost);
 
                         return this.results;
                     }
                 }
-
-                var options = this.results.options;
 
                 /**
                  * Sort items by address, then by ship method: result.lines[x].shipaddress
@@ -43,27 +55,32 @@ define('Pacejet.Model'
                  * Update itemlist with new Pacejet shipping prices
                  */
 
-                var shipList = this.buildPackingList();
-                nlapiLogExecution('debug', 'shiplist', JSON.stringify(shipList));
-                var order = nlapiGetWebContainer().getShoppingSession().getOrder()
-                    , itemsArray = order.getItems();
+                shipList = this.buildPackingList();
+                order = nlapiGetWebContainer().getShoppingSession().getOrder();
+                itemsArray = order.getItems();
 
                 this.results.hasFreeShipItems = this._hasFreeShipItems(itemsArray);
                 this.results.allFreeShipItems = this._allFreeShipItems(itemsArray);
 
-
-                var pacejetRates = this.getShippingObj(shipList, itemsArray, this.results, 'pjrcache');
-
-                var prechangeShipping = this.results.summary.shippingcost;
+                pacejetRates = this.getShippingObj(shipList, itemsArray, this.results, 'pjrcache');
+                prechangeShipping = this.results.summary.shippingcost;
                 this.setSummary(pacejetRates.totalShipping, prechangeShipping);
 
+                // Set packageMethods in session object so client script can retrieve them
                 nlapiGetContext().setSessionObject('packageMethods', JSON.stringify(pacejetRates.sessionMethods));
 
+                // If we are in checkout and user is logged in, proceed
                 if (Utils.isCheckoutDomain(request) && nlapiGetWebContainer().getShoppingSession().isLoggedIn2() ) {
+
+                    /**
+                     * Set custom shipping value on commerce API order object. This will trigger client script
+                     * to take value set here and set it as value in transaction's native shippingcost field.
+                     */
                     order.setCustomFieldValues({
                         'custbody_pacejet_shipping_price_hidden': String(pacejetRates.totalShipping)
                     });
-                    var summary = order.getFieldValues(['summary']);
+
+                    summary = order.getFieldValues(['summary']);
                     nlapiLogExecution('debug', 'Pacejet#summary post CS', JSON.stringify(summary));
 
                     if (summary) {
@@ -71,14 +88,16 @@ define('Pacejet.Model'
                     }
                 }
 
-                //store sessionmethods in session
+                // Store sessionmethods in session
                 this.results.pacejet = {
                     status: 'Prices updated'
                 };
 
                 return this.results;
             }
+
             , setSummaryFromOrder: function(results, newTax, newTotal, newShipping) {
+
                 this.results.summary.taxtotal = newTax;
                 this.results.summary.taxtotal_formatted = Utils.formatCurrency(newTax);
 
@@ -88,7 +107,9 @@ define('Pacejet.Model'
                 this.results.summary.total = newTotal;
                 this.results.summary.total_formatted = Utils.formatCurrency(newTotal);
             }
+
             , setSummary: function (pacejetShipping, prechangeShipping) {
+
                 this.results.summary.shippingcost = pacejetShipping;
                 this.results.summary.shippingcost_formatted = Utils.formatCurrency(pacejetShipping);
 
@@ -97,31 +118,44 @@ define('Pacejet.Model'
             }
 
             , getShippingObj: function (shipList, itemsArray, results, sessionCache) {
-                var totalShipping = 0;
-                var sessionMethods = [];
+
+                var totalShipping = 0
+                ,   sessionMethods = []
+                ,   packageMethod;
 
                 if (!_.isEmpty(shipList)) {
+
                     for (var x = 0; x < shipList.length; x++) {
-                        var packageMethod = this.getShippingRates(results, shipList[x], itemsArray, sessionCache);
-                        if (!_.isEmpty(packageMethod)) totalShipping += packageMethod.rate;
+
+                        packageMethod = this.getShippingRates(results, shipList[x], itemsArray, sessionCache);
+
+                        if (!_.isEmpty(packageMethod)) {
+                            totalShipping += packageMethod.rate;
+                        }
+
                         sessionMethods.push({
-                            method: packageMethod,
-                            address: shipList[x].address
+                            method: packageMethod
+                        ,   address: shipList[x].address
                         });
                     }
                 }
 
                 return {
                     totalShipping: totalShipping
-                    , sessionMethods: sessionMethods
+                ,   sessionMethods: sessionMethods
                 }
             }
 
             , buildPackingList: function () {
-                var shipList = [];
 
-                var lineNums = this.results.lines.length;
+                var shipList = []
+                ,   lineNums = this.results.lines.length
+                ,   addrIndex
+                ,   pkg;
+
+
                 for (var i = 0; i < lineNums; i++) {
+
                     if (this.results.ismultishipto && this.results.lines[i].shipaddress == null) {
                         nlapiLogExecution('debug', 'PacejetModel#updateOrder: skipping Pacejet lookup because no line ship address');
                         this.setSummary(0, this.results.summary.shippingcost);
@@ -130,27 +164,27 @@ define('Pacejet.Model'
 
                     if (!this.results.ismultishipto) {
 
-                        var addrIndex = this.findAddrIndex(shipList, this.results.shipaddress);
+                        addrIndex = this.findAddrIndex(shipList, this.results.shipaddress);
                         if (addrIndex != null) {
                             shipList[addrIndex].lines.push(this.results.lines[i].internalid);
                         }
                         else {
-                            var pkg = {
+                            pkg = {
                                 address: this.results.shipaddress,
                                 method: this.results.shipmethod,
                                 lines: [this.results.lines[i].internalid]
                             };
                             shipList.push(pkg);
                         }
-                    }
-                    else {
 
-                        var addrIndex = this.findAddrIndex(shipList, this.results.lines[i].shipaddress);
+                    } else {
+
+                        addrIndex = this.findAddrIndex(shipList, this.results.lines[i].shipaddress);
                         if (addrIndex != null) {
                             shipList[addrIndex].lines.push(this.results.lines[i].internalid);
                         }
                         else {
-                            var pkg = {
+                            pkg = {
                                 address: this.results.lines[i].shipaddress,
                                 method: this.results.lines[i].shipmethod,
                                 lines: [this.results.lines[i].internalid]
@@ -164,9 +198,10 @@ define('Pacejet.Model'
             }
 
             , findAddrIndex: function (obj, attr) {
-                for (var i = 0; i < obj.length; i++) {
-                    if (obj[i].address === attr) {
 
+                for (var i = 0; i < obj.length; i++) {
+
+                    if (obj[i].address === attr) {
                         return i;
                     }
                 }
@@ -174,20 +209,24 @@ define('Pacejet.Model'
             }
 
             , shippingAddress: function (results, data) {
-                var Destination = null;
+
+                var Destination = null
+                ,   addrStr
+                ,   addrParts
+                ,   shipaddress;
 
                 if (results.shipaddress.match(/^[a-z]+[-]+[0-9]+[-]+null$/gi)) {
+
                     nlapiLogExecution('debug', 'address in cart', results.shipaddress);
 
                     // Stripping out the dashes to obtain the country and zip
-                    var addrStr = results.shipaddress.replace(/[-]+/g, ' ');
-
-                    var addrParts = addrStr.split(' ');
+                    addrStr = results.shipaddress.replace(/[-]+/g, ' ');
+                    addrParts = addrStr.split(' ');
 
                     Destination = {
                         Destination: {
                             "PostalCode": addrParts[1]
-                            , "CountryCode": addrParts[0]
+                        ,   "CountryCode": addrParts[0]
                         }
                     };
 
@@ -196,7 +235,8 @@ define('Pacejet.Model'
 
                 // If we are logged in and there is shipaddress in the order, then format and return the address.
                 if (nlapiGetWebContainer().getShoppingSession().isLoggedIn2()) {
-                    var shipaddress = nlapiGetWebContainer().getShoppingSession().getCustomer().getAddress(data.address);
+
+                    shipaddress = nlapiGetWebContainer().getShoppingSession().getCustomer().getAddress(data.address);
 
                     if (shipaddress) {
 
@@ -204,28 +244,29 @@ define('Pacejet.Model'
                         Destination = {
                             Destination: {
                                 "CompanyName": ''
-                                , "Address1": shipaddress.addr1
-                                , "Address2": shipaddress.addr2
-                                , "City": shipaddress.city
-                                , "StateOrProvinceCode": shipaddress.state
-                                , "PostalCode": shipaddress.zip
-                                , "CountryCode": shipaddress.country
-                                , "ContactName": shipaddress.addressee
-                                , "Email": ''
-                                , "Phone": shipaddress.phone
-                                , "Residential": shipaddress.isresidential == 'T' ? 'true' : 'false'
+                            ,   "Address1": shipaddress.addr1
+                            ,   "Address2": shipaddress.addr2
+                            ,   "City": shipaddress.city
+                            ,   "StateOrProvinceCode": shipaddress.state
+                            ,   "PostalCode": shipaddress.zip
+                            ,   "CountryCode": shipaddress.country
+                            ,   "ContactName": shipaddress.addressee
+                            ,   "Email": ''
+                            ,   "Phone": shipaddress.phone
+                            ,   "Residential": shipaddress.isresidential == 'T' ? 'true' : 'false'
                             }
                         };
                     }
                 }
-                // if address has a valid zip and country, we are estimating from cart so return minimal address passed into GET
+
+                // If address has a valid zip and country, we are estimating from cart so return minimal address passed into GET
                 if (!Destination && data.address && data.address.zip && data.address.country) {
 
                     Destination = {
                         Destination: {
                             "PostalCode": data.address.zip
-                            , "CountryCode": data.address.country
-                            , "Residential": 'false'
+                        ,   "CountryCode": data.address.country
+                        ,   "Residential": 'false'
                         }
                     };
                 }
@@ -235,22 +276,38 @@ define('Pacejet.Model'
 
             // modifed by ss 7/16 - pass request object since quote lines are different than order lines
             , getRates: function (results, shipListX, itemsArray, shipaddress, request, sessionCache) {
-                var ratingResultsList = [];
+
+                var ratingResultsList = []
+                ,   pacejetConfig
+                ,   cache
+                ,   cacheObj
+                ,   pacejetUrl = 'https://api.pacejet.cc/Rates'
+                ,   pacejetHeaders = {}
+                ,   maxTries
+                ,   countTries
+                ,   pacejetResponse
+                ,   ts
+                ,   code
+                ,   rates
+                ,   ratesStr
+                ,   newCache
+                ,   body;
 
                 try {
-                    var pacejetConfig = this.pacejetConfiguration().production;
+                    pacejetConfig = this.pacejetConfiguration().production;
 
                     nlapiLogExecution('debug', 'rates request', JSON.stringify(request, null, 2));
 
                     // Cache requests since LiveOver.Model#get is called repeatedly through the checkout process
-                    var cache = [];
+                    cache = [];
                     try {
                         cache = JSON.parse(nlapiGetContext().getSessionObject(sessionCache));
                     } catch (ignore) {
                     }
 
                     if (cache && cache.length > 0) {
-                        var cacheObj = _.findWhere(cache, {h: hashCode(JSON.stringify(request))});
+
+                        cacheObj = _.findWhere(cache, {h: hashCode(JSON.stringify(request))});
 
                         if (cacheObj && !_.isEmpty(cacheObj.r)) {
                             nlapiLogExecution('debug', '_getRates returning cached result', JSON.stringify(cacheObj.r));
@@ -258,24 +315,22 @@ define('Pacejet.Model'
                         }
                     }
 
-                    var pacejetUrl = 'https://api.pacejet.cc/Rates';
-
-                    var pacejetHeaders = {};
                     pacejetHeaders.PacejetLocation = pacejetConfig.Location;
                     pacejetHeaders.PacejetLicenseKey = pacejetConfig.LicenseKey;
                     pacejetHeaders.UpsLicenseID = pacejetConfig.UpsLicenseID;
                     pacejetHeaders['Content-Type'] = 'application/json';
 
-                    var maxTries = 3;
-                    var countTries = 0;
-                    var pacejetResponse = null;
+                    maxTries = 3;
+                    countTries = 0;
+                    pacejetResponse = null;
 
                     while (countTries < maxTries) {
+
                         try {
-                            var ts = new Date().getTime();
+                            ts = new Date().getTime();
                             pacejetResponse = nlapiRequestURL(pacejetUrl, JSON.stringify(request), pacejetHeaders);
 
-                            var code = parseInt(pacejetResponse.getCode(), 10) || 500;
+                            code = parseInt(pacejetResponse.getCode(), 10) || 500;
                             nlapiLogExecution('debug', 'code', code);
 
                             if (code >= 200 && code <= 299) {
@@ -284,10 +339,11 @@ define('Pacejet.Model'
                             else {
                                 throw nlapiCreateError("PaceJet return error " + code, '', true);
                             }
-
                         }
                         catch (e) {
+
                             nlapiLogExecution('ERROR', 'PaceJet exception', e);
+
                             if (e instanceof nlobjError) {
                                 switch (e.getCode()) {
                                     case 'SSS_REQUEST_TIME_EXCEEDED':
@@ -310,19 +366,19 @@ define('Pacejet.Model'
 
                     nlapiLogExecution('debug', 'Pacejet.Rates: elapsed time in ms', new Date().getTime() - ts);
 
-                    var rates = JSON.parse(pacejetResponse.getBody());
-
-                    var ratesStr = JSON.stringify(rates, null, 2);
+                    rates = JSON.parse(pacejetResponse.getBody());
+                    ratesStr = JSON.stringify(rates, null, 2);
 
                     for (var x = 0; x < ratesStr.length; x += 3899) {
                         nlapiLogExecution('debug', 'Pacejet.getRates rates', ratesStr.slice(x, x + 3900));
                     }
 
                     if (results.shipaddress.match(/[-]+null$/gi)) {
-                        ratingResultsList = rates.serviceRecommendationList
+
+                        ratingResultsList = rates.serviceRecommendationList;
                         nlapiLogExecution('debug', 'Pacejet.Rates ship results in cart', JSON.stringify(ratingResultsList));
-                    }
-                    else {
+                    } else {
+
                         ratingResultsList = rates.ratingResultsList;
                         ratingResultsList = _.filter(ratingResultsList, function (rate) {
                             return !!rate.consignorFreight;
@@ -330,9 +386,9 @@ define('Pacejet.Model'
                     }
 
                     // set rates cache here
-                    var newCache = {
+                    newCache = {
                         h: hashCode(JSON.stringify(request))
-                        , r: ratingResultsList
+                    ,   r: ratingResultsList
                     };
                     cache = cache || [];
 
@@ -341,11 +397,11 @@ define('Pacejet.Model'
 
                 }
                 catch (e) {
-                    nlapiLogExecution('ERROR', 'Pacejet.js:_getRates: exception', e);
 
+                    nlapiLogExecution('ERROR', 'Pacejet.js:_getRates: exception', e);
                     nlapiGetContext().setSessionObject(sessionCache, null);
 
-                    var body = 'Pacejet.js\nunexpected error: '
+                    body = 'Pacejet.js\nunexpected error: '
                         + e.toString()
                         + '\nrequest = '
                         + JSON.stringify(request,null,2)
@@ -360,35 +416,41 @@ define('Pacejet.Model'
 
             , getShippingRates: function (results, shipListX, itemsArray, sessionCache) {
 
-                var shipaddress = this.shippingAddress(results, shipListX);
-
-                // build request object
-                var request = {};
-                var pacejetConfig = this.pacejetConfiguration();
-                nlapiLogExecution('debug', 'Pacjetconfig', JSON.stringify(pacejetConfig));
+                var shipaddress = this.shippingAddress(results, shipListX)
+                ,   request = {}
+                ,   pacejetConfig = this.pacejetConfiguration()
+                ,   rates
+                ,   groundMethods
+                ,   filterToGroundMethods
+                ,   methodsArr
+                ,   packageMethod
+                ,   newShipmethods
+                ,   rate;
 
                 _.extend(request, shipaddress, packageDetailsList(itemsArray, results, shipListX), pacejetConfig.production);
 
-                var rates = this.getRates(results, shipListX, itemsArray, shipaddress, request, sessionCache);
+                // Get all available shipmethods from Pacejet
+                rates = this.getRates(results, shipListX, itemsArray, shipaddress, request, sessionCache);
+
                 if (results.shipaddress.match(/[-]+null$/gi)) {
                     rates.rate = rates.lowestCostConsigneeFreight;
                     return rates;
                 }
 
-                var groundMethods = pacejetConfig.groundMethods;
-                var filterToGroundMethods = results.hasFreeShipItems || results.allFreeShipItems;
-                nlapiLogExecution('debug', 'Pacjetconfig ground', groundMethods);
+                groundMethods = pacejetConfig.groundMethods;
+                filterToGroundMethods = results.hasFreeShipItems || results.allFreeShipItems;
 
+                // Set original NS ship methods as results.shipmethods_orig
                 this.cloneShipmethods(results);
 
-                // Filter methods
-                               rates = _.map(rates, function (e) {
-                                   if (pacejetConfig.PJtoNSMethodsMap[e.shipCodeXRef]) {
-                                       e.shipCodeXRef = pacejetConfig.PJtoNSMethodsMap[e.shipCodeXRef];
-                                   }
-                                   return e;
-                               });
-                               nlapiLogExecution('debug', 'Pacjetconfig after', "after map");
+                // Iterate over PJ ship methods, set corresponding NS ship method on each PJ ship method
+                   rates = _.map(rates, function (e) {
+
+                       if (pacejetConfig.PJtoNSMethodsMap[e.shipCodeXRef]) {
+                           e.shipCodeXRef = pacejetConfig.PJtoNSMethodsMap[e.shipCodeXRef];
+                       }
+                       return e;
+                   });
 
                 if (filterToGroundMethods) {
                     rates = _.filter(rates, function (e) {
@@ -403,18 +465,20 @@ define('Pacejet.Model'
                     });
                 }
 
-                var methodsArr;
                 if (results.ismultishipto) {
                     methodsArr = results.multishipmethods[shipListX.address]
-                }
-                else {
+                } else {
                     methodsArr = results.shipmethods
                 }
 
-                var packageMethod = {};
-                var newShipmethods = [];
+                packageMethod = {};
+                newShipmethods = [];
+
+                // Iterate over NS ship methods and generate new shipmethod array
                 _.each(methodsArr, function (method) {
-                    var rate = _.findWhere(rates, {shipCodeXRef: method.internalid});
+
+                    // Find PJ ship method where NS ship method's internal ID is PJ ship method's shipCodeXRef
+                    rate = _.findWhere(rates, {shipCodeXRef: method.internalid});
                     if (rate) {
 
                         method.rate = rate.consigneeFreight;
@@ -424,8 +488,9 @@ define('Pacejet.Model'
                         if (shipListX.method && method.internalid == shipListX.method) {
 
                             /**
-                             * Found the method for the current shipment
-                             * Set the rate to the first line and zero any other lines
+                             * Found the method for the current shipment.
+                             * Set packageMethod as this method. This is the PJ data that will get retrieved by the
+                             * client script.
                              */
                             packageMethod = method;
                             nlapiLogExecution('debug', 'found package method ' + method.internalid, JSON.stringify(packageMethod));
@@ -485,6 +550,7 @@ define('Pacejet.Model'
             , cloneShipmethods: function (results) {
 
                 var shipmethods_orig = new Array;
+
                 _.each(results.shipmethods, function (e) {
                     shipmethods_orig.push(_.extend({}, e));
                 });
@@ -493,6 +559,7 @@ define('Pacejet.Model'
             }
 
             , pacejetConfiguration: function () {
+
                 var pacejetConfiguration = {
                     demo: {
                         Location: 'DemoAPI'
