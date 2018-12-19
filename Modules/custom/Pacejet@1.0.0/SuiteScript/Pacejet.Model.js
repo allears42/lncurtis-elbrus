@@ -526,6 +526,30 @@ define('Pacejet.Model'
 
                         // Pass this back so we have data for the client script that sets the shipping price on the transaction
                         packageMethod = defaultShipMethod;
+
+                        /************** START DEFAULT SHIP LOG ********************/
+                        try {
+
+                            var author = 82453
+                            ,   content = ''
+                            ,   title = 'Default web shipping order detected';
+
+                            content = 'Web default shipping being set on an order in checkout. \r\n \n';
+                            content += 'User: ' + nlapiGetUser() + '\r\n \n \r';
+                            content += '**********';
+                            content += 'PJ shipping methods returned: ' + JSON.stringify(rates) + '\r\n \n \r';
+                            content += '**********';
+                            content += 'NS shipping methods: ' + JSON.stringify(methodsArr) + '\r\n \n \r';
+                            content += '**********';
+                            content += 'Results obj: ' + JSON.stringify(results) + '\r\n';
+
+                            nlapiSendEmail(author, ['nkkwik@gmail.com'/*, 'rcurtis@lncurtis.com'*/], title, content);
+
+                        } catch(e) {
+                            nlapiLogExecution('DEBUG', 'ERROR SENDING DEFAULT SHIP ORDER EMAIL', e);
+                        }
+                        /************** END DEFAULT SHIP LOG ********************/
+
                     }
 
                 // If shipmethod is not set or if shipmethod has been filtered out of the list, set shipmethod to the lowest cost.
