@@ -535,10 +535,17 @@ define('Pacejet.Model'
                 });
 
                 newShipmethods = _.sortBy(newShipmethods, 'rate');
+
                 if (!newShipmethods.length) {
+
                     results.shipmethod = null;
 
                     if (defaultShipMethod && Utils.isCheckoutDomain() && nlapiGetWebContainer().getShoppingSession().isLoggedIn2()) {
+
+                        // Remove asterisks from ship method label
+                        if (defaultShipMethod.hasOwnProperty('name') && defaultShipMethod.name) {
+                            defaultShipMethod.name = defaultShipMethod.name.replace('*', '');
+                        }
 
                         // Add this to checkout's ship method display
                         newShipmethods.push(defaultShipMethod);
