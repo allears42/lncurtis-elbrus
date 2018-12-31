@@ -1,0 +1,18 @@
+{
+  "type": "object",
+  "subtab": {
+      "id": "pacejet",
+      "title": "PaceJet",
+      "group": "integrations"
+  },
+  "properties": {
+      "pacejet.defaultWebShippingId": {
+          "group": "integrations",
+          "subtab": "pacejet",
+          "type": "string",
+          "title": "ID of Default Web Shipping Method",
+          "mandatory": true,
+          "description": "If no shipping methods are returned from PaceJet or no PaceJet methods match NS methods, use this method"
+      }
+  }
+}
