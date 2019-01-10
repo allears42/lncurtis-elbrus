@@ -348,6 +348,10 @@ define('Pacejet.Model'
                     while (countTries < maxTries) {
 
                         try {
+                            if (countTries > 0) {
+                                nlapiLogExecution('DEBUG', 'MAKING MULTIPLE ATTEMPTS TO GET PACEJET RATES', 'COUNT: ' + (countTries + 1));
+                            }
+
                             ts = new Date().getTime();
                             pacejetResponse = nlapiRequestURL(pacejetUrl, JSON.stringify(request), pacejetHeaders);
 
@@ -356,30 +360,17 @@ define('Pacejet.Model'
 
                             if (code >= 200 && code <= 299) {
                                 break;
-                            }
-                            else {
+                            } else {
                                 throw nlapiCreateError("PaceJet return error " + code, '', true);
                             }
                         }
                         catch (e) {
 
-                            nlapiLogExecution('ERROR', 'PaceJet exception', e);
+                            nlapiLogExecution('ERROR', 'Got bad PJ response', e);
 
                             if (e instanceof nlobjError) {
-                                switch (e.getCode()) {
-                                    case 'SSS_REQUEST_TIME_EXCEEDED':
-                                        ++countTries;
-                                        continue;
-                                    case 'SSS_CONNECTION_TIME_OUT':
-                                        ++countTries;
-                                        continue;
-                                    case 'SSS_CONNECTION_CLOSED':
-                                        ++countTries;
-                                        continue;
-                                }
-                                break;
-                            }
-                            else {
+                                ++countTries;
+                            } else {
                                 break;
                             }
                         }
