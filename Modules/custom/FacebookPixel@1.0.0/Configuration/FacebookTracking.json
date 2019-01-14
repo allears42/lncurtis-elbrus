@@ -1,0 +1,18 @@
+{
+	"type": "object",
+    "subtab": {
+        "id": "facebookpixel",
+        "title": "Facebook Pixel",
+        "description": "Facebook Pixel",
+        "group": "integrations"
+    }
+,	"properties": {
+		"tracking.facebookPixel.pixelID": {
+			"group": "integrations"
+		,	"subtab": "facebookpixel"
+		,	"type": "string"
+		,	"title": "Facebook Pixel ID"
+		,	"description": "Enter the Facebook Pixel ID. SuiteCommerce Advanced inserts this property into each page of the application."
+		}
+	}
+}
