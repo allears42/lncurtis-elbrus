@@ -15,6 +15,7 @@
 
 		<div class="product-details-quickview-upper-info-outer">
 			<div data-view="Product.Price"></div>
+			<div class="product-badge-container" data-view="ProductBadging"></div>
 			<div data-view="Product.Sku" class="product-details-quickview-sku-container"></div>
 		</div>
 

@@ -43,7 +43,7 @@
 				<div class="product-details-full-main">
 					{{#if isItemProperlyConfigured}}
 						<form id="product-details-full-form" data-action="submit-form" method="POST">
-
+							<div class="product-badge-container" data-view="ProductBadging"></div>
 							<section class="product-details-full-info">
 								<div id="banner-summary-bottom" class="product-details-full-banner-summary-bottom"></div>
 							</section>
