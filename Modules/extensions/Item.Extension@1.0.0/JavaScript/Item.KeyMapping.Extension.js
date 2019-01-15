@@ -26,6 +26,8 @@ define('Item.KeyMapping.Extension'
 	,	_ca_prop_65_warning_text: 'custitem_jhm_webstore_warn_text_ca_65'
 	,	_wa_sb_6413_warning_text: 'custitem_jhm_webstore_warn_text_wa6413'
 
+	,	_product_badges: 'custitem_jhm_webstore_product_badges'
+
 	,	_showWarningIcons: function(item)
         {
             var returnFlag = false

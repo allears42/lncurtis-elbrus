@@ -9,12 +9,14 @@ define('ProductDetails.QuickView.View.Extension'
 
 	,	'underscore'
 	,	'StateComplianceWarnings.View'
+	,	'ProductBadging.View'
 	]
 ,	function (
 		ProductDetailsQuickViewView
 
 	,	_
 	,	StateComplianceWarningsView
+	,	ProductBadgingView
 	)
 {
 	'use strict';
@@ -55,6 +57,12 @@ define('ProductDetails.QuickView.View.Extension'
             'StateWarnings.Icons': function()
             {
                 return new StateComplianceWarningsView({
+                    model: this.model
+                })
+            }
+		,   'ProductBadging': function()
+            {
+                return new ProductBadgingView({
                     model: this.model
                 })
             }

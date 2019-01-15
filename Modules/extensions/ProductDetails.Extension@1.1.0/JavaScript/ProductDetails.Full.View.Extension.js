@@ -12,6 +12,7 @@ define(
 	,	'underscore'
 	,	'StateComplianceWarnings.View'
 	,	'state_warning_messages.tpl'
+	,	'ProductBadging.View'
 
 	]
 ,	function (
@@ -21,6 +22,7 @@ define(
 	,	_
 	,	StateComplianceWarningsView
 	,	state_warning_messages_tpl
+	,	ProductBadgingView
 	)
 {
 	'use strict';
@@ -56,6 +58,12 @@ define(
                 return new StateComplianceWarningsView({
                     model: this.model
 				,	template: state_warning_messages_tpl
+                })
+            }
+		,   'ProductBadging': function()
+            {
+                return new ProductBadgingView({
+                    model: this.model
                 })
             }
         })

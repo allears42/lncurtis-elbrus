@@ -14,8 +14,8 @@ define(
         ,   'Product.Model'
         ,   'Cart.QuickAddToCart.View'
         ,   'SC.Configuration'
-    
         ,	'underscore'
+        ,   'ProductBadging.View'
 
     ]
     ,	function(
@@ -26,6 +26,7 @@ define(
         ,   CartQuickAddToCartView
         ,   Configuration
         , 	_
+        ,   ProductBadgingView
         
     )
     {
@@ -63,7 +64,12 @@ define(
                     ,	origin: 'ITEMCELL_SEARCH'
                     });
                 }
-
+            ,   'ProductBadging': function()
+                {
+                    return new ProductBadgingView({
+                        model: this.model
+                    })
+                }
             })
 
         ,	getContext: _.wrap( FacetsItemCellView.prototype.getContext, function(fn) {

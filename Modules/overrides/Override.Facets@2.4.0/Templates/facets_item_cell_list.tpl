@@ -7,7 +7,7 @@
 
 <div class="facets-item-cell-list item-cell" itemprop="itemListElement"  data-item-id="{{itemId}}" itemscope itemtype="https://schema.org/Product" data-track-productlist-list="{{track_productlist_list}}" data-track-productlist-category="{{track_productlist_category}}" data-track-productlist-position="{{track_productlist_position}}" data-sku="{{sku}}">
 	<meta itemprop="url" content="{{seoURL}}">
-
+	<div class="product-badge-container" data-view="ProductBadging"></div>
 	<div class="facets-item-cell-list-left">
 		<div class="facets-item-cell-list-image-wrapper">
 			{{#if itemIsNavigable}}

@@ -1,0 +1,34 @@
+{
+  "type": "object",
+
+  "subtab": {
+    "id": "productBadging",
+    "title": "Product Badging",
+    "group": "layout"
+  },
+
+  "properties": {
+    "productBadging.Badges": {
+      "group": "layout",
+      "subtab": "productBadging",
+      "type": "array",
+      "title": "Badges",
+
+      "items": {
+        "type": "object",
+        "properties": {
+          "badgeType": {
+            "type": "string",
+            "title": "Badge Type",
+            "source": "customrecord_jhm_product_badge"
+          },
+          "badgeColor": {
+            "type": "string",
+            "title": "Badge Color",
+            "enum": ["black", "green", "red"]
+          }
+        }
+      }
+    }
+  }
+}

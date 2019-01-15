@@ -1,0 +1,38 @@
+.product-badge-container {
+  position: absolute;
+  z-index: 1001;
+  font-weight: $sc-font-weight-bold;
+  text-transform: uppercase;
+  width: 45px;
+  text-align: center;
+  top: 5px;
+  left: 15px;
+  line-height: 14px;
+
+  .badge {
+    margin-bottom: $sc-base-margin;
+  }
+
+  .green {
+    color: $sc-color-theme;
+  }
+  .black {
+    color: #000;
+  }
+  .red {
+    color: $sc-color-primary;
+  }
+}
+
+
+#product-details-full-form .product-badge-container, .product-details-quickview .product-badge-container {
+  position: relative;
+  text-align: left;
+  width: auto;
+  font-size: $sc-h5-font-size;
+  left: 0;
+}
+
+#product-details-full-form .product-badge-container {
+  margin-bottom: $sc-base-margin * 3;
+}
