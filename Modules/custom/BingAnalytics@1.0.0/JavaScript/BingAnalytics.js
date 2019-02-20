@@ -32,13 +32,6 @@
 		)
 	{
 		var BingAnalytics = {
-			
-			//@method doCallback Indicates if this module do a callback after some particular events
-			//@return {Boolean}
-			// doCallback: function()
-			// {
-			// 	return !win[name].q;
-			// }
 
 			//@method trackPageview
 			//@param {String} url
@@ -92,8 +85,8 @@
 				var subtotal = transaction.get('total');
 
 				win[name] = win[name] || [];
-				win[name].push({'gv': subtotal, 'ea': 'purchase', 'el' : 'purchase', 'ev' : subtotal, 'gc': 'USD'});
-				// console.log('UETQ: ', win[name]);
+                win[name].push('event', 'purchase', {revenue_value: subtotal, currency: 'USD'});
+
 			}
 
 			//@method setAccount
@@ -143,7 +136,8 @@
 			{
 				// we get the account and domain name from the configuration file
 				var tracking = application.getConfig('tracking.bingAnalytics');
-				// TODO: Test only
+
+				// FOR TESTING ONLY - UNCOMMENT
 				// var tracking = {
 				// 	propertyID: '13000038'
 				// ,	domainName: 'http://sb-lncurtis.jhmservices.net/'
