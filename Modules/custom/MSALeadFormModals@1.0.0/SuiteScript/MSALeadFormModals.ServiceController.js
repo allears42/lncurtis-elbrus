@@ -46,8 +46,6 @@ define('MSALeadFormModals.ServiceController'
 
                     returnObj.title = searchResults[0].getValue('custrecord_jhm_msa_lead_cam_title');
                     returnObj.desc = searchResults[0].getValue('custrecord_jhm_msa_lead_cam_desc');
-                    // returnObj.imageId = searchResults[0].getValue('custrecord_jhm_msa_lead_cam_image');
-                    // returnObj.imageText = searchResults[0].getText('custrecord_jhm_msa_lead_cam_image');
                     returnObj.items = searchResults[0].getValue('custrecord_jhm_msa_lead_cam_items');
 
                     imageId = searchResults[0].getValue('custrecord_jhm_msa_lead_cam_image');
@@ -65,6 +63,10 @@ define('MSALeadFormModals.ServiceController'
             }
 
             return returnObj;
+        }
+
+    ,   post: function() {
+
         }
 
     });

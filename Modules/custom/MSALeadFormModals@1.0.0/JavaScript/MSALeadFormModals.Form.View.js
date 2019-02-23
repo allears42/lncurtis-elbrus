@@ -43,7 +43,6 @@ define('MSALeadFormModals.Form.View'
 
     ,   afterSuccessfulSubmit: function()
         {
-            this.model.clear();
             this.validationModel.clear();
             this.showForm = false;
             this.render();
