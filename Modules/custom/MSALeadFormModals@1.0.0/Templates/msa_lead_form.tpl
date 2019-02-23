@@ -3,7 +3,9 @@
     <p class="description">{{desc}}</p>
 
     {{#if showForm}}
-        <div class="image">IMAGE</div>
+        <div class="image">
+            <img src="{{imagePath}}" />
+        </div>
         <form class="form">
             <div data-confirm-message></div>
             <div class="form-control">

@@ -83,11 +83,13 @@ define('MSALeadFormModals.Form.View'
 
     ,   getContext: function()
         {
+            console.log('MODEL: ', this.model);
             return {
                 showForm: this.showForm
             ,   successMessage: this.successMessage
             ,   title: this.model.get('title')
             ,   desc: this.model.get('desc')
+            ,   imagePath: this.model.get('imagePath')
             }
         }
     });
