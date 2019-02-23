@@ -1,0 +1,26 @@
+{
+  "type": "object",
+
+  "subtab": {
+    "id": "msaLeadCampaign",
+    "title": "MSA Lead Campaign",
+    "group": "integrations"
+  },
+
+  "properties": {
+    "msaLeadCampaigns.activeCampaign": {
+        "group": "integrations",
+        "subtab": "msaLeadCampaign",
+        "type": "string",
+        "title": "Active MSA Lead Campaign",
+        "source": "customrecord_jhm_msa_lead_campaign"
+    },
+    "msaLeadCampaigns.delay": {
+        "group": "integrations",
+        "subtab": "msaLeadCampaign",
+        "type": "integer",
+        "title": "Pop-up delay (in ms)",
+        "default": 0
+    }
+  }
+}
