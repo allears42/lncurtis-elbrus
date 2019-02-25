@@ -25,7 +25,7 @@ define('MSALeadFormModals.Form.View'
             '[name="firstname"]': 'firstname'
         ,   '[name="lastname"]': 'lastname'
         ,   '[name="email"]': 'email'
-        ,   '[name="zipcode"]': 'zipcode'
+        ,   '[name="custevent_jhm_zip_code"]': 'custevent_jhm_zip_code'
         }
 
     ,   successMessage: 'Thank you for contacting us! We will respond to your inquiry as quickly as possible.'
