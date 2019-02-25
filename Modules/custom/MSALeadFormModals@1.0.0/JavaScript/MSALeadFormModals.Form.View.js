@@ -18,19 +18,20 @@ define('MSALeadFormModals.Form.View'
         template: msa_lead_form_tpl
 
     ,   events: {
-            'submit form': 'customSaveForm'
+            'submit form': 'saveForm'
         }
 
     ,   bindings: {
             '[name="firstname"]': 'firstname'
         ,   '[name="lastname"]': 'lastname'
         ,   '[name="email"]': 'email'
-        ,   '[name="zip"]': 'zip'
+        ,   '[name="zipcode"]': 'zipcode'
         }
 
     ,   successMessage: 'Thank you for contacting us! We will respond to your inquiry as quickly as possible.'
     ,   failureMessage: 'Sorry, there was an error submitting your inquiry. Please try again.'
     ,   showForm: true
+    ,   closeModalOnSuccess: false
 
     ,   initialize: function(options)
         {
@@ -54,31 +55,31 @@ define('MSALeadFormModals.Form.View'
             this.showWarningMessage(this.failureMessage);
         }
 
-    ,   customSaveForm: function(e)
-        {
-            e.preventDefault();
-            e.stopPropagation();
-
-            var result
-            ,   self = this;
-
-            // TODO: Check for/add name, title, message values
-
-            // TODO: Testing only
-            // self.afterFailedSubmit();
-            self.afterSuccessfulSubmit();
-
-            // result = this.saveForm(e, this.validationModel, null);
-            //
-            // if(!result) {
-            //     self.afterFailedSubmit();
-            //     return;
-            // }
-            //
-            // result.done(function(data) {
-            //     self.afterSuccessfulSubmit();
-            // })
-        }
+    // ,   customSaveForm: function(e)
+    //     {
+    //         e.preventDefault();
+    //         e.stopPropagation();
+    //
+    //         var result
+    //         ,   self = this;
+    //
+    //         // TODO: Testing only
+    //         // self.afterFailedSubmit();
+    //         // self.afterSuccessfulSubmit();
+    //
+    //         result = this.saveForm(e, this.validationModel, null);
+    //         console.log('RESULT: ', result);
+    //
+    //         if (!result) {
+    //             self.afterFailedSubmit();
+    //             return;
+    //         }
+    //
+    //         result.done(function(data) {
+    //             console.log('GOT SUCCESFUL SUBMIT: ', data);
+    //             self.afterSuccessfulSubmit();
+    //         })
+    //     }
 
     ,   getContext: function()
         {

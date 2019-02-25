@@ -67,6 +67,45 @@ define('MSALeadFormModals.ServiceController'
 
     ,   post: function() {
 
+            nlapiLogExecution('DEBUG', 'CHECKPOINT 1', 'ENTER POST');
+            var url
+            ,   response
+            ,   responseCode;
+
+            url = SC.Configuration.msaLeadCampaigns.externalUrl;
+            nlapiLogExecution('DEBUG', 'CHECKPOINT 2: DATA', JSON.stringify(this.data));
+
+            try {
+
+                response = nlapiRequestURL(url, this.data);
+                responseCode = parseInt(response.getCode(), 10);
+                nlapiLogExecution('DEBUG', 'CHECKPOINT 3: response', responseCode.toString());
+
+                // Just in case someday it accepts the redirect. 206 is netsuite error ('partial content')
+                if (responseCode === 200 || responseCode === 302 || responseCode === 201 || responseCode === 404) {
+                    return {
+                        successMessage: this.successMessage
+                    }
+                }
+
+            } catch(e) {
+
+                // The 'successful' exception is a redirect error, so let's intercept that
+                if (e instanceof nlobjError && e.getCode().toString() === 'ILLEGAL_URL_REDIRECT')
+                {
+                    return {
+                        successMessage: this.successMessage
+                    };
+
+                    // Finally, let's catch any other error that may come
+                    return {
+
+                        status: 500
+                    , 	code: 'ERR_FORM'
+                    , 	message: 'There was an error submitting the form, please try again later'
+                    }
+                }
+            }
         }
 
     });
