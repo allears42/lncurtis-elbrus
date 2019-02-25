@@ -37,7 +37,7 @@ define(
 			// @param {HTMLEvent} e @param {Backbone.Model} model @param {Object} props properties to pass to model.save()
 			// @return {jQuery.Deferred}
 			, saveForm: function (e, model, props) {
-				console.log('GOT EXTENSION -------------');
+
 				e.preventDefault();
 				
 				//Add validate method into the view.model
@@ -66,11 +66,10 @@ define(
 						// Hides error messages, re enables buttons and triggers the save event
 						// if we are in a modal this also closes it
 						, success: function (model, response) {
-							console.log('GOT EXTENDED SUCCESS -------------------');
+
 							if (self.inModal && self.$containerModal) {
 								// customization to not auto close modal
 								if (self.closeModalOnSuccess) {
-									console.log('CLOSING MODAL ------------');
 									self.$containerModal.modal('hide');
 								}
 							}
