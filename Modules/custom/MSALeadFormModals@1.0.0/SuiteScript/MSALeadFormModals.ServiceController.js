@@ -44,7 +44,7 @@ define('MSALeadFormModals.ServiceController'
 
                 if (searchResults && searchResults.length) {
 
-                    returnObj.title = searchResults[0].getValue('custrecord_jhm_msa_lead_cam_title');
+                    returnObj.campaignTitle = searchResults[0].getValue('custrecord_jhm_msa_lead_cam_title');
                     returnObj.desc = searchResults[0].getValue('custrecord_jhm_msa_lead_cam_desc');
                     returnObj.items = searchResults[0].getValue('custrecord_jhm_msa_lead_cam_items');
 

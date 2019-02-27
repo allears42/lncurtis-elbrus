@@ -1,5 +1,5 @@
 <div class="msa-form-container">
-    <p class="title">{{title}}</p>
+    <p class="title">{{campaignTitle}}</p>
     <p class="description">{{desc}}</p>
 
     {{#if showForm}}

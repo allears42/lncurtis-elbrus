@@ -87,7 +87,7 @@ define('MSALeadFormModals.Form.View'
             return {
                 showForm: this.showForm
             ,   successMessage: this.successMessage
-            ,   title: this.model.get('title')
+            ,   campaignTitle: this.model.get('campaignTitle')
             ,   desc: this.model.get('desc')
             ,   imagePath: this.model.get('imagePath')
             }
