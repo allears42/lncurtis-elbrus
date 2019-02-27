@@ -44,7 +44,7 @@ define('MSALeadFormModals'
                         model.set('custevent_jhm_msa_lead_campaign', campaignId);
                         model.set('incomingmessage', 'MSA LEAD CAMPAIGN SUBMISSION');
                         model.set('title', 'MSA LEAD CAMPAIGN SUBMISSION');
-                        model.set('subsidiary', '3');   // TODO: WHYYYYYYYYYYYY FML
+                        model.set('subsidiary', '1');
 
                         // Layout.on('afterAppendView', function() { // Fires repeatedly, too much
                         // Layout.on('afterRender', function() {   // Fires once, when layout loads - but not on navigation
