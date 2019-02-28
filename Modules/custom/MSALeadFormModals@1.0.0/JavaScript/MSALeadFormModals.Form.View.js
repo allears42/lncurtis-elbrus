@@ -98,13 +98,18 @@ define('MSALeadFormModals.Form.View'
 
     ,   getContext: function()
         {
-            // console.log('MODEL: ', this.model);
+            var imagePath = this.model.get('imagePath');
+
+            if (imagePath) {
+                imagePath = imagePath.replace('Web Site Hosting Files/LN Curtis Firefighter Hosting Files', '');
+            }
+
             return {
                 showForm: this.showForm
             ,   successMessage: this.successMessage
             ,   campaignTitle: this.model.get('campaignTitle')
             ,   desc: this.model.get('desc')
-            ,   imagePath: this.model.get('imagePath')
+            ,   imagePath: imagePath
             }
         }
     });

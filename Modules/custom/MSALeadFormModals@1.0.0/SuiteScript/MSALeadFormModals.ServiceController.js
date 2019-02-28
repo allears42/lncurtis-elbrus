@@ -21,8 +21,7 @@ define('MSALeadFormModals.ServiceController'
             ,   searchResults
             ,   columns = []
             ,   imageId
-            ,   imageFile
-            ,   imageUrl;
+            ,   imageFile;
 
             returnObj.status = 400;
 
@@ -53,8 +52,7 @@ define('MSALeadFormModals.ServiceController'
                     if (imageId) {
 
                         imageFile = nlapiLoadFile(imageId);
-                        imageUrl = imageFile.getURL();
-                        returnObj.imagePath = imageUrl;
+                        returnObj.imagePath = imageFile.path;
                     }
 
                     returnObj.status = 200;
