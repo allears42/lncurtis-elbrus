@@ -82,6 +82,11 @@ $green-haze: #00A850;
       padding: 2px 6px 17px;
     }
 
+    .dismiss-msa-modal {
+      padding-right: $sc-base-padding * 3;
+      text-align: right;
+    }
+
   } // End form
 
   .successMessage {

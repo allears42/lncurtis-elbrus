@@ -3,12 +3,14 @@ define('MSALeadFormModals'
         'MSALeadFormModals.Form.View'
     ,   'SC.Configuration'
     ,   'MSALeadFormModals.Model'
+        ,   'MSALeadFormModals.Utils'
     ]
 ,   function
     (
         MSALeadFormModalsFormView
     ,   Configuration
     ,   MSALeadFormModalsModel
+        ,   MSALeadFormModalsUtils
     )
 {
     'use strict';
@@ -16,9 +18,6 @@ define('MSALeadFormModals'
     return {
 
         mountToApp: function(application) {
-
-            // TODO: Skip and reset if cart page?
-            // TODO: Call for campaign data, execute on return
 
             if (!SC.isPageGenerator()) {
 
@@ -30,7 +29,8 @@ define('MSALeadFormModals'
                 ,   isCartPage = currPage.indexOf('cart') >= 0
                 ,   promise
                 ,   model
-                ,   requestObj;
+                ,   requestObj
+                ,   cookie;
 
                 if (campaignId && !isCartPage) {
 
@@ -40,14 +40,17 @@ define('MSALeadFormModals'
 
                     promise.done(function() {
 
-                        console.log('GOT PROMISE: ', model);
+                        // console.log('GOT PROMISE: ', JSON.stringify(model));
+
                         model.set('custevent_jhm_msa_lead_campaign', campaignId);
                         model.set('incomingmessage', 'MSA LEAD CAMPAIGN SUBMISSION');
                         model.set('title', 'MSA LEAD CAMPAIGN SUBMISSION');
                         model.set('subsidiary', '1');
 
-                        // Layout.on('afterAppendView', function() { // Fires repeatedly, too much
-                        // Layout.on('afterRender', function() {   // Fires once, when layout loads - but not on navigation
+                        // console.log('COOKIE FROM DEF: ', MSALeadFormModalsUtils.getCookie(model));
+                        cookie = MSALeadFormModalsUtils.getCookie(model);
+
+                        if (!cookie) {
 
                             modalView = new MSALeadFormModalsFormView({
                                 application: application
@@ -57,12 +60,18 @@ define('MSALeadFormModals'
                             setTimeout(function() {
                                 Layout.showInModal(modalView);
                             }, delay);
+                        }
+
+
+
+                        // Layout.on('afterAppendView', function() { // Fires repeatedly, too much
+                        // Layout.on('afterRender', function() {   // Fires once, when layout loads - but not on navigation
+
                         // })
                     });
 
                 }
-
             }
-        }
+        }   // End MTA
     }
 });

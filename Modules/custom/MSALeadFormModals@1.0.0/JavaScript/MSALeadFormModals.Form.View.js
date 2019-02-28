@@ -3,12 +3,16 @@ define('MSALeadFormModals.Form.View'
         'Backbone'
     ,   'msa_lead_form.tpl'
     ,   'Backbone.FormView'
+    ,   'jQuery'
+    ,   'MSALeadFormModals.Utils'
     ]
 ,   function
     (
         Backbone
     ,   msa_lead_form_tpl
     ,   BackboneFormView
+    ,   jQuery
+    ,   MSALeadFormModalsUtils
     )
 {
     'use strict';
@@ -19,6 +23,7 @@ define('MSALeadFormModals.Form.View'
 
     ,   events: {
             'submit form': 'saveForm'
+        ,   'click [data-action="dismiss-msa-modal"]': 'dismissModal'
         }
 
     ,   bindings: {
@@ -55,6 +60,16 @@ define('MSALeadFormModals.Form.View'
             this.showWarningMessage(this.failureMessage);
         }
 
+    ,   dismissModal: function(e)
+        {
+            e.preventDefault();
+            e.stopPropagation();
+
+            MSALeadFormModalsUtils.setCookie(this.model);
+
+            this.$containerModal.modal('hide');
+        }
+
     // ,   customSaveForm: function(e)
     //     {
     //         e.preventDefault();
@@ -83,7 +98,7 @@ define('MSALeadFormModals.Form.View'
 
     ,   getContext: function()
         {
-            console.log('MODEL: ', this.model);
+            // console.log('MODEL: ', this.model);
             return {
                 showForm: this.showForm
             ,   successMessage: this.successMessage
