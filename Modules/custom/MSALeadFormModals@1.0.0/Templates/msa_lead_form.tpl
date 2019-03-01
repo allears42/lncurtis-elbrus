@@ -30,7 +30,7 @@
                 </div>
                 <div class="row">
                     <div data-validation="control-group" class="col-md-5">
-                        <label for="custevent_jhm_zip_code">Zip Code:</label>
+                        <label for="custevent_jhm_zip_code">Zip Code:<span class="input-required">*</span></label>
                         <input type="text" name="custevent_jhm_zip_code" id="custevent_jhm_zip_code" placeholder="zip code" maxlength="10">
                         <div data-validation="control" class="error-wrapper"></div>
                     </div>

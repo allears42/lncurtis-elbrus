@@ -65,19 +65,16 @@ define('MSALeadFormModals.ServiceController'
 
     ,   post: function() {
 
-            nlapiLogExecution('DEBUG', 'CHECKPOINT 1', 'ENTER POST');
             var url
             ,   response
             ,   responseCode;
 
             url = SC.Configuration.msaLeadCampaigns.externalUrl;
-            nlapiLogExecution('DEBUG', 'CHECKPOINT 2: DATA', JSON.stringify(this.data));
 
             try {
 
                 response = nlapiRequestURL(url, this.data);
                 responseCode = parseInt(response.getCode(), 10);
-                nlapiLogExecution('DEBUG', 'CHECKPOINT 3: response', responseCode.toString());
 
                 // Just in case someday it accepts the redirect. 206 is netsuite error ('partial content')
                 if (responseCode === 200 || responseCode === 302 || responseCode === 201 || responseCode === 404) {
