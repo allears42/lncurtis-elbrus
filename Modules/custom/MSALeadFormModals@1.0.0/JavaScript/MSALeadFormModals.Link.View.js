@@ -20,7 +20,7 @@ define('MSALeadFormModals.Link.View'
         template: msa_lead_form_link_tpl
 
     ,   events: {
-            'click [data-view="display-msa-modal"]': 'displayMSAModal'
+            'click [data-action="display-msa-modal"]': 'displayMSAModal'
         }
 
     ,   initialize: function(options)
