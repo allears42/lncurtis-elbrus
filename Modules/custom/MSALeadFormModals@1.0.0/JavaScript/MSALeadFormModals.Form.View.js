@@ -49,6 +49,7 @@ define('MSALeadFormModals.Form.View'
 
     ,   afterSuccessfulSubmit: function()
         {
+            MSALeadFormModalsUtils.setCookie(this.model);
             this.validationModel.clear();
             this.showForm = false;
             this.render();
