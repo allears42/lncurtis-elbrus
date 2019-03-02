@@ -61,20 +61,8 @@ define('MSALeadFormModals.Link.View'
 
     ,   getContext: function()
         {
-            var displayLink = false
-            ,   items = this.model.get('items');
-
-            if (items && this.options.itemId) {
-
-                items = items.split(',');
-
-                if (items.indexOf(this.options.itemId.toString()) >= 0) {
-                    displayLink = true;
-                }
-            }
-
             return {
-                displayLink: displayLink
+                displayLink: true
             ,   campaignTitle: this.model.get('campaignTitle') || ''
             }
         }

@@ -1,14 +1,14 @@
 define('MSALeadFormModals.ProductDetails.Extension'
 ,   [
         'ProductDetails.Full.View'
-    ,   'MSALeadFormModals.Link.View'
     ,   'MSALeadFormModals.Model'
+    ,   'MSALeadFormModals.Link.Item.View'
     ]
 ,   function
     (
         ProductDetailsFullView
-    ,   MSALeadFormModalsLinkView
     ,   MSALeadFormModalsModel
+    ,   MSALeadFormModalsLinkItemView
     )
 {
     'use strict';
@@ -18,8 +18,6 @@ define('MSALeadFormModals.ProductDetails.Extension'
         childViews: _.extend({}, ProductDetailsFullView.prototype.childViews, {
 
             'MSALeadFormModal.Link': function() {
-                console.log('ENTER MSA LEAD LINK VIEW ---------------');
-                console.log('ITEM MODEL: ', this.model);
 
                 var item = this.model.get('item')
                 ,   itemId = null;
@@ -28,7 +26,7 @@ define('MSALeadFormModals.ProductDetails.Extension'
                     itemId = item.get('internalid');
                 }
 
-                return new MSALeadFormModalsLinkView({
+                return new MSALeadFormModalsLinkItemView({
                     application: this.application
                 ,   model:  new MSALeadFormModalsModel()
                 ,   itemId: itemId
