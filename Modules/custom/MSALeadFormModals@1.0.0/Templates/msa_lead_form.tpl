@@ -38,9 +38,12 @@
                         <button type="submit" class="submit-button">Contact Me</button>
                     </div>
                 </div>
-                <div class="row dismiss-msa-modal">
-                    <a href="#" data-action="dismiss-msa-modal">Click here if you don't want to see this offer again</a>
-                </div>
+                {{#if showOptOut}}
+                    <div class="row dismiss-msa-modal">
+                        <a href="#" data-action="dismiss-msa-modal">Click here if you don't want to see this offer again</a>
+                    </div>
+                {{/if}}
+
             </div>
         </form>
     {{else}}
