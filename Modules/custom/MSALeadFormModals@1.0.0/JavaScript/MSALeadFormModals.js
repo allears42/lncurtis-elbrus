@@ -3,14 +3,14 @@ define('MSALeadFormModals'
         'MSALeadFormModals.Form.View'
     ,   'SC.Configuration'
     ,   'MSALeadFormModals.Model'
-        ,   'MSALeadFormModals.Utils'
+    ,   'MSALeadFormModals.Utils'
     ]
 ,   function
     (
         MSALeadFormModalsFormView
     ,   Configuration
     ,   MSALeadFormModalsModel
-        ,   MSALeadFormModalsUtils
+    ,   MSALeadFormModalsUtils
     )
 {
     'use strict';
@@ -40,14 +40,6 @@ define('MSALeadFormModals'
 
                     promise.done(function() {
 
-                        // console.log('GOT PROMISE: ', JSON.stringify(model));
-
-                        model.set('custevent_jhm_msa_lead_campaign', campaignId);
-                        model.set('incomingmessage', 'MSA LEAD CAMPAIGN SUBMISSION');
-                        model.set('title', 'MSA LEAD CAMPAIGN SUBMISSION');
-                        model.set('subsidiary', '1');
-
-                        // console.log('COOKIE FROM DEF: ', MSALeadFormModalsUtils.getCookie(model));
                         cookie = MSALeadFormModalsUtils.getCookie(model);
 
                         if (!cookie) {
@@ -73,5 +65,6 @@ define('MSALeadFormModals'
                 }
             }
         }   // End MTA
+
     }
 });

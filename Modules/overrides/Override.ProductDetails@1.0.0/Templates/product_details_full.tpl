@@ -62,6 +62,7 @@
 
 							{{#if isPriceEnabled}}
 								<div data-view="Quantity"></div>
+								<div data-view="MSALeadFormModal.Link"></div>
 								<section class="product-details-full-actions row">
 									{{#unless isCallForPricing}}
 										<div class="col-sm-6">

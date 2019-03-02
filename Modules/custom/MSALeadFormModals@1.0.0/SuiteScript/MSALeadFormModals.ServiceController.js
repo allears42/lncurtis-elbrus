@@ -46,6 +46,10 @@ define('MSALeadFormModals.ServiceController'
                     returnObj.campaignTitle = searchResults[0].getValue('custrecord_jhm_msa_lead_cam_title');
                     returnObj.desc = searchResults[0].getValue('custrecord_jhm_msa_lead_cam_desc');
                     returnObj.items = searchResults[0].getValue('custrecord_jhm_msa_lead_cam_items');
+                    returnObj.custevent_jhm_msa_lead_campaign = campaignId;
+                    returnObj.incomingmessage = 'MSA LEAD CAMPAIGN SUBMISSION';
+                    returnObj.title = 'MSA LEAD CAMPAIGN SUBMISSION';
+                    returnObj.subsidiary = nlapiGetContext().getSubsidiary();
 
                     imageId = searchResults[0].getValue('custrecord_jhm_msa_lead_cam_image');
 
