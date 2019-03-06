@@ -8,6 +8,12 @@
   },
 
   "properties": {
+    "msaLeadCampaigns.enableCampaign": {
+      "group": "integrations",
+      "subtab": "msaLeadCampaign",
+      "type": "boolean",
+      "title": "Enable MSA Lead Campaign"
+    },
     "msaLeadCampaigns.activeCampaign": {
         "group": "integrations",
         "subtab": "msaLeadCampaign",

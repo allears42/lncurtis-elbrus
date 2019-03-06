@@ -23,6 +23,7 @@ define('MSALeadFormModals'
 
                 var Layout = application.getLayout()
                 ,   modalView
+                ,   campaignIsActive = Configuration.get('msaLeadCampaigns.enableCampaign', false)
                 ,   campaignId = Configuration.get('msaLeadCampaigns.activeCampaign', null)
                 ,   delay = Configuration.get('msaLeadCampaigns.delay', 0)
                 ,   currPage = window.location.href
@@ -31,7 +32,6 @@ define('MSALeadFormModals'
                 ,   model
                 ,   requestObj
                 ,   cookie;
-
 
                 /**
                  * Attaching an event listener and handler to layout allows us to add elements with the appropriate
@@ -52,9 +52,10 @@ define('MSALeadFormModals'
                         ,   modalView
                         ,   layout = application.getLayout()
                         ,   campaignId = Configuration.get('msaLeadCampaigns.activeCampaign', null)
+                        ,   campaignIsActive = Configuration.get('msaLeadCampaigns.enableCampaign', false)
                         ,   requestObj;
 
-                        if (campaignId) {
+                        if (campaignIsActive && campaignId) {
 
                             requestObj = {data: $.param({campaignId: campaignId})};
 
@@ -73,7 +74,7 @@ define('MSALeadFormModals'
                 });
 
 
-                if (campaignId && !isCartPage) {
+                if (campaignIsActive && campaignId && !isCartPage) {
 
                     requestObj = {data: $.param({campaignId: campaignId})};
                     model = new MSALeadFormModalsModel();

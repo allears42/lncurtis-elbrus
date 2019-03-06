@@ -32,8 +32,9 @@ define('MSALeadFormModals.Link.View'
 
             this.application = options.application;
             this.layout = this.application.getLayout();
+            this.campaignIsActive = Configuration.get('msaLeadCampaigns.enableCampaign', false);
 
-            if (campaignId) {
+            if (this.campaignIsActive && campaignId) {
 
                 requestObj = {data: $.param({campaignId: campaignId})};
                 promise = this.model.fetch(requestObj);
@@ -49,13 +50,24 @@ define('MSALeadFormModals.Link.View'
             e.preventDefault();
             e.stopPropagation();
 
-            var modalView = new MSALeadFormModalsFormView({
-                application: this.application
-            ,   model: this.model
-            ,   showOptOut: false
-            });
+            if (this.campaignIsActive) {
 
-            this.layout.showInModal(modalView);
+                var modalView = new MSALeadFormModalsFormView({
+                    application: this.application
+                ,   model: this.model
+                ,   showOptOut: false
+                });
+
+                this.layout.showInModal(modalView);
+            }
+
+            // var modalView = new MSALeadFormModalsFormView({
+            //     application: this.application
+            // ,   model: this.model
+            // ,   showOptOut: false
+            // });
+            //
+            // this.layout.showInModal(modalView);
 
         }
 
