@@ -32,6 +32,47 @@ define('MSALeadFormModals'
                 ,   requestObj
                 ,   cookie;
 
+
+                /**
+                 * Attaching an event listener and handler to layout allows us to add elements with the appropriate
+                 * data-action property to SMT landing and enhanced pages and trigger modal pop-up on click.
+                 */
+                _.extend(Layout, {
+
+                    events: _.extend({}, Layout.events, {
+                        'click [data-action="display-msa-modal-smt"]': 'displayMSAModal'
+                    })
+
+                ,   displayMSAModal: function(e)
+                    {
+                        // Prevent default but don't stop event propagation
+                        e.preventDefault();
+
+                        var model = new MSALeadFormModalsModel()
+                        ,   modalView
+                        ,   layout = application.getLayout()
+                        ,   campaignId = Configuration.get('msaLeadCampaigns.activeCampaign', null)
+                        ,   requestObj;
+
+                        if (campaignId) {
+
+                            requestObj = {data: $.param({campaignId: campaignId})};
+
+                            model.fetch(requestObj).done(function() {
+
+                                modalView = new MSALeadFormModalsFormView({
+                                    application: application
+                                ,   model: model
+                                ,   showOptOut: false
+                                });
+
+                                layout.showInModal(modalView);
+                            })
+                        }
+                    }
+                });
+
+
                 if (campaignId && !isCartPage) {
 
                     requestObj = {data: $.param({campaignId: campaignId})};
@@ -54,12 +95,6 @@ define('MSALeadFormModals'
                             }, delay);
                         }
 
-
-
-                        // Layout.on('afterAppendView', function() { // Fires repeatedly, too much
-                        // Layout.on('afterRender', function() {   // Fires once, when layout loads - but not on navigation
-
-                        // })
                     });
 
                 }
