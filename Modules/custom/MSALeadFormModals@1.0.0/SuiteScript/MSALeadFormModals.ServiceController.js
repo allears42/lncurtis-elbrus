@@ -76,58 +76,86 @@ define('MSALeadFormModals.ServiceController'
 
     ,   post: function() {
 
-            // var url
-            // ,   response
-            // ,   responseCode;
-
-            // url = SC.Configuration.msaLeadCampaigns.externalUrl;
-
-            // try {
-            //
-            //     response = nlapiRequestURL(url, this.data);
-            //     responseCode = parseInt(response.getCode(), 10);
-            //
-            //     // Just in case someday it accepts the redirect. 206 is netsuite error ('partial content')
-            //     if (responseCode === 200 || responseCode === 302 || responseCode === 201 || responseCode === 404) {
-            //         return {
-            //             successMessage: this.successMessage
-            //         }
-            //     }
-            //
-            // } catch(e) {
-            //
-            //     // The 'successful' exception is a redirect error, so let's intercept that
-            //     if (e instanceof nlobjError && e.getCode().toString() === 'ILLEGAL_URL_REDIRECT')
-            //     {
-            //         return {
-            //             successMessage: this.successMessage
-            //         };
-            //
-            //         // Finally, let's catch any other error that may come
-            //         return {
-            //
-            //             status: 500
-            //         , 	code: 'ERR_FORM'
-            //         , 	message: 'There was an error submitting the form, please try again later'
-            //         }
-            //     }
-            // }
-
-
-            // TODO: TEST IF THIS WORKS, THEN REFACTOR
-            // TODO: ADD ERROR HANDLING
             var returnObj = {status: 400}
-            ,   leadValuesObj
             ,   siteId = ModelsInit.session.getSiteSettings(['siteid']).siteid || 2 // lncurtis.com
+            ,   leadValuesObj
             ,   caseValuesObj
             ,   dupeSearchResults
-            ,   filters = []
             ,   entityId
-            ,   leadRec
             ,   isNewLead = false
-            ,   caseRec;
+            ,   caseId;
 
-            leadValuesObj = {
+            this.siteId = siteId;
+
+            leadValuesObj = this.getLeadValuesObj();
+            dupeSearchResults = this.getDupeSearchResults();
+
+            if (dupeSearchResults && dupeSearchResults.length) {
+                entityId = dupeSearchResults[0].getId();
+            } else {
+
+                entityId = this.createNewRecord('lead', leadValuesObj);
+                isNewLead = true;
+            }
+
+            if (entityId) {
+
+                caseValuesObj = this.getCaseValuesObj(entityId);
+                caseId = this.createNewRecord('supportcase', caseValuesObj);
+
+                if (caseId) {
+
+                    if (isNewLead) {
+                        nlapiSubmitField('lead', entityId, 'entitystatus', 6);
+                    }
+
+                    returnObj.status = 200;
+                }
+            }
+
+            return returnObj;
+        }
+
+    ,   createNewRecord: function(recordType, valuesObj)
+        {
+            var newRecord
+            ,   recordId = null;
+
+            try {
+                newRecord = nlapiCreateRecord(recordType);
+
+                for (var key in valuesObj) {
+                    newRecord.setFieldValue(key, valuesObj[key]);
+                }
+
+                recordId = nlapiSubmitRecord(newRecord);
+            } catch (e) {
+                nlapiLogExecution('ERROR', 'Error creating new ' + recordType + ' record', e);
+            }
+
+           return recordId;
+        }
+
+    ,   getDupeSearchResults: function()
+        {
+            var filters = []
+            ,   results = [];
+
+            filters.push(new nlobjSearchFilter('email', null, 'is', this.data.email));
+            filters.push(new nlobjSearchFilter('subsidiary', null, 'is', 1));
+
+            try {
+                results = nlapiSearchRecord('customer', null, filters, null);
+            } catch (e) {
+                nlapiLogExecution('ERROR', 'Error searching for duplicate MSA leads', e);
+            }
+
+            return results;
+        }
+
+    ,   getLeadValuesObj: function()
+        {
+            return {
                 isperson: 'T'
             ,   custentity_customer_class: 1 	// LN Curtis and sons
             ,   salesrep: 53161 	// LNCS Pacific North
@@ -135,7 +163,7 @@ define('MSALeadFormModals.ServiceController'
             ,   custentity_accountclass: 3 	// C
             ,   custentity_targetmarket: 1 	// Fire
             ,   custentity_salesregion: 1 	// Pacific North
-            ,   custentity_internal_notes: 'Lead created from MSA lead form for siteid ' + siteId
+            ,   custentity_internal_notes: 'Lead created from MSA lead form for siteid ' + this.siteId
             ,   subsidiary: 1 	// LN Curtis & sons
             ,   custentity_department: 36 	// 001 - LNCS Oakland
             ,   entitystatus: 6 	// LEAD-Unqualified
@@ -143,82 +171,31 @@ define('MSALeadFormModals.ServiceController'
             ,   companyname: this.data.firstname + ' ' + this.data.lastname
             ,   accessrole: 1085  // WEB B2C CUSTOMER CENTER
             ,   custentity_subtype: 17  // LNCurtis.com
-            ,   custentity_website_source : this.data.siteid || 2 //lncurtis.com
+            ,   custentity_website_source : this.siteId
             ,   firstname: this.data.firstname
             ,   lastname: this.data.lastname
             ,   email: this.data.email
             };
+        }
 
-            filters.push(new nlobjSearchFilter('email', null, 'is', this.data.email));
-            filters.push(new nlobjSearchFilter('subsidiary', null, 'is', 1));
-
-            dupeSearchResults = nlapiSearchRecord('customer', null, filters, null);
-
-            if (dupeSearchResults && dupeSearchResults.length) {
-                entityId = dupeSearchResults[0].getId();
-            } else {
-
-                try {
-
-                    leadRec = nlapiCreateRecord('lead');
-
-                    for (var key in leadValuesObj) {
-                        leadRec.setFieldValue(key, leadValuesObj[key]);
-                    }
-
-                    entityId = nlapiSubmitRecord(leadRec);
-                    isNewLead = true;
-                } catch (e) {
-                    nlapiLogExecution('ERROR', 'Error creating lead record', e);
-                }
-
+    ,   getCaseValuesObj: function(entityId)
+        {
+            return {
+                company: entityId
+            ,   helpdesk: false
+            ,   status: 1
+            ,   profile: 1
+            ,   origin: '-5'
+            ,   assigned: this.supportGroupMap[this.siteId]
+            ,   issue: 10 // TODO Add a custom issue here
+            ,   title: this.data.title
+            ,   custevent_jhm_msa_lead_campaign: this.data.custevent_jhm_msa_lead_campaign
+            ,   incomingmessage: this.data.incomingmessage
+            ,   firstname: this.data.firstname
+            ,   lastname: this.data.lastname
+            ,   email: this.data.email
+            ,   custevent_jhm_zip_code: this.data.custevent_jhm_zip_code
             }
-            nlapiLogExecution('DEBUG', 'ENTITY ID', entityId);
-            nlapiLogExecution('DEBUG', 'IS NEW LEAD?', isNewLead.toString());
-
-            if (entityId) {
-
-                caseValuesObj = {
-                    company: entityId
-                ,   helpdesk: false
-                ,   status: 1
-                ,   profile: 1
-                ,   origin: '-5'
-                ,   assigned: this.supportGroupMap[siteId]
-                ,   issue: 10 // TODO Add a custom issue here
-                ,   title: this.data.title
-                ,   custevent_jhm_msa_lead_campaign: this.data.custevent_jhm_msa_lead_campaign
-                ,   incomingmessage: this.data.incomingmessage
-                ,   firstname: this.data.firstname
-                ,   lastname: this.data.lastname
-                ,   email: this.data.email
-                ,   custevent_jhm_zip_code: this.data.custevent_jhm_zip_code
-                };
-
-                try {
-
-                    caseRec = nlapiCreateRecord('supportcase');
-
-                    for (var key in caseValuesObj) {
-                        caseRec.setFieldValue(key, caseValuesObj[key]);
-                    }
-
-                    nlapiSubmitRecord(caseRec);
-
-                    if (isNewLead) {
-                        nlapiSubmitField('lead', entityId, 'entitystatus', 6);
-                    }
-
-                    returnObj.status = 200;
-                } catch (e) {
-                    nlapiLogExecution('ERROR', 'Error creating MSA lead form support case', e);
-                }
-
-
-
-            }
-
-            return returnObj;
         }
 
     });
