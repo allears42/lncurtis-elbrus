@@ -187,7 +187,7 @@ define('MSALeadFormModals.ServiceController'
             ,   profile: 1
             ,   origin: '-5'
             ,   assigned: this.supportGroupMap[this.siteId]
-            ,   issue: 10 // TODO Add a custom issue here
+            ,   issue: 14 // MSA Lead Form Submission
             ,   title: this.data.title
             ,   custevent_jhm_msa_lead_campaign: this.data.custevent_jhm_msa_lead_campaign
             ,   incomingmessage: this.data.incomingmessage
