@@ -34,6 +34,7 @@ define('OrderWizard.Module.OrderComments'
 			
 		,   initialize: function () {
 				WizardModule.prototype.initialize.apply(this, arguments);
+                this.events['blur [name="' + this.field_id + '"]'] = 'setFieldValueOnBlur';
 			}
 			
 		,   setFieldValueOnBlur: function (e) {
@@ -44,7 +45,7 @@ define('OrderWizard.Module.OrderComments'
 			},
 			
 			saveFieldValue: function (value) {
-				// console.log('save');
+
 				var options = this.model.get('options'),
 					self = this;
 				
