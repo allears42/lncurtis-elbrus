@@ -85,7 +85,7 @@ define('MSALeadFormModals.ServiceController'
             ,   isNewLead = false
             ,   caseId;
 
-            this.siteId = siteId;
+            this.siteId = siteId.toString();
 
             leadValuesObj = this.getLeadValuesObj();
             dupeSearchResults = this.getDupeSearchResults();
