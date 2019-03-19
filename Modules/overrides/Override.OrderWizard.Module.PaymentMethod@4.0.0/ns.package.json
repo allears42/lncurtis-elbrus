@@ -11,6 +11,7 @@
         ]
     }
     , "overrides": {
-        "suitecommerce/OrderWizard.Module.PaymentMethod@4.0.0/JavaScript/OrderWizard.Module.PaymentMethod.Selector.js": "JavaScript/OrderWizard.Module.PaymentMethod.Selector.js"
+        "suitecommerce/OrderWizard.Module.PaymentMethod@4.0.0/JavaScript/OrderWizard.Module.PaymentMethod.Selector.js": "JavaScript/OrderWizard.Module.PaymentMethod.Selector.js",
+        "suitecommerce/OrderWizard.Module.PaymentMethod@4.0.0/Templates/order_wizard_paymentmethod_invoice_module.tpl": "Templates/order_wizard_paymentmethod_invoice_module.tpl"
     }
 }
