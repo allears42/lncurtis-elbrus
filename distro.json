@@ -266,6 +266,7 @@
         "custom/ProductViews.SizeChart": "1.0.0",
         "custom/OrderWizard.Module.PromocodeNotifications": "1.0.0",
         "custom/OrderWizard.Module.OrderComments": "1.0.0",
+        "custom/RenameInvoice": "1.0.0",
         "custom/Wizard.Step.Fix": "2.3.0",
         "custom/StateComplianceWarnings": "1.0.0",
 
@@ -535,7 +536,8 @@
                     "SiteSearch.Extension",
                     "Product.Extension",
                     "StateComplianceWarnings",
-                    "Transaction.Line.Views.Extension"
+                    "Transaction.Line.Views.Extension",
+                    "RenameInvoice"
 
                 ],
                 "amdclean": true,
@@ -683,7 +685,8 @@
                     "Product.Extension",
                     "Transaction.Line.Views.Extension",
                     "StateComplianceWarnings",
-                    "Pacejet"
+                    "Pacejet",
+                    "RenameInvoice"
                 ],
                 "amdclean": true,
                 "amdConfig": {

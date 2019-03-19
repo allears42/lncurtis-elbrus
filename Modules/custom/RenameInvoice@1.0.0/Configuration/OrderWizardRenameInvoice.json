@@ -1,0 +1,11 @@
+{
+  "type": "object",
+
+  "properties": {
+    "checkoutApp.renameInvoice": {
+      "group": "checkoutApp",
+      "type": "string",
+      "title": "Rename Invoice Payment Method In Checkout To:"
+    }
+  }
+}

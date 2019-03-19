@@ -27,7 +27,7 @@
 	{{/if}}
 
 	{{#if isInvoice}}
-		<p class="global-views-format-payment-method-invoice">{{translate 'Invoice: Terms $(0)' model.paymentterms.name}}</p>
+		<p class="global-views-format-payment-method-invoice">{{translate model.paymentterms.name}}</p>
 		
 		{{#if showPurchaseNumber}}
 			<p class="global-views-format-payment-method-purchase">{{translate 'Purchase Number: $(0)' model.purchasenumber }}</p>
