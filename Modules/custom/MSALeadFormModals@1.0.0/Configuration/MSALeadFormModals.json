@@ -27,12 +27,6 @@
         "type": "integer",
         "title": "Pop-up delay (in ms)",
         "default": 0
-    },
-    "msaLeadCampaigns.externalUrl": {
-      "group": "integrations",
-      "subtab": "msaLeadCampaign",
-      "type": "string",
-      "title": "Case Form External URL"
     }
   }
 }

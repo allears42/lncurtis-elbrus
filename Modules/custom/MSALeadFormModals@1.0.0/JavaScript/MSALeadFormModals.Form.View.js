@@ -71,41 +71,15 @@ define('MSALeadFormModals.Form.View'
             this.$containerModal.modal('hide');
         }
 
-    // ,   customSaveForm: function(e)
-    //     {
-    //         e.preventDefault();
-    //         e.stopPropagation();
-    //
-    //         var result
-    //         ,   self = this;
-    //
-    //         // TODO: Testing only
-    //         // self.afterFailedSubmit();
-    //         // self.afterSuccessfulSubmit();
-    //
-    //         result = this.saveForm(e, this.validationModel, null);
-    //         console.log('RESULT: ', result);
-    //
-    //         if (!result) {
-    //             self.afterFailedSubmit();
-    //             return;
-    //         }
-    //
-    //         result.done(function(data) {
-    //             console.log('GOT SUCCESFUL SUBMIT: ', data);
-    //             self.afterSuccessfulSubmit();
-    //         })
-    //     }
-
     ,   getContext: function()
         {
             var imagePath = this.model.get('imagePath')
             ,   showOptOut = true;
 
             if (imagePath) {
-                imagePath = imagePath.replace('Web Site Hosting Files/LN Curtis Firefighter Hosting Files', '');
+                imagePath = imagePath.replace('Web Site Hosting Files/LN Curtis Firefighter Hosting Files', '')
+                    .replace('Web Site Hosting Files/LN Curtis Blueline Hosting Files', '');
             }
-            console.log('SHOW OPT OUT: ', this.options.showOptOut);
 
             if (this.options.hasOwnProperty('showOptOut')) {
                 showOptOut = this.options.showOptOut
