@@ -36,6 +36,7 @@
 				<div class="product-details-upper-info-outer">
 					<div data-view="Product.Price"></div>
 					<div data-view="Product.Sku" class="product-details-sku-container"></div>
+					<div data-view="MSALeadFormModal.Link" class="msa-item-link-container"></div>
 					<div data-view="StateWarnings.Icons" class="warning-icon-container"></div>
 				</div>
 				<div class="product-details-full-divider"></div>

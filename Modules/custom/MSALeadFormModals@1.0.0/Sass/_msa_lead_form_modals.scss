@@ -1,0 +1,109 @@
+$green-haze: #00A850;
+
+.msa-form-container {
+
+  color: $sc-color-extra-dark-copy;
+  overflow: hidden;
+  //border: 3px solid $sc-color-extra-dark-copy;
+
+  h1, h2, .title, .description {
+    text-align: center;
+  }
+  h1, .title {
+    color: $green-haze;
+    font-size: 2.5em;
+    font-weight: $sc-font-weight-bold;
+    text-transform: capitalize;
+
+    @media (min-width: $screen-md-min) {
+      margin-bottom: $sc-base-margin * 3;
+    }
+  }
+  h2, .description {
+    color: $sc-color-extra-dark-copy;
+    font-size: 2em;
+
+    @media (min-width: $screen-md-min) {
+      margin-bottom: $sc-base-margin * 8;
+    }
+  }
+  .image {
+    @extend .col-sm-5;
+  }
+  .form {
+    @extend .col-sm-7;
+
+    @media (min-width: $screen-md-min) {
+      padding-right: $sc-base-margin * 12;
+    }
+
+    label {
+      display: inline-block;
+      font-weight: $sc-font-weight-bold;
+
+      @media (min-width: $screen-md-min) {
+        margin-bottom: $sc-base-margin * 2;
+      }
+    }
+
+    input {
+      @extend .input-large;
+      max-width: unset;
+    }
+
+    .error-wrapper {
+      @media (min-width: $screen-md-min) {
+          margin-bottom: $sc-base-margin * 4;
+      }
+    }
+
+    button {
+      @extend .button-secondary;
+      @extend .button-medium;
+      padding-left: $sc-base-padding * 8;
+      padding-right: $sc-base-padding * 8;
+
+      margin-top: $sc-base-margin * 2;
+
+      @media (max-width: $screen-sm-max) {
+        margin-bottom: $sc-base-padding * 4;
+      }
+      @media (min-width: $screen-md-min) {
+        margin-top: 28px;
+        float: right;
+      }
+    }
+
+    .input-required {
+      margin-left: $sc-base-margin;
+    }
+
+    .global-views-message-button {
+      padding: 2px 6px 17px;
+    }
+
+    .dismiss-msa-modal {
+      padding-right: $sc-base-padding * 3;
+      text-align: right;
+    }
+
+  } // End form
+
+  .successMessage {
+    text-align: center;
+    color: $sc-color-extra-dark-copy;
+    font-size: 1.5em;
+    margin-bottom: $sc-base-margin * 4;
+  }
+
+}
+
+@media (min-width: $screen-md-min) {
+  .modal-dialog {
+    width: $modal-lg;
+  }
+}
+
+.msa-item-link-container {
+  clear: both;
+}

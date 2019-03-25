@@ -256,6 +256,7 @@
         "custom/FacetContent": "1.0.0",
         "custom/Home.BestSellers": "1.0.0",
         "custom/LinkHierarchy": "1.0.0",
+        "custom/MSALeadFormModals": "1.0.0",
         "custom/Pacejet": "1.0.0",
         "custom/Product.BackOrders": "1.0.0",
         "custom/ProductBadging": "1.0.0",
@@ -372,6 +373,8 @@
                     "FacetContent",
                     "Home.BestSellers",
                     "LinkHierarchy",
+                    "MSALeadFormModals",
+                    "MSALeadFormModals.ProductDetails.Extension",
                     "Product.BackOrders",
                     "ProductBadging",
                     "Product.Configurator",
@@ -795,7 +798,8 @@
                 "ExternalPayment.Model",
                 "SC.BaseComponent",
                 "Cart.Component",
-                "CustomerServiceForm.ServiceController"
+                "CustomerServiceForm.ServiceController",
+                "MSALeadFormModals.ServiceController"
             ],
             "exportFile": "ssp_libraries.js",
             "amdConfig": {
@@ -1018,7 +1022,8 @@
                                 "shopping"
                             ]
                         },
-                        "StateComplianceWarnings"
+                        "StateComplianceWarnings",
+                        "MSALeadFormModals"
                     ]
                 },
                 {
