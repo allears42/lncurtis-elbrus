@@ -9,15 +9,19 @@ define(
 		, 'LinkHierarchy.View'
 		, 'Profile.Model'
 		, 'SC.Configuration'
-		
 		, 'underscore'
+		, 'jQuery'
 	]
 	
-	, function (HeaderMenuView
+	, function (
+		HeaderMenuView
 		, LinkHierarchyView
 		, ProfileModel
 		, Configuration
-		, _) {
+		, _
+		, jQuery
+	)
+	{
 		'use strict';
 
 		_.extend(HeaderMenuView.prototype, {
@@ -40,14 +44,21 @@ define(
 			}
 			
 			, toggleMenu: function (e) {
+
 				e.preventDefault();
-				var $target = jQuery(e.currentTarget).parent('[data-toggle="categories-menu"]');
+
+				var height
+				,	$target = jQuery(e.currentTarget).parent('[data-toggle="categories-menu"]');
 				
 				if ($target.hasClass('open')) {
 					$target.removeClass('open');
-				}
-				else {
+				} else {
+
+                    // Calculate max height of dropdown menu: (window height - header height) - 20px
+					height = (jQuery(window).height() - jQuery('#site-header').height()) - 20;
+					
 					jQuery('[data-toggle="categories-menu"]').removeClass('open');
+					$target.find('.header-menu-level-container').css('max-height', height);
 					$target.addClass('open');
 				}
 				
