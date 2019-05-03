@@ -78,7 +78,8 @@ define('CreditCard.Edit.Form.Icon.View'
                     //@property {String} ccnumber
                     ,	ccnumber: ccnumber
                     //@property {boolean} showPaymentSelector
-                    ,	showPaymentSelector: this.model.isNew()
+                    // We are ALWAYS hiding this now, as we do not want users entering random card types
+                    ,	showPaymentSelector: false
                     //@property {Boolean} isNew
                     ,	isNew: this.model.isNew()
                     //@property {Array<Object>?} months
