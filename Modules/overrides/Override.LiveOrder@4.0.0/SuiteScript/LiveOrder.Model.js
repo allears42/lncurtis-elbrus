@@ -282,7 +282,8 @@ define(
             /************** END ZERO SHIP LOG ********************/
 
 			// We need remove the paypal's address because after order submit the address is invalid for the next time.
-			this.removePaypalAddress(paypal_address);
+            // Removing this line to eliminate disappearing address issue: https://3880230-sb2.app.netsuite.com/app/help/helpcenter.nl?fid=section_4830376716.html
+			// this.removePaypalAddress(paypal_address);
 
 			ModelsInit.context.setSessionObject('paypal_complete', 'F');
 
