@@ -28,6 +28,7 @@ define(
 	,	'OrderWizard.Module.RegisterGuest'
 	,	'OrderWizard.Module.PromocodeForm'
 	,   'OrderWizard.Module.PromocodeNotifications'
+	,	'OrderWizard.Module.ShowPOInReview'
 
 	,	'OrderWizard.Module.MultiShipTo.Select.Addresses.Shipping'
 	,	'OrderWizard.Module.MultiShipTo.Package.Creation'
@@ -63,6 +64,7 @@ define(
 	,	OrderWizardModuleRegisterGuest
 	,	OrderWizardModulePromocodeForm
 	,   OrderWizardModulePromocodeNotification
+	,	OrderWizardModuleShowPOInReview
 
 	,	OrderWizardModuleMultiShipToSelectAddressesShipping
 	,	OrderWizardModuleMultiShipToPackageCreation
@@ -317,7 +319,7 @@ define(
 							]
 						
 						,	[OrderWizardModuleShowPayments, {edit_url_billing: '/billing', edit_url_address: '/billing'}]
-						
+						,	OrderWizardModuleShowPOInReview
 						,	[
 								OrderWizardModuleShowShipments
 							,	_.extend(
