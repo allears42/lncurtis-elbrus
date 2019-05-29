@@ -42,6 +42,7 @@ define(
 	,	'OrderWizard.Module.CartItems.PickupInStore.List'
 	,	'Header.View'
 	,	'OrderWizard.Module.OrderComments'
+	,	'OrderWizard.Module.ShipComplete'
 
 	]
 ,	function (
@@ -76,6 +77,7 @@ define(
 	,	OrderWizardModuleCartItemsPickupInStoreList
 	,	HeaderView
 	,	OrderWizardModuleOrderComments
+	,	OrderWizardModuleShipComplete
 	)
     {
 	'use strict';
@@ -233,6 +235,7 @@ define(
 					,	bottomMessage: _('You will have an opportunity to review your order on the next step.').translate()
 					,	modules: [
 							[OrderWizardModuleShipmethod, mst_delivery_options]
+                            ,	OrderWizardModuleShipComplete
 						,	[OrderWizardModulePromocodeNotification, {exclude_on_skip_step: true}]
 						,   OrderWizardModulePaymentMethodGiftCertificates
 						,	[OrderWizardModulePaymentMethodSelector, {record_type:'salesorder', prevent_default: true}]
