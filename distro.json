@@ -198,6 +198,7 @@
         "overrides/Override.OrderHistory": "5.0.0",
         "overrides/Override.OrderWizard.Module.Confirmation": "3.0.0",
         "overrides/Override.OrderWizard.Module.PaymentMethod": "4.0.0",
+        "overrides/Override.OrderWizard.Module.Shipmethod": "3.0.0",
         "overrides/Override.ProductDetails": "1.0.0",
         "overrides/Override.ProductLine": "1.0.0",
         "overrides/Override.ProductList": "3.0.0",
@@ -268,6 +269,7 @@
         "custom/ProductViews.SizeChart": "1.0.0",
         "custom/OrderWizard.Module.PromocodeNotifications": "1.0.0",
         "custom/OrderWizard.Module.OrderComments": "1.0.0",
+        "custom/OrderWizard.Module.ShipComplete": "1.0.0",
         "custom/RenameInvoice": "1.0.0",
         "custom/Wizard.Step.Fix": "2.3.0",
         "custom/StateComplianceWarnings": "1.0.0",
@@ -677,6 +679,7 @@
                     "ListHeader.Extension",
                     "LoginRegister.Extension",
                     "OrderWizard.Module.OrderComments",
+                    "OrderWizard.Module.ShipComplete",
                     "NavigationHelper.Extension",
                     "Newsletter.Extension",
                     "ProductViews.Extension",
@@ -1303,6 +1306,7 @@
                         "Newsletter",
                         "Newsletter.Extension",
                         "OrderWizard.Module.OrderComments",
+                        "OrderWizard.Module.ShipComplete",
                         {
                             "module": "Firefighter",
                             "include": [
