@@ -1,0 +1,26 @@
+.order-wizard-show-po-in-review-module {
+
+  margin-bottom: $sc-base-margin * 3;
+  @media (min-width: $screen-md-min) {
+    float: right;
+  }
+
+  h4 {
+    margin-bottom: $sc-base-margin *4;
+  }
+
+  p {
+    padding: $sc-base-padding * 3;
+    border: 1px solid #d8d8d8;
+  }
+}
+
+.order-wizard-showpayments-module-payment-method {
+  @media (min-width: $screen-xs-max) and (max-width: 1023px) {
+    padding-left: 0;
+  }
+}
+
+.order-wizard-paymentmethod-purchasenumber-module {
+    padding-left: 0;
+}

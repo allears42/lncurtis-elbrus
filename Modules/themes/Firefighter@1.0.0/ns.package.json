@@ -79,6 +79,7 @@
         "suitecommerce/OrderWizard.Module.CartItems@2.0.0/Sass/_order-wizard-cartitems-module.scss" : "Sass/OrderWizard.Module.CartItems/_order-wizard-cartitems-module.scss",
         "suitecommerce/OrderWizard.Module.Confirmation@3.0.0/Sass/_order-wizard-confirmation-module.scss" : "Sass/OrderWizard.Module.Confirmation/_order-wizard-confirmation-module.scss",
         "suitecommerce/OrderWizard.Module.PaymentMethod@4.0.0/Sass/_order-wizard-showpayments-module.scss": "Sass/OrderWizard.Module.PaymentMethod/_order-wizard-showpayments-module.scss",
+        "suitecommerce/OrderWizard.Module.PaymentMethod@4.0.0/Sass/_order-wizard-paymentmethod-purchasenumber-module.scss": "Sass/OrderWizard.Module.PaymentMethod/_order-wizard-paymentmethod-purchasenumber-module.scss",
 
         "suitecommerce/OrderWizard.Module.Shipmethod@3.0.0/Sass/_order-wizard-shipmethod-module.scss" : "Sass/OrderWizard.Module.Shipmethod/_order-wizard-shipmethod-module.scss",
         "suitecommerce/OrderWizard.Module.Shipmethod@3.0.0/Sass/_order-wizard-showshipments-module.scss" : "Sass/OrderWizard.Module.Shipmethod/_order-wizard-showshipments-module.scss",

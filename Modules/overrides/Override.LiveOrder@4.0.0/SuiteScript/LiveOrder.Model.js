@@ -173,7 +173,7 @@ define(
 	,	update: function update (data)
 		{
 			// custom - add data to order
-            data.purchasenumber = 'WEB';
+            // data.purchasenumber = 'WEB';
 
             // Pacejet rates status is saved in the order, not passed from the site so need to look it up here
             var options = ModelsInit.order.getCustomFieldValues();

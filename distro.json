@@ -270,6 +270,7 @@
         "custom/OrderWizard.Module.PromocodeNotifications": "1.0.0",
         "custom/OrderWizard.Module.OrderComments": "1.0.0",
         "custom/OrderWizard.Module.ShipComplete": "1.0.0",
+        "custom/OrderWizard.Module.ShowPOInReview": "1.0.0",
         "custom/RenameInvoice": "1.0.0",
         "custom/Wizard.Step.Fix": "2.3.0",
         "custom/StateComplianceWarnings": "1.0.0",
@@ -664,6 +665,7 @@
                     "CreditCard.Extension",
                     "LinkHierarchy",
                     "OrderWizard.Module.PromocodeNotifications",
+                    "OrderWizard.Module.ShowPOInReview",
                     "Wizard.Step.Fix",
 
                     "Backbone.FormView.Extension",
@@ -1313,7 +1315,8 @@
                                 "checkout"
                             ]
                         },
-                        "StateComplianceWarnings"
+                        "StateComplianceWarnings",
+                        "OrderWizard.Module.ShowPOInReview"
                     ]
                 }
             ]
