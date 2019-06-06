@@ -37,6 +37,7 @@ define(
 			
 			_.extend(returnVariable, {
 				showShippingMessage: this.manage === "shipaddress-"
+			,	attention: this.model.get('attention')
 			});
 			
 			return returnVariable;
