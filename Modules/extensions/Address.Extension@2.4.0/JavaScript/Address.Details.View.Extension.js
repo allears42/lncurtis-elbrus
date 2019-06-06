@@ -22,7 +22,7 @@ define('Address.Details.View.Extension'
             ,   attention = this.model.get('attention')
             ,   hasAttention = false;
             
-            if(attention) {
+            if (attention) {
                 hasAttention = true;
             }
 
