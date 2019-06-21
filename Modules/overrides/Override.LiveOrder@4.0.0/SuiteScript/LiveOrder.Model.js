@@ -273,7 +273,7 @@ define(
                     content = 'Zero-shipping order detected. Details: \r\n';
                     content += 'Confirmation: ' + JSON.stringify(confirmation) + '\r\n';
                     content += 'User: ' + nlapiGetUser() + '\r\n';
-                    nlapiSendEmail(author, ['nkkwik@gmail.com', 'rcurtis@lncurtis.com'], 'Zero shipping order detected', content);
+                    nlapiSendEmail(author, ['rcurtis@lncurtis.com'], 'Zero shipping order detected', content);
 
 				} catch(e) {
                     nlapiLogExecution('DEBUG', 'ERROR SENDING ZERO SHIP EMAIL', e);

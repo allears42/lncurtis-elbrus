@@ -563,7 +563,7 @@ define('Pacejet.Model'
                             content += '**********';
                             content += 'Results obj: ' + JSON.stringify(results) + '\r\n';
 
-                            nlapiSendEmail(author, ['nkkwik@gmail.com', 'rcurtis@lncurtis.com'], title, content);
+                            nlapiSendEmail(author, ['rcurtis@lncurtis.com'], title, content);
 
                         } catch(e) {
                             nlapiLogExecution('DEBUG', 'ERROR SENDING DEFAULT SHIP ORDER EMAIL', e);
