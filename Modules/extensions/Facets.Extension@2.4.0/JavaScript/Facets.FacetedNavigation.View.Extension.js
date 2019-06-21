@@ -58,13 +58,14 @@ define(
 
                 // remove any facets with only one value
                 ordered_facets = _.filter(ordered_facets, function (facet) {
+
                     var validURLS = _.filter(facet.values, function (facetValue) {
 
                             return facetValue.url && facetValue.url.length > 0
                         }
                     );
-                    return validURLS.length > 1;
-                    //facet.values.length > 1
+
+                    return validURLS.length > 1 || facet.id === 'custitem_jhm_webstore_product_badges';
                 });
 
 
